@@ -126,7 +126,7 @@ module Ark
       # Some parameter documentations has been truncated, see
       # {Ark::Models::EmailSendParams} for more details.
       #
-      # Send a single email message. The email is queued for immediate delivery and
+      # Send a single email message. The email is accepted for immediate delivery and
       # typically delivered within seconds.
       #
       # **Example use case:** Send a password reset email to a user.
@@ -143,7 +143,7 @@ module Ark
       #
       # @overload send_(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
       #
-      # @param from [String] Body param: Sender email. Can include name: "Name <email@domain.com>"
+      # @param from [String] Body param: Sender email address. Must be from a verified domain.
       #
       # @param subject [String] Body param: Email subject line
       #

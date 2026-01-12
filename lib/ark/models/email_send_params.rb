@@ -8,8 +8,15 @@ module Ark
       include Ark::Internal::Type::RequestParameters
 
       # @!attribute from
-      #   Sender email. Can include name: "Name <email@domain.com>" Must be from a
-      #   verified domain.
+      #   Sender email address. Must be from a verified domain.
+      #
+      #   **Supported formats:**
+      #
+      #   - Email only: `hello@yourdomain.com`
+      #   - With display name: `Acme <hello@yourdomain.com>`
+      #   - With quoted name: `"Acme Support" <support@yourdomain.com>`
+      #
+      #   The domain portion must match a verified sending domain in your account.
       #
       #   @return [String]
       required :from, String
@@ -85,7 +92,7 @@ module Ark
       #   Some parameter documentations has been truncated, see
       #   {Ark::Models::EmailSendParams} for more details.
       #
-      #   @param from [String] Sender email. Can include name: "Name <email@domain.com>"
+      #   @param from [String] Sender email address. Must be from a verified domain.
       #
       #   @param subject [String] Email subject line
       #

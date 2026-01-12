@@ -57,10 +57,9 @@ module Ark
         #
         #   - `pending` - Email accepted, waiting to be processed
         #   - `sent` - Email transmitted to recipient's mail server
-        #   - `delivered` - Recipient's server confirmed receipt
-        #   - `bounced` - Permanently rejected (hard bounce)
-        #   - `failed` - Delivery failed after all retry attempts
-        #   - `delayed` - Temporary failure, will retry automatically
+        #   - `softfail` - Temporary delivery failure, will retry
+        #   - `hardfail` - Permanent delivery failure
+        #   - `bounced` - Email bounced back
         #   - `held` - Held for manual review
         #
         #   @return [Symbol, Ark::Models::EmailRetrieveResponse::Data::Status]
@@ -193,10 +192,9 @@ module Ark
         #
         # - `pending` - Email accepted, waiting to be processed
         # - `sent` - Email transmitted to recipient's mail server
-        # - `delivered` - Recipient's server confirmed receipt
-        # - `bounced` - Permanently rejected (hard bounce)
-        # - `failed` - Delivery failed after all retry attempts
-        # - `delayed` - Temporary failure, will retry automatically
+        # - `softfail` - Temporary delivery failure, will retry
+        # - `hardfail` - Permanent delivery failure
+        # - `bounced` - Email bounced back
         # - `held` - Held for manual review
         #
         # @see Ark::Models::EmailRetrieveResponse::Data#status
@@ -205,10 +203,9 @@ module Ark
 
           PENDING = :pending
           SENT = :sent
-          DELIVERED = :delivered
+          SOFTFAIL = :softfail
+          HARDFAIL = :hardfail
           BOUNCED = :bounced
-          FAILED = :failed
-          DELAYED = :delayed
           HELD = :held
 
           # @!method self.values
