@@ -8,31 +8,20 @@ module Ark
           T.any(Ark::Models::TrackingListResponse, Ark::Internal::AnyHash)
         end
 
-      sig { returns(T.nilable(Ark::Models::TrackingListResponse::Data)) }
+      sig { returns(Ark::Models::TrackingListResponse::Data) }
       attr_reader :data
 
       sig { params(data: Ark::Models::TrackingListResponse::Data::OrHash).void }
       attr_writer :data
 
-      sig { returns(T.nilable(Ark::APIMeta)) }
+      sig { returns(Ark::APIMeta) }
       attr_reader :meta
 
       sig { params(meta: Ark::APIMeta::OrHash).void }
       attr_writer :meta
 
-      sig do
-        returns(
-          T.nilable(Ark::Models::TrackingListResponse::Success::TaggedBoolean)
-        )
-      end
-      attr_reader :success
-
-      sig do
-        params(
-          success: Ark::Models::TrackingListResponse::Success::OrBoolean
-        ).void
-      end
-      attr_writer :success
+      sig { returns(Ark::Models::TrackingListResponse::Success::TaggedBoolean) }
+      attr_accessor :success
 
       sig do
         params(
@@ -41,7 +30,7 @@ module Ark
           success: Ark::Models::TrackingListResponse::Success::OrBoolean
         ).returns(T.attached_class)
       end
-      def self.new(data: nil, meta: nil, success: nil)
+      def self.new(data:, meta:, success:)
       end
 
       sig do
@@ -65,18 +54,15 @@ module Ark
             )
           end
 
-        sig { returns(T.nilable(T::Array[Ark::TrackDomain])) }
-        attr_reader :track_domains
-
-        sig { params(track_domains: T::Array[Ark::TrackDomain::OrHash]).void }
-        attr_writer :track_domains
+        sig { returns(T::Array[Ark::TrackDomain]) }
+        attr_accessor :track_domains
 
         sig do
           params(track_domains: T::Array[Ark::TrackDomain::OrHash]).returns(
             T.attached_class
           )
         end
-        def self.new(track_domains: nil)
+        def self.new(track_domains:)
         end
 
         sig { override.returns({ track_domains: T::Array[Ark::TrackDomain] }) }

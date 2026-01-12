@@ -8,26 +8,16 @@ module Ark
       }
 
     class TrackingListResponse < Ark::Internal::Type::BaseModel
-      attr_reader data: Ark::Models::TrackingListResponse::Data?
+      attr_accessor data: Ark::Models::TrackingListResponse::Data
 
-      def data=: (
-        Ark::Models::TrackingListResponse::Data
-      ) -> Ark::Models::TrackingListResponse::Data
+      attr_accessor meta: Ark::APIMeta
 
-      attr_reader meta: Ark::APIMeta?
-
-      def meta=: (Ark::APIMeta) -> Ark::APIMeta
-
-      attr_reader success: Ark::Models::TrackingListResponse::success?
-
-      def success=: (
-        Ark::Models::TrackingListResponse::success
-      ) -> Ark::Models::TrackingListResponse::success
+      attr_accessor success: Ark::Models::TrackingListResponse::success
 
       def initialize: (
-        ?data: Ark::Models::TrackingListResponse::Data,
-        ?meta: Ark::APIMeta,
-        ?success: Ark::Models::TrackingListResponse::success
+        data: Ark::Models::TrackingListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::TrackingListResponse::success
       ) -> void
 
       def to_hash: -> {
@@ -39,13 +29,9 @@ module Ark
       type data = { track_domains: ::Array[Ark::TrackDomain] }
 
       class Data < Ark::Internal::Type::BaseModel
-        attr_reader track_domains: ::Array[Ark::TrackDomain]?
+        attr_accessor track_domains: ::Array[Ark::TrackDomain]
 
-        def track_domains=: (
-          ::Array[Ark::TrackDomain]
-        ) -> ::Array[Ark::TrackDomain]
-
-        def initialize: (?track_domains: ::Array[Ark::TrackDomain]) -> void
+        def initialize: (track_domains: ::Array[Ark::TrackDomain]) -> void
 
         def to_hash: -> { track_domains: ::Array[Ark::TrackDomain] }
       end

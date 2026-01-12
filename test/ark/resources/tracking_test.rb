@@ -68,9 +68,9 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
 
     assert_pattern do
       response => {
-        data: Ark::Models::TrackingListResponse::Data | nil,
-        meta: Ark::APIMeta | nil,
-        success: Ark::Models::TrackingListResponse::Success | nil
+        data: Ark::Models::TrackingListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::TrackingListResponse::Success
       }
     end
   end
