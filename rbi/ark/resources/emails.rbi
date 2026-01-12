@@ -64,12 +64,11 @@ module Ark
         per_page: nil,
         # Filter by delivery status:
         #
-        # - `queued` - Email accepted and waiting to be sent
+        # - `pending` - Email accepted, waiting to be processed
         # - `sent` - Email transmitted to recipient's mail server
-        # - `delivered` - Recipient's server confirmed receipt
-        # - `bounced` - Permanently rejected (hard bounce)
-        # - `failed` - Delivery failed after all retry attempts
-        # - `delayed` - Temporary failure, will retry
+        # - `softfail` - Temporary delivery failure, will retry
+        # - `hardfail` - Permanent delivery failure
+        # - `bounced` - Email bounced back
         # - `held` - Held for manual review
         status: nil,
         # Filter by tag
@@ -104,7 +103,7 @@ module Ark
       def retry_(email_id, request_options: {})
       end
 
-      # Send a single email message. The email is queued for immediate delivery and
+      # Send a single email message. The email is accepted for immediate delivery and
       # typically delivered within seconds.
       #
       # **Example use case:** Send a password reset email to a user.
@@ -136,8 +135,15 @@ module Ark
         ).returns(Ark::SendEmail)
       end
       def send_(
-        # Body param: Sender email. Can include name: "Name <email@domain.com>" Must be
-        # from a verified domain.
+        # Body param: Sender email address. Must be from a verified domain.
+        #
+        # **Supported formats:**
+        #
+        # - Email only: `hello@yourdomain.com`
+        # - With display name: `Acme <hello@yourdomain.com>`
+        # - With quoted name: `"Acme Support" <support@yourdomain.com>`
+        #
+        # The domain portion must match a verified sending domain in your account.
         from:,
         # Body param: Email subject line
         subject:,

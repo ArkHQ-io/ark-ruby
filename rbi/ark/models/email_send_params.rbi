@@ -9,8 +9,15 @@ module Ark
       OrHash =
         T.type_alias { T.any(Ark::EmailSendParams, Ark::Internal::AnyHash) }
 
-      # Sender email. Can include name: "Name <email@domain.com>" Must be from a
-      # verified domain.
+      # Sender email address. Must be from a verified domain.
+      #
+      # **Supported formats:**
+      #
+      # - Email only: `hello@yourdomain.com`
+      # - With display name: `Acme <hello@yourdomain.com>`
+      # - With quoted name: `"Acme Support" <support@yourdomain.com>`
+      #
+      # The domain portion must match a verified sending domain in your account.
       sig { returns(String) }
       attr_accessor :from
 
@@ -108,8 +115,15 @@ module Ark
         ).returns(T.attached_class)
       end
       def self.new(
-        # Sender email. Can include name: "Name <email@domain.com>" Must be from a
-        # verified domain.
+        # Sender email address. Must be from a verified domain.
+        #
+        # **Supported formats:**
+        #
+        # - Email only: `hello@yourdomain.com`
+        # - With display name: `Acme <hello@yourdomain.com>`
+        # - With quoted name: `"Acme Support" <support@yourdomain.com>`
+        #
+        # The domain portion must match a verified sending domain in your account.
         from:,
         # Email subject line
         subject:,

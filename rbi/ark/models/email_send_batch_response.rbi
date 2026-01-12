@@ -58,6 +58,10 @@ module Ark
             )
           end
 
+        # Successfully accepted emails
+        sig { returns(Integer) }
+        attr_accessor :accepted
+
         # Failed emails
         sig { returns(Integer) }
         attr_accessor :failed
@@ -70,33 +74,29 @@ module Ark
         end
         attr_accessor :messages
 
-        # Successfully queued emails
-        sig { returns(Integer) }
-        attr_accessor :queued
-
         # Total emails in the batch
         sig { returns(Integer) }
         attr_accessor :total
 
         sig do
           params(
+            accepted: Integer,
             failed: Integer,
             messages:
               T::Hash[
                 Symbol,
                 Ark::Models::EmailSendBatchResponse::Data::Message::OrHash
               ],
-            queued: Integer,
             total: Integer
           ).returns(T.attached_class)
         end
         def self.new(
+          # Successfully accepted emails
+          accepted:,
           # Failed emails
           failed:,
           # Map of recipient email to message info
           messages:,
-          # Successfully queued emails
-          queued:,
           # Total emails in the batch
           total:
         )
@@ -105,13 +105,13 @@ module Ark
         sig do
           override.returns(
             {
+              accepted: Integer,
               failed: Integer,
               messages:
                 T::Hash[
                   Symbol,
                   Ark::Models::EmailSendBatchResponse::Data::Message
                 ],
-              queued: Integer,
               total: Integer
             }
           )

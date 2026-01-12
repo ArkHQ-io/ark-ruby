@@ -106,7 +106,7 @@ module Ark
             T.type_alias { T.all(Symbol, Ark::SendEmail::Data::Status) }
           OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-          QUEUED = T.let(:queued, Ark::SendEmail::Data::Status::TaggedSymbol)
+          PENDING = T.let(:pending, Ark::SendEmail::Data::Status::TaggedSymbol)
           SENT = T.let(:sent, Ark::SendEmail::Data::Status::TaggedSymbol)
 
           sig do

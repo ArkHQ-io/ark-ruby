@@ -46,12 +46,11 @@ module Ark
 
       # Filter by delivery status:
       #
-      # - `queued` - Email accepted and waiting to be sent
+      # - `pending` - Email accepted, waiting to be processed
       # - `sent` - Email transmitted to recipient's mail server
-      # - `delivered` - Recipient's server confirmed receipt
-      # - `bounced` - Permanently rejected (hard bounce)
-      # - `failed` - Delivery failed after all retry attempts
-      # - `delayed` - Temporary failure, will retry
+      # - `softfail` - Temporary delivery failure, will retry
+      # - `hardfail` - Permanent delivery failure
+      # - `bounced` - Email bounced back
       # - `held` - Held for manual review
       sig { returns(T.nilable(Ark::EmailListParams::Status::OrSymbol)) }
       attr_reader :status
@@ -99,12 +98,11 @@ module Ark
         per_page: nil,
         # Filter by delivery status:
         #
-        # - `queued` - Email accepted and waiting to be sent
+        # - `pending` - Email accepted, waiting to be processed
         # - `sent` - Email transmitted to recipient's mail server
-        # - `delivered` - Recipient's server confirmed receipt
-        # - `bounced` - Permanently rejected (hard bounce)
-        # - `failed` - Delivery failed after all retry attempts
-        # - `delayed` - Temporary failure, will retry
+        # - `softfail` - Temporary delivery failure, will retry
+        # - `hardfail` - Permanent delivery failure
+        # - `bounced` - Email bounced back
         # - `held` - Held for manual review
         status: nil,
         # Filter by tag
@@ -135,12 +133,11 @@ module Ark
 
       # Filter by delivery status:
       #
-      # - `queued` - Email accepted and waiting to be sent
+      # - `pending` - Email accepted, waiting to be processed
       # - `sent` - Email transmitted to recipient's mail server
-      # - `delivered` - Recipient's server confirmed receipt
-      # - `bounced` - Permanently rejected (hard bounce)
-      # - `failed` - Delivery failed after all retry attempts
-      # - `delayed` - Temporary failure, will retry
+      # - `softfail` - Temporary delivery failure, will retry
+      # - `hardfail` - Permanent delivery failure
+      # - `bounced` - Email bounced back
       # - `held` - Held for manual review
       module Status
         extend Ark::Internal::Type::Enum
@@ -149,13 +146,11 @@ module Ark
           T.type_alias { T.all(Symbol, Ark::EmailListParams::Status) }
         OrSymbol = T.type_alias { T.any(Symbol, String) }
 
-        QUEUED = T.let(:queued, Ark::EmailListParams::Status::TaggedSymbol)
+        PENDING = T.let(:pending, Ark::EmailListParams::Status::TaggedSymbol)
         SENT = T.let(:sent, Ark::EmailListParams::Status::TaggedSymbol)
-        DELIVERED =
-          T.let(:delivered, Ark::EmailListParams::Status::TaggedSymbol)
+        SOFTFAIL = T.let(:softfail, Ark::EmailListParams::Status::TaggedSymbol)
+        HARDFAIL = T.let(:hardfail, Ark::EmailListParams::Status::TaggedSymbol)
         BOUNCED = T.let(:bounced, Ark::EmailListParams::Status::TaggedSymbol)
-        FAILED = T.let(:failed, Ark::EmailListParams::Status::TaggedSymbol)
-        DELAYED = T.let(:delayed, Ark::EmailListParams::Status::TaggedSymbol)
         HELD = T.let(:held, Ark::EmailListParams::Status::TaggedSymbol)
 
         sig do

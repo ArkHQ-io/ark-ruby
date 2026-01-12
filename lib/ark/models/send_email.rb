@@ -65,7 +65,7 @@ module Ark
         module Status
           extend Ark::Internal::Type::Enum
 
-          QUEUED = :queued
+          PENDING = :pending
           SENT = :sent
 
           # @!method self.values
