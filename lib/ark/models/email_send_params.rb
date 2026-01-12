@@ -1,0 +1,142 @@
+# frozen_string_literal: true
+
+module Ark
+  module Models
+    # @see Ark::Resources::Emails#send_
+    class EmailSendParams < Ark::Internal::Type::BaseModel
+      extend Ark::Internal::Type::RequestParameters::Converter
+      include Ark::Internal::Type::RequestParameters
+
+      # @!attribute from
+      #   Sender email. Can include name: "Name <email@domain.com>" Must be from a
+      #   verified domain.
+      #
+      #   @return [String]
+      required :from, String
+
+      # @!attribute subject
+      #   Email subject line
+      #
+      #   @return [String]
+      required :subject, String
+
+      # @!attribute to
+      #   Recipient email addresses (max 50)
+      #
+      #   @return [Array<String>]
+      required :to, Ark::Internal::Type::ArrayOf[String]
+
+      # @!attribute attachments
+      #   File attachments
+      #
+      #   @return [Array<Ark::Models::EmailSendParams::Attachment>, nil]
+      optional :attachments, -> { Ark::Internal::Type::ArrayOf[Ark::EmailSendParams::Attachment] }
+
+      # @!attribute bcc
+      #   BCC recipients
+      #
+      #   @return [Array<String>, nil]
+      optional :bcc, Ark::Internal::Type::ArrayOf[String]
+
+      # @!attribute cc
+      #   CC recipients
+      #
+      #   @return [Array<String>, nil]
+      optional :cc, Ark::Internal::Type::ArrayOf[String]
+
+      # @!attribute headers
+      #   Custom email headers
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :headers, Ark::Internal::Type::HashOf[String]
+
+      # @!attribute html
+      #   HTML body content. Maximum 5MB (5,242,880 characters). Combined with
+      #   attachments, the total message must not exceed 14MB.
+      #
+      #   @return [String, nil]
+      optional :html, String
+
+      # @!attribute reply_to
+      #   Reply-to address
+      #
+      #   @return [String, nil]
+      optional :reply_to, String, api_name: :replyTo
+
+      # @!attribute tag
+      #   Tag for categorization and filtering
+      #
+      #   @return [String, nil]
+      optional :tag, String
+
+      # @!attribute text
+      #   Plain text body (auto-generated from HTML if not provided). Maximum 5MB
+      #   (5,242,880 characters).
+      #
+      #   @return [String, nil]
+      optional :text, String
+
+      # @!attribute idempotency_key
+      #
+      #   @return [String, nil]
+      optional :idempotency_key, String
+
+      # @!method initialize(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {Ark::Models::EmailSendParams} for more details.
+      #
+      #   @param from [String] Sender email. Can include name: "Name <email@domain.com>"
+      #
+      #   @param subject [String] Email subject line
+      #
+      #   @param to [Array<String>] Recipient email addresses (max 50)
+      #
+      #   @param attachments [Array<Ark::Models::EmailSendParams::Attachment>] File attachments
+      #
+      #   @param bcc [Array<String>] BCC recipients
+      #
+      #   @param cc [Array<String>] CC recipients
+      #
+      #   @param headers [Hash{Symbol=>String}] Custom email headers
+      #
+      #   @param html [String] HTML body content.
+      #
+      #   @param reply_to [String] Reply-to address
+      #
+      #   @param tag [String] Tag for categorization and filtering
+      #
+      #   @param text [String] Plain text body (auto-generated from HTML if not provided).
+      #
+      #   @param idempotency_key [String]
+      #
+      #   @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}]
+
+      class Attachment < Ark::Internal::Type::BaseModel
+        # @!attribute content
+        #   Base64-encoded file content
+        #
+        #   @return [String]
+        required :content, String
+
+        # @!attribute content_type
+        #   MIME type
+        #
+        #   @return [String]
+        required :content_type, String, api_name: :contentType
+
+        # @!attribute filename
+        #   Attachment filename
+        #
+        #   @return [String]
+        required :filename, String
+
+        # @!method initialize(content:, content_type:, filename:)
+        #   @param content [String] Base64-encoded file content
+        #
+        #   @param content_type [String] MIME type
+        #
+        #   @param filename [String] Attachment filename
+      end
+    end
+  end
+end

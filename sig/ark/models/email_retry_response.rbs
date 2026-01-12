@@ -1,0 +1,40 @@
+module Ark
+  module Models
+    type email_retry_response =
+      { data: Ark::Models::EmailRetryResponse::Data, success: bool }
+
+    class EmailRetryResponse < Ark::Internal::Type::BaseModel
+      attr_reader data: Ark::Models::EmailRetryResponse::Data?
+
+      def data=: (
+        Ark::Models::EmailRetryResponse::Data
+      ) -> Ark::Models::EmailRetryResponse::Data
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Ark::Models::EmailRetryResponse::Data,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::EmailRetryResponse::Data,
+        success: bool
+      }
+
+      type data = { message: String }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_reader message: String?
+
+        def message=: (String) -> String
+
+        def initialize: (?message: String) -> void
+
+        def to_hash: -> { message: String }
+      end
+    end
+  end
+end

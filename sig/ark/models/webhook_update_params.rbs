@@ -1,0 +1,56 @@
+module Ark
+  module Models
+    type webhook_update_params =
+      {
+        all_events: bool,
+        enabled: bool,
+        events: ::Array[String],
+        name: String,
+        url: String
+      }
+      & Ark::Internal::Type::request_parameters
+
+    class WebhookUpdateParams < Ark::Internal::Type::BaseModel
+      extend Ark::Internal::Type::RequestParameters::Converter
+      include Ark::Internal::Type::RequestParameters
+
+      attr_reader all_events: bool?
+
+      def all_events=: (bool) -> bool
+
+      attr_reader enabled: bool?
+
+      def enabled=: (bool) -> bool
+
+      attr_reader events: ::Array[String]?
+
+      def events=: (::Array[String]) -> ::Array[String]
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader url: String?
+
+      def url=: (String) -> String
+
+      def initialize: (
+        ?all_events: bool,
+        ?enabled: bool,
+        ?events: ::Array[String],
+        ?name: String,
+        ?url: String,
+        ?request_options: Ark::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        all_events: bool,
+        enabled: bool,
+        events: ::Array[String],
+        name: String,
+        url: String,
+        request_options: Ark::RequestOptions
+      }
+    end
+  end
+end

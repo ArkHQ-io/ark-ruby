@@ -1,0 +1,114 @@
+module Ark
+  module Models
+    type domain_response =
+      {
+        data: Ark::DomainResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::DomainResponse::success
+      }
+
+    class DomainResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::DomainResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::DomainResponse::success
+
+      def initialize: (
+        data: Ark::DomainResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::DomainResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::DomainResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::DomainResponse::success
+      }
+
+      type data =
+        {
+          id: String,
+          created_at: Time,
+          dns_records: Ark::DomainResponse::Data::DNSRecords,
+          name: String,
+          uuid: String,
+          verified: bool,
+          verified_at: Time?
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor dns_records: Ark::DomainResponse::Data::DNSRecords
+
+        attr_accessor name: String
+
+        attr_accessor uuid: String
+
+        attr_accessor verified: bool
+
+        attr_accessor verified_at: Time?
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          dns_records: Ark::DomainResponse::Data::DNSRecords,
+          name: String,
+          uuid: String,
+          verified: bool,
+          ?verified_at: Time?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          dns_records: Ark::DomainResponse::Data::DNSRecords,
+          name: String,
+          uuid: String,
+          verified: bool,
+          verified_at: Time?
+        }
+
+        type dns_records =
+          {
+            dkim: Ark::DNSRecord,
+            return_path: Ark::DNSRecord,
+            spf: Ark::DNSRecord
+          }
+
+        class DNSRecords < Ark::Internal::Type::BaseModel
+          attr_accessor dkim: Ark::DNSRecord
+
+          attr_accessor return_path: Ark::DNSRecord
+
+          attr_accessor spf: Ark::DNSRecord
+
+          def initialize: (
+            dkim: Ark::DNSRecord,
+            return_path: Ark::DNSRecord,
+            spf: Ark::DNSRecord
+          ) -> void
+
+          def to_hash: -> {
+            dkim: Ark::DNSRecord,
+            return_path: Ark::DNSRecord,
+            spf: Ark::DNSRecord
+          }
+        end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::DomainResponse::success]
+      end
+    end
+  end
+end

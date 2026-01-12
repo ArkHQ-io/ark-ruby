@@ -1,0 +1,81 @@
+module Ark
+  module Models
+    type domain_list_response =
+      {
+        data: Ark::Models::DomainListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::DomainListResponse::success
+      }
+
+    class DomainListResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::Models::DomainListResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::DomainListResponse::success
+
+      def initialize: (
+        data: Ark::Models::DomainListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::DomainListResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::DomainListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::DomainListResponse::success
+      }
+
+      type data =
+        { domains: ::Array[Ark::Models::DomainListResponse::Data::Domain] }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor domains: ::Array[Ark::Models::DomainListResponse::Data::Domain]
+
+        def initialize: (
+          domains: ::Array[Ark::Models::DomainListResponse::Data::Domain]
+        ) -> void
+
+        def to_hash: -> {
+          domains: ::Array[Ark::Models::DomainListResponse::Data::Domain]
+        }
+
+        type domain = { id: String, dns_ok: bool, name: String, verified: bool }
+
+        class Domain < Ark::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor dns_ok: bool
+
+          attr_accessor name: String
+
+          attr_accessor verified: bool
+
+          def initialize: (
+            id: String,
+            dns_ok: bool,
+            name: String,
+            verified: bool
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            dns_ok: bool,
+            name: String,
+            verified: bool
+          }
+        end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::DomainListResponse::success]
+      end
+    end
+  end
+end

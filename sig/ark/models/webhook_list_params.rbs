@@ -1,0 +1,14 @@
+module Ark
+  module Models
+    type webhook_list_params = {  } & Ark::Internal::Type::request_parameters
+
+    class WebhookListParams < Ark::Internal::Type::BaseModel
+      extend Ark::Internal::Type::RequestParameters::Converter
+      include Ark::Internal::Type::RequestParameters
+
+      def initialize: (?request_options: Ark::request_opts) -> void
+
+      def to_hash: -> { request_options: Ark::RequestOptions }
+    end
+  end
+end

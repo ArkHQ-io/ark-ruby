@@ -1,0 +1,85 @@
+module Ark
+  module Models
+    type send_email =
+      {
+        data: Ark::SendEmail::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::SendEmail::success
+      }
+
+    class SendEmail < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::SendEmail::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::SendEmail::success
+
+      def initialize: (
+        data: Ark::SendEmail::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::SendEmail::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::SendEmail::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::SendEmail::success
+      }
+
+      type data =
+        {
+          id: String,
+          status: Ark::Models::SendEmail::Data::status,
+          to: ::Array[String],
+          message_id: String
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor status: Ark::Models::SendEmail::Data::status
+
+        attr_accessor to: ::Array[String]
+
+        attr_reader message_id: String?
+
+        def message_id=: (String) -> String
+
+        def initialize: (
+          id: String,
+          status: Ark::Models::SendEmail::Data::status,
+          to: ::Array[String],
+          ?message_id: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          status: Ark::Models::SendEmail::Data::status,
+          to: ::Array[String],
+          message_id: String
+        }
+
+        type status = :queued | :sent
+
+        module Status
+          extend Ark::Internal::Type::Enum
+
+          QUEUED: :queued
+          SENT: :sent
+
+          def self?.values: -> ::Array[Ark::Models::SendEmail::Data::status]
+        end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::SendEmail::success]
+      end
+    end
+  end
+end

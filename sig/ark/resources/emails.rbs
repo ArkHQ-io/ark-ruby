@@ -1,0 +1,65 @@
+module Ark
+  module Resources
+    class Emails
+      def retrieve: (
+        String email_id,
+        ?expand: String,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::EmailRetrieveResponse
+
+      def list: (
+        ?after: String,
+        ?before: String,
+        ?from: String,
+        ?page: Integer,
+        ?per_page: Integer,
+        ?status: Ark::Models::EmailListParams::status,
+        ?tag: String,
+        ?to: String,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::EmailListResponse
+
+      def get_deliveries: (
+        String email_id,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::EmailGetDeliveriesResponse
+
+      def retry_: (
+        String email_id,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::EmailRetryResponse
+
+      def send_: (
+        from: String,
+        subject: String,
+        to: ::Array[String],
+        ?attachments: ::Array[Ark::EmailSendParams::Attachment],
+        ?bcc: ::Array[String],
+        ?cc: ::Array[String],
+        ?headers: ::Hash[Symbol, String],
+        ?html: String,
+        ?reply_to: String,
+        ?tag: String,
+        ?text: String,
+        ?idempotency_key: String,
+        ?request_options: Ark::request_opts
+      ) -> Ark::SendEmail
+
+      def send_batch: (
+        emails: ::Array[Ark::EmailSendBatchParams::Email],
+        from: String,
+        ?idempotency_key: String,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::EmailSendBatchResponse
+
+      def send_raw: (
+        data: String,
+        mail_from: String,
+        rcpt_to: ::Array[String],
+        ?request_options: Ark::request_opts
+      ) -> Ark::SendEmail
+
+      def initialize: (client: Ark::Client) -> void
+    end
+  end
+end

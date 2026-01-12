@@ -1,0 +1,181 @@
+module Ark
+  module Models
+    type email_retrieve_response =
+      {
+        data: Ark::Models::EmailRetrieveResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::EmailRetrieveResponse::success
+      }
+
+    class EmailRetrieveResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::Models::EmailRetrieveResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::EmailRetrieveResponse::success
+
+      def initialize: (
+        data: Ark::Models::EmailRetrieveResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::EmailRetrieveResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::EmailRetrieveResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::EmailRetrieveResponse::success
+      }
+
+      type data =
+        {
+          id: String,
+          token: String,
+          from: String,
+          scope: Ark::Models::EmailRetrieveResponse::Data::scope,
+          status: Ark::Models::EmailRetrieveResponse::Data::status,
+          subject: String,
+          timestamp: Float,
+          timestamp_iso: Time,
+          to: String,
+          deliveries: ::Array[Ark::Delivery],
+          headers: ::Hash[Symbol, String],
+          html_body: String,
+          message_id: String,
+          plain_body: String,
+          spam: bool,
+          spam_score: Float,
+          tag: String
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor token: String
+
+        attr_accessor from: String
+
+        attr_accessor scope: Ark::Models::EmailRetrieveResponse::Data::scope
+
+        attr_accessor status: Ark::Models::EmailRetrieveResponse::Data::status
+
+        attr_accessor subject: String
+
+        attr_accessor timestamp: Float
+
+        attr_accessor timestamp_iso: Time
+
+        attr_accessor to: String
+
+        attr_reader deliveries: ::Array[Ark::Delivery]?
+
+        def deliveries=: (::Array[Ark::Delivery]) -> ::Array[Ark::Delivery]
+
+        attr_reader headers: ::Hash[Symbol, String]?
+
+        def headers=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+        attr_reader html_body: String?
+
+        def html_body=: (String) -> String
+
+        attr_reader message_id: String?
+
+        def message_id=: (String) -> String
+
+        attr_reader plain_body: String?
+
+        def plain_body=: (String) -> String
+
+        attr_reader spam: bool?
+
+        def spam=: (bool) -> bool
+
+        attr_reader spam_score: Float?
+
+        def spam_score=: (Float) -> Float
+
+        attr_reader tag: String?
+
+        def tag=: (String) -> String
+
+        def initialize: (
+          id: String,
+          token: String,
+          from: String,
+          scope: Ark::Models::EmailRetrieveResponse::Data::scope,
+          status: Ark::Models::EmailRetrieveResponse::Data::status,
+          subject: String,
+          timestamp: Float,
+          timestamp_iso: Time,
+          to: String,
+          ?deliveries: ::Array[Ark::Delivery],
+          ?headers: ::Hash[Symbol, String],
+          ?html_body: String,
+          ?message_id: String,
+          ?plain_body: String,
+          ?spam: bool,
+          ?spam_score: Float,
+          ?tag: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          token: String,
+          from: String,
+          scope: Ark::Models::EmailRetrieveResponse::Data::scope,
+          status: Ark::Models::EmailRetrieveResponse::Data::status,
+          subject: String,
+          timestamp: Float,
+          timestamp_iso: Time,
+          to: String,
+          deliveries: ::Array[Ark::Delivery],
+          headers: ::Hash[Symbol, String],
+          html_body: String,
+          message_id: String,
+          plain_body: String,
+          spam: bool,
+          spam_score: Float,
+          tag: String
+        }
+
+        type scope = :outgoing | :incoming
+
+        module Scope
+          extend Ark::Internal::Type::Enum
+
+          OUTGOING: :outgoing
+          INCOMING: :incoming
+
+          def self?.values: -> ::Array[Ark::Models::EmailRetrieveResponse::Data::scope]
+        end
+
+        type status =
+          :pending | :sent | :delivered | :bounced | :failed | :delayed | :held
+
+        module Status
+          extend Ark::Internal::Type::Enum
+
+          PENDING: :pending
+          SENT: :sent
+          DELIVERED: :delivered
+          BOUNCED: :bounced
+          FAILED: :failed
+          DELAYED: :delayed
+          HELD: :held
+
+          def self?.values: -> ::Array[Ark::Models::EmailRetrieveResponse::Data::status]
+        end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::EmailRetrieveResponse::success]
+      end
+    end
+  end
+end

@@ -1,0 +1,92 @@
+# frozen_string_literal: true
+
+module Ark
+  module Models
+    # @see Ark::Resources::Emails#send_batch
+    class EmailSendBatchResponse < Ark::Internal::Type::BaseModel
+      # @!attribute data
+      #
+      #   @return [Ark::Models::EmailSendBatchResponse::Data]
+      required :data, -> { Ark::Models::EmailSendBatchResponse::Data }
+
+      # @!attribute meta
+      #
+      #   @return [Ark::Models::APIMeta]
+      required :meta, -> { Ark::APIMeta }
+
+      # @!attribute success
+      #
+      #   @return [Boolean, Ark::Models::EmailSendBatchResponse::Success]
+      required :success, enum: -> { Ark::Models::EmailSendBatchResponse::Success }
+
+      # @!method initialize(data:, meta:, success:)
+      #   @param data [Ark::Models::EmailSendBatchResponse::Data]
+      #   @param meta [Ark::Models::APIMeta]
+      #   @param success [Boolean, Ark::Models::EmailSendBatchResponse::Success]
+
+      # @see Ark::Models::EmailSendBatchResponse#data
+      class Data < Ark::Internal::Type::BaseModel
+        # @!attribute failed
+        #   Failed emails
+        #
+        #   @return [Integer]
+        required :failed, Integer
+
+        # @!attribute messages
+        #   Map of recipient email to message info
+        #
+        #   @return [Hash{Symbol=>Ark::Models::EmailSendBatchResponse::Data::Message}]
+        required :messages, -> { Ark::Internal::Type::HashOf[Ark::Models::EmailSendBatchResponse::Data::Message] }
+
+        # @!attribute queued
+        #   Successfully queued emails
+        #
+        #   @return [Integer]
+        required :queued, Integer
+
+        # @!attribute total
+        #   Total emails in the batch
+        #
+        #   @return [Integer]
+        required :total, Integer
+
+        # @!method initialize(failed:, messages:, queued:, total:)
+        #   @param failed [Integer] Failed emails
+        #
+        #   @param messages [Hash{Symbol=>Ark::Models::EmailSendBatchResponse::Data::Message}] Map of recipient email to message info
+        #
+        #   @param queued [Integer] Successfully queued emails
+        #
+        #   @param total [Integer] Total emails in the batch
+
+        class Message < Ark::Internal::Type::BaseModel
+          # @!attribute id
+          #   Message ID
+          #
+          #   @return [String]
+          required :id, String
+
+          # @!attribute token
+          #
+          #   @return [String]
+          required :token, String
+
+          # @!method initialize(id:, token:)
+          #   @param id [String] Message ID
+          #
+          #   @param token [String]
+        end
+      end
+
+      # @see Ark::Models::EmailSendBatchResponse#success
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE = true
+
+        # @!method self.values
+        #   @return [Array<Boolean>]
+      end
+    end
+  end
+end

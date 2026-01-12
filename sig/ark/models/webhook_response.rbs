@@ -1,0 +1,124 @@
+module Ark
+  module Models
+    type webhook_response =
+      {
+        data: Ark::WebhookResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookResponse::success
+      }
+
+    class WebhookResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::WebhookResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::WebhookResponse::success
+
+      def initialize: (
+        data: Ark::WebhookResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::WebhookResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookResponse::success
+      }
+
+      type data =
+        {
+          id: String,
+          all_events: bool,
+          created_at: Time,
+          enabled: bool,
+          events: ::Array[Ark::Models::WebhookResponse::Data::event],
+          name: String,
+          url: String,
+          uuid: String,
+          signed: bool
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor all_events: bool
+
+        attr_accessor created_at: Time
+
+        attr_accessor enabled: bool
+
+        attr_accessor events: ::Array[Ark::Models::WebhookResponse::Data::event]
+
+        attr_accessor name: String
+
+        attr_accessor url: String
+
+        attr_accessor uuid: String
+
+        attr_reader signed: bool?
+
+        def signed=: (bool) -> bool
+
+        def initialize: (
+          id: String,
+          all_events: bool,
+          created_at: Time,
+          enabled: bool,
+          events: ::Array[Ark::Models::WebhookResponse::Data::event],
+          name: String,
+          url: String,
+          uuid: String,
+          ?signed: bool
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          all_events: bool,
+          created_at: Time,
+          enabled: bool,
+          events: ::Array[Ark::Models::WebhookResponse::Data::event],
+          name: String,
+          url: String,
+          uuid: String,
+          signed: bool
+        }
+
+        type event =
+          :MessageSent
+          | :MessageDelayed
+          | :MessageDeliveryFailed
+          | :MessageHeld
+          | :MessageBounced
+          | :MessageLinkClicked
+          | :MessageLoaded
+          | :DomainDNSError
+
+        module Event
+          extend Ark::Internal::Type::Enum
+
+          MESSAGE_SENT: :MessageSent
+          MESSAGE_DELAYED: :MessageDelayed
+          MESSAGE_DELIVERY_FAILED: :MessageDeliveryFailed
+          MESSAGE_HELD: :MessageHeld
+          MESSAGE_BOUNCED: :MessageBounced
+          MESSAGE_LINK_CLICKED: :MessageLinkClicked
+          MESSAGE_LOADED: :MessageLoaded
+          DOMAIN_DNS_ERROR: :DomainDNSError
+
+          def self?.values: -> ::Array[Ark::Models::WebhookResponse::Data::event]
+        end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::WebhookResponse::success]
+      end
+    end
+  end
+end

@@ -1,0 +1,119 @@
+module Ark
+  module Models
+    type tracking_verify_response =
+      {
+        data: Ark::Models::TrackingVerifyResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::TrackingVerifyResponse::success
+      }
+
+    class TrackingVerifyResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::Models::TrackingVerifyResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::TrackingVerifyResponse::success
+
+      def initialize: (
+        data: Ark::Models::TrackingVerifyResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::TrackingVerifyResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::TrackingVerifyResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::TrackingVerifyResponse::success
+      }
+
+      type data =
+        {
+          id: String,
+          dns_ok: bool,
+          dns_status: Ark::Models::TrackingVerifyResponse::Data::dns_status?,
+          full_name: String,
+          dns_checked_at: Time?,
+          dns_error: String?,
+          dns_record: Ark::Models::TrackingVerifyResponse::Data::DNSRecord?
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor dns_ok: bool
+
+        attr_accessor dns_status: Ark::Models::TrackingVerifyResponse::Data::dns_status?
+
+        attr_accessor full_name: String
+
+        attr_accessor dns_checked_at: Time?
+
+        attr_accessor dns_error: String?
+
+        attr_accessor dns_record: Ark::Models::TrackingVerifyResponse::Data::DNSRecord?
+
+        def initialize: (
+          id: String,
+          dns_ok: bool,
+          dns_status: Ark::Models::TrackingVerifyResponse::Data::dns_status?,
+          full_name: String,
+          ?dns_checked_at: Time?,
+          ?dns_error: String?,
+          ?dns_record: Ark::Models::TrackingVerifyResponse::Data::DNSRecord?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          dns_ok: bool,
+          dns_status: Ark::Models::TrackingVerifyResponse::Data::dns_status?,
+          full_name: String,
+          dns_checked_at: Time?,
+          dns_error: String?,
+          dns_record: Ark::Models::TrackingVerifyResponse::Data::DNSRecord?
+        }
+
+        type dns_status = :ok | :missing | :invalid
+
+        module DNSStatus
+          extend Ark::Internal::Type::Enum
+
+          OK: :ok
+          MISSING: :missing
+          INVALID: :invalid
+
+          def self?.values: -> ::Array[Ark::Models::TrackingVerifyResponse::Data::dns_status]
+        end
+
+        type dns_record = { name: String, type: String, value: String }
+
+        class DNSRecord < Ark::Internal::Type::BaseModel
+          attr_reader name: String?
+
+          def name=: (String) -> String
+
+          attr_reader type: String?
+
+          def type=: (String) -> String
+
+          attr_reader value: String?
+
+          def value=: (String) -> String
+
+          def initialize: (?name: String, ?type: String, ?value: String) -> void
+
+          def to_hash: -> { name: String, type: String, value: String }
+        end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::TrackingVerifyResponse::success]
+      end
+    end
+  end
+end

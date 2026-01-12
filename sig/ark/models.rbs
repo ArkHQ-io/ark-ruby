@@ -1,0 +1,79 @@
+module Ark
+  class APIMeta = Ark::Models::APIMeta
+
+  class Delivery = Ark::Models::Delivery
+
+  class DNSRecord = Ark::Models::DNSRecord
+
+  class DomainCreateParams = Ark::Models::DomainCreateParams
+
+  class DomainDeleteParams = Ark::Models::DomainDeleteParams
+
+  class DomainListParams = Ark::Models::DomainListParams
+
+  class DomainResponse = Ark::Models::DomainResponse
+
+  class DomainRetrieveParams = Ark::Models::DomainRetrieveParams
+
+  class DomainVerifyParams = Ark::Models::DomainVerifyParams
+
+  class EmailGetDeliveriesParams = Ark::Models::EmailGetDeliveriesParams
+
+  class EmailListParams = Ark::Models::EmailListParams
+
+  class EmailRetrieveParams = Ark::Models::EmailRetrieveParams
+
+  class EmailRetryParams = Ark::Models::EmailRetryParams
+
+  class EmailSendBatchParams = Ark::Models::EmailSendBatchParams
+
+  class EmailSendParams = Ark::Models::EmailSendParams
+
+  class EmailSendRawParams = Ark::Models::EmailSendRawParams
+
+  class Pagination = Ark::Models::Pagination
+
+  class SendEmail = Ark::Models::SendEmail
+
+  class SuccessResponse = Ark::Models::SuccessResponse
+
+  class SuppressionBulkCreateParams = Ark::Models::SuppressionBulkCreateParams
+
+  class SuppressionCreateParams = Ark::Models::SuppressionCreateParams
+
+  class SuppressionDeleteParams = Ark::Models::SuppressionDeleteParams
+
+  class SuppressionListParams = Ark::Models::SuppressionListParams
+
+  class SuppressionRetrieveParams = Ark::Models::SuppressionRetrieveParams
+
+  class TrackDomain = Ark::Models::TrackDomain
+
+  class TrackDomainResponse = Ark::Models::TrackDomainResponse
+
+  class TrackingCreateParams = Ark::Models::TrackingCreateParams
+
+  class TrackingDeleteParams = Ark::Models::TrackingDeleteParams
+
+  class TrackingListParams = Ark::Models::TrackingListParams
+
+  class TrackingRetrieveParams = Ark::Models::TrackingRetrieveParams
+
+  class TrackingUpdateParams = Ark::Models::TrackingUpdateParams
+
+  class TrackingVerifyParams = Ark::Models::TrackingVerifyParams
+
+  class WebhookCreateParams = Ark::Models::WebhookCreateParams
+
+  class WebhookDeleteParams = Ark::Models::WebhookDeleteParams
+
+  class WebhookListParams = Ark::Models::WebhookListParams
+
+  class WebhookResponse = Ark::Models::WebhookResponse
+
+  class WebhookRetrieveParams = Ark::Models::WebhookRetrieveParams
+
+  class WebhookTestParams = Ark::Models::WebhookTestParams
+
+  class WebhookUpdateParams = Ark::Models::WebhookUpdateParams
+end
