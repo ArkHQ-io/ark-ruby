@@ -78,11 +78,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
     skip("Prism tests are disabled")
 
     response =
-      @ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
-        to: ["user@example.com"]
-      )
+      @ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
 
     assert_pattern do
       response => Ark::SendEmail

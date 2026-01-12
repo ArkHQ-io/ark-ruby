@@ -104,21 +104,13 @@ module Ark
           sig { returns(String) }
           attr_accessor :url
 
-          # Whether webhook payloads are signed
-          sig { returns(T.nilable(T::Boolean)) }
-          attr_reader :signed
-
-          sig { params(signed: T::Boolean).void }
-          attr_writer :signed
-
           sig do
             params(
               id: String,
               enabled: T::Boolean,
               events: T::Array[String],
               name: String,
-              url: String,
-              signed: T::Boolean
+              url: String
             ).returns(T.attached_class)
           end
           def self.new(
@@ -127,9 +119,7 @@ module Ark
             enabled:,
             events:,
             name:,
-            url:,
-            # Whether webhook payloads are signed
-            signed: nil
+            url:
           )
           end
 
@@ -140,8 +130,7 @@ module Ark
                 enabled: T::Boolean,
                 events: T::Array[String],
                 name: String,
-                url: String,
-                signed: T::Boolean
+                url: String
               }
             )
           end

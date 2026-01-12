@@ -35,8 +35,7 @@ module Ark
           events: ::Array[Ark::Models::WebhookResponse::Data::event],
           name: String,
           url: String,
-          uuid: String,
-          signed: bool
+          uuid: String
         }
 
       class Data < Ark::Internal::Type::BaseModel
@@ -56,10 +55,6 @@ module Ark
 
         attr_accessor uuid: String
 
-        attr_reader signed: bool?
-
-        def signed=: (bool) -> bool
-
         def initialize: (
           id: String,
           all_events: bool,
@@ -68,8 +63,7 @@ module Ark
           events: ::Array[Ark::Models::WebhookResponse::Data::event],
           name: String,
           url: String,
-          uuid: String,
-          ?signed: bool
+          uuid: String
         ) -> void
 
         def to_hash: -> {
@@ -80,8 +74,7 @@ module Ark
           events: ::Array[Ark::Models::WebhookResponse::Data::event],
           name: String,
           url: String,
-          uuid: String,
-          signed: bool
+          uuid: String
         }
 
         type event =

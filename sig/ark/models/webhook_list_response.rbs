@@ -46,8 +46,7 @@ module Ark
             enabled: bool,
             events: ::Array[String],
             name: String,
-            url: String,
-            signed: bool
+            url: String
           }
 
         class Webhook < Ark::Internal::Type::BaseModel
@@ -61,17 +60,12 @@ module Ark
 
           attr_accessor url: String
 
-          attr_reader signed: bool?
-
-          def signed=: (bool) -> bool
-
           def initialize: (
             id: String,
             enabled: bool,
             events: ::Array[String],
             name: String,
-            url: String,
-            ?signed: bool
+            url: String
           ) -> void
 
           def to_hash: -> {
@@ -79,8 +73,7 @@ module Ark
             enabled: bool,
             events: ::Array[String],
             name: String,
-            url: String,
-            signed: bool
+            url: String
           }
         end
       end
