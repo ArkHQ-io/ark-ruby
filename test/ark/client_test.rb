@@ -40,11 +40,7 @@ class ArkTest < Minitest::Test
     ark = Ark::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Ark::Errors::InternalServerError) do
-      ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
-        to: ["user@example.com"]
-      )
+      ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
     end
 
     assert_requested(:any, /./, times: 3)
@@ -56,11 +52,7 @@ class ArkTest < Minitest::Test
     ark = Ark::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 3)
 
     assert_raises(Ark::Errors::InternalServerError) do
-      ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
-        to: ["user@example.com"]
-      )
+      ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
     end
 
     assert_requested(:any, /./, times: 4)
@@ -73,8 +65,8 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::InternalServerError) do
       ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
+        from: "Acme <hello@acme.com>",
+        subject: "Hello World",
         to: ["user@example.com"],
         request_options: {max_retries: 3}
       )
@@ -90,8 +82,8 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::InternalServerError) do
       ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
+        from: "Acme <hello@acme.com>",
+        subject: "Hello World",
         to: ["user@example.com"],
         request_options: {max_retries: 4}
       )
@@ -110,11 +102,7 @@ class ArkTest < Minitest::Test
     ark = Ark::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Ark::Errors::InternalServerError) do
-      ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
-        to: ["user@example.com"]
-      )
+      ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
     end
 
     assert_requested(:any, /./, times: 2)
@@ -132,11 +120,7 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::InternalServerError) do
       Thread.current.thread_variable_set(:time_now, Time.now)
-      ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
-        to: ["user@example.com"]
-      )
+      ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
       Thread.current.thread_variable_set(:time_now, nil)
     end
 
@@ -154,11 +138,7 @@ class ArkTest < Minitest::Test
     ark = Ark::Client.new(base_url: "http://localhost", api_key: "My API Key", max_retries: 1)
 
     assert_raises(Ark::Errors::InternalServerError) do
-      ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
-        to: ["user@example.com"]
-      )
+      ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
     end
 
     assert_requested(:any, /./, times: 2)
@@ -171,11 +151,7 @@ class ArkTest < Minitest::Test
     ark = Ark::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
     assert_raises(Ark::Errors::InternalServerError) do
-      ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
-        to: ["user@example.com"]
-      )
+      ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
     end
 
     3.times do
@@ -190,8 +166,8 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::InternalServerError) do
       ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
+        from: "Acme <hello@acme.com>",
+        subject: "Hello World",
         to: ["user@example.com"],
         request_options: {extra_headers: {"x-stainless-retry-count" => nil}}
       )
@@ -209,8 +185,8 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::InternalServerError) do
       ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
+        from: "Acme <hello@acme.com>",
+        subject: "Hello World",
         to: ["user@example.com"],
         request_options: {extra_headers: {"x-stainless-retry-count" => "42"}}
       )
@@ -234,8 +210,8 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::APIConnectionError) do
       ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
+        from: "Acme <hello@acme.com>",
+        subject: "Hello World",
         to: ["user@example.com"],
         request_options: {extra_headers: {}}
       )
@@ -268,8 +244,8 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::APIConnectionError) do
       ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
+        from: "Acme <hello@acme.com>",
+        subject: "Hello World",
         to: ["user@example.com"],
         request_options: {extra_headers: {}}
       )
@@ -297,8 +273,8 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::APIConnectionError) do
       ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
+        from: "Acme <hello@acme.com>",
+        subject: "Hello World",
         to: ["user@example.com"],
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
@@ -329,8 +305,8 @@ class ArkTest < Minitest::Test
 
     assert_raises(Ark::Errors::APIConnectionError) do
       ark.emails.send_(
-        from: "Security <security@myapp.com>",
-        subject: "Reset your password",
+        from: "Acme <hello@acme.com>",
+        subject: "Hello World",
         to: ["user@example.com"],
         request_options: {extra_headers: {"authorization" => "Bearer xyz"}}
       )
@@ -347,11 +323,7 @@ class ArkTest < Minitest::Test
 
     ark = Ark::Client.new(base_url: "http://localhost", api_key: "My API Key")
 
-    ark.emails.send_(
-      from: "Security <security@myapp.com>",
-      subject: "Reset your password",
-      to: ["user@example.com"]
-    )
+    ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
 
     assert_requested(:any, /./) do |req|
       headers = req.headers.transform_keys(&:downcase).fetch_values("accept", "content-type")
