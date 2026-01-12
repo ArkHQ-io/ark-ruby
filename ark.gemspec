@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = "support@arkhq.io"
   s.homepage = "https://gemdocs.org/gems/ark"
   s.metadata["homepage_uri"] = s.homepage
-  s.metadata["source_code_uri"] = "https://github.com/stainless-sdks/ark-ruby"
+  s.metadata["source_code_uri"] = "https://github.com/ArkHQ-io/ark-ruby"
   s.metadata["rubygems_mfa_required"] = false.to_s
   s.required_ruby_version = ">= 3.2.0"
 
