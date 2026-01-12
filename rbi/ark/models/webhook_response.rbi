@@ -81,13 +81,6 @@ module Ark
         sig { returns(String) }
         attr_accessor :uuid
 
-        # Whether the webhook payloads are signed (always true for new webhooks)
-        sig { returns(T.nilable(T::Boolean)) }
-        attr_reader :signed
-
-        sig { params(signed: T::Boolean).void }
-        attr_writer :signed
-
         sig do
           params(
             id: String,
@@ -97,8 +90,7 @@ module Ark
             events: T::Array[Ark::WebhookResponse::Data::Event::OrSymbol],
             name: String,
             url: String,
-            uuid: String,
-            signed: T::Boolean
+            uuid: String
           ).returns(T.attached_class)
         end
         def self.new(
@@ -115,9 +107,7 @@ module Ark
           name:,
           # Webhook endpoint URL
           url:,
-          uuid:,
-          # Whether the webhook payloads are signed (always true for new webhooks)
-          signed: nil
+          uuid:
         )
         end
 
@@ -131,8 +121,7 @@ module Ark
               events: T::Array[Ark::WebhookResponse::Data::Event::TaggedSymbol],
               name: String,
               url: String,
-              uuid: String,
-              signed: T::Boolean
+              uuid: String
             }
           )
         end

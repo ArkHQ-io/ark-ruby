@@ -61,13 +61,7 @@ module Ark
           #   @return [String]
           required :url, String
 
-          # @!attribute signed
-          #   Whether webhook payloads are signed
-          #
-          #   @return [Boolean, nil]
-          optional :signed, Ark::Internal::Type::Boolean
-
-          # @!method initialize(id:, enabled:, events:, name:, url:, signed: nil)
+          # @!method initialize(id:, enabled:, events:, name:, url:)
           #   @param id [String] Webhook ID
           #
           #   @param enabled [Boolean]
@@ -77,8 +71,6 @@ module Ark
           #   @param name [String]
           #
           #   @param url [String]
-          #
-          #   @param signed [Boolean] Whether webhook payloads are signed
         end
       end
 
