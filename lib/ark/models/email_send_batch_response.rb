@@ -26,6 +26,12 @@ module Ark
 
       # @see Ark::Models::EmailSendBatchResponse#data
       class Data < Ark::Internal::Type::BaseModel
+        # @!attribute accepted
+        #   Successfully accepted emails
+        #
+        #   @return [Integer]
+        required :accepted, Integer
+
         # @!attribute failed
         #   Failed emails
         #
@@ -38,24 +44,18 @@ module Ark
         #   @return [Hash{Symbol=>Ark::Models::EmailSendBatchResponse::Data::Message}]
         required :messages, -> { Ark::Internal::Type::HashOf[Ark::Models::EmailSendBatchResponse::Data::Message] }
 
-        # @!attribute queued
-        #   Successfully queued emails
-        #
-        #   @return [Integer]
-        required :queued, Integer
-
         # @!attribute total
         #   Total emails in the batch
         #
         #   @return [Integer]
         required :total, Integer
 
-        # @!method initialize(failed:, messages:, queued:, total:)
+        # @!method initialize(accepted:, failed:, messages:, total:)
+        #   @param accepted [Integer] Successfully accepted emails
+        #
         #   @param failed [Integer] Failed emails
         #
         #   @param messages [Hash{Symbol=>Ark::Models::EmailSendBatchResponse::Data::Message}] Map of recipient email to message info
-        #
-        #   @param queued [Integer] Successfully queued emails
         #
         #   @param total [Integer] Total emails in the batch
 

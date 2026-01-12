@@ -59,12 +59,12 @@ module Ark
           message_id: String
         }
 
-        type status = :queued | :sent
+        type status = :pending | :sent
 
         module Status
           extend Ark::Internal::Type::Enum
 
-          QUEUED: :queued
+          PENDING: :pending
           SENT: :sent
 
           def self?.values: -> ::Array[Ark::Models::SendEmail::Data::status]

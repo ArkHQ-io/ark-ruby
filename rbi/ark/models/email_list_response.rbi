@@ -104,10 +104,9 @@ module Ark
           #
           # - `pending` - Email accepted, waiting to be processed
           # - `sent` - Email transmitted to recipient's mail server
-          # - `delivered` - Recipient's server confirmed receipt
-          # - `bounced` - Permanently rejected (hard bounce)
-          # - `failed` - Delivery failed after all retry attempts
-          # - `delayed` - Temporary failure, will retry automatically
+          # - `softfail` - Temporary delivery failure, will retry
+          # - `hardfail` - Permanent delivery failure
+          # - `bounced` - Email bounced back
           # - `held` - Held for manual review
           sig do
             returns(
@@ -157,10 +156,9 @@ module Ark
             #
             # - `pending` - Email accepted, waiting to be processed
             # - `sent` - Email transmitted to recipient's mail server
-            # - `delivered` - Recipient's server confirmed receipt
-            # - `bounced` - Permanently rejected (hard bounce)
-            # - `failed` - Delivery failed after all retry attempts
-            # - `delayed` - Temporary failure, will retry automatically
+            # - `softfail` - Temporary delivery failure, will retry
+            # - `hardfail` - Permanent delivery failure
+            # - `bounced` - Email bounced back
             # - `held` - Held for manual review
             status:,
             subject:,
@@ -194,10 +192,9 @@ module Ark
           #
           # - `pending` - Email accepted, waiting to be processed
           # - `sent` - Email transmitted to recipient's mail server
-          # - `delivered` - Recipient's server confirmed receipt
-          # - `bounced` - Permanently rejected (hard bounce)
-          # - `failed` - Delivery failed after all retry attempts
-          # - `delayed` - Temporary failure, will retry automatically
+          # - `softfail` - Temporary delivery failure, will retry
+          # - `hardfail` - Permanent delivery failure
+          # - `bounced` - Email bounced back
           # - `held` - Held for manual review
           module Status
             extend Ark::Internal::Type::Enum
@@ -221,24 +218,19 @@ module Ark
                 :sent,
                 Ark::Models::EmailListResponse::Data::Message::Status::TaggedSymbol
               )
-            DELIVERED =
+            SOFTFAIL =
               T.let(
-                :delivered,
+                :softfail,
+                Ark::Models::EmailListResponse::Data::Message::Status::TaggedSymbol
+              )
+            HARDFAIL =
+              T.let(
+                :hardfail,
                 Ark::Models::EmailListResponse::Data::Message::Status::TaggedSymbol
               )
             BOUNCED =
               T.let(
                 :bounced,
-                Ark::Models::EmailListResponse::Data::Message::Status::TaggedSymbol
-              )
-            FAILED =
-              T.let(
-                :failed,
-                Ark::Models::EmailListResponse::Data::Message::Status::TaggedSymbol
-              )
-            DELAYED =
-              T.let(
-                :delayed,
                 Ark::Models::EmailListResponse::Data::Message::Status::TaggedSymbol
               )
             HELD =

@@ -28,32 +28,32 @@ module Ark
 
       type data =
         {
+          accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, Ark::Models::EmailSendBatchResponse::Data::Message],
-          queued: Integer,
           total: Integer
         }
 
       class Data < Ark::Internal::Type::BaseModel
+        attr_accessor accepted: Integer
+
         attr_accessor failed: Integer
 
         attr_accessor messages: ::Hash[Symbol, Ark::Models::EmailSendBatchResponse::Data::Message]
 
-        attr_accessor queued: Integer
-
         attr_accessor total: Integer
 
         def initialize: (
+          accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, Ark::Models::EmailSendBatchResponse::Data::Message],
-          queued: Integer,
           total: Integer
         ) -> void
 
         def to_hash: -> {
+          accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, Ark::Models::EmailSendBatchResponse::Data::Message],
-          queued: Integer,
           total: Integer
         }
 

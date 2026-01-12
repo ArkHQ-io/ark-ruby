@@ -150,17 +150,16 @@ module Ark
         end
 
         type status =
-          :pending | :sent | :delivered | :bounced | :failed | :delayed | :held
+          :pending | :sent | :softfail | :hardfail | :bounced | :held
 
         module Status
           extend Ark::Internal::Type::Enum
 
           PENDING: :pending
           SENT: :sent
-          DELIVERED: :delivered
+          SOFTFAIL: :softfail
+          HARDFAIL: :hardfail
           BOUNCED: :bounced
-          FAILED: :failed
-          DELAYED: :delayed
           HELD: :held
 
           def self?.values: -> ::Array[Ark::Models::EmailRetrieveResponse::Data::status]

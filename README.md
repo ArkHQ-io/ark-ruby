@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "ark", "~> 0.1.0"
+gem "ark", "~> 0.2.0"
 ```
 
 <!-- x-release-please-end -->
@@ -209,11 +209,11 @@ ark.emails.send_(**params)
 Since this library does not depend on `sorbet-runtime`, it cannot provide [`T::Enum`](https://sorbet.org/docs/tenum) instances. Instead, we provide "tagged symbols" instead, which is always a primitive at runtime:
 
 ```ruby
-# :queued
-puts(Ark::EmailListParams::Status::QUEUED)
+# :pending
+puts(Ark::EmailListParams::Status::PENDING)
 
 # Revealed type: `T.all(Ark::EmailListParams::Status, Symbol)`
-T.reveal_type(Ark::EmailListParams::Status::QUEUED)
+T.reveal_type(Ark::EmailListParams::Status::PENDING)
 ```
 
 Enum parameters have a "relaxed" type, so you can either pass in enum constants or their literal value:
@@ -221,13 +221,13 @@ Enum parameters have a "relaxed" type, so you can either pass in enum constants 
 ```ruby
 # Using the enum constants preserves the tagged type information:
 ark.emails.list(
-  status: Ark::EmailListParams::Status::QUEUED,
+  status: Ark::EmailListParams::Status::PENDING,
   # …
 )
 
 # Literal values are also permissible:
 ark.emails.list(
-  status: :queued,
+  status: :pending,
   # …
 )
 ```
