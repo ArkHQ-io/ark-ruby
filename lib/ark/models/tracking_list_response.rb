@@ -6,20 +6,20 @@ module Ark
     class TrackingListResponse < Ark::Internal::Type::BaseModel
       # @!attribute data
       #
-      #   @return [Ark::Models::TrackingListResponse::Data, nil]
-      optional :data, -> { Ark::Models::TrackingListResponse::Data }
+      #   @return [Ark::Models::TrackingListResponse::Data]
+      required :data, -> { Ark::Models::TrackingListResponse::Data }
 
       # @!attribute meta
       #
-      #   @return [Ark::Models::APIMeta, nil]
-      optional :meta, -> { Ark::APIMeta }
+      #   @return [Ark::Models::APIMeta]
+      required :meta, -> { Ark::APIMeta }
 
       # @!attribute success
       #
-      #   @return [Boolean, Ark::Models::TrackingListResponse::Success, nil]
-      optional :success, enum: -> { Ark::Models::TrackingListResponse::Success }
+      #   @return [Boolean, Ark::Models::TrackingListResponse::Success]
+      required :success, enum: -> { Ark::Models::TrackingListResponse::Success }
 
-      # @!method initialize(data: nil, meta: nil, success: nil)
+      # @!method initialize(data:, meta:, success:)
       #   @param data [Ark::Models::TrackingListResponse::Data]
       #   @param meta [Ark::Models::APIMeta]
       #   @param success [Boolean, Ark::Models::TrackingListResponse::Success]
@@ -28,14 +28,14 @@ module Ark
       class Data < Ark::Internal::Type::BaseModel
         # @!attribute track_domains
         #
-        #   @return [Array<Ark::Models::TrackDomain>, nil]
-        optional :track_domains,
+        #   @return [Array<Ark::Models::TrackDomain>]
+        required :track_domains,
                  -> {
                    Ark::Internal::Type::ArrayOf[Ark::TrackDomain]
                  },
                  api_name: :trackDomains
 
-        # @!method initialize(track_domains: nil)
+        # @!method initialize(track_domains:)
         #   @param track_domains [Array<Ark::Models::TrackDomain>]
       end
 
