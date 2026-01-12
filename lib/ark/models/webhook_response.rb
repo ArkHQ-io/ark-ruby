@@ -72,13 +72,7 @@ module Ark
         #   @return [String]
         required :uuid, String
 
-        # @!attribute signed
-        #   Whether the webhook payloads are signed (always true for new webhooks)
-        #
-        #   @return [Boolean, nil]
-        optional :signed, Ark::Internal::Type::Boolean
-
-        # @!method initialize(id:, all_events:, created_at:, enabled:, events:, name:, url:, uuid:, signed: nil)
+        # @!method initialize(id:, all_events:, created_at:, enabled:, events:, name:, url:, uuid:)
         #   @param id [String] Webhook ID
         #
         #   @param all_events [Boolean] Whether subscribed to all events
@@ -94,8 +88,6 @@ module Ark
         #   @param url [String] Webhook endpoint URL
         #
         #   @param uuid [String]
-        #
-        #   @param signed [Boolean] Whether the webhook payloads are signed (always true for new webhooks)
 
         module Event
           extend Ark::Internal::Type::Enum
