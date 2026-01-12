@@ -43,13 +43,13 @@ If you’d like to use the repository from source, you can either install from g
 To install via git in your `Gemfile`:
 
 ```ruby
-gem "ark", git: "https://www.github.com/stainless-sdks/ark-ruby"
+gem "ark", git: "https://www.github.com/ArkHQ-io/ark-ruby"
 ```
 
 Alternatively, reference local copy of the repo:
 
 ```bash
-$ git clone -- 'https://www.github.com/stainless-sdks/ark-ruby' '<path-to-repo>'
+$ git clone -- 'https://www.github.com/ArkHQ-io/ark-ruby' '<path-to-repo>'
 ```
 
 ```ruby
