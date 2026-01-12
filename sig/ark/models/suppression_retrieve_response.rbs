@@ -1,0 +1,64 @@
+module Ark
+  module Models
+    type suppression_retrieve_response =
+      { data: Ark::Models::SuppressionRetrieveResponse::Data, success: bool }
+
+    class SuppressionRetrieveResponse < Ark::Internal::Type::BaseModel
+      attr_reader data: Ark::Models::SuppressionRetrieveResponse::Data?
+
+      def data=: (
+        Ark::Models::SuppressionRetrieveResponse::Data
+      ) -> Ark::Models::SuppressionRetrieveResponse::Data
+
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
+
+      def initialize: (
+        ?data: Ark::Models::SuppressionRetrieveResponse::Data,
+        ?success: bool
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::SuppressionRetrieveResponse::Data,
+        success: bool
+      }
+
+      type data =
+        {
+          address: String,
+          created_at: Time?,
+          reason: String?,
+          suppressed: bool
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_reader address: String?
+
+        def address=: (String) -> String
+
+        attr_accessor created_at: Time?
+
+        attr_accessor reason: String?
+
+        attr_reader suppressed: bool?
+
+        def suppressed=: (bool) -> bool
+
+        def initialize: (
+          ?address: String,
+          ?created_at: Time?,
+          ?reason: String?,
+          ?suppressed: bool
+        ) -> void
+
+        def to_hash: -> {
+          address: String,
+          created_at: Time?,
+          reason: String?,
+          suppressed: bool
+        }
+      end
+    end
+  end
+end

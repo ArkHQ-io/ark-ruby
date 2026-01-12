@@ -1,0 +1,196 @@
+# typed: strong
+
+module Ark
+  module Models
+    class DomainResponse < Ark::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias { T.any(Ark::DomainResponse, Ark::Internal::AnyHash) }
+
+      sig { returns(Ark::DomainResponse::Data) }
+      attr_reader :data
+
+      sig { params(data: Ark::DomainResponse::Data::OrHash).void }
+      attr_writer :data
+
+      sig { returns(Ark::APIMeta) }
+      attr_reader :meta
+
+      sig { params(meta: Ark::APIMeta::OrHash).void }
+      attr_writer :meta
+
+      sig { returns(Ark::DomainResponse::Success::TaggedBoolean) }
+      attr_accessor :success
+
+      sig do
+        params(
+          data: Ark::DomainResponse::Data::OrHash,
+          meta: Ark::APIMeta::OrHash,
+          success: Ark::DomainResponse::Success::OrBoolean
+        ).returns(T.attached_class)
+      end
+      def self.new(data:, meta:, success:)
+      end
+
+      sig do
+        override.returns(
+          {
+            data: Ark::DomainResponse::Data,
+            meta: Ark::APIMeta,
+            success: Ark::DomainResponse::Success::TaggedBoolean
+          }
+        )
+      end
+      def to_hash
+      end
+
+      class Data < Ark::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(Ark::DomainResponse::Data, Ark::Internal::AnyHash)
+          end
+
+        # Domain ID
+        sig { returns(String) }
+        attr_accessor :id
+
+        sig { returns(Time) }
+        attr_accessor :created_at
+
+        sig { returns(Ark::DomainResponse::Data::DNSRecords) }
+        attr_reader :dns_records
+
+        sig do
+          params(
+            dns_records: Ark::DomainResponse::Data::DNSRecords::OrHash
+          ).void
+        end
+        attr_writer :dns_records
+
+        # Domain name
+        sig { returns(String) }
+        attr_accessor :name
+
+        sig { returns(String) }
+        attr_accessor :uuid
+
+        # Whether DNS is verified
+        sig { returns(T::Boolean) }
+        attr_accessor :verified
+
+        # When the domain was verified (null if not verified)
+        sig { returns(T.nilable(Time)) }
+        attr_accessor :verified_at
+
+        sig do
+          params(
+            id: String,
+            created_at: Time,
+            dns_records: Ark::DomainResponse::Data::DNSRecords::OrHash,
+            name: String,
+            uuid: String,
+            verified: T::Boolean,
+            verified_at: T.nilable(Time)
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Domain ID
+          id:,
+          created_at:,
+          dns_records:,
+          # Domain name
+          name:,
+          uuid:,
+          # Whether DNS is verified
+          verified:,
+          # When the domain was verified (null if not verified)
+          verified_at: nil
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              id: String,
+              created_at: Time,
+              dns_records: Ark::DomainResponse::Data::DNSRecords,
+              name: String,
+              uuid: String,
+              verified: T::Boolean,
+              verified_at: T.nilable(Time)
+            }
+          )
+        end
+        def to_hash
+        end
+
+        class DNSRecords < Ark::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                Ark::DomainResponse::Data::DNSRecords,
+                Ark::Internal::AnyHash
+              )
+            end
+
+          sig { returns(Ark::DNSRecord) }
+          attr_reader :dkim
+
+          sig { params(dkim: Ark::DNSRecord::OrHash).void }
+          attr_writer :dkim
+
+          sig { returns(Ark::DNSRecord) }
+          attr_reader :return_path
+
+          sig { params(return_path: Ark::DNSRecord::OrHash).void }
+          attr_writer :return_path
+
+          sig { returns(Ark::DNSRecord) }
+          attr_reader :spf
+
+          sig { params(spf: Ark::DNSRecord::OrHash).void }
+          attr_writer :spf
+
+          sig do
+            params(
+              dkim: Ark::DNSRecord::OrHash,
+              return_path: Ark::DNSRecord::OrHash,
+              spf: Ark::DNSRecord::OrHash
+            ).returns(T.attached_class)
+          end
+          def self.new(dkim:, return_path:, spf:)
+          end
+
+          sig do
+            override.returns(
+              {
+                dkim: Ark::DNSRecord,
+                return_path: Ark::DNSRecord,
+                spf: Ark::DNSRecord
+              }
+            )
+          end
+          def to_hash
+          end
+        end
+      end
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TaggedBoolean =
+          T.type_alias { T.all(T::Boolean, Ark::DomainResponse::Success) }
+        OrBoolean = T.type_alias { T::Boolean }
+
+        TRUE = T.let(true, Ark::DomainResponse::Success::TaggedBoolean)
+
+        sig do
+          override.returns(
+            T::Array[Ark::DomainResponse::Success::TaggedBoolean]
+          )
+        end
+        def self.values
+        end
+      end
+    end
+  end
+end

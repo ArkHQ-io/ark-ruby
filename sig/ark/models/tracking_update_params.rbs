@@ -1,0 +1,49 @@
+module Ark
+  module Models
+    type tracking_update_params =
+      {
+        excluded_click_domains: String,
+        ssl_enabled: bool,
+        track_clicks: bool,
+        track_opens: bool
+      }
+      & Ark::Internal::Type::request_parameters
+
+    class TrackingUpdateParams < Ark::Internal::Type::BaseModel
+      extend Ark::Internal::Type::RequestParameters::Converter
+      include Ark::Internal::Type::RequestParameters
+
+      attr_reader excluded_click_domains: String?
+
+      def excluded_click_domains=: (String) -> String
+
+      attr_reader ssl_enabled: bool?
+
+      def ssl_enabled=: (bool) -> bool
+
+      attr_reader track_clicks: bool?
+
+      def track_clicks=: (bool) -> bool
+
+      attr_reader track_opens: bool?
+
+      def track_opens=: (bool) -> bool
+
+      def initialize: (
+        ?excluded_click_domains: String,
+        ?ssl_enabled: bool,
+        ?track_clicks: bool,
+        ?track_opens: bool,
+        ?request_options: Ark::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        excluded_click_domains: String,
+        ssl_enabled: bool,
+        track_clicks: bool,
+        track_opens: bool,
+        request_options: Ark::RequestOptions
+      }
+    end
+  end
+end

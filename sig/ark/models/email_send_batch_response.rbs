@@ -1,0 +1,84 @@
+module Ark
+  module Models
+    type email_send_batch_response =
+      {
+        data: Ark::Models::EmailSendBatchResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::EmailSendBatchResponse::success
+      }
+
+    class EmailSendBatchResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::Models::EmailSendBatchResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::EmailSendBatchResponse::success
+
+      def initialize: (
+        data: Ark::Models::EmailSendBatchResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::EmailSendBatchResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::EmailSendBatchResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::EmailSendBatchResponse::success
+      }
+
+      type data =
+        {
+          failed: Integer,
+          messages: ::Hash[Symbol, Ark::Models::EmailSendBatchResponse::Data::Message],
+          queued: Integer,
+          total: Integer
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor failed: Integer
+
+        attr_accessor messages: ::Hash[Symbol, Ark::Models::EmailSendBatchResponse::Data::Message]
+
+        attr_accessor queued: Integer
+
+        attr_accessor total: Integer
+
+        def initialize: (
+          failed: Integer,
+          messages: ::Hash[Symbol, Ark::Models::EmailSendBatchResponse::Data::Message],
+          queued: Integer,
+          total: Integer
+        ) -> void
+
+        def to_hash: -> {
+          failed: Integer,
+          messages: ::Hash[Symbol, Ark::Models::EmailSendBatchResponse::Data::Message],
+          queued: Integer,
+          total: Integer
+        }
+
+        type message = { id: String, token: String }
+
+        class Message < Ark::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor token: String
+
+          def initialize: (id: String, token: String) -> void
+
+          def to_hash: -> { id: String, token: String }
+        end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::EmailSendBatchResponse::success]
+      end
+    end
+  end
+end

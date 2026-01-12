@@ -1,0 +1,75 @@
+module Ark
+  module Models
+    type webhook_create_params =
+      {
+        events: ::Array[Ark::Models::WebhookCreateParams::event],
+        name: String,
+        url: String,
+        all_events: bool,
+        enabled: bool
+      }
+      & Ark::Internal::Type::request_parameters
+
+    class WebhookCreateParams < Ark::Internal::Type::BaseModel
+      extend Ark::Internal::Type::RequestParameters::Converter
+      include Ark::Internal::Type::RequestParameters
+
+      attr_accessor events: ::Array[Ark::Models::WebhookCreateParams::event]
+
+      attr_accessor name: String
+
+      attr_accessor url: String
+
+      attr_reader all_events: bool?
+
+      def all_events=: (bool) -> bool
+
+      attr_reader enabled: bool?
+
+      def enabled=: (bool) -> bool
+
+      def initialize: (
+        events: ::Array[Ark::Models::WebhookCreateParams::event],
+        name: String,
+        url: String,
+        ?all_events: bool,
+        ?enabled: bool,
+        ?request_options: Ark::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        events: ::Array[Ark::Models::WebhookCreateParams::event],
+        name: String,
+        url: String,
+        all_events: bool,
+        enabled: bool,
+        request_options: Ark::RequestOptions
+      }
+
+      type event =
+        :MessageSent
+        | :MessageDelayed
+        | :MessageDeliveryFailed
+        | :MessageHeld
+        | :MessageBounced
+        | :MessageLinkClicked
+        | :MessageLoaded
+        | :DomainDNSError
+
+      module Event
+        extend Ark::Internal::Type::Enum
+
+        MESSAGE_SENT: :MessageSent
+        MESSAGE_DELAYED: :MessageDelayed
+        MESSAGE_DELIVERY_FAILED: :MessageDeliveryFailed
+        MESSAGE_HELD: :MessageHeld
+        MESSAGE_BOUNCED: :MessageBounced
+        MESSAGE_LINK_CLICKED: :MessageLinkClicked
+        MESSAGE_LOADED: :MessageLoaded
+        DOMAIN_DNS_ERROR: :DomainDNSError
+
+        def self?.values: -> ::Array[Ark::Models::WebhookCreateParams::event]
+      end
+    end
+  end
+end

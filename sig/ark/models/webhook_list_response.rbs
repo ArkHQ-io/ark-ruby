@@ -1,0 +1,99 @@
+module Ark
+  module Models
+    type webhook_list_response =
+      {
+        data: Ark::Models::WebhookListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookListResponse::success
+      }
+
+    class WebhookListResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::Models::WebhookListResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::WebhookListResponse::success
+
+      def initialize: (
+        data: Ark::Models::WebhookListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookListResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::WebhookListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookListResponse::success
+      }
+
+      type data =
+        { webhooks: ::Array[Ark::Models::WebhookListResponse::Data::Webhook] }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor webhooks: ::Array[Ark::Models::WebhookListResponse::Data::Webhook]
+
+        def initialize: (
+          webhooks: ::Array[Ark::Models::WebhookListResponse::Data::Webhook]
+        ) -> void
+
+        def to_hash: -> {
+          webhooks: ::Array[Ark::Models::WebhookListResponse::Data::Webhook]
+        }
+
+        type webhook =
+          {
+            id: String,
+            enabled: bool,
+            events: ::Array[String],
+            name: String,
+            url: String,
+            signed: bool
+          }
+
+        class Webhook < Ark::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor enabled: bool
+
+          attr_accessor events: ::Array[String]
+
+          attr_accessor name: String
+
+          attr_accessor url: String
+
+          attr_reader signed: bool?
+
+          def signed=: (bool) -> bool
+
+          def initialize: (
+            id: String,
+            enabled: bool,
+            events: ::Array[String],
+            name: String,
+            url: String,
+            ?signed: bool
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            enabled: bool,
+            events: ::Array[String],
+            name: String,
+            url: String,
+            signed: bool
+          }
+        end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::WebhookListResponse::success]
+      end
+    end
+  end
+end

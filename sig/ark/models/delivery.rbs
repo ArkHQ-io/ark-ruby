@@ -1,0 +1,63 @@
+module Ark
+  module Models
+    type delivery =
+      {
+        id: String,
+        status: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        code: Integer,
+        details: String,
+        output: String,
+        sent_with_ssl: bool
+      }
+
+    class Delivery < Ark::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor status: String
+
+      attr_accessor timestamp: Float
+
+      attr_accessor timestamp_iso: Time
+
+      attr_reader code: Integer?
+
+      def code=: (Integer) -> Integer
+
+      attr_reader details: String?
+
+      def details=: (String) -> String
+
+      attr_reader output: String?
+
+      def output=: (String) -> String
+
+      attr_reader sent_with_ssl: bool?
+
+      def sent_with_ssl=: (bool) -> bool
+
+      def initialize: (
+        id: String,
+        status: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        ?code: Integer,
+        ?details: String,
+        ?output: String,
+        ?sent_with_ssl: bool
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        status: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        code: Integer,
+        details: String,
+        output: String,
+        sent_with_ssl: bool
+      }
+    end
+  end
+end

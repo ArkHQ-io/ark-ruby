@@ -1,0 +1,34 @@
+module Ark
+  module Resources
+    class Suppressions
+      def create: (
+        address: String,
+        ?reason: String,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::SuppressionCreateResponse
+
+      def retrieve: (
+        String email,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::SuppressionRetrieveResponse
+
+      def list: (
+        ?page: Integer,
+        ?per_page: Integer,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::SuppressionListResponse
+
+      def delete: (
+        String email,
+        ?request_options: Ark::request_opts
+      ) -> Ark::SuccessResponse
+
+      def bulk_create: (
+        suppressions: ::Array[Ark::SuppressionBulkCreateParams::Suppression],
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::SuppressionBulkCreateResponse
+
+      def initialize: (client: Ark::Client) -> void
+    end
+  end
+end

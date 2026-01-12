@@ -1,0 +1,82 @@
+module Ark
+  module Models
+    type webhook_test_response =
+      {
+        data: Ark::Models::WebhookTestResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookTestResponse::success
+      }
+
+    class WebhookTestResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::Models::WebhookTestResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::WebhookTestResponse::success
+
+      def initialize: (
+        data: Ark::Models::WebhookTestResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookTestResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::WebhookTestResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::WebhookTestResponse::success
+      }
+
+      type data =
+        {
+          duration: Integer,
+          event: String,
+          status_code: Integer?,
+          success: bool,
+          body: String?,
+          error: String?
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor duration: Integer
+
+        attr_accessor event: String
+
+        attr_accessor status_code: Integer?
+
+        attr_accessor success: bool
+
+        attr_accessor body: String?
+
+        attr_accessor error: String?
+
+        def initialize: (
+          duration: Integer,
+          event: String,
+          status_code: Integer?,
+          success: bool,
+          ?body: String?,
+          ?error: String?
+        ) -> void
+
+        def to_hash: -> {
+          duration: Integer,
+          event: String,
+          status_code: Integer?,
+          success: bool,
+          body: String?,
+          error: String?
+        }
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::WebhookTestResponse::success]
+      end
+    end
+  end
+end

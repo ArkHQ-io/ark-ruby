@@ -1,0 +1,46 @@
+module Ark
+  module Resources
+    class Webhooks
+      def create: (
+        events: ::Array[Ark::Models::WebhookCreateParams::event],
+        name: String,
+        url: String,
+        ?all_events: bool,
+        ?enabled: bool,
+        ?request_options: Ark::request_opts
+      ) -> Ark::WebhookResponse
+
+      def retrieve: (
+        String webhook_id,
+        ?request_options: Ark::request_opts
+      ) -> Ark::WebhookResponse
+
+      def update: (
+        String webhook_id,
+        ?all_events: bool,
+        ?enabled: bool,
+        ?events: ::Array[String],
+        ?name: String,
+        ?url: String,
+        ?request_options: Ark::request_opts
+      ) -> Ark::WebhookResponse
+
+      def list: (
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::WebhookListResponse
+
+      def delete: (
+        String webhook_id,
+        ?request_options: Ark::request_opts
+      ) -> Ark::SuccessResponse
+
+      def test_: (
+        String webhook_id,
+        event: Ark::Models::WebhookTestParams::event,
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::WebhookTestResponse
+
+      def initialize: (client: Ark::Client) -> void
+    end
+  end
+end

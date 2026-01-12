@@ -1,0 +1,30 @@
+module Ark
+  module Models
+    type pagination =
+      { page: Integer, per_page: Integer, total: Integer, total_pages: Integer }
+
+    class Pagination < Ark::Internal::Type::BaseModel
+      attr_accessor page: Integer
+
+      attr_accessor per_page: Integer
+
+      attr_accessor total: Integer
+
+      attr_accessor total_pages: Integer
+
+      def initialize: (
+        page: Integer,
+        per_page: Integer,
+        total: Integer,
+        total_pages: Integer
+      ) -> void
+
+      def to_hash: -> {
+        page: Integer,
+        per_page: Integer,
+        total: Integer,
+        total_pages: Integer
+      }
+    end
+  end
+end

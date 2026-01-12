@@ -1,0 +1,72 @@
+module Ark
+  module Models
+    type suppression_bulk_create_response =
+      {
+        data: Ark::Models::SuppressionBulkCreateResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::SuppressionBulkCreateResponse::success
+      }
+
+    class SuppressionBulkCreateResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::Models::SuppressionBulkCreateResponse::Data
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: Ark::Models::SuppressionBulkCreateResponse::success
+
+      def initialize: (
+        data: Ark::Models::SuppressionBulkCreateResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::SuppressionBulkCreateResponse::success
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::Models::SuppressionBulkCreateResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::SuppressionBulkCreateResponse::success
+      }
+
+      type data =
+        {
+          added: Integer,
+          failed: Integer,
+          total_requested: Integer,
+          updated: Integer
+        }
+
+      class Data < Ark::Internal::Type::BaseModel
+        attr_accessor added: Integer
+
+        attr_accessor failed: Integer
+
+        attr_accessor total_requested: Integer
+
+        attr_accessor updated: Integer
+
+        def initialize: (
+          added: Integer,
+          failed: Integer,
+          total_requested: Integer,
+          updated: Integer
+        ) -> void
+
+        def to_hash: -> {
+          added: Integer,
+          failed: Integer,
+          total_requested: Integer,
+          updated: Integer
+        }
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::SuppressionBulkCreateResponse::success]
+      end
+    end
+  end
+end

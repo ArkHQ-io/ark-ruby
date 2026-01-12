@@ -1,0 +1,3 @@
+module Ark
+  VERSION: String
+end

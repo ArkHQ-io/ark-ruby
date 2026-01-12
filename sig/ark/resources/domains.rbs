@@ -1,0 +1,31 @@
+module Ark
+  module Resources
+    class Domains
+      def create: (
+        name: String,
+        ?request_options: Ark::request_opts
+      ) -> Ark::DomainResponse
+
+      def retrieve: (
+        String domain_id,
+        ?request_options: Ark::request_opts
+      ) -> Ark::DomainResponse
+
+      def list: (
+        ?request_options: Ark::request_opts
+      ) -> Ark::Models::DomainListResponse
+
+      def delete: (
+        String domain_id,
+        ?request_options: Ark::request_opts
+      ) -> Ark::SuccessResponse
+
+      def verify: (
+        String domain_id,
+        ?request_options: Ark::request_opts
+      ) -> Ark::DomainResponse
+
+      def initialize: (client: Ark::Client) -> void
+    end
+  end
+end

@@ -1,0 +1,32 @@
+module Ark
+  module Models
+    type email_send_raw_params =
+      { data: String, mail_from: String, rcpt_to: ::Array[String] }
+      & Ark::Internal::Type::request_parameters
+
+    class EmailSendRawParams < Ark::Internal::Type::BaseModel
+      extend Ark::Internal::Type::RequestParameters::Converter
+      include Ark::Internal::Type::RequestParameters
+
+      attr_accessor data: String
+
+      attr_accessor mail_from: String
+
+      attr_accessor rcpt_to: ::Array[String]
+
+      def initialize: (
+        data: String,
+        mail_from: String,
+        rcpt_to: ::Array[String],
+        ?request_options: Ark::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        data: String,
+        mail_from: String,
+        rcpt_to: ::Array[String],
+        request_options: Ark::RequestOptions
+      }
+    end
+  end
+end
