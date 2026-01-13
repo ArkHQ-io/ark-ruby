@@ -7,60 +7,44 @@ module Ark
 
       Elem = type_member
 
-      sig { returns(Data) }
+      sig { returns(T.nilable(T::Array[Elem])) }
       attr_accessor :data
+
+      sig { returns(Integer) }
+      attr_accessor :page
+
+      sig { returns(Integer) }
+      attr_accessor :per_page
+
+      sig { returns(Integer) }
+      attr_accessor :total
+
+      sig { returns(Integer) }
+      attr_accessor :total_pages
+
+      sig { returns(Meta) }
+      attr_accessor :meta
 
       # @api private
       sig { returns(String) }
       def inspect
       end
 
-      class Data < Ark::Internal::Type::BaseModel
-        OrHash = T.type_alias { T.any(Data, Ark::Internal::AnyHash) }
+      class Meta < Ark::Internal::Type::BaseModel
+        OrHash = T.type_alias { T.any(Meta, Ark::Internal::AnyHash) }
 
-        sig { returns(T.nilable(Data::Pagination)) }
-        attr_reader :pagination
+        sig { returns(T.nilable(String)) }
+        attr_reader :request_id
 
-        sig { params(pagination: Data::Pagination::OrHash).void }
-        attr_writer :pagination
+        sig { params(request_id: String).void }
+        attr_writer :request_id
 
-        sig do
-          params(pagination: Data::Pagination::OrHash).returns(T.attached_class)
-        end
-        def self.new(pagination: nil)
+        sig { params(request_id: String).returns(T.attached_class) }
+        def self.new(request_id: nil)
         end
 
-        sig { override.returns({ pagination: Data::Pagination }) }
+        sig { override.returns({ request_id: String }) }
         def to_hash
-        end
-
-        class Pagination < Ark::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias { T.any(Data::Pagination, Ark::Internal::AnyHash) }
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :page
-
-          sig { params(page: Integer).void }
-          attr_writer :page
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :total_pages
-
-          sig { params(total_pages: Integer).void }
-          attr_writer :total_pages
-
-          sig do
-            params(page: Integer, total_pages: Integer).returns(
-              T.attached_class
-            )
-          end
-          def self.new(page: nil, total_pages: nil)
-          end
-
-          sig { override.returns({ page: Integer, total_pages: Integer }) }
-          def to_hash
-          end
         end
       end
     end

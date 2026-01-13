@@ -35,9 +35,15 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       row => {
-        data: Ark::Models::EmailListResponse::Data,
-        meta: Ark::APIMeta,
-        success: true | false
+        id: String,
+        token: String,
+        from: String,
+        status: Ark::Models::EmailListResponse::Status,
+        subject: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        to: String,
+        tag: String | nil
       }
     end
   end
