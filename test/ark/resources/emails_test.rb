@@ -14,7 +14,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::EmailRetrieveResponse::Success
       }
     end
   end
@@ -23,27 +23,14 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
     response = @ark.emails.list
 
     assert_pattern do
-      response => Ark::Internal::PageNumberPagination
-    end
-
-    row = response.to_enum.first
-    return if row.nil?
-
-    assert_pattern do
-      row => Ark::Models::EmailListResponse
+      response => Ark::Models::EmailListResponse
     end
 
     assert_pattern do
-      row => {
-        id: String,
-        token: String,
-        from: String,
-        status: Ark::Models::EmailListResponse::Status,
-        subject: String,
-        timestamp: Float,
-        timestamp_iso: Time,
-        to: String,
-        tag: String | nil
+      response => {
+        data: Ark::Models::EmailListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::EmailListResponse::Success
       }
     end
   end
@@ -59,7 +46,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailRetrieveDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::EmailRetrieveDeliveriesResponse::Success
       }
     end
   end
@@ -73,9 +60,8 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       response => {
-        data: Ark::Models::EmailRetryResponse::Data,
-        meta: Ark::APIMeta,
-        success: true | false
+        data: Ark::Models::EmailRetryResponse::Data | nil,
+        success: Ark::Internal::Type::Boolean | nil
       }
     end
   end
@@ -92,7 +78,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailSendResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::EmailSendResponse::Success
       }
     end
   end
@@ -115,7 +101,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailSendBatchResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::EmailSendBatchResponse::Success
       }
     end
   end
@@ -132,7 +118,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailSendRawResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::EmailSendRawResponse::Success
       }
     end
   end

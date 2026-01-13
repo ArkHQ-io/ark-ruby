@@ -20,17 +20,17 @@ module Ark
       sig { params(meta: Ark::APIMeta::OrHash).void }
       attr_writer :meta
 
-      sig { returns(T::Boolean) }
+      sig { returns(Ark::Models::EmailSendRawResponse::Success::TaggedBoolean) }
       attr_accessor :success
 
       sig do
         params(
           data: Ark::Models::EmailSendRawResponse::Data::OrHash,
           meta: Ark::APIMeta::OrHash,
-          success: T::Boolean
+          success: Ark::Models::EmailSendRawResponse::Success::OrBoolean
         ).returns(T.attached_class)
       end
-      def self.new(data:, meta:, success: true)
+      def self.new(data:, meta:, success:)
       end
 
       sig do
@@ -38,7 +38,7 @@ module Ark
           {
             data: Ark::Models::EmailSendRawResponse::Data,
             meta: Ark::APIMeta,
-            success: T::Boolean
+            success: Ark::Models::EmailSendRawResponse::Success::TaggedBoolean
           }
         )
       end
@@ -139,6 +139,27 @@ module Ark
           end
           def self.values
           end
+        end
+      end
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TaggedBoolean =
+          T.type_alias do
+            T.all(T::Boolean, Ark::Models::EmailSendRawResponse::Success)
+          end
+        OrBoolean = T.type_alias { T::Boolean }
+
+        TRUE =
+          T.let(true, Ark::Models::EmailSendRawResponse::Success::TaggedBoolean)
+
+        sig do
+          override.returns(
+            T::Array[Ark::Models::EmailSendRawResponse::Success::TaggedBoolean]
+          )
+        end
+        def self.values
         end
       end
     end

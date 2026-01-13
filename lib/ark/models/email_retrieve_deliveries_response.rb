@@ -16,13 +16,13 @@ module Ark
 
       # @!attribute success
       #
-      #   @return [Boolean, true]
-      required :success, const: true
+      #   @return [Boolean, Ark::Models::EmailRetrieveDeliveriesResponse::Success]
+      required :success, enum: -> { Ark::Models::EmailRetrieveDeliveriesResponse::Success }
 
-      # @!method initialize(data:, meta:, success: true)
+      # @!method initialize(data:, meta:, success:)
       #   @param data [Ark::Models::EmailRetrieveDeliveriesResponse::Data]
       #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, true]
+      #   @param success [Boolean, Ark::Models::EmailRetrieveDeliveriesResponse::Success]
 
       # @see Ark::Models::EmailRetrieveDeliveriesResponse#data
       class Data < Ark::Internal::Type::BaseModel
@@ -117,6 +117,16 @@ module Ark
           #
           #   @param sent_with_ssl [Boolean] Whether TLS was used
         end
+      end
+
+      # @see Ark::Models::EmailRetrieveDeliveriesResponse#success
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE = true
+
+        # @!method self.values
+        #   @return [Array<Boolean>]
       end
     end
   end

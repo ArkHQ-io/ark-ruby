@@ -6,58 +6,45 @@ module Ark
     class SuppressionRetrieveResponse < Ark::Internal::Type::BaseModel
       # @!attribute data
       #
-      #   @return [Ark::Models::SuppressionRetrieveResponse::Data]
-      required :data, -> { Ark::Models::SuppressionRetrieveResponse::Data }
-
-      # @!attribute meta
-      #
-      #   @return [Ark::Models::APIMeta]
-      required :meta, -> { Ark::APIMeta }
+      #   @return [Ark::Models::SuppressionRetrieveResponse::Data, nil]
+      optional :data, -> { Ark::Models::SuppressionRetrieveResponse::Data }
 
       # @!attribute success
       #
-      #   @return [Boolean, true]
-      required :success, const: true
+      #   @return [Boolean, nil]
+      optional :success, Ark::Internal::Type::Boolean
 
-      # @!method initialize(data:, meta:, success: true)
+      # @!method initialize(data: nil, success: nil)
       #   @param data [Ark::Models::SuppressionRetrieveResponse::Data]
-      #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, true]
+      #   @param success [Boolean]
 
       # @see Ark::Models::SuppressionRetrieveResponse#data
       class Data < Ark::Internal::Type::BaseModel
         # @!attribute address
-        #   The email address that was checked
         #
-        #   @return [String]
-        required :address, String
-
-        # @!attribute suppressed
-        #   Whether the address is currently suppressed
-        #
-        #   @return [Boolean]
-        required :suppressed, Ark::Internal::Type::Boolean
+        #   @return [String, nil]
+        optional :address, String
 
         # @!attribute created_at
-        #   When the suppression was created (if suppressed)
         #
         #   @return [Time, nil]
         optional :created_at, Time, api_name: :createdAt, nil?: true
 
         # @!attribute reason
-        #   Reason for suppression (if suppressed)
         #
         #   @return [String, nil]
         optional :reason, String, nil?: true
 
-        # @!method initialize(address:, suppressed:, created_at: nil, reason: nil)
-        #   @param address [String] The email address that was checked
+        # @!attribute suppressed
         #
-        #   @param suppressed [Boolean] Whether the address is currently suppressed
-        #
-        #   @param created_at [Time, nil] When the suppression was created (if suppressed)
-        #
-        #   @param reason [String, nil] Reason for suppression (if suppressed)
+        #   @return [Boolean, nil]
+        optional :suppressed, Ark::Internal::Type::Boolean
+
+        # @!method initialize(address: nil, created_at: nil, reason: nil, suppressed: nil)
+        #   @param address [String]
+        #   @param created_at [Time, nil]
+        #   @param reason [String, nil]
+        #   @param suppressed [Boolean]
       end
     end
   end

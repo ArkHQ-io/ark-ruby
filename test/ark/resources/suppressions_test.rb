@@ -14,7 +14,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::SuppressionCreateResponse::Success
       }
     end
   end
@@ -28,9 +28,8 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       response => {
-        data: Ark::Models::SuppressionRetrieveResponse::Data,
-        meta: Ark::APIMeta,
-        success: true | false
+        data: Ark::Models::SuppressionRetrieveResponse::Data | nil,
+        success: Ark::Internal::Type::Boolean | nil
       }
     end
   end
@@ -39,22 +38,14 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
     response = @ark.suppressions.list
 
     assert_pattern do
-      response => Ark::Internal::PageNumberPagination
-    end
-
-    row = response.to_enum.first
-    return if row.nil?
-
-    assert_pattern do
-      row => Ark::Models::SuppressionListResponse
+      response => Ark::Models::SuppressionListResponse
     end
 
     assert_pattern do
-      row => {
-        id: String,
-        address: String,
-        created_at: Time,
-        reason: String | nil
+      response => {
+        data: Ark::Models::SuppressionListResponse::Data,
+        meta: Ark::APIMeta,
+        success: Ark::Models::SuppressionListResponse::Success
       }
     end
   end
@@ -70,7 +61,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionDeleteResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::SuppressionDeleteResponse::Success
       }
     end
   end
@@ -86,7 +77,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionBulkCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::SuppressionBulkCreateResponse::Success
       }
     end
   end

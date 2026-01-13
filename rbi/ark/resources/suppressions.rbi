@@ -42,11 +42,7 @@ module Ark
           page: Integer,
           per_page: Integer,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(
-          Ark::Internal::PageNumberPagination[
-            Ark::Models::SuppressionListResponse
-          ]
-        )
+        ).returns(Ark::Models::SuppressionListResponse)
       end
       def list(page: nil, per_page: nil, request_options: {})
       end

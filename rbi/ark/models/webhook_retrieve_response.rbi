@@ -22,17 +22,19 @@ module Ark
       sig { params(meta: Ark::APIMeta::OrHash).void }
       attr_writer :meta
 
-      sig { returns(T::Boolean) }
+      sig do
+        returns(Ark::Models::WebhookRetrieveResponse::Success::TaggedBoolean)
+      end
       attr_accessor :success
 
       sig do
         params(
           data: Ark::Models::WebhookRetrieveResponse::Data::OrHash,
           meta: Ark::APIMeta::OrHash,
-          success: T::Boolean
+          success: Ark::Models::WebhookRetrieveResponse::Success::OrBoolean
         ).returns(T.attached_class)
       end
-      def self.new(data:, meta:, success: true)
+      def self.new(data:, meta:, success:)
       end
 
       sig do
@@ -40,7 +42,8 @@ module Ark
           {
             data: Ark::Models::WebhookRetrieveResponse::Data,
             meta: Ark::APIMeta,
-            success: T::Boolean
+            success:
+              Ark::Models::WebhookRetrieveResponse::Success::TaggedBoolean
           }
         )
       end
@@ -204,6 +207,32 @@ module Ark
           end
           def self.values
           end
+        end
+      end
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TaggedBoolean =
+          T.type_alias do
+            T.all(T::Boolean, Ark::Models::WebhookRetrieveResponse::Success)
+          end
+        OrBoolean = T.type_alias { T::Boolean }
+
+        TRUE =
+          T.let(
+            true,
+            Ark::Models::WebhookRetrieveResponse::Success::TaggedBoolean
+          )
+
+        sig do
+          override.returns(
+            T::Array[
+              Ark::Models::WebhookRetrieveResponse::Success::TaggedBoolean
+            ]
+          )
+        end
+        def self.values
         end
       end
     end

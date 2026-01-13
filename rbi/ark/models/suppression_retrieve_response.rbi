@@ -11,7 +11,7 @@ module Ark
           )
         end
 
-      sig { returns(Ark::Models::SuppressionRetrieveResponse::Data) }
+      sig { returns(T.nilable(Ark::Models::SuppressionRetrieveResponse::Data)) }
       attr_reader :data
 
       sig do
@@ -21,30 +21,25 @@ module Ark
       end
       attr_writer :data
 
-      sig { returns(Ark::APIMeta) }
-      attr_reader :meta
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_reader :success
 
-      sig { params(meta: Ark::APIMeta::OrHash).void }
-      attr_writer :meta
-
-      sig { returns(T::Boolean) }
-      attr_accessor :success
+      sig { params(success: T::Boolean).void }
+      attr_writer :success
 
       sig do
         params(
           data: Ark::Models::SuppressionRetrieveResponse::Data::OrHash,
-          meta: Ark::APIMeta::OrHash,
           success: T::Boolean
         ).returns(T.attached_class)
       end
-      def self.new(data:, meta:, success: true)
+      def self.new(data: nil, success: nil)
       end
 
       sig do
         override.returns(
           {
             data: Ark::Models::SuppressionRetrieveResponse::Data,
-            meta: Ark::APIMeta,
             success: T::Boolean
           }
         )
@@ -61,39 +56,37 @@ module Ark
             )
           end
 
-        # The email address that was checked
-        sig { returns(String) }
-        attr_accessor :address
+        sig { returns(T.nilable(String)) }
+        attr_reader :address
 
-        # Whether the address is currently suppressed
-        sig { returns(T::Boolean) }
-        attr_accessor :suppressed
+        sig { params(address: String).void }
+        attr_writer :address
 
-        # When the suppression was created (if suppressed)
         sig { returns(T.nilable(Time)) }
         attr_accessor :created_at
 
-        # Reason for suppression (if suppressed)
         sig { returns(T.nilable(String)) }
         attr_accessor :reason
+
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :suppressed
+
+        sig { params(suppressed: T::Boolean).void }
+        attr_writer :suppressed
 
         sig do
           params(
             address: String,
-            suppressed: T::Boolean,
             created_at: T.nilable(Time),
-            reason: T.nilable(String)
+            reason: T.nilable(String),
+            suppressed: T::Boolean
           ).returns(T.attached_class)
         end
         def self.new(
-          # The email address that was checked
-          address:,
-          # Whether the address is currently suppressed
-          suppressed:,
-          # When the suppression was created (if suppressed)
+          address: nil,
           created_at: nil,
-          # Reason for suppression (if suppressed)
-          reason: nil
+          reason: nil,
+          suppressed: nil
         )
         end
 
@@ -101,9 +94,9 @@ module Ark
           override.returns(
             {
               address: String,
-              suppressed: T::Boolean,
               created_at: T.nilable(Time),
-              reason: T.nilable(String)
+              reason: T.nilable(String),
+              suppressed: T::Boolean
             }
           )
         end
