@@ -1,40 +1,26 @@
 module Ark
   module Models
     type track_domain_response =
-      {
-        data: Ark::TrackDomain,
-        meta: Ark::APIMeta,
-        success: Ark::Models::TrackDomainResponse::success
-      }
+      { data: Ark::TrackDomain, meta: Ark::APIMeta, success: true }
 
     class TrackDomainResponse < Ark::Internal::Type::BaseModel
       attr_accessor data: Ark::TrackDomain
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: Ark::Models::TrackDomainResponse::success
+      attr_accessor success: true
 
       def initialize: (
         data: Ark::TrackDomain,
         meta: Ark::APIMeta,
-        success: Ark::Models::TrackDomainResponse::success
+        ?success: true
       ) -> void
 
       def to_hash: -> {
         data: Ark::TrackDomain,
         meta: Ark::APIMeta,
-        success: Ark::Models::TrackDomainResponse::success
+        success: true
       }
-
-      type success = true
-
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE: true
-
-        def self?.values: -> ::Array[Ark::Models::TrackDomainResponse::success]
-      end
     end
   end
 end

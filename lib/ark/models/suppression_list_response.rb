@@ -16,13 +16,13 @@ module Ark
 
       # @!attribute success
       #
-      #   @return [Boolean, Ark::Models::SuppressionListResponse::Success]
-      required :success, enum: -> { Ark::Models::SuppressionListResponse::Success }
+      #   @return [Boolean, true]
+      required :success, const: true
 
-      # @!method initialize(data:, meta:, success:)
+      # @!method initialize(data:, meta:, success: true)
       #   @param data [Ark::Models::SuppressionListResponse::Data]
       #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, Ark::Models::SuppressionListResponse::Success]
+      #   @param success [Boolean, true]
 
       # @see Ark::Models::SuppressionListResponse#data
       class Data < Ark::Internal::Type::BaseModel
@@ -72,16 +72,6 @@ module Ark
           #
           #   @param reason [String]
         end
-      end
-
-      # @see Ark::Models::SuppressionListResponse#success
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE = true
-
-        # @!method self.values
-        #   @return [Array<Boolean>]
       end
     end
   end

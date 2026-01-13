@@ -16,7 +16,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailRetrieveResponse::Success
+        success: true | false
       }
     end
   end
@@ -34,7 +34,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailListResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailListResponse::Success
+        success: true | false
       }
     end
   end
@@ -52,7 +52,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailGetDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailGetDeliveriesResponse::Success
+        success: true | false
       }
     end
   end
@@ -88,7 +88,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::SendEmail::Data,
         meta: Ark::APIMeta,
-        success: Ark::SendEmail::Success
+        success: true | false
       }
     end
   end
@@ -113,7 +113,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailSendBatchResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailSendBatchResponse::Success
+        success: true | false
       }
     end
   end
@@ -132,7 +132,7 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::SendEmail::Data,
         meta: Ark::APIMeta,
-        success: Ark::SendEmail::Success
+        success: true | false
       }
     end
   end

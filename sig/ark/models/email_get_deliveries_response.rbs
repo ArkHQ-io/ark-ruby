@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::EmailGetDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailGetDeliveriesResponse::success
+        success: true
       }
 
     class EmailGetDeliveriesResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: Ark::Models::EmailGetDeliveriesResponse::success
+      attr_accessor success: true
 
       def initialize: (
         data: Ark::Models::EmailGetDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailGetDeliveriesResponse::success
+        ?success: true
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::EmailGetDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailGetDeliveriesResponse::success
+        success: true
       }
 
       type data =
@@ -51,16 +51,6 @@ module Ark
           message_id: String,
           message_token: String
         }
-      end
-
-      type success = true
-
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE: true
-
-        def self?.values: -> ::Array[Ark::Models::EmailGetDeliveriesResponse::success]
       end
     end
   end
