@@ -7,8 +7,14 @@ module Ark
 
       Elem = type_member
 
+      sig { returns(T::Boolean) }
+      attr_accessor :success
+
       sig { returns(Data) }
       attr_accessor :data
+
+      sig { returns(Meta) }
+      attr_accessor :meta
 
       # @api private
       sig { returns(String) }
@@ -18,13 +24,10 @@ module Ark
       class Data < Ark::Internal::Type::BaseModel
         OrHash = T.type_alias { T.any(Data, Ark::Internal::AnyHash) }
 
-        sig { returns(T.nilable(T::Array[T.anything])) }
-        attr_reader :messages
+        sig { returns(T::Array[T::Hash[Symbol, T.anything]]) }
+        attr_accessor :messages
 
-        sig { params(messages: T::Array[T.anything]).void }
-        attr_writer :messages
-
-        sig { returns(T.nilable(Data::Pagination)) }
+        sig { returns(Data::Pagination) }
         attr_reader :pagination
 
         sig { params(pagination: Data::Pagination::OrHash).void }
@@ -32,16 +35,19 @@ module Ark
 
         sig do
           params(
-            messages: T::Array[T.anything],
+            messages: T::Array[T::Hash[Symbol, T.anything]],
             pagination: Data::Pagination::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(messages: nil, pagination: nil)
+        def self.new(messages:, pagination:)
         end
 
         sig do
           override.returns(
-            { messages: T::Array[T.anything], pagination: Data::Pagination }
+            {
+              messages: T::Array[T::Hash[Symbol, T.anything]],
+              pagination: Data::Pagination
+            }
           )
         end
         def to_hash
@@ -58,22 +64,64 @@ module Ark
           attr_writer :page
 
           sig { returns(T.nilable(Integer)) }
+          attr_reader :per_page
+
+          sig { params(per_page: Integer).void }
+          attr_writer :per_page
+
+          sig { returns(T.nilable(Integer)) }
+          attr_reader :total
+
+          sig { params(total: Integer).void }
+          attr_writer :total
+
+          sig { returns(T.nilable(Integer)) }
           attr_reader :total_pages
 
           sig { params(total_pages: Integer).void }
           attr_writer :total_pages
 
           sig do
-            params(page: Integer, total_pages: Integer).returns(
-              T.attached_class
-            )
+            params(
+              page: Integer,
+              per_page: Integer,
+              total: Integer,
+              total_pages: Integer
+            ).returns(T.attached_class)
           end
-          def self.new(page: nil, total_pages: nil)
+          def self.new(page: nil, per_page: nil, total: nil, total_pages: nil)
           end
 
-          sig { override.returns({ page: Integer, total_pages: Integer }) }
+          sig do
+            override.returns(
+              {
+                page: Integer,
+                per_page: Integer,
+                total: Integer,
+                total_pages: Integer
+              }
+            )
+          end
           def to_hash
           end
+        end
+      end
+
+      class Meta < Ark::Internal::Type::BaseModel
+        OrHash = T.type_alias { T.any(Meta, Ark::Internal::AnyHash) }
+
+        sig { returns(T.nilable(String)) }
+        attr_reader :request_id
+
+        sig { params(request_id: String).void }
+        attr_writer :request_id
+
+        sig { params(request_id: String).returns(T.attached_class) }
+        def self.new(request_id: nil)
+        end
+
+        sig { override.returns({ request_id: String }) }
+        def to_hash
         end
       end
     end

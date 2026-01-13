@@ -16,8 +16,14 @@ module Ark
     class EmailsPage
       include Ark::Internal::Type::BasePage
 
+      # @return [Boolean]
+      attr_accessor :success
+
       # @return [Data]
       attr_accessor :data
+
+      # @return [Meta]
+      attr_accessor :meta
 
       # @return [Boolean]
       def next_page?
@@ -62,12 +68,18 @@ module Ark
       def initialize(client:, req:, headers:, page_data:)
         super
 
+        @success = page_data[:success]
         case page_data
         in {data: Hash | nil => data}
           if (messages = data[:messages]).is_a?(Array)
             data = {**data, messages: messages.map { Ark::Internal::Type::Converter.coerce(@model, _1) }}
           end
           @data = Ark::Internal::Type::Converter.coerce(Ark::Internal::EmailsPage::Data, data)
+        else
+        end
+        case page_data
+        in {meta: Hash | nil => meta}
+          @meta = Ark::Internal::Type::Converter.coerce(Ark::Internal::EmailsPage::Meta, meta)
         else
         end
       end
@@ -78,22 +90,23 @@ module Ark
       def inspect
         model = Ark::Internal::Type::Converter.inspect(@model, depth: 1)
 
-        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)}>"
+        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)} success=#{success.inspect}>"
       end
 
       class Data < Ark::Internal::Type::BaseModel
         # @!attribute messages
         #
-        #   @return [Array<Object>, nil]
-        optional :messages, Ark::Internal::Type::ArrayOf[Ark::Internal::Type::Unknown]
+        #   @return [Array<Hash{Symbol=>Object}>]
+        required :messages,
+                 Ark::Internal::Type::ArrayOf[Ark::Internal::Type::HashOf[Ark::Internal::Type::Unknown]]
 
         # @!attribute pagination
         #
-        #   @return [Data::Pagination, nil]
-        optional :pagination, -> { Data::Pagination }
+        #   @return [Data::Pagination]
+        required :pagination, -> { Data::Pagination }
 
-        # @!method initialize(messages: nil, pagination: nil)
-        #   @param messages [Array<Object>]
+        # @!method initialize(messages:, pagination:)
+        #   @param messages [Array<Hash{Symbol=>Object}>]
         #   @param pagination [Data::Pagination]
 
         # @see Data#pagination
@@ -103,15 +116,37 @@ module Ark
           #   @return [Integer, nil]
           optional :page, Integer
 
+          # @!attribute per_page
+          #
+          #   @return [Integer, nil]
+          optional :per_page, Integer, api_name: :perPage
+
+          # @!attribute total
+          #
+          #   @return [Integer, nil]
+          optional :total, Integer
+
           # @!attribute total_pages
           #
           #   @return [Integer, nil]
           optional :total_pages, Integer, api_name: :totalPages
 
-          # @!method initialize(page: nil, total_pages: nil)
+          # @!method initialize(page: nil, per_page: nil, total: nil, total_pages: nil)
           #   @param page [Integer]
+          #   @param per_page [Integer]
+          #   @param total [Integer]
           #   @param total_pages [Integer]
         end
+      end
+
+      class Meta < Ark::Internal::Type::BaseModel
+        # @!attribute request_id
+        #
+        #   @return [String, nil]
+        optional :request_id, String, api_name: :requestId
+
+        # @!method initialize(request_id: nil)
+        #   @param request_id [String]
       end
     end
   end
