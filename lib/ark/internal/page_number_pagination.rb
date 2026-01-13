@@ -16,12 +16,27 @@ module Ark
     class PageNumberPagination
       include Ark::Internal::Type::BasePage
 
-      # @return [Data]
+      # @return [Array<generic<Elem>>, nil]
       attr_accessor :data
+
+      # @return [Integer]
+      attr_accessor :page
+
+      # @return [Integer]
+      attr_accessor :per_page
+
+      # @return [Integer]
+      attr_accessor :total
+
+      # @return [Integer]
+      attr_accessor :total_pages
+
+      # @return [Meta]
+      attr_accessor :meta
 
       # @return [Boolean]
       def next_page?
-        !data.to_a.empty? && (data&.pagination&.page.nil? || data&.pagination&.total_pages.nil? || (data&.pagination&.page&.< data&.pagination&.total_pages))
+        !data.to_a.empty? && (page.nil? || total_pages.nil? || page < total_pages)
       end
 
       # @raise [Ark::HTTP::Error]
@@ -32,7 +47,7 @@ module Ark
           raise RuntimeError.new(message)
         end
 
-        req = Ark::Internal::Util.deep_merge(@req, {query: {page: (data&.pagination&.page || 1).to_i.succ}})
+        req = Ark::Internal::Util.deep_merge(@req, {query: {page: (page || 1).to_i.succ}})
         @client.request(req)
       end
 
@@ -63,8 +78,17 @@ module Ark
         super
 
         case page_data
-        in {data: Hash | nil => data}
-          @data = Ark::Internal::Type::Converter.coerce(Ark::Internal::PageNumberPagination::Data, data)
+        in {data: Array => data}
+          @data = data.map { Ark::Internal::Type::Converter.coerce(@model, _1) }
+        else
+        end
+        @page = page_data[:page]
+        @per_page = page_data[:perPage]
+        @total = page_data[:total]
+        @total_pages = page_data[:totalPages]
+        case page_data
+        in {meta: Hash | nil => meta}
+          @meta = Ark::Internal::Type::Converter.coerce(Ark::Internal::PageNumberPagination::Meta, meta)
         else
         end
       end
@@ -73,36 +97,21 @@ module Ark
       #
       # @return [String]
       def inspect
+        # rubocop:disable Layout/LineLength
         model = Ark::Internal::Type::Converter.inspect(@model, depth: 1)
 
-        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)}>"
+        "#<#{self.class}[#{model}]:0x#{object_id.to_s(16)} page=#{page.inspect} per_page=#{per_page.inspect} total=#{total.inspect} total_pages=#{total_pages.inspect}>"
+        # rubocop:enable Layout/LineLength
       end
 
-      class Data < Ark::Internal::Type::BaseModel
-        # @!attribute pagination
+      class Meta < Ark::Internal::Type::BaseModel
+        # @!attribute request_id
         #
-        #   @return [Data::Pagination, nil]
-        optional :pagination, -> { Data::Pagination }
+        #   @return [String, nil]
+        optional :request_id, String, api_name: :requestId
 
-        # @!method initialize(pagination: nil)
-        #   @param pagination [Data::Pagination]
-
-        # @see Data#pagination
-        class Pagination < Ark::Internal::Type::BaseModel
-          # @!attribute page
-          #
-          #   @return [Integer, nil]
-          optional :page, Integer
-
-          # @!attribute total_pages
-          #
-          #   @return [Integer, nil]
-          optional :total_pages, Integer, api_name: :totalPages
-
-          # @!method initialize(page: nil, total_pages: nil)
-          #   @param page [Integer]
-          #   @param total_pages [Integer]
-        end
+        # @!method initialize(request_id: nil)
+        #   @param request_id [String]
       end
     end
   end

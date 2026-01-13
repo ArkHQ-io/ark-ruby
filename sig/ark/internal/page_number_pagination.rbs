@@ -3,35 +3,29 @@ module Ark
     class PageNumberPagination[Elem]
       include Ark::Internal::Type::BasePage[Elem]
 
-      attr_accessor data: Data
+      attr_accessor data: ::Array[Elem]?
+
+      attr_accessor page: Integer
+
+      attr_accessor per_page: Integer
+
+      attr_accessor total: Integer
+
+      attr_accessor total_pages: Integer
+
+      attr_accessor meta: Meta
 
       def inspect: -> String
 
-      type data = { pagination: Data::Pagination }
-      class Data < Ark::Internal::Type::BaseModel
-        attr_reader pagination: Data::Pagination?
+      type meta = { request_id: String }
+      class Meta < Ark::Internal::Type::BaseModel
+        attr_reader request_id: String?
 
-        def pagination=: (Data::Pagination) -> Data::Pagination
+        def request_id=: (String) -> String
 
-        def initialize: (?pagination: Data::Pagination) -> void
+        def initialize: (?request_id: String) -> void
 
-        def to_hash: -> { pagination: Data::Pagination }
-
-        type pagination = { page: Integer, total_pages: Integer }
-
-        class Pagination < Ark::Internal::Type::BaseModel
-          attr_reader page: Integer?
-
-          def page=: (Integer) -> Integer
-
-          attr_reader total_pages: Integer?
-
-          def total_pages=: (Integer) -> Integer
-
-          def initialize: (?page: Integer, ?total_pages: Integer) -> void
-
-          def to_hash: -> { page: Integer, total_pages: Integer }
-        end
+        def to_hash: -> { request_id: String }
       end
     end
   end

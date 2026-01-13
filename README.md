@@ -53,11 +53,11 @@ page = ark.emails.list(page: 1, per_page: 10)
 
 # Fetch single item from page.
 email = page.data[0]
-puts(email.data)
+puts(email.id)
 
 # Automatically fetches more pages as needed.
 page.auto_paging_each do |email|
-  puts(email.data)
+  puts(email.id)
 end
 ```
 
@@ -66,7 +66,7 @@ Alternatively, you can use the `#next_page?` and `#next_page` methods for more g
 ```ruby
 if page.next_page?
   new_page = page.next_page
-  puts(new_page.data[0].data)
+  puts(new_page.data[0].id)
 end
 ```
 

@@ -51,9 +51,10 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       row => {
-        data: Ark::Models::SuppressionListResponse::Data,
-        meta: Ark::APIMeta,
-        success: true | false
+        id: String,
+        address: String,
+        created_at: Time,
+        reason: String | nil
       }
     end
   end
