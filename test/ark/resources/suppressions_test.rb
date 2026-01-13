@@ -14,7 +14,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionCreateResponse::Success
+        success: true | false
       }
     end
   end
@@ -28,8 +28,9 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       response => {
-        data: Ark::Models::SuppressionRetrieveResponse::Data | nil,
-        success: Ark::Internal::Type::Boolean | nil
+        data: Ark::Models::SuppressionRetrieveResponse::Data,
+        meta: Ark::APIMeta,
+        success: true | false
       }
     end
   end
@@ -38,14 +39,22 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
     response = @ark.suppressions.list
 
     assert_pattern do
-      response => Ark::Models::SuppressionListResponse
+      response => Ark::Internal::PageNumberPagination
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Ark::Models::SuppressionListResponse
     end
 
     assert_pattern do
-      response => {
-        data: Ark::Models::SuppressionListResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionListResponse::Success
+      row => {
+        id: String,
+        address: String,
+        created_at: Time,
+        reason: String | nil
       }
     end
   end
@@ -61,7 +70,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionDeleteResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionDeleteResponse::Success
+        success: true | false
       }
     end
   end
@@ -77,7 +86,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionBulkCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionBulkCreateResponse::Success
+        success: true | false
       }
     end
   end

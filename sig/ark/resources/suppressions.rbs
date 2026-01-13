@@ -16,7 +16,7 @@ module Ark
         ?page: Integer,
         ?per_page: Integer,
         ?request_options: Ark::request_opts
-      ) -> Ark::Models::SuppressionListResponse
+      ) -> Ark::Internal::PageNumberPagination[Ark::Models::SuppressionListResponse]
 
       def delete: (
         String email,

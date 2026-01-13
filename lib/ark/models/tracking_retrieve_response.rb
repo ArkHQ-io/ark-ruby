@@ -16,23 +16,13 @@ module Ark
 
       # @!attribute success
       #
-      #   @return [Boolean, Ark::Models::TrackingRetrieveResponse::Success]
-      required :success, enum: -> { Ark::Models::TrackingRetrieveResponse::Success }
+      #   @return [Boolean, true]
+      required :success, const: true
 
-      # @!method initialize(data:, meta:, success:)
+      # @!method initialize(data:, meta:, success: true)
       #   @param data [Ark::Models::TrackDomain]
       #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, Ark::Models::TrackingRetrieveResponse::Success]
-
-      # @see Ark::Models::TrackingRetrieveResponse#success
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE = true
-
-        # @!method self.values
-        #   @return [Array<Boolean>]
-      end
+      #   @param success [Boolean, true]
     end
   end
 end
