@@ -1,0 +1,159 @@
+# typed: strong
+
+module ArkEmail
+  module Models
+    class EmailSendBatchResponse < ArkEmail::Internal::Type::BaseModel
+      OrHash =
+        T.type_alias do
+          T.any(
+            ArkEmail::Models::EmailSendBatchResponse,
+            ArkEmail::Internal::AnyHash
+          )
+        end
+
+      sig { returns(ArkEmail::Models::EmailSendBatchResponse::Data) }
+      attr_reader :data
+
+      sig do
+        params(
+          data: ArkEmail::Models::EmailSendBatchResponse::Data::OrHash
+        ).void
+      end
+      attr_writer :data
+
+      sig { returns(ArkEmail::APIMeta) }
+      attr_reader :meta
+
+      sig { params(meta: ArkEmail::APIMeta::OrHash).void }
+      attr_writer :meta
+
+      sig { returns(T::Boolean) }
+      attr_accessor :success
+
+      sig do
+        params(
+          data: ArkEmail::Models::EmailSendBatchResponse::Data::OrHash,
+          meta: ArkEmail::APIMeta::OrHash,
+          success: T::Boolean
+        ).returns(T.attached_class)
+      end
+      def self.new(data:, meta:, success: true)
+      end
+
+      sig do
+        override.returns(
+          {
+            data: ArkEmail::Models::EmailSendBatchResponse::Data,
+            meta: ArkEmail::APIMeta,
+            success: T::Boolean
+          }
+        )
+      end
+      def to_hash
+      end
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        OrHash =
+          T.type_alias do
+            T.any(
+              ArkEmail::Models::EmailSendBatchResponse::Data,
+              ArkEmail::Internal::AnyHash
+            )
+          end
+
+        # Successfully accepted emails
+        sig { returns(Integer) }
+        attr_accessor :accepted
+
+        # Failed emails
+        sig { returns(Integer) }
+        attr_accessor :failed
+
+        # Map of recipient email to message info
+        sig do
+          returns(
+            T::Hash[
+              Symbol,
+              ArkEmail::Models::EmailSendBatchResponse::Data::Message
+            ]
+          )
+        end
+        attr_accessor :messages
+
+        # Total emails in the batch
+        sig { returns(Integer) }
+        attr_accessor :total
+
+        sig do
+          params(
+            accepted: Integer,
+            failed: Integer,
+            messages:
+              T::Hash[
+                Symbol,
+                ArkEmail::Models::EmailSendBatchResponse::Data::Message::OrHash
+              ],
+            total: Integer
+          ).returns(T.attached_class)
+        end
+        def self.new(
+          # Successfully accepted emails
+          accepted:,
+          # Failed emails
+          failed:,
+          # Map of recipient email to message info
+          messages:,
+          # Total emails in the batch
+          total:
+        )
+        end
+
+        sig do
+          override.returns(
+            {
+              accepted: Integer,
+              failed: Integer,
+              messages:
+                T::Hash[
+                  Symbol,
+                  ArkEmail::Models::EmailSendBatchResponse::Data::Message
+                ],
+              total: Integer
+            }
+          )
+        end
+        def to_hash
+        end
+
+        class Message < ArkEmail::Internal::Type::BaseModel
+          OrHash =
+            T.type_alias do
+              T.any(
+                ArkEmail::Models::EmailSendBatchResponse::Data::Message,
+                ArkEmail::Internal::AnyHash
+              )
+            end
+
+          # Message ID
+          sig { returns(String) }
+          attr_accessor :id
+
+          sig { returns(String) }
+          attr_accessor :token
+
+          sig { params(id: String, token: String).returns(T.attached_class) }
+          def self.new(
+            # Message ID
+            id:,
+            token:
+          )
+          end
+
+          sig { override.returns({ id: String, token: String }) }
+          def to_hash
+          end
+        end
+      end
+    end
+  end
+end

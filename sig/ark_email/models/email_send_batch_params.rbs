@@ -1,0 +1,81 @@
+module ArkEmail
+  module Models
+    type email_send_batch_params =
+      {
+        emails: ::Array[ArkEmail::EmailSendBatchParams::Email],
+        from: String,
+        idempotency_key: String
+      }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class EmailSendBatchParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_accessor emails: ::Array[ArkEmail::EmailSendBatchParams::Email]
+
+      attr_accessor from: String
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        emails: ::Array[ArkEmail::EmailSendBatchParams::Email],
+        from: String,
+        ?idempotency_key: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        emails: ::Array[ArkEmail::EmailSendBatchParams::Email],
+        from: String,
+        idempotency_key: String,
+        request_options: ArkEmail::RequestOptions
+      }
+
+      type email =
+        {
+          subject: String,
+          to: ::Array[String],
+          html: String,
+          tag: String,
+          text: String
+        }
+
+      class Email < ArkEmail::Internal::Type::BaseModel
+        attr_accessor subject: String
+
+        attr_accessor to: ::Array[String]
+
+        attr_reader html: String?
+
+        def html=: (String) -> String
+
+        attr_reader tag: String?
+
+        def tag=: (String) -> String
+
+        attr_reader text: String?
+
+        def text=: (String) -> String
+
+        def initialize: (
+          subject: String,
+          to: ::Array[String],
+          ?html: String,
+          ?tag: String,
+          ?text: String
+        ) -> void
+
+        def to_hash: -> {
+          subject: String,
+          to: ::Array[String],
+          html: String,
+          tag: String,
+          text: String
+        }
+      end
+    end
+  end
+end

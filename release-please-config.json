@@ -60,7 +60,7 @@
     }
   ],
   "release-type": "ruby",
-  "version-file": "lib/ark/version.rb",
+  "version-file": "lib/ark_email/version.rb",
   "extra-files": [
     {
       "type": "ruby-readme",

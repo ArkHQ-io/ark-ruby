@@ -1,0 +1,77 @@
+module ArkEmail
+  module Models
+    type email_list_response =
+      {
+        id: String,
+        token: String,
+        from: String,
+        status: ArkEmail::Models::EmailListResponse::status,
+        subject: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        to: String,
+        tag: String
+      }
+
+    class EmailListResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor token: String
+
+      attr_accessor from: String
+
+      attr_accessor status: ArkEmail::Models::EmailListResponse::status
+
+      attr_accessor subject: String
+
+      attr_accessor timestamp: Float
+
+      attr_accessor timestamp_iso: Time
+
+      attr_accessor to: String
+
+      attr_reader tag: String?
+
+      def tag=: (String) -> String
+
+      def initialize: (
+        id: String,
+        token: String,
+        from: String,
+        status: ArkEmail::Models::EmailListResponse::status,
+        subject: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        to: String,
+        ?tag: String
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        token: String,
+        from: String,
+        status: ArkEmail::Models::EmailListResponse::status,
+        subject: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        to: String,
+        tag: String
+      }
+
+      type status = :pending | :sent | :softfail | :hardfail | :bounced | :held
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        PENDING: :pending
+        SENT: :sent
+        SOFTFAIL: :softfail
+        HARDFAIL: :hardfail
+        BOUNCED: :bounced
+        HELD: :held
+
+        def self?.values: -> ::Array[ArkEmail::Models::EmailListResponse::status]
+      end
+    end
+  end
+end

@@ -1,0 +1,26 @@
+module ArkEmail
+  module Internal
+    module Type
+      class Boolean
+        extend ArkEmail::Internal::Type::Converter
+        extend ArkEmail::Internal::Util::SorbetRuntimeSupport
+
+        def self.===: (top other) -> bool
+
+        def self.==: (top other) -> bool
+
+        def self.coerce: (
+          bool | top value,
+          state: ArkEmail::Internal::Type::Converter::coerce_state
+        ) -> (bool | top)
+
+        def self.dump: (
+          bool | top value,
+          state: ArkEmail::Internal::Type::Converter::dump_state
+        ) -> (bool | top)
+
+        def self.to_sorbet_type: -> top
+      end
+    end
+  end
+end

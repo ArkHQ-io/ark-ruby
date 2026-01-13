@@ -1,0 +1,34 @@
+module ArkEmail
+  module Resources
+    class Suppressions
+      def create: (
+        address: String,
+        ?reason: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::SuppressionCreateResponse
+
+      def retrieve: (
+        String email,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::SuppressionRetrieveResponse
+
+      def list: (
+        ?page: Integer,
+        ?per_page: Integer,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Internal::PageNumberPagination[ArkEmail::Models::SuppressionListResponse]
+
+      def delete: (
+        String email,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::SuppressionDeleteResponse
+
+      def bulk_create: (
+        suppressions: ::Array[ArkEmail::SuppressionBulkCreateParams::Suppression],
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::SuppressionBulkCreateResponse
+
+      def initialize: (client: ArkEmail::Client) -> void
+    end
+  end
+end

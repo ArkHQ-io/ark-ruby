@@ -1,0 +1,65 @@
+module ArkEmail
+  class APIMeta = ArkEmail::Models::APIMeta
+
+  class DNSRecord = ArkEmail::Models::DNSRecord
+
+  class DomainCreateParams = ArkEmail::Models::DomainCreateParams
+
+  class DomainDeleteParams = ArkEmail::Models::DomainDeleteParams
+
+  class DomainListParams = ArkEmail::Models::DomainListParams
+
+  class DomainRetrieveParams = ArkEmail::Models::DomainRetrieveParams
+
+  class DomainVerifyParams = ArkEmail::Models::DomainVerifyParams
+
+  class EmailListParams = ArkEmail::Models::EmailListParams
+
+  class EmailRetrieveDeliveriesParams = ArkEmail::Models::EmailRetrieveDeliveriesParams
+
+  class EmailRetrieveParams = ArkEmail::Models::EmailRetrieveParams
+
+  class EmailRetryParams = ArkEmail::Models::EmailRetryParams
+
+  class EmailSendBatchParams = ArkEmail::Models::EmailSendBatchParams
+
+  class EmailSendParams = ArkEmail::Models::EmailSendParams
+
+  class EmailSendRawParams = ArkEmail::Models::EmailSendRawParams
+
+  class SuppressionBulkCreateParams = ArkEmail::Models::SuppressionBulkCreateParams
+
+  class SuppressionCreateParams = ArkEmail::Models::SuppressionCreateParams
+
+  class SuppressionDeleteParams = ArkEmail::Models::SuppressionDeleteParams
+
+  class SuppressionListParams = ArkEmail::Models::SuppressionListParams
+
+  class SuppressionRetrieveParams = ArkEmail::Models::SuppressionRetrieveParams
+
+  class TrackDomain = ArkEmail::Models::TrackDomain
+
+  class TrackingCreateParams = ArkEmail::Models::TrackingCreateParams
+
+  class TrackingDeleteParams = ArkEmail::Models::TrackingDeleteParams
+
+  class TrackingListParams = ArkEmail::Models::TrackingListParams
+
+  class TrackingRetrieveParams = ArkEmail::Models::TrackingRetrieveParams
+
+  class TrackingUpdateParams = ArkEmail::Models::TrackingUpdateParams
+
+  class TrackingVerifyParams = ArkEmail::Models::TrackingVerifyParams
+
+  class WebhookCreateParams = ArkEmail::Models::WebhookCreateParams
+
+  class WebhookDeleteParams = ArkEmail::Models::WebhookDeleteParams
+
+  class WebhookListParams = ArkEmail::Models::WebhookListParams
+
+  class WebhookRetrieveParams = ArkEmail::Models::WebhookRetrieveParams
+
+  class WebhookTestParams = ArkEmail::Models::WebhookTestParams
+
+  class WebhookUpdateParams = ArkEmail::Models::WebhookUpdateParams
+end
