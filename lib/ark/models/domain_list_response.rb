@@ -16,13 +16,13 @@ module Ark
 
       # @!attribute success
       #
-      #   @return [Boolean, Ark::Models::DomainListResponse::Success]
-      required :success, enum: -> { Ark::Models::DomainListResponse::Success }
+      #   @return [Boolean, true]
+      required :success, const: true
 
-      # @!method initialize(data:, meta:, success:)
+      # @!method initialize(data:, meta:, success: true)
       #   @param data [Ark::Models::DomainListResponse::Data]
       #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, Ark::Models::DomainListResponse::Success]
+      #   @param success [Boolean, true]
 
       # @see Ark::Models::DomainListResponse#data
       class Data < Ark::Internal::Type::BaseModel
@@ -65,16 +65,6 @@ module Ark
           #
           #   @param verified [Boolean]
         end
-      end
-
-      # @see Ark::Models::DomainListResponse#success
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE = true
-
-        # @!method self.values
-        #   @return [Array<Boolean>]
       end
     end
   end
