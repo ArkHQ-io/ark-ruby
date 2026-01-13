@@ -31,32 +31,19 @@ module ArkEmail
       sig { returns(T::Array[String]) }
       attr_accessor :to
 
-      # File attachments
+      # File attachments (accepts null)
       sig do
         returns(T.nilable(T::Array[ArkEmail::EmailSendParams::Attachment]))
       end
-      attr_reader :attachments
+      attr_accessor :attachments
 
-      sig do
-        params(
-          attachments: T::Array[ArkEmail::EmailSendParams::Attachment::OrHash]
-        ).void
-      end
-      attr_writer :attachments
-
-      # BCC recipients
+      # BCC recipients (accepts null)
       sig { returns(T.nilable(T::Array[String])) }
-      attr_reader :bcc
+      attr_accessor :bcc
 
-      sig { params(bcc: T::Array[String]).void }
-      attr_writer :bcc
-
-      # CC recipients
+      # CC recipients (accepts null)
       sig { returns(T.nilable(T::Array[String])) }
-      attr_reader :cc
-
-      sig { params(cc: T::Array[String]).void }
-      attr_writer :cc
+      attr_accessor :cc
 
       # Custom email headers
       sig { returns(T.nilable(T::Hash[Symbol, String])) }
@@ -73,12 +60,9 @@ module ArkEmail
       sig { params(html: String).void }
       attr_writer :html
 
-      # Reply-to address
+      # Reply-to address (accepts null)
       sig { returns(T.nilable(String)) }
-      attr_reader :reply_to
-
-      sig { params(reply_to: String).void }
-      attr_writer :reply_to
+      attr_accessor :reply_to
 
       # Tag for categorization and filtering
       sig { returns(T.nilable(String)) }
@@ -106,12 +90,13 @@ module ArkEmail
           from: String,
           subject: String,
           to: T::Array[String],
-          attachments: T::Array[ArkEmail::EmailSendParams::Attachment::OrHash],
-          bcc: T::Array[String],
-          cc: T::Array[String],
+          attachments:
+            T.nilable(T::Array[ArkEmail::EmailSendParams::Attachment::OrHash]),
+          bcc: T.nilable(T::Array[String]),
+          cc: T.nilable(T::Array[String]),
           headers: T::Hash[Symbol, String],
           html: String,
-          reply_to: String,
+          reply_to: T.nilable(String),
           tag: String,
           text: String,
           idempotency_key: String,
@@ -133,18 +118,18 @@ module ArkEmail
         subject:,
         # Recipient email addresses (max 50)
         to:,
-        # File attachments
+        # File attachments (accepts null)
         attachments: nil,
-        # BCC recipients
+        # BCC recipients (accepts null)
         bcc: nil,
-        # CC recipients
+        # CC recipients (accepts null)
         cc: nil,
         # Custom email headers
         headers: nil,
         # HTML body content. Maximum 5MB (5,242,880 characters). Combined with
         # attachments, the total message must not exceed 14MB.
         html: nil,
-        # Reply-to address
+        # Reply-to address (accepts null)
         reply_to: nil,
         # Tag for categorization and filtering
         tag: nil,
@@ -162,12 +147,13 @@ module ArkEmail
             from: String,
             subject: String,
             to: T::Array[String],
-            attachments: T::Array[ArkEmail::EmailSendParams::Attachment],
-            bcc: T::Array[String],
-            cc: T::Array[String],
+            attachments:
+              T.nilable(T::Array[ArkEmail::EmailSendParams::Attachment]),
+            bcc: T.nilable(T::Array[String]),
+            cc: T.nilable(T::Array[String]),
             headers: T::Hash[Symbol, String],
             html: String,
-            reply_to: String,
+            reply_to: T.nilable(String),
             tag: String,
             text: String,
             idempotency_key: String,

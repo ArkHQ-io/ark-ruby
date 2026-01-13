@@ -3,7 +3,7 @@ module ArkEmail
     class Suppressions
       def create: (
         address: String,
-        ?reason: String,
+        ?reason: String?,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::SuppressionCreateResponse
 

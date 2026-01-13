@@ -2,11 +2,11 @@ module ArkEmail
   module Models
     type webhook_create_params =
       {
-        events: ::Array[ArkEmail::Models::WebhookCreateParams::event],
         name: String,
         url: String,
-        all_events: bool,
-        enabled: bool
+        all_events: bool?,
+        enabled: bool?,
+        events: ::Array[ArkEmail::Models::WebhookCreateParams::event]?
       }
       & ArkEmail::Internal::Type::request_parameters
 
@@ -14,35 +14,31 @@ module ArkEmail
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
 
-      attr_accessor events: ::Array[ArkEmail::Models::WebhookCreateParams::event]
-
       attr_accessor name: String
 
       attr_accessor url: String
 
-      attr_reader all_events: bool?
+      attr_accessor all_events: bool?
 
-      def all_events=: (bool) -> bool
+      attr_accessor enabled: bool?
 
-      attr_reader enabled: bool?
-
-      def enabled=: (bool) -> bool
+      attr_accessor events: ::Array[ArkEmail::Models::WebhookCreateParams::event]?
 
       def initialize: (
-        events: ::Array[ArkEmail::Models::WebhookCreateParams::event],
         name: String,
         url: String,
-        ?all_events: bool,
-        ?enabled: bool,
+        ?all_events: bool?,
+        ?enabled: bool?,
+        ?events: ::Array[ArkEmail::Models::WebhookCreateParams::event]?,
         ?request_options: ArkEmail::request_opts
       ) -> void
 
       def to_hash: -> {
-        events: ::Array[ArkEmail::Models::WebhookCreateParams::event],
         name: String,
         url: String,
-        all_events: bool,
-        enabled: bool,
+        all_events: bool?,
+        enabled: bool?,
+        events: ::Array[ArkEmail::Models::WebhookCreateParams::event]?,
         request_options: ArkEmail::RequestOptions
       }
 

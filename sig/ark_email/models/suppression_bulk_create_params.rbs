@@ -22,18 +22,16 @@ module ArkEmail
         request_options: ArkEmail::RequestOptions
       }
 
-      type suppression = { address: String, reason: String }
+      type suppression = { address: String, reason: String? }
 
       class Suppression < ArkEmail::Internal::Type::BaseModel
         attr_accessor address: String
 
-        attr_reader reason: String?
+        attr_accessor reason: String?
 
-        def reason=: (String) -> String
+        def initialize: (address: String, ?reason: String?) -> void
 
-        def initialize: (address: String, ?reason: String) -> void
-
-        def to_hash: -> { address: String, reason: String }
+        def to_hash: -> { address: String, reason: String? }
       end
     end
   end

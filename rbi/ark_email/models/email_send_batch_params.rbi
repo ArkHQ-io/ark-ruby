@@ -70,30 +70,21 @@ module ArkEmail
         attr_accessor :to
 
         sig { returns(T.nilable(String)) }
-        attr_reader :html
-
-        sig { params(html: String).void }
-        attr_writer :html
+        attr_accessor :html
 
         sig { returns(T.nilable(String)) }
-        attr_reader :tag
-
-        sig { params(tag: String).void }
-        attr_writer :tag
+        attr_accessor :tag
 
         sig { returns(T.nilable(String)) }
-        attr_reader :text
-
-        sig { params(text: String).void }
-        attr_writer :text
+        attr_accessor :text
 
         sig do
           params(
             subject: String,
             to: T::Array[String],
-            html: String,
-            tag: String,
-            text: String
+            html: T.nilable(String),
+            tag: T.nilable(String),
+            text: T.nilable(String)
           ).returns(T.attached_class)
         end
         def self.new(subject:, to:, html: nil, tag: nil, text: nil)
@@ -104,9 +95,9 @@ module ArkEmail
             {
               subject: String,
               to: T::Array[String],
-              html: String,
-              tag: String,
-              text: String
+              html: T.nilable(String),
+              tag: T.nilable(String),
+              text: T.nilable(String)
             }
           )
         end

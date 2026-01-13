@@ -10,7 +10,7 @@ module ArkEmail
       #
       # @param address [String] Email address to suppress
       #
-      # @param reason [String] Reason for suppression
+      # @param reason [String, nil] Reason for suppression (accepts null)
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #

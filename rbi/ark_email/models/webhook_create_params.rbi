@@ -11,7 +11,23 @@ module ArkEmail
           T.any(ArkEmail::WebhookCreateParams, ArkEmail::Internal::AnyHash)
         end
 
-      # Events to subscribe to:
+      # Webhook name for identification
+      sig { returns(String) }
+      attr_accessor :name
+
+      # HTTPS endpoint URL
+      sig { returns(String) }
+      attr_accessor :url
+
+      # Subscribe to all events (ignores events array, accepts null)
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :all_events
+
+      # Whether the webhook is enabled (accepts null)
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :enabled
+
+      # Events to subscribe to (accepts null):
       #
       # - `MessageSent` - Email successfully delivered to recipient's server
       # - `MessageDelayed` - Temporary delivery failure, will retry
@@ -21,42 +37,34 @@ module ArkEmail
       # - `MessageLinkClicked` - Recipient clicked a tracked link
       # - `MessageLoaded` - Recipient opened the email (tracking pixel loaded)
       # - `DomainDNSError` - DNS configuration issue detected
-      sig { returns(T::Array[ArkEmail::WebhookCreateParams::Event::OrSymbol]) }
+      sig do
+        returns(
+          T.nilable(T::Array[ArkEmail::WebhookCreateParams::Event::OrSymbol])
+        )
+      end
       attr_accessor :events
-
-      # Webhook name for identification
-      sig { returns(String) }
-      attr_accessor :name
-
-      # HTTPS endpoint URL
-      sig { returns(String) }
-      attr_accessor :url
-
-      # Subscribe to all events (ignores events array)
-      sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :all_events
-
-      sig { params(all_events: T::Boolean).void }
-      attr_writer :all_events
-
-      sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :enabled
-
-      sig { params(enabled: T::Boolean).void }
-      attr_writer :enabled
 
       sig do
         params(
-          events: T::Array[ArkEmail::WebhookCreateParams::Event::OrSymbol],
           name: String,
           url: String,
-          all_events: T::Boolean,
-          enabled: T::Boolean,
+          all_events: T.nilable(T::Boolean),
+          enabled: T.nilable(T::Boolean),
+          events:
+            T.nilable(T::Array[ArkEmail::WebhookCreateParams::Event::OrSymbol]),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # Events to subscribe to:
+        # Webhook name for identification
+        name:,
+        # HTTPS endpoint URL
+        url:,
+        # Subscribe to all events (ignores events array, accepts null)
+        all_events: nil,
+        # Whether the webhook is enabled (accepts null)
+        enabled: nil,
+        # Events to subscribe to (accepts null):
         #
         # - `MessageSent` - Email successfully delivered to recipient's server
         # - `MessageDelayed` - Temporary delivery failure, will retry
@@ -66,14 +74,7 @@ module ArkEmail
         # - `MessageLinkClicked` - Recipient clicked a tracked link
         # - `MessageLoaded` - Recipient opened the email (tracking pixel loaded)
         # - `DomainDNSError` - DNS configuration issue detected
-        events:,
-        # Webhook name for identification
-        name:,
-        # HTTPS endpoint URL
-        url:,
-        # Subscribe to all events (ignores events array)
-        all_events: nil,
-        enabled: nil,
+        events: nil,
         request_options: {}
       )
       end
@@ -81,11 +82,14 @@ module ArkEmail
       sig do
         override.returns(
           {
-            events: T::Array[ArkEmail::WebhookCreateParams::Event::OrSymbol],
             name: String,
             url: String,
-            all_events: T::Boolean,
-            enabled: T::Boolean,
+            all_events: T.nilable(T::Boolean),
+            enabled: T.nilable(T::Boolean),
+            events:
+              T.nilable(
+                T::Array[ArkEmail::WebhookCreateParams::Event::OrSymbol]
+              ),
             request_options: ArkEmail::RequestOptions
           }
         )

@@ -126,12 +126,13 @@ module ArkEmail
           from: String,
           subject: String,
           to: T::Array[String],
-          attachments: T::Array[ArkEmail::EmailSendParams::Attachment::OrHash],
-          bcc: T::Array[String],
-          cc: T::Array[String],
+          attachments:
+            T.nilable(T::Array[ArkEmail::EmailSendParams::Attachment::OrHash]),
+          bcc: T.nilable(T::Array[String]),
+          cc: T.nilable(T::Array[String]),
           headers: T::Hash[Symbol, String],
           html: String,
-          reply_to: String,
+          reply_to: T.nilable(String),
           tag: String,
           text: String,
           idempotency_key: String,
@@ -153,18 +154,18 @@ module ArkEmail
         subject:,
         # Body param: Recipient email addresses (max 50)
         to:,
-        # Body param: File attachments
+        # Body param: File attachments (accepts null)
         attachments: nil,
-        # Body param: BCC recipients
+        # Body param: BCC recipients (accepts null)
         bcc: nil,
-        # Body param: CC recipients
+        # Body param: CC recipients (accepts null)
         cc: nil,
         # Body param: Custom email headers
         headers: nil,
         # Body param: HTML body content. Maximum 5MB (5,242,880 characters). Combined with
         # attachments, the total message must not exceed 14MB.
         html: nil,
-        # Body param: Reply-to address
+        # Body param: Reply-to address (accepts null)
         reply_to: nil,
         # Body param: Tag for categorization and filtering
         tag: nil,
@@ -214,6 +215,7 @@ module ArkEmail
           data: String,
           mail_from: String,
           rcpt_to: T::Array[String],
+          bounce: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailSendRawResponse)
       end
@@ -224,6 +226,8 @@ module ArkEmail
         mail_from:,
         # Envelope recipient addresses
         rcpt_to:,
+        # Whether this is a bounce message (accepts null)
+        bounce: nil,
         request_options: {}
       )
       end
