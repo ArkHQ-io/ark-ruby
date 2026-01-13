@@ -35,15 +35,9 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       row => {
-        id: String,
-        token: String,
-        from: String,
-        status: Ark::Models::EmailListResponse::Status,
-        subject: String,
-        timestamp: Float,
-        timestamp_iso: Time,
-        to: String,
-        tag: String | nil
+        data: Ark::Models::EmailListResponse::Data,
+        meta: Ark::APIMeta,
+        success: true | false
       }
     end
   end
@@ -73,8 +67,9 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       response => {
-        data: Ark::Models::EmailRetryResponse::Data | nil,
-        success: Ark::Internal::Type::Boolean | nil
+        data: Ark::Models::EmailRetryResponse::Data,
+        meta: Ark::APIMeta,
+        success: true | false
       }
     end
   end

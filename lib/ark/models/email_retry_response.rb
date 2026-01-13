@@ -6,26 +6,32 @@ module Ark
     class EmailRetryResponse < Ark::Internal::Type::BaseModel
       # @!attribute data
       #
-      #   @return [Ark::Models::EmailRetryResponse::Data, nil]
-      optional :data, -> { Ark::Models::EmailRetryResponse::Data }
+      #   @return [Ark::Models::EmailRetryResponse::Data]
+      required :data, -> { Ark::Models::EmailRetryResponse::Data }
+
+      # @!attribute meta
+      #
+      #   @return [Ark::Models::APIMeta]
+      required :meta, -> { Ark::APIMeta }
 
       # @!attribute success
       #
-      #   @return [Boolean, nil]
-      optional :success, Ark::Internal::Type::Boolean
+      #   @return [Boolean, true]
+      required :success, const: true
 
-      # @!method initialize(data: nil, success: nil)
+      # @!method initialize(data:, meta:, success: true)
       #   @param data [Ark::Models::EmailRetryResponse::Data]
-      #   @param success [Boolean]
+      #   @param meta [Ark::Models::APIMeta]
+      #   @param success [Boolean, true]
 
       # @see Ark::Models::EmailRetryResponse#data
       class Data < Ark::Internal::Type::BaseModel
         # @!attribute message
         #
-        #   @return [String, nil]
-        optional :message, String
+        #   @return [String]
+        required :message, String
 
-        # @!method initialize(message: nil)
+        # @!method initialize(message:)
         #   @param message [String]
       end
     end
