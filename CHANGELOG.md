@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.1 (2026-01-13)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/ArkHQ-io/ark-ruby/compare/v0.5.0...v0.5.1)
+
+### Chores
+
+* update SDK settings ([b29ec46](https://github.com/ArkHQ-io/ark-ruby/commit/b29ec4697ee7e2dac11d0601ba7902b06433af31))
+
 ## 0.5.0 (2026-01-13)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.4.0...v0.5.0)
