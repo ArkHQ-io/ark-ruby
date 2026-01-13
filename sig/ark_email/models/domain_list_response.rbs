@@ -1,0 +1,71 @@
+module ArkEmail
+  module Models
+    type domain_list_response =
+      {
+        data: ArkEmail::Models::DomainListResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class DomainListResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::DomainListResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::DomainListResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::DomainListResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        { domains: ::Array[ArkEmail::Models::DomainListResponse::Data::Domain] }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor domains: ::Array[ArkEmail::Models::DomainListResponse::Data::Domain]
+
+        def initialize: (
+          domains: ::Array[ArkEmail::Models::DomainListResponse::Data::Domain]
+        ) -> void
+
+        def to_hash: -> {
+          domains: ::Array[ArkEmail::Models::DomainListResponse::Data::Domain]
+        }
+
+        type domain = { id: String, dns_ok: bool, name: String, verified: bool }
+
+        class Domain < ArkEmail::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor dns_ok: bool
+
+          attr_accessor name: String
+
+          attr_accessor verified: bool
+
+          def initialize: (
+            id: String,
+            dns_ok: bool,
+            name: String,
+            verified: bool
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            dns_ok: bool,
+            name: String,
+            verified: bool
+          }
+        end
+      end
+    end
+  end
+end

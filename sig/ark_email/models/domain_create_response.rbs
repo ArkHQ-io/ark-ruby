@@ -1,0 +1,104 @@
+module ArkEmail
+  module Models
+    type domain_create_response =
+      {
+        data: ArkEmail::Models::DomainCreateResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class DomainCreateResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::DomainCreateResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::DomainCreateResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::DomainCreateResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        {
+          id: String,
+          created_at: Time,
+          dns_records: ArkEmail::Models::DomainCreateResponse::Data::DNSRecords,
+          name: String,
+          uuid: String,
+          verified: bool,
+          verified_at: Time?
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor created_at: Time
+
+        attr_accessor dns_records: ArkEmail::Models::DomainCreateResponse::Data::DNSRecords
+
+        attr_accessor name: String
+
+        attr_accessor uuid: String
+
+        attr_accessor verified: bool
+
+        attr_accessor verified_at: Time?
+
+        def initialize: (
+          id: String,
+          created_at: Time,
+          dns_records: ArkEmail::Models::DomainCreateResponse::Data::DNSRecords,
+          name: String,
+          uuid: String,
+          verified: bool,
+          ?verified_at: Time?
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          created_at: Time,
+          dns_records: ArkEmail::Models::DomainCreateResponse::Data::DNSRecords,
+          name: String,
+          uuid: String,
+          verified: bool,
+          verified_at: Time?
+        }
+
+        type dns_records =
+          {
+            dkim: ArkEmail::DNSRecord,
+            return_path: ArkEmail::DNSRecord,
+            spf: ArkEmail::DNSRecord
+          }
+
+        class DNSRecords < ArkEmail::Internal::Type::BaseModel
+          attr_accessor dkim: ArkEmail::DNSRecord
+
+          attr_accessor return_path: ArkEmail::DNSRecord
+
+          attr_accessor spf: ArkEmail::DNSRecord
+
+          def initialize: (
+            dkim: ArkEmail::DNSRecord,
+            return_path: ArkEmail::DNSRecord,
+            spf: ArkEmail::DNSRecord
+          ) -> void
+
+          def to_hash: -> {
+            dkim: ArkEmail::DNSRecord,
+            return_path: ArkEmail::DNSRecord,
+            spf: ArkEmail::DNSRecord
+          }
+        end
+      end
+    end
+  end
+end

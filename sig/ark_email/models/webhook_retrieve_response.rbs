@@ -1,0 +1,107 @@
+module ArkEmail
+  module Models
+    type webhook_retrieve_response =
+      {
+        data: ArkEmail::Models::WebhookRetrieveResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class WebhookRetrieveResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::WebhookRetrieveResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::WebhookRetrieveResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::WebhookRetrieveResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        {
+          id: String,
+          all_events: bool,
+          created_at: Time,
+          enabled: bool,
+          events: ::Array[ArkEmail::Models::WebhookRetrieveResponse::Data::event],
+          name: String,
+          url: String,
+          uuid: String
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor all_events: bool
+
+        attr_accessor created_at: Time
+
+        attr_accessor enabled: bool
+
+        attr_accessor events: ::Array[ArkEmail::Models::WebhookRetrieveResponse::Data::event]
+
+        attr_accessor name: String
+
+        attr_accessor url: String
+
+        attr_accessor uuid: String
+
+        def initialize: (
+          id: String,
+          all_events: bool,
+          created_at: Time,
+          enabled: bool,
+          events: ::Array[ArkEmail::Models::WebhookRetrieveResponse::Data::event],
+          name: String,
+          url: String,
+          uuid: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          all_events: bool,
+          created_at: Time,
+          enabled: bool,
+          events: ::Array[ArkEmail::Models::WebhookRetrieveResponse::Data::event],
+          name: String,
+          url: String,
+          uuid: String
+        }
+
+        type event =
+          :MessageSent
+          | :MessageDelayed
+          | :MessageDeliveryFailed
+          | :MessageHeld
+          | :MessageBounced
+          | :MessageLinkClicked
+          | :MessageLoaded
+          | :DomainDNSError
+
+        module Event
+          extend ArkEmail::Internal::Type::Enum
+
+          MESSAGE_SENT: :MessageSent
+          MESSAGE_DELAYED: :MessageDelayed
+          MESSAGE_DELIVERY_FAILED: :MessageDeliveryFailed
+          MESSAGE_HELD: :MessageHeld
+          MESSAGE_BOUNCED: :MessageBounced
+          MESSAGE_LINK_CLICKED: :MessageLinkClicked
+          MESSAGE_LOADED: :MessageLoaded
+          DOMAIN_DNS_ERROR: :DomainDNSError
+
+          def self?.values: -> ::Array[ArkEmail::Models::WebhookRetrieveResponse::Data::event]
+        end
+      end
+    end
+  end
+end

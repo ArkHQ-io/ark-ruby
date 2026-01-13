@@ -162,7 +162,7 @@ multitask(:"build:gem") do
     sig/*
   GLOB
 
-  sh(*%w[gem build -- ark.gemspec])
+  sh(*%w[gem build -- ark_email.gemspec])
   rm_rf(ignore_file)
 end
 

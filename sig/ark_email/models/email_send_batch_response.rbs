@@ -1,0 +1,74 @@
+module ArkEmail
+  module Models
+    type email_send_batch_response =
+      {
+        data: ArkEmail::Models::EmailSendBatchResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class EmailSendBatchResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::EmailSendBatchResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::EmailSendBatchResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::EmailSendBatchResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        {
+          accepted: Integer,
+          failed: Integer,
+          messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
+          total: Integer
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor accepted: Integer
+
+        attr_accessor failed: Integer
+
+        attr_accessor messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message]
+
+        attr_accessor total: Integer
+
+        def initialize: (
+          accepted: Integer,
+          failed: Integer,
+          messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
+          total: Integer
+        ) -> void
+
+        def to_hash: -> {
+          accepted: Integer,
+          failed: Integer,
+          messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
+          total: Integer
+        }
+
+        type message = { id: String, token: String }
+
+        class Message < ArkEmail::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor token: String
+
+          def initialize: (id: String, token: String) -> void
+
+          def to_hash: -> { id: String, token: String }
+        end
+      end
+    end
+  end
+end

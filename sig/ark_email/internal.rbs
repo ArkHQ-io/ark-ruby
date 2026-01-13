@@ -1,0 +1,9 @@
+module ArkEmail
+  module Internal
+    extend ArkEmail::Internal::Util::SorbetRuntimeSupport
+
+    type file_input = Pathname | StringIO | IO | String | ArkEmail::FilePart
+
+    OMIT: Object
+  end
+end

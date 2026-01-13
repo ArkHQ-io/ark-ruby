@@ -1,0 +1,75 @@
+module ArkEmail
+  module Models
+    type email_send_raw_response =
+      {
+        data: ArkEmail::Models::EmailSendRawResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class EmailSendRawResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::EmailSendRawResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::EmailSendRawResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::EmailSendRawResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        {
+          id: String,
+          status: ArkEmail::Models::EmailSendRawResponse::Data::status,
+          to: ::Array[String],
+          message_id: String
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor status: ArkEmail::Models::EmailSendRawResponse::Data::status
+
+        attr_accessor to: ::Array[String]
+
+        attr_reader message_id: String?
+
+        def message_id=: (String) -> String
+
+        def initialize: (
+          id: String,
+          status: ArkEmail::Models::EmailSendRawResponse::Data::status,
+          to: ::Array[String],
+          ?message_id: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          status: ArkEmail::Models::EmailSendRawResponse::Data::status,
+          to: ::Array[String],
+          message_id: String
+        }
+
+        type status = :pending | :sent
+
+        module Status
+          extend ArkEmail::Internal::Type::Enum
+
+          PENDING: :pending
+          SENT: :sent
+
+          def self?.values: -> ::Array[ArkEmail::Models::EmailSendRawResponse::Data::status]
+        end
+      end
+    end
+  end
+end

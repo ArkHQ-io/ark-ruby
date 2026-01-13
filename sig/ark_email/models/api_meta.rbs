@@ -1,0 +1,13 @@
+module ArkEmail
+  module Models
+    type api_meta = { request_id: String }
+
+    class APIMeta < ArkEmail::Internal::Type::BaseModel
+      attr_accessor request_id: String
+
+      def initialize: (request_id: String) -> void
+
+      def to_hash: -> { request_id: String }
+    end
+  end
+end

@@ -5,7 +5,7 @@ include:
   - 'Rakefile'
   - 'examples/**/*.rb'
   - 'lib/**/*.rb'
-  - 'test/ark/resource_namespaces.rb'
-  - 'test/ark/test_helper.rb'
+  - 'test/ark_email/resource_namespaces.rb'
+  - 'test/ark_email/test_helper.rb'
 exclude:
   - 'rbi/**/*'

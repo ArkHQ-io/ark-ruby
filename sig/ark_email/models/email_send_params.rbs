@@ -1,0 +1,124 @@
+module ArkEmail
+  module Models
+    type email_send_params =
+      {
+        from: String,
+        subject: String,
+        to: ::Array[String],
+        attachments: ::Array[ArkEmail::EmailSendParams::Attachment],
+        bcc: ::Array[String],
+        cc: ::Array[String],
+        headers: ::Hash[Symbol, String],
+        html: String,
+        reply_to: String,
+        tag: String,
+        text: String,
+        idempotency_key: String
+      }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class EmailSendParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_accessor from: String
+
+      attr_accessor subject: String
+
+      attr_accessor to: ::Array[String]
+
+      attr_reader attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?
+
+      def attachments=: (
+        ::Array[ArkEmail::EmailSendParams::Attachment]
+      ) -> ::Array[ArkEmail::EmailSendParams::Attachment]
+
+      attr_reader bcc: ::Array[String]?
+
+      def bcc=: (::Array[String]) -> ::Array[String]
+
+      attr_reader cc: ::Array[String]?
+
+      def cc=: (::Array[String]) -> ::Array[String]
+
+      attr_reader headers: ::Hash[Symbol, String]?
+
+      def headers=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
+
+      attr_reader html: String?
+
+      def html=: (String) -> String
+
+      attr_reader reply_to: String?
+
+      def reply_to=: (String) -> String
+
+      attr_reader tag: String?
+
+      def tag=: (String) -> String
+
+      attr_reader text: String?
+
+      def text=: (String) -> String
+
+      attr_reader idempotency_key: String?
+
+      def idempotency_key=: (String) -> String
+
+      def initialize: (
+        from: String,
+        subject: String,
+        to: ::Array[String],
+        ?attachments: ::Array[ArkEmail::EmailSendParams::Attachment],
+        ?bcc: ::Array[String],
+        ?cc: ::Array[String],
+        ?headers: ::Hash[Symbol, String],
+        ?html: String,
+        ?reply_to: String,
+        ?tag: String,
+        ?text: String,
+        ?idempotency_key: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        from: String,
+        subject: String,
+        to: ::Array[String],
+        attachments: ::Array[ArkEmail::EmailSendParams::Attachment],
+        bcc: ::Array[String],
+        cc: ::Array[String],
+        headers: ::Hash[Symbol, String],
+        html: String,
+        reply_to: String,
+        tag: String,
+        text: String,
+        idempotency_key: String,
+        request_options: ArkEmail::RequestOptions
+      }
+
+      type attachment =
+        { content: String, content_type: String, filename: String }
+
+      class Attachment < ArkEmail::Internal::Type::BaseModel
+        attr_accessor content: String
+
+        attr_accessor content_type: String
+
+        attr_accessor filename: String
+
+        def initialize: (
+          content: String,
+          content_type: String,
+          filename: String
+        ) -> void
+
+        def to_hash: -> {
+          content: String,
+          content_type: String,
+          filename: String
+        }
+      end
+    end
+  end
+end
