@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.2 (2026-01-13)
+
+Full Changelog: [v0.5.1...v0.5.2](https://github.com/ArkHQ-io/ark-ruby/compare/v0.5.1...v0.5.2)
+
+### Chores
+
+* configure new SDK language ([e2a346c](https://github.com/ArkHQ-io/ark-ruby/commit/e2a346c614f32f9be61309c0b45bc8eae40ff3ab))
+
 ## 0.5.1 (2026-01-13)
 
 Full Changelog: [v0.5.0...v0.5.1](https://github.com/ArkHQ-io/ark-ruby/compare/v0.5.0...v0.5.1)
