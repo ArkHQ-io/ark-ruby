@@ -1,0 +1,59 @@
+module ArkEmail
+  module Models
+    type suppression_create_response =
+      {
+        data: ArkEmail::Models::SuppressionCreateResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class SuppressionCreateResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::SuppressionCreateResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::SuppressionCreateResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::SuppressionCreateResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        { id: String, address: String, created_at: Time, reason: String }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor address: String
+
+        attr_accessor created_at: Time
+
+        attr_reader reason: String?
+
+        def reason=: (String) -> String
+
+        def initialize: (
+          id: String,
+          address: String,
+          created_at: Time,
+          ?reason: String
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          address: String,
+          created_at: Time,
+          reason: String
+        }
+      end
+    end
+  end
+end

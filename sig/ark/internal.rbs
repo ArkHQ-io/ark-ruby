@@ -1,9 +1,0 @@
-module Ark
-  module Internal
-    extend Ark::Internal::Util::SorbetRuntimeSupport
-
-    type file_input = Pathname | StringIO | IO | String | Ark::FilePart
-
-    OMIT: Object
-  end
-end

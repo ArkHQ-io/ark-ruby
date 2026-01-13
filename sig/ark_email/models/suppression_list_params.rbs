@@ -1,0 +1,32 @@
+module ArkEmail
+  module Models
+    type suppression_list_params =
+      { page: Integer, per_page: Integer }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class SuppressionListParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader per_page: Integer?
+
+      def per_page=: (Integer) -> Integer
+
+      def initialize: (
+        ?page: Integer,
+        ?per_page: Integer,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        page: Integer,
+        per_page: Integer,
+        request_options: ArkEmail::RequestOptions
+      }
+    end
+  end
+end

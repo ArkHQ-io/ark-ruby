@@ -1,0 +1,3 @@
+module ArkEmail
+  VERSION: String
+end

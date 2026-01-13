@@ -1,0 +1,117 @@
+module ArkEmail
+  module Models
+    type email_retrieve_deliveries_response =
+      {
+        data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class EmailRetrieveDeliveriesResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        {
+          deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
+          message_id: String,
+          message_token: String
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery]
+
+        attr_accessor message_id: String
+
+        attr_accessor message_token: String
+
+        def initialize: (
+          deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
+          message_id: String,
+          message_token: String
+        ) -> void
+
+        def to_hash: -> {
+          deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
+          message_id: String,
+          message_token: String
+        }
+
+        type delivery =
+          {
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            code: Integer,
+            details: String,
+            output: String,
+            sent_with_ssl: bool
+          }
+
+        class Delivery < ArkEmail::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor status: String
+
+          attr_accessor timestamp: Float
+
+          attr_accessor timestamp_iso: Time
+
+          attr_reader code: Integer?
+
+          def code=: (Integer) -> Integer
+
+          attr_reader details: String?
+
+          def details=: (String) -> String
+
+          attr_reader output: String?
+
+          def output=: (String) -> String
+
+          attr_reader sent_with_ssl: bool?
+
+          def sent_with_ssl=: (bool) -> bool
+
+          def initialize: (
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            ?code: Integer,
+            ?details: String,
+            ?output: String,
+            ?sent_with_ssl: bool
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            code: Integer,
+            details: String,
+            output: String,
+            sent_with_ssl: bool
+          }
+        end
+      end
+    end
+  end
+end

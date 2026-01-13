@@ -1,0 +1,72 @@
+module ArkEmail
+  module Models
+    type webhook_test_response =
+      {
+        data: ArkEmail::Models::WebhookTestResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class WebhookTestResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::WebhookTestResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::WebhookTestResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::WebhookTestResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        {
+          duration: Integer,
+          event: String,
+          status_code: Integer?,
+          success: bool,
+          body: String?,
+          error: String?
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor duration: Integer
+
+        attr_accessor event: String
+
+        attr_accessor status_code: Integer?
+
+        attr_accessor success: bool
+
+        attr_accessor body: String?
+
+        attr_accessor error: String?
+
+        def initialize: (
+          duration: Integer,
+          event: String,
+          status_code: Integer?,
+          success: bool,
+          ?body: String?,
+          ?error: String?
+        ) -> void
+
+        def to_hash: -> {
+          duration: Integer,
+          event: String,
+          status_code: Integer?,
+          success: bool,
+          body: String?,
+          error: String?
+        }
+      end
+    end
+  end
+end

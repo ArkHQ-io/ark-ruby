@@ -1,0 +1,94 @@
+module ArkEmail
+  module Models
+    type email_list_params =
+      {
+        after: String,
+        before: String,
+        from: String,
+        page: Integer,
+        per_page: Integer,
+        status: ArkEmail::Models::EmailListParams::status,
+        tag: String,
+        to: String
+      }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class EmailListParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_reader after: String?
+
+      def after=: (String) -> String
+
+      attr_reader before: String?
+
+      def before=: (String) -> String
+
+      attr_reader from: String?
+
+      def from=: (String) -> String
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader per_page: Integer?
+
+      def per_page=: (Integer) -> Integer
+
+      attr_reader status: ArkEmail::Models::EmailListParams::status?
+
+      def status=: (
+        ArkEmail::Models::EmailListParams::status
+      ) -> ArkEmail::Models::EmailListParams::status
+
+      attr_reader tag: String?
+
+      def tag=: (String) -> String
+
+      attr_reader to: String?
+
+      def to=: (String) -> String
+
+      def initialize: (
+        ?after: String,
+        ?before: String,
+        ?from: String,
+        ?page: Integer,
+        ?per_page: Integer,
+        ?status: ArkEmail::Models::EmailListParams::status,
+        ?tag: String,
+        ?to: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        after: String,
+        before: String,
+        from: String,
+        page: Integer,
+        per_page: Integer,
+        status: ArkEmail::Models::EmailListParams::status,
+        tag: String,
+        to: String,
+        request_options: ArkEmail::RequestOptions
+      }
+
+      type status = :pending | :sent | :softfail | :hardfail | :bounced | :held
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        PENDING: :pending
+        SENT: :sent
+        SOFTFAIL: :softfail
+        HARDFAIL: :hardfail
+        BOUNCED: :bounced
+        HELD: :held
+
+        def self?.values: -> ::Array[ArkEmail::Models::EmailListParams::status]
+      end
+    end
+  end
+end

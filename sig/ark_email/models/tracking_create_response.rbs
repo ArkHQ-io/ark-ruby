@@ -1,0 +1,26 @@
+module ArkEmail
+  module Models
+    type tracking_create_response =
+      { data: ArkEmail::TrackDomain, meta: ArkEmail::APIMeta, success: true }
+
+    class TrackingCreateResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::TrackDomain
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::TrackDomain,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::TrackDomain,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+    end
+  end
+end
