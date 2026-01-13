@@ -5,15 +5,15 @@ module Ark
     # @generic Elem
     #
     # @example
-    #   if suppressions_page.has_next?
-    #     suppressions_page = suppressions_page.next_page
+    #   if emails_page.has_next?
+    #     emails_page = emails_page.next_page
     #   end
     #
     # @example
-    #   suppressions_page.auto_paging_each do |item|
-    #     puts(item)
+    #   emails_page.auto_paging_each do |email|
+    #     puts(email)
     #   end
-    class SuppressionsPage
+    class EmailsPage
       include Ark::Internal::Type::BasePage
 
       # @return [Data]
@@ -21,7 +21,7 @@ module Ark
 
       # @return [Boolean]
       def next_page?
-        !data&.suppressions.to_a.empty? && (data&.pagination&.page.nil? || data&.pagination&.total_pages.nil? || (data&.pagination&.page&.< data&.pagination&.total_pages))
+        !data&.messages.to_a.empty? && (data&.pagination&.page.nil? || data&.pagination&.total_pages.nil? || (data&.pagination&.page&.< data&.pagination&.total_pages))
       end
 
       # @raise [Ark::HTTP::Error]
@@ -46,7 +46,7 @@ module Ark
 
         page = self
         loop do
-          page.data&.suppressions&.each(&blk)
+          page.data&.messages&.each(&blk)
 
           break unless page.next_page?
           page = page.next_page
@@ -64,10 +64,10 @@ module Ark
 
         case page_data
         in {data: Hash | nil => data}
-          if (suppressions = data[:suppressions]).is_a?(Array)
-            data = {**data, suppressions: suppressions.map { Ark::Internal::Type::Converter.coerce(@model, _1) }}
+          if (messages = data[:messages]).is_a?(Array)
+            data = {**data, messages: messages.map { Ark::Internal::Type::Converter.coerce(@model, _1) }}
           end
-          @data = Ark::Internal::Type::Converter.coerce(Ark::Internal::SuppressionsPage::Data, data)
+          @data = Ark::Internal::Type::Converter.coerce(Ark::Internal::EmailsPage::Data, data)
         else
         end
       end
@@ -82,19 +82,19 @@ module Ark
       end
 
       class Data < Ark::Internal::Type::BaseModel
+        # @!attribute messages
+        #
+        #   @return [Array<Object>, nil]
+        optional :messages, Ark::Internal::Type::ArrayOf[Ark::Internal::Type::Unknown]
+
         # @!attribute pagination
         #
         #   @return [Data::Pagination, nil]
         optional :pagination, -> { Data::Pagination }
 
-        # @!attribute suppressions
-        #
-        #   @return [Array<Object>, nil]
-        optional :suppressions, Ark::Internal::Type::ArrayOf[Ark::Internal::Type::Unknown]
-
-        # @!method initialize(pagination: nil, suppressions: nil)
+        # @!method initialize(messages: nil, pagination: nil)
+        #   @param messages [Array<Object>]
         #   @param pagination [Data::Pagination]
-        #   @param suppressions [Array<Object>]
 
         # @see Data#pagination
         class Pagination < Ark::Internal::Type::BaseModel

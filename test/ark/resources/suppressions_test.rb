@@ -44,11 +44,18 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
     response = @ark.suppressions.list
 
     assert_pattern do
-      response => Ark::Models::SuppressionListResponse
+      response => Ark::Internal::EmailsPage
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Ark::Models::SuppressionListResponse
     end
 
     assert_pattern do
-      response => {
+      row => {
         data: Ark::Models::SuppressionListResponse::Data,
         meta: Ark::APIMeta,
         success: Ark::Models::SuppressionListResponse::Success

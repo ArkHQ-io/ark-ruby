@@ -2,7 +2,7 @@
 
 module Ark
   module Internal
-    class SuppressionsPage
+    class EmailsPage
       include Ark::Internal::Type::BasePage
 
       Elem = type_member
@@ -18,30 +18,30 @@ module Ark
       class Data < Ark::Internal::Type::BaseModel
         OrHash = T.type_alias { T.any(Data, Ark::Internal::AnyHash) }
 
+        sig { returns(T.nilable(T::Array[T.anything])) }
+        attr_reader :messages
+
+        sig { params(messages: T::Array[T.anything]).void }
+        attr_writer :messages
+
         sig { returns(T.nilable(Data::Pagination)) }
         attr_reader :pagination
 
         sig { params(pagination: Data::Pagination::OrHash).void }
         attr_writer :pagination
 
-        sig { returns(T.nilable(T::Array[T.anything])) }
-        attr_reader :suppressions
-
-        sig { params(suppressions: T::Array[T.anything]).void }
-        attr_writer :suppressions
-
         sig do
           params(
-            pagination: Data::Pagination::OrHash,
-            suppressions: T::Array[T.anything]
+            messages: T::Array[T.anything],
+            pagination: Data::Pagination::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(pagination: nil, suppressions: nil)
+        def self.new(messages: nil, pagination: nil)
         end
 
         sig do
           override.returns(
-            { pagination: Data::Pagination, suppressions: T::Array[T.anything] }
+            { messages: T::Array[T.anything], pagination: Data::Pagination }
           )
         end
         def to_hash
