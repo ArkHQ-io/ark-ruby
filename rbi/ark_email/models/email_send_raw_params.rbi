@@ -23,11 +23,16 @@ module ArkEmail
       sig { returns(T::Array[String]) }
       attr_accessor :rcpt_to
 
+      # Whether this is a bounce message (accepts null)
+      sig { returns(T.nilable(T::Boolean)) }
+      attr_accessor :bounce
+
       sig do
         params(
           data: String,
           mail_from: String,
           rcpt_to: T::Array[String],
+          bounce: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -38,6 +43,8 @@ module ArkEmail
         mail_from:,
         # Envelope recipient addresses
         rcpt_to:,
+        # Whether this is a bounce message (accepts null)
+        bounce: nil,
         request_options: {}
       )
       end
@@ -48,6 +55,7 @@ module ArkEmail
             data: String,
             mail_from: String,
             rcpt_to: T::Array[String],
+            bounce: T.nilable(T::Boolean),
             request_options: ArkEmail::RequestOptions
           }
         )

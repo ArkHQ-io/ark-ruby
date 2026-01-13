@@ -8,14 +8,14 @@ module ArkEmail
       sig do
         params(
           address: String,
-          reason: String,
+          reason: T.nilable(String),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::SuppressionCreateResponse)
       end
       def create(
         # Email address to suppress
         address:,
-        # Reason for suppression
+        # Reason for suppression (accepts null)
         reason: nil,
         request_options: {}
       )

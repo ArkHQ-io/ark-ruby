@@ -14,15 +14,15 @@ module ArkEmail
       required :address, String
 
       # @!attribute reason
-      #   Reason for suppression
+      #   Reason for suppression (accepts null)
       #
       #   @return [String, nil]
-      optional :reason, String
+      optional :reason, String, nil?: true
 
       # @!method initialize(address:, reason: nil, request_options: {})
       #   @param address [String] Email address to suppress
       #
-      #   @param reason [String] Reason for suppression
+      #   @param reason [String, nil] Reason for suppression (accepts null)
       #
       #   @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}]
     end

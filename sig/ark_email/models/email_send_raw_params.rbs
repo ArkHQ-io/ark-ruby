@@ -1,7 +1,12 @@
 module ArkEmail
   module Models
     type email_send_raw_params =
-      { data: String, mail_from: String, rcpt_to: ::Array[String] }
+      {
+        data: String,
+        mail_from: String,
+        rcpt_to: ::Array[String],
+        bounce: bool?
+      }
       & ArkEmail::Internal::Type::request_parameters
 
     class EmailSendRawParams < ArkEmail::Internal::Type::BaseModel
@@ -14,10 +19,13 @@ module ArkEmail
 
       attr_accessor rcpt_to: ::Array[String]
 
+      attr_accessor bounce: bool?
+
       def initialize: (
         data: String,
         mail_from: String,
         rcpt_to: ::Array[String],
+        ?bounce: bool?,
         ?request_options: ArkEmail::request_opts
       ) -> void
 
@@ -25,6 +33,7 @@ module ArkEmail
         data: String,
         mail_from: String,
         rcpt_to: ::Array[String],
+        bounce: bool?,
         request_options: ArkEmail::RequestOptions
       }
     end

@@ -15,24 +15,21 @@ module ArkEmail
       sig { returns(String) }
       attr_accessor :address
 
-      # Reason for suppression
+      # Reason for suppression (accepts null)
       sig { returns(T.nilable(String)) }
-      attr_reader :reason
-
-      sig { params(reason: String).void }
-      attr_writer :reason
+      attr_accessor :reason
 
       sig do
         params(
           address: String,
-          reason: String,
+          reason: T.nilable(String),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
         # Email address to suppress
         address:,
-        # Reason for suppression
+        # Reason for suppression (accepts null)
         reason: nil,
         request_options: {}
       )
@@ -42,7 +39,7 @@ module ArkEmail
         override.returns(
           {
             address: String,
-            reason: String,
+            reason: T.nilable(String),
             request_options: ArkEmail::RequestOptions
           }
         )

@@ -12,42 +12,27 @@ module ArkEmail
         end
 
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :all_events
-
-      sig { params(all_events: T::Boolean).void }
-      attr_writer :all_events
+      attr_accessor :all_events
 
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :enabled
-
-      sig { params(enabled: T::Boolean).void }
-      attr_writer :enabled
+      attr_accessor :enabled
 
       sig { returns(T.nilable(T::Array[String])) }
-      attr_reader :events
-
-      sig { params(events: T::Array[String]).void }
-      attr_writer :events
+      attr_accessor :events
 
       sig { returns(T.nilable(String)) }
-      attr_reader :name
-
-      sig { params(name: String).void }
-      attr_writer :name
+      attr_accessor :name
 
       sig { returns(T.nilable(String)) }
-      attr_reader :url
-
-      sig { params(url: String).void }
-      attr_writer :url
+      attr_accessor :url
 
       sig do
         params(
-          all_events: T::Boolean,
-          enabled: T::Boolean,
-          events: T::Array[String],
-          name: String,
-          url: String,
+          all_events: T.nilable(T::Boolean),
+          enabled: T.nilable(T::Boolean),
+          events: T.nilable(T::Array[String]),
+          name: T.nilable(String),
+          url: T.nilable(String),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -64,11 +49,11 @@ module ArkEmail
       sig do
         override.returns(
           {
-            all_events: T::Boolean,
-            enabled: T::Boolean,
-            events: T::Array[String],
-            name: String,
-            url: String,
+            all_events: T.nilable(T::Boolean),
+            enabled: T.nilable(T::Boolean),
+            events: T.nilable(T::Array[String]),
+            name: T.nilable(String),
+            url: T.nilable(String),
             request_options: ArkEmail::RequestOptions
           }
         )

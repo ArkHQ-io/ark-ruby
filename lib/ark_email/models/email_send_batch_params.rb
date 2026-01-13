@@ -46,24 +46,24 @@ module ArkEmail
         # @!attribute html
         #
         #   @return [String, nil]
-        optional :html, String
+        optional :html, String, nil?: true
 
         # @!attribute tag
         #
         #   @return [String, nil]
-        optional :tag, String
+        optional :tag, String, nil?: true
 
         # @!attribute text
         #
         #   @return [String, nil]
-        optional :text, String
+        optional :text, String, nil?: true
 
         # @!method initialize(subject:, to:, html: nil, tag: nil, text: nil)
         #   @param subject [String]
         #   @param to [Array<String>]
-        #   @param html [String]
-        #   @param tag [String]
-        #   @param text [String]
+        #   @param html [String, nil]
+        #   @param tag [String, nil]
+        #   @param text [String, nil]
       end
     end
   end

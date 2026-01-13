@@ -5,12 +5,12 @@ module ArkEmail
         from: String,
         subject: String,
         to: ::Array[String],
-        attachments: ::Array[ArkEmail::EmailSendParams::Attachment],
-        bcc: ::Array[String],
-        cc: ::Array[String],
+        attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?,
+        bcc: ::Array[String]?,
+        cc: ::Array[String]?,
         headers: ::Hash[Symbol, String],
         html: String,
-        reply_to: String,
+        reply_to: String?,
         tag: String,
         text: String,
         idempotency_key: String
@@ -27,19 +27,11 @@ module ArkEmail
 
       attr_accessor to: ::Array[String]
 
-      attr_reader attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?
+      attr_accessor attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?
 
-      def attachments=: (
-        ::Array[ArkEmail::EmailSendParams::Attachment]
-      ) -> ::Array[ArkEmail::EmailSendParams::Attachment]
+      attr_accessor bcc: ::Array[String]?
 
-      attr_reader bcc: ::Array[String]?
-
-      def bcc=: (::Array[String]) -> ::Array[String]
-
-      attr_reader cc: ::Array[String]?
-
-      def cc=: (::Array[String]) -> ::Array[String]
+      attr_accessor cc: ::Array[String]?
 
       attr_reader headers: ::Hash[Symbol, String]?
 
@@ -49,9 +41,7 @@ module ArkEmail
 
       def html=: (String) -> String
 
-      attr_reader reply_to: String?
-
-      def reply_to=: (String) -> String
+      attr_accessor reply_to: String?
 
       attr_reader tag: String?
 
@@ -69,12 +59,12 @@ module ArkEmail
         from: String,
         subject: String,
         to: ::Array[String],
-        ?attachments: ::Array[ArkEmail::EmailSendParams::Attachment],
-        ?bcc: ::Array[String],
-        ?cc: ::Array[String],
+        ?attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?,
+        ?bcc: ::Array[String]?,
+        ?cc: ::Array[String]?,
         ?headers: ::Hash[Symbol, String],
         ?html: String,
-        ?reply_to: String,
+        ?reply_to: String?,
         ?tag: String,
         ?text: String,
         ?idempotency_key: String,
@@ -85,12 +75,12 @@ module ArkEmail
         from: String,
         subject: String,
         to: ::Array[String],
-        attachments: ::Array[ArkEmail::EmailSendParams::Attachment],
-        bcc: ::Array[String],
-        cc: ::Array[String],
+        attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?,
+        bcc: ::Array[String]?,
+        cc: ::Array[String]?,
         headers: ::Hash[Symbol, String],
         html: String,
-        reply_to: String,
+        reply_to: String?,
         tag: String,
         text: String,
         idempotency_key: String,

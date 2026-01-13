@@ -17,16 +17,25 @@ module ArkEmail
       # - `DomainDNSError` - Domain DNS issue detected
       sig do
         params(
-          events: T::Array[ArkEmail::WebhookCreateParams::Event::OrSymbol],
           name: String,
           url: String,
-          all_events: T::Boolean,
-          enabled: T::Boolean,
+          all_events: T.nilable(T::Boolean),
+          enabled: T.nilable(T::Boolean),
+          events:
+            T.nilable(T::Array[ArkEmail::WebhookCreateParams::Event::OrSymbol]),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::WebhookCreateResponse)
       end
       def create(
-        # Events to subscribe to:
+        # Webhook name for identification
+        name:,
+        # HTTPS endpoint URL
+        url:,
+        # Subscribe to all events (ignores events array, accepts null)
+        all_events: nil,
+        # Whether the webhook is enabled (accepts null)
+        enabled: nil,
+        # Events to subscribe to (accepts null):
         #
         # - `MessageSent` - Email successfully delivered to recipient's server
         # - `MessageDelayed` - Temporary delivery failure, will retry
@@ -36,14 +45,7 @@ module ArkEmail
         # - `MessageLinkClicked` - Recipient clicked a tracked link
         # - `MessageLoaded` - Recipient opened the email (tracking pixel loaded)
         # - `DomainDNSError` - DNS configuration issue detected
-        events:,
-        # Webhook name for identification
-        name:,
-        # HTTPS endpoint URL
-        url:,
-        # Subscribe to all events (ignores events array)
-        all_events: nil,
-        enabled: nil,
+        events: nil,
         request_options: {}
       )
       end
@@ -62,11 +64,11 @@ module ArkEmail
       sig do
         params(
           webhook_id: String,
-          all_events: T::Boolean,
-          enabled: T::Boolean,
-          events: T::Array[String],
-          name: String,
-          url: String,
+          all_events: T.nilable(T::Boolean),
+          enabled: T.nilable(T::Boolean),
+          events: T.nilable(T::Array[String]),
+          name: T.nilable(String),
+          url: T.nilable(String),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::WebhookUpdateResponse)
       end
