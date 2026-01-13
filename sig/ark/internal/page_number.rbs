@@ -1,0 +1,11 @@
+module Ark
+  module Internal
+    class PageNumber[Elem]
+      include Ark::Internal::Type::BasePage[Elem]
+
+      attr_accessor messages: ::Array[Elem]?
+
+      def inspect: -> String
+    end
+  end
+end

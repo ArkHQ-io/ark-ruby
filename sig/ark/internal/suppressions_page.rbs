@@ -1,0 +1,11 @@
+module Ark
+  module Internal
+    class SuppressionsPage[Elem]
+      include Ark::Internal::Type::BasePage[Elem]
+
+      attr_accessor suppressions: ::Array[Elem]?
+
+      def inspect: -> String
+    end
+  end
+end
