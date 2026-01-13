@@ -150,21 +150,21 @@ module ArkEmail
       #
       # @param to [Array<String>] Body param: Recipient email addresses (max 50)
       #
-      # @param attachments [Array<ArkEmail::Models::EmailSendParams::Attachment>] Body param: File attachments
+      # @param attachments [Array<ArkEmail::Models::EmailSendParams::Attachment>, nil] Body param: File attachments (accepts null)
       #
-      # @param bcc [Array<String>] Body param: BCC recipients
+      # @param bcc [Array<String>, nil] Body param: BCC recipients (accepts null)
       #
-      # @param cc [Array<String>] Body param: CC recipients
+      # @param cc [Array<String>, nil] Body param: CC recipients (accepts null)
       #
-      # @param headers [Hash{Symbol=>String}] Body param: Custom email headers
+      # @param headers [Hash{Symbol=>String}, nil] Body param: Custom email headers (accepts null)
       #
-      # @param html [String] Body param: HTML body content.
+      # @param html [String, nil] Body param: HTML body content (accepts null).
       #
-      # @param reply_to [String] Body param: Reply-to address
+      # @param reply_to [String, nil] Body param: Reply-to address (accepts null)
       #
-      # @param tag [String] Body param: Tag for categorization and filtering
+      # @param tag [String, nil] Body param: Tag for categorization and filtering (accepts null)
       #
-      # @param text [String] Body param: Plain text body (auto-generated from HTML if not provided).
+      # @param text [String, nil] Body param: Plain text body (accepts null, auto-generated from HTML if not provi
       #
       # @param idempotency_key [String] Header param: Unique key for idempotent requests. If a request with this key was
       #
@@ -228,13 +228,15 @@ module ArkEmail
       #
       # The `data` field should contain the base64-encoded raw email.
       #
-      # @overload send_raw(data:, mail_from:, rcpt_to:, request_options: {})
+      # @overload send_raw(data:, mail_from:, rcpt_to:, bounce: nil, request_options: {})
       #
       # @param data [String] Base64-encoded RFC 2822 message
       #
       # @param mail_from [String] Envelope sender address
       #
       # @param rcpt_to [Array<String>] Envelope recipient addresses
+      #
+      # @param bounce [Boolean, nil] Whether this is a bounce message (accepts null)
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #

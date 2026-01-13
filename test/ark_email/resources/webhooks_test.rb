@@ -4,12 +4,7 @@ require_relative "../test_helper"
 
 class ArkEmail::Test::Resources::WebhooksTest < ArkEmail::Test::ResourceTest
   def test_create_required_params
-    response =
-      @ark.webhooks.create(
-        events: [:MessageSent, :MessageDeliveryFailed, :MessageBounced],
-        name: "My App Webhook",
-        url: "https://myapp.com/webhooks/email"
-      )
+    response = @ark.webhooks.create(name: "My App Webhook", url: "https://myapp.com/webhooks/email")
 
     assert_pattern do
       response => ArkEmail::Models::WebhookCreateResponse

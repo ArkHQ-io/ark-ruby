@@ -2,11 +2,11 @@ module ArkEmail
   module Models
     type tracking_create_params =
       {
-        domain_id: String,
+        domain_id: Integer,
         name: String,
-        ssl_enabled: bool,
-        track_clicks: bool,
-        track_opens: bool
+        ssl_enabled: bool?,
+        track_clicks: bool?,
+        track_opens: bool?
       }
       & ArkEmail::Internal::Type::request_parameters
 
@@ -14,37 +14,31 @@ module ArkEmail
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
 
-      attr_accessor domain_id: String
+      attr_accessor domain_id: Integer
 
       attr_accessor name: String
 
-      attr_reader ssl_enabled: bool?
+      attr_accessor ssl_enabled: bool?
 
-      def ssl_enabled=: (bool) -> bool
+      attr_accessor track_clicks: bool?
 
-      attr_reader track_clicks: bool?
-
-      def track_clicks=: (bool) -> bool
-
-      attr_reader track_opens: bool?
-
-      def track_opens=: (bool) -> bool
+      attr_accessor track_opens: bool?
 
       def initialize: (
-        domain_id: String,
+        domain_id: Integer,
         name: String,
-        ?ssl_enabled: bool,
-        ?track_clicks: bool,
-        ?track_opens: bool,
+        ?ssl_enabled: bool?,
+        ?track_clicks: bool?,
+        ?track_opens: bool?,
         ?request_options: ArkEmail::request_opts
       ) -> void
 
       def to_hash: -> {
-        domain_id: String,
+        domain_id: Integer,
         name: String,
-        ssl_enabled: bool,
-        track_clicks: bool,
-        track_opens: bool,
+        ssl_enabled: bool?,
+        track_clicks: bool?,
+        track_opens: bool?,
         request_options: ArkEmail::RequestOptions
       }
     end

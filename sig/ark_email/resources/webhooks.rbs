@@ -2,11 +2,11 @@ module ArkEmail
   module Resources
     class Webhooks
       def create: (
-        events: ::Array[ArkEmail::Models::WebhookCreateParams::event],
         name: String,
         url: String,
-        ?all_events: bool,
-        ?enabled: bool,
+        ?all_events: bool?,
+        ?enabled: bool?,
+        ?events: ::Array[ArkEmail::Models::WebhookCreateParams::event]?,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::WebhookCreateResponse
 
@@ -17,11 +17,11 @@ module ArkEmail
 
       def update: (
         String webhook_id,
-        ?all_events: bool,
-        ?enabled: bool,
-        ?events: ::Array[String],
-        ?name: String,
-        ?url: String,
+        ?all_events: bool?,
+        ?enabled: bool?,
+        ?events: ::Array[String]?,
+        ?name: String?,
+        ?url: String?,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::WebhookUpdateResponse
 

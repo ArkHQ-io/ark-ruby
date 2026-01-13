@@ -24,13 +24,15 @@ module ArkEmail
         required :address, String
 
         # @!attribute reason
+        #   Reason for suppression (accepts null)
         #
         #   @return [String, nil]
-        optional :reason, String
+        optional :reason, String, nil?: true
 
         # @!method initialize(address:, reason: nil)
         #   @param address [String]
-        #   @param reason [String]
+        #
+        #   @param reason [String, nil] Reason for suppression (accepts null)
       end
     end
   end

@@ -34,54 +34,56 @@ module ArkEmail
       required :to, ArkEmail::Internal::Type::ArrayOf[String]
 
       # @!attribute attachments
-      #   File attachments
+      #   File attachments (accepts null)
       #
       #   @return [Array<ArkEmail::Models::EmailSendParams::Attachment>, nil]
-      optional :attachments, -> { ArkEmail::Internal::Type::ArrayOf[ArkEmail::EmailSendParams::Attachment] }
+      optional :attachments,
+               -> { ArkEmail::Internal::Type::ArrayOf[ArkEmail::EmailSendParams::Attachment] },
+               nil?: true
 
       # @!attribute bcc
-      #   BCC recipients
+      #   BCC recipients (accepts null)
       #
       #   @return [Array<String>, nil]
-      optional :bcc, ArkEmail::Internal::Type::ArrayOf[String]
+      optional :bcc, ArkEmail::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute cc
-      #   CC recipients
+      #   CC recipients (accepts null)
       #
       #   @return [Array<String>, nil]
-      optional :cc, ArkEmail::Internal::Type::ArrayOf[String]
+      optional :cc, ArkEmail::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute headers
-      #   Custom email headers
+      #   Custom email headers (accepts null)
       #
       #   @return [Hash{Symbol=>String}, nil]
-      optional :headers, ArkEmail::Internal::Type::HashOf[String]
+      optional :headers, ArkEmail::Internal::Type::HashOf[String], nil?: true
 
       # @!attribute html
-      #   HTML body content. Maximum 5MB (5,242,880 characters). Combined with
-      #   attachments, the total message must not exceed 14MB.
+      #   HTML body content (accepts null). Maximum 5MB (5,242,880 characters). Combined
+      #   with attachments, the total message must not exceed 14MB.
       #
       #   @return [String, nil]
-      optional :html, String
+      optional :html, String, nil?: true
 
       # @!attribute reply_to
-      #   Reply-to address
+      #   Reply-to address (accepts null)
       #
       #   @return [String, nil]
-      optional :reply_to, String, api_name: :replyTo
+      optional :reply_to, String, api_name: :replyTo, nil?: true
 
       # @!attribute tag
-      #   Tag for categorization and filtering
+      #   Tag for categorization and filtering (accepts null)
       #
       #   @return [String, nil]
-      optional :tag, String
+      optional :tag, String, nil?: true
 
       # @!attribute text
-      #   Plain text body (auto-generated from HTML if not provided). Maximum 5MB
-      #   (5,242,880 characters).
+      #   Plain text body (accepts null, auto-generated from HTML if not provided).
+      #   Maximum 5MB (5,242,880 characters).
       #
       #   @return [String, nil]
-      optional :text, String
+      optional :text, String, nil?: true
 
       # @!attribute idempotency_key
       #
@@ -98,21 +100,21 @@ module ArkEmail
       #
       #   @param to [Array<String>] Recipient email addresses (max 50)
       #
-      #   @param attachments [Array<ArkEmail::Models::EmailSendParams::Attachment>] File attachments
+      #   @param attachments [Array<ArkEmail::Models::EmailSendParams::Attachment>, nil] File attachments (accepts null)
       #
-      #   @param bcc [Array<String>] BCC recipients
+      #   @param bcc [Array<String>, nil] BCC recipients (accepts null)
       #
-      #   @param cc [Array<String>] CC recipients
+      #   @param cc [Array<String>, nil] CC recipients (accepts null)
       #
-      #   @param headers [Hash{Symbol=>String}] Custom email headers
+      #   @param headers [Hash{Symbol=>String}, nil] Custom email headers (accepts null)
       #
-      #   @param html [String] HTML body content.
+      #   @param html [String, nil] HTML body content (accepts null).
       #
-      #   @param reply_to [String] Reply-to address
+      #   @param reply_to [String, nil] Reply-to address (accepts null)
       #
-      #   @param tag [String] Tag for categorization and filtering
+      #   @param tag [String, nil] Tag for categorization and filtering (accepts null)
       #
-      #   @param text [String] Plain text body (auto-generated from HTML if not provided).
+      #   @param text [String, nil] Plain text body (accepts null, auto-generated from HTML if not provided).
       #
       #   @param idempotency_key [String]
       #

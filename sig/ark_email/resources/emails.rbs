@@ -33,14 +33,14 @@ module ArkEmail
         from: String,
         subject: String,
         to: ::Array[String],
-        ?attachments: ::Array[ArkEmail::EmailSendParams::Attachment],
-        ?bcc: ::Array[String],
-        ?cc: ::Array[String],
-        ?headers: ::Hash[Symbol, String],
-        ?html: String,
-        ?reply_to: String,
-        ?tag: String,
-        ?text: String,
+        ?attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?,
+        ?bcc: ::Array[String]?,
+        ?cc: ::Array[String]?,
+        ?headers: ::Hash[Symbol, String]?,
+        ?html: String?,
+        ?reply_to: String?,
+        ?tag: String?,
+        ?text: String?,
         ?idempotency_key: String,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::EmailSendResponse
@@ -56,6 +56,7 @@ module ArkEmail
         data: String,
         mail_from: String,
         rcpt_to: ::Array[String],
+        ?bounce: bool?,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::EmailSendRawResponse
 

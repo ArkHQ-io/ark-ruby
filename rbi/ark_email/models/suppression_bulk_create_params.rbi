@@ -55,19 +55,23 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :address
 
+        # Reason for suppression (accepts null)
         sig { returns(T.nilable(String)) }
-        attr_reader :reason
-
-        sig { params(reason: String).void }
-        attr_writer :reason
+        attr_accessor :reason
 
         sig do
-          params(address: String, reason: String).returns(T.attached_class)
+          params(address: String, reason: T.nilable(String)).returns(
+            T.attached_class
+          )
         end
-        def self.new(address:, reason: nil)
+        def self.new(
+          address:,
+          # Reason for suppression (accepts null)
+          reason: nil
+        )
         end
 
-        sig { override.returns({ address: String, reason: String }) }
+        sig { override.returns({ address: String, reason: T.nilable(String) }) }
         def to_hash
         end
       end

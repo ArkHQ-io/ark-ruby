@@ -126,14 +126,15 @@ module ArkEmail
           from: String,
           subject: String,
           to: T::Array[String],
-          attachments: T::Array[ArkEmail::EmailSendParams::Attachment::OrHash],
-          bcc: T::Array[String],
-          cc: T::Array[String],
-          headers: T::Hash[Symbol, String],
-          html: String,
-          reply_to: String,
-          tag: String,
-          text: String,
+          attachments:
+            T.nilable(T::Array[ArkEmail::EmailSendParams::Attachment::OrHash]),
+          bcc: T.nilable(T::Array[String]),
+          cc: T.nilable(T::Array[String]),
+          headers: T.nilable(T::Hash[Symbol, String]),
+          html: T.nilable(String),
+          reply_to: T.nilable(String),
+          tag: T.nilable(String),
+          text: T.nilable(String),
           idempotency_key: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailSendResponse)
@@ -153,23 +154,23 @@ module ArkEmail
         subject:,
         # Body param: Recipient email addresses (max 50)
         to:,
-        # Body param: File attachments
+        # Body param: File attachments (accepts null)
         attachments: nil,
-        # Body param: BCC recipients
+        # Body param: BCC recipients (accepts null)
         bcc: nil,
-        # Body param: CC recipients
+        # Body param: CC recipients (accepts null)
         cc: nil,
-        # Body param: Custom email headers
+        # Body param: Custom email headers (accepts null)
         headers: nil,
-        # Body param: HTML body content. Maximum 5MB (5,242,880 characters). Combined with
-        # attachments, the total message must not exceed 14MB.
+        # Body param: HTML body content (accepts null). Maximum 5MB (5,242,880
+        # characters). Combined with attachments, the total message must not exceed 14MB.
         html: nil,
-        # Body param: Reply-to address
+        # Body param: Reply-to address (accepts null)
         reply_to: nil,
-        # Body param: Tag for categorization and filtering
+        # Body param: Tag for categorization and filtering (accepts null)
         tag: nil,
-        # Body param: Plain text body (auto-generated from HTML if not provided). Maximum
-        # 5MB (5,242,880 characters).
+        # Body param: Plain text body (accepts null, auto-generated from HTML if not
+        # provided). Maximum 5MB (5,242,880 characters).
         text: nil,
         # Header param: Unique key for idempotent requests. If a request with this key was
         # already processed, the cached response is returned. Keys expire after 24 hours.
@@ -214,6 +215,7 @@ module ArkEmail
           data: String,
           mail_from: String,
           rcpt_to: T::Array[String],
+          bounce: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailSendRawResponse)
       end
@@ -224,6 +226,8 @@ module ArkEmail
         mail_from:,
         # Envelope recipient addresses
         rcpt_to:,
+        # Whether this is a bounce message (accepts null)
+        bounce: nil,
         request_options: {}
       )
       end

@@ -19,17 +19,17 @@ module ArkEmail
       # - `MessageLoaded` - Recipient opened the email
       # - `DomainDNSError` - Domain DNS issue detected
       #
-      # @overload create(events:, name:, url:, all_events: nil, enabled: nil, request_options: {})
-      #
-      # @param events [Array<Symbol, ArkEmail::Models::WebhookCreateParams::Event>] Events to subscribe to:
+      # @overload create(name:, url:, all_events: nil, enabled: nil, events: nil, request_options: {})
       #
       # @param name [String] Webhook name for identification
       #
       # @param url [String] HTTPS endpoint URL
       #
-      # @param all_events [Boolean] Subscribe to all events (ignores events array)
+      # @param all_events [Boolean, nil] Subscribe to all events (ignores events array, accepts null)
       #
-      # @param enabled [Boolean]
+      # @param enabled [Boolean, nil] Whether the webhook is enabled (accepts null)
+      #
+      # @param events [Array<Symbol, ArkEmail::Models::WebhookCreateParams::Event>, nil] Events to subscribe to (accepts null):
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -71,11 +71,11 @@ module ArkEmail
       # @overload update(webhook_id, all_events: nil, enabled: nil, events: nil, name: nil, url: nil, request_options: {})
       #
       # @param webhook_id [String]
-      # @param all_events [Boolean]
-      # @param enabled [Boolean]
-      # @param events [Array<String>]
-      # @param name [String]
-      # @param url [String]
+      # @param all_events [Boolean, nil]
+      # @param enabled [Boolean, nil]
+      # @param events [Array<String>, nil]
+      # @param name [String, nil]
+      # @param url [String, nil]
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [ArkEmail::Models::WebhookUpdateResponse]
