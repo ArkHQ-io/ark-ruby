@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version = Ark::VERSION
   s.summary = "Ruby library to access the Ark API"
   s.authors = ["Ark"]
-  s.email = "support@arkhq.io"
+  s.email = "hi@arkhq.io"
   s.homepage = "https://gemdocs.org/gems/ark"
   s.metadata["homepage_uri"] = s.homepage
   s.metadata["source_code_uri"] = "https://github.com/ArkHQ-io/ark-ruby"
