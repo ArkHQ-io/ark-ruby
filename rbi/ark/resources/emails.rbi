@@ -49,7 +49,9 @@ module Ark
           tag: String,
           to: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::Models::EmailListResponse)
+        ).returns(
+          Ark::Internal::PageNumberPagination[Ark::Models::EmailListResponse]
+        )
       end
       def list(
         # Return emails sent after this timestamp (Unix seconds or ISO 8601)
