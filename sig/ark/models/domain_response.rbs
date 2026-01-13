@@ -1,29 +1,25 @@
 module Ark
   module Models
     type domain_response =
-      {
-        data: Ark::DomainResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::DomainResponse::success
-      }
+      { data: Ark::DomainResponse::Data, meta: Ark::APIMeta, success: true }
 
     class DomainResponse < Ark::Internal::Type::BaseModel
       attr_accessor data: Ark::DomainResponse::Data
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: Ark::Models::DomainResponse::success
+      attr_accessor success: true
 
       def initialize: (
         data: Ark::DomainResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::DomainResponse::success
+        ?success: true
       ) -> void
 
       def to_hash: -> {
         data: Ark::DomainResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::DomainResponse::success
+        success: true
       }
 
       type data =
@@ -98,16 +94,6 @@ module Ark
             spf: Ark::DNSRecord
           }
         end
-      end
-
-      type success = true
-
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE: true
-
-        def self?.values: -> ::Array[Ark::Models::DomainResponse::success]
       end
     end
   end
