@@ -4,44 +4,38 @@ require_relative "../test_helper"
 
 class Ark::Test::Resources::DomainsTest < Ark::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
-
     response = @ark.domains.create(name: "notifications.myapp.com")
 
     assert_pattern do
-      response => Ark::DomainResponse
+      response => Ark::Models::DomainCreateResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::DomainResponse::Data,
+        data: Ark::Models::DomainCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::DomainResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_retrieve
-    skip("Prism tests are disabled")
-
     response = @ark.domains.retrieve("domainId")
 
     assert_pattern do
-      response => Ark::DomainResponse
+      response => Ark::Models::DomainRetrieveResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::DomainResponse::Data,
+        data: Ark::Models::DomainRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::DomainResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_list
-    skip("Prism tests are disabled")
-
     response = @ark.domains.list
 
     assert_pattern do
@@ -52,43 +46,39 @@ class Ark::Test::Resources::DomainsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::DomainListResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::DomainListResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_delete
-    skip("Prism tests are disabled")
-
     response = @ark.domains.delete("domainId")
 
     assert_pattern do
-      response => Ark::SuccessResponse
+      response => Ark::Models::DomainDeleteResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::SuccessResponse::Data,
+        data: Ark::Models::DomainDeleteResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::SuccessResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_verify
-    skip("Prism tests are disabled")
-
     response = @ark.domains.verify("domainId")
 
     assert_pattern do
-      response => Ark::DomainResponse
+      response => Ark::Models::DomainVerifyResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::DomainResponse::Data,
+        data: Ark::Models::DomainVerifyResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::DomainResponse::Success
+        success: true | false
       }
     end
   end

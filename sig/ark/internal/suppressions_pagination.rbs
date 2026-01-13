@@ -1,0 +1,48 @@
+module Ark
+  module Internal
+    class SuppressionsPagination[Elem]
+      include Ark::Internal::Type::BasePage[Elem]
+
+      attr_accessor data: Data
+
+      def inspect: -> String
+
+      type data = { pagination: Data::Pagination, suppressions: ::Array[top] }
+      class Data < Ark::Internal::Type::BaseModel
+        attr_reader pagination: Data::Pagination?
+
+        def pagination=: (Data::Pagination) -> Data::Pagination
+
+        attr_reader suppressions: ::Array[top]?
+
+        def suppressions=: (::Array[top]) -> ::Array[top]
+
+        def initialize: (
+          ?pagination: Data::Pagination,
+          ?suppressions: ::Array[top]
+        ) -> void
+
+        def to_hash: -> {
+          pagination: Data::Pagination,
+          suppressions: ::Array[top]
+        }
+
+        type pagination = { page: Integer, total_pages: Integer }
+
+        class Pagination < Ark::Internal::Type::BaseModel
+          attr_reader page: Integer?
+
+          def page=: (Integer) -> Integer
+
+          attr_reader total_pages: Integer?
+
+          def total_pages=: (Integer) -> Integer
+
+          def initialize: (?page: Integer, ?total_pages: Integer) -> void
+
+          def to_hash: -> { page: Integer, total_pages: Integer }
+        end
+      end
+    end
+  end
+end

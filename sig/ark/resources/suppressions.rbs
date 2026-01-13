@@ -16,12 +16,12 @@ module Ark
         ?page: Integer,
         ?per_page: Integer,
         ?request_options: Ark::request_opts
-      ) -> Ark::Internal::EmailsPage[Ark::Models::SuppressionListResponse]
+      ) -> Ark::Internal::PageNumberPagination[Ark::Models::SuppressionListResponse]
 
       def delete: (
         String email,
         ?request_options: Ark::request_opts
-      ) -> Ark::SuccessResponse
+      ) -> Ark::Models::SuppressionDeleteResponse
 
       def bulk_create: (
         suppressions: ::Array[Ark::SuppressionBulkCreateParams::Suppression],

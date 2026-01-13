@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::EmailRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailRetrieveResponse::success
+        success: true
       }
 
     class EmailRetrieveResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: Ark::Models::EmailRetrieveResponse::success
+      attr_accessor success: true
 
       def initialize: (
         data: Ark::Models::EmailRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailRetrieveResponse::success
+        ?success: true
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::EmailRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailRetrieveResponse::success
+        success: true
       }
 
       type data =
@@ -37,7 +37,7 @@ module Ark
           timestamp: Float,
           timestamp_iso: Time,
           to: String,
-          deliveries: ::Array[Ark::Delivery],
+          deliveries: ::Array[Ark::Models::EmailRetrieveResponse::Data::Delivery],
           headers: ::Hash[Symbol, String],
           html_body: String,
           message_id: String,
@@ -66,9 +66,11 @@ module Ark
 
         attr_accessor to: String
 
-        attr_reader deliveries: ::Array[Ark::Delivery]?
+        attr_reader deliveries: ::Array[Ark::Models::EmailRetrieveResponse::Data::Delivery]?
 
-        def deliveries=: (::Array[Ark::Delivery]) -> ::Array[Ark::Delivery]
+        def deliveries=: (
+          ::Array[Ark::Models::EmailRetrieveResponse::Data::Delivery]
+        ) -> ::Array[Ark::Models::EmailRetrieveResponse::Data::Delivery]
 
         attr_reader headers: ::Hash[Symbol, String]?
 
@@ -108,7 +110,7 @@ module Ark
           timestamp: Float,
           timestamp_iso: Time,
           to: String,
-          ?deliveries: ::Array[Ark::Delivery],
+          ?deliveries: ::Array[Ark::Models::EmailRetrieveResponse::Data::Delivery],
           ?headers: ::Hash[Symbol, String],
           ?html_body: String,
           ?message_id: String,
@@ -128,7 +130,7 @@ module Ark
           timestamp: Float,
           timestamp_iso: Time,
           to: String,
-          deliveries: ::Array[Ark::Delivery],
+          deliveries: ::Array[Ark::Models::EmailRetrieveResponse::Data::Delivery],
           headers: ::Hash[Symbol, String],
           html_body: String,
           message_id: String,
@@ -164,16 +166,66 @@ module Ark
 
           def self?.values: -> ::Array[Ark::Models::EmailRetrieveResponse::Data::status]
         end
-      end
 
-      type success = true
+        type delivery =
+          {
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            code: Integer,
+            details: String,
+            output: String,
+            sent_with_ssl: bool
+          }
 
-      module Success
-        extend Ark::Internal::Type::Enum
+        class Delivery < Ark::Internal::Type::BaseModel
+          attr_accessor id: String
 
-        TRUE: true
+          attr_accessor status: String
 
-        def self?.values: -> ::Array[Ark::Models::EmailRetrieveResponse::success]
+          attr_accessor timestamp: Float
+
+          attr_accessor timestamp_iso: Time
+
+          attr_reader code: Integer?
+
+          def code=: (Integer) -> Integer
+
+          attr_reader details: String?
+
+          def details=: (String) -> String
+
+          attr_reader output: String?
+
+          def output=: (String) -> String
+
+          attr_reader sent_with_ssl: bool?
+
+          def sent_with_ssl=: (bool) -> bool
+
+          def initialize: (
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            ?code: Integer,
+            ?details: String,
+            ?output: String,
+            ?sent_with_ssl: bool
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            code: Integer,
+            details: String,
+            output: String,
+            sent_with_ssl: bool
+          }
+        end
       end
     end
   end

@@ -1,0 +1,26 @@
+module Ark
+  module Models
+    type tracking_update_response =
+      { data: Ark::TrackDomain, meta: Ark::APIMeta, success: true }
+
+    class TrackingUpdateResponse < Ark::Internal::Type::BaseModel
+      attr_accessor data: Ark::TrackDomain
+
+      attr_accessor meta: Ark::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: Ark::TrackDomain,
+        meta: Ark::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: Ark::TrackDomain,
+        meta: Ark::APIMeta,
+        success: true
+      }
+    end
+  end
+end

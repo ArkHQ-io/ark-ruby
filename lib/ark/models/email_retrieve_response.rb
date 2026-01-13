@@ -16,13 +16,13 @@ module Ark
 
       # @!attribute success
       #
-      #   @return [Boolean, Ark::Models::EmailRetrieveResponse::Success]
-      required :success, enum: -> { Ark::Models::EmailRetrieveResponse::Success }
+      #   @return [Boolean, true]
+      required :success, const: true
 
-      # @!method initialize(data:, meta:, success:)
+      # @!method initialize(data:, meta:, success: true)
       #   @param data [Ark::Models::EmailRetrieveResponse::Data]
       #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, Ark::Models::EmailRetrieveResponse::Success]
+      #   @param success [Boolean, true]
 
       # @see Ark::Models::EmailRetrieveResponse#data
       class Data < Ark::Internal::Type::BaseModel
@@ -92,8 +92,9 @@ module Ark
         # @!attribute deliveries
         #   Delivery attempt history (included if expand=deliveries)
         #
-        #   @return [Array<Ark::Models::Delivery>, nil]
-        optional :deliveries, -> { Ark::Internal::Type::ArrayOf[Ark::Delivery] }
+        #   @return [Array<Ark::Models::EmailRetrieveResponse::Data::Delivery>, nil]
+        optional :deliveries,
+                 -> { Ark::Internal::Type::ArrayOf[Ark::Models::EmailRetrieveResponse::Data::Delivery] }
 
         # @!attribute headers
         #   Email headers (included if expand=headers)
@@ -159,7 +160,7 @@ module Ark
         #
         #   @param to [String] Recipient address
         #
-        #   @param deliveries [Array<Ark::Models::Delivery>] Delivery attempt history (included if expand=deliveries)
+        #   @param deliveries [Array<Ark::Models::EmailRetrieveResponse::Data::Delivery>] Delivery attempt history (included if expand=deliveries)
         #
         #   @param headers [Hash{Symbol=>String}] Email headers (included if expand=headers)
         #
@@ -211,16 +212,73 @@ module Ark
           # @!method self.values
           #   @return [Array<Symbol>]
         end
-      end
 
-      # @see Ark::Models::EmailRetrieveResponse#success
-      module Success
-        extend Ark::Internal::Type::Enum
+        class Delivery < Ark::Internal::Type::BaseModel
+          # @!attribute id
+          #   Delivery attempt ID
+          #
+          #   @return [String]
+          required :id, String
 
-        TRUE = true
+          # @!attribute status
+          #   Delivery status (lowercase)
+          #
+          #   @return [String]
+          required :status, String
 
-        # @!method self.values
-        #   @return [Array<Boolean>]
+          # @!attribute timestamp
+          #   Unix timestamp
+          #
+          #   @return [Float]
+          required :timestamp, Float
+
+          # @!attribute timestamp_iso
+          #   ISO 8601 timestamp
+          #
+          #   @return [Time]
+          required :timestamp_iso, Time, api_name: :timestampIso
+
+          # @!attribute code
+          #   SMTP response code
+          #
+          #   @return [Integer, nil]
+          optional :code, Integer
+
+          # @!attribute details
+          #   Status details
+          #
+          #   @return [String, nil]
+          optional :details, String
+
+          # @!attribute output
+          #   SMTP server response from the receiving mail server
+          #
+          #   @return [String, nil]
+          optional :output, String
+
+          # @!attribute sent_with_ssl
+          #   Whether TLS was used
+          #
+          #   @return [Boolean, nil]
+          optional :sent_with_ssl, Ark::Internal::Type::Boolean, api_name: :sentWithSsl
+
+          # @!method initialize(id:, status:, timestamp:, timestamp_iso:, code: nil, details: nil, output: nil, sent_with_ssl: nil)
+          #   @param id [String] Delivery attempt ID
+          #
+          #   @param status [String] Delivery status (lowercase)
+          #
+          #   @param timestamp [Float] Unix timestamp
+          #
+          #   @param timestamp_iso [Time] ISO 8601 timestamp
+          #
+          #   @param code [Integer] SMTP response code
+          #
+          #   @param details [String] Status details
+          #
+          #   @param output [String] SMTP server response from the receiving mail server
+          #
+          #   @param sent_with_ssl [Boolean] Whether TLS was used
+        end
       end
     end
   end

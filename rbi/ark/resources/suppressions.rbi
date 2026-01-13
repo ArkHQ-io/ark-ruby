@@ -43,7 +43,9 @@ module Ark
           per_page: Integer,
           request_options: Ark::RequestOptions::OrHash
         ).returns(
-          Ark::Internal::EmailsPage[Ark::Models::SuppressionListResponse]
+          Ark::Internal::PageNumberPagination[
+            Ark::Models::SuppressionListResponse
+          ]
         )
       end
       def list(page: nil, per_page: nil, request_options: {})
@@ -55,7 +57,7 @@ module Ark
         params(
           email: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::SuccessResponse)
+        ).returns(Ark::Models::SuppressionDeleteResponse)
       end
       def delete(email, request_options: {})
       end

@@ -22,7 +22,7 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::TrackDomainResponse]
+      # @return [Ark::Models::TrackingCreateResponse]
       #
       # @see Ark::Models::TrackingCreateParams
       def create(params)
@@ -31,7 +31,7 @@ module Ark
           method: :post,
           path: "tracking",
           body: parsed,
-          model: Ark::TrackDomainResponse,
+          model: Ark::Models::TrackingCreateResponse,
           options: options
         )
       end
@@ -44,14 +44,14 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::TrackDomainResponse]
+      # @return [Ark::Models::TrackingRetrieveResponse]
       #
       # @see Ark::Models::TrackingRetrieveParams
       def retrieve(tracking_id, params = {})
         @client.request(
           method: :get,
           path: ["tracking/%1$s", tracking_id],
-          model: Ark::TrackDomainResponse,
+          model: Ark::Models::TrackingRetrieveResponse,
           options: params[:request_options]
         )
       end
@@ -79,7 +79,7 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::TrackDomainResponse]
+      # @return [Ark::Models::TrackingUpdateResponse]
       #
       # @see Ark::Models::TrackingUpdateParams
       def update(tracking_id, params = {})
@@ -88,7 +88,7 @@ module Ark
           method: :patch,
           path: ["tracking/%1$s", tracking_id],
           body: parsed,
-          model: Ark::TrackDomainResponse,
+          model: Ark::Models::TrackingUpdateResponse,
           options: options
         )
       end
@@ -121,14 +121,14 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::SuccessResponse]
+      # @return [Ark::Models::TrackingDeleteResponse]
       #
       # @see Ark::Models::TrackingDeleteParams
       def delete(tracking_id, params = {})
         @client.request(
           method: :delete,
           path: ["tracking/%1$s", tracking_id],
-          model: Ark::SuccessResponse,
+          model: Ark::Models::TrackingDeleteResponse,
           options: params[:request_options]
         )
       end

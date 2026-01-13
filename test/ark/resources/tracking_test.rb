@@ -4,62 +4,54 @@ require_relative "../test_helper"
 
 class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
-
     response = @ark.tracking.create(domain_id: "123", name: "track")
 
     assert_pattern do
-      response => Ark::TrackDomainResponse
+      response => Ark::Models::TrackingCreateResponse
     end
 
     assert_pattern do
       response => {
         data: Ark::TrackDomain,
         meta: Ark::APIMeta,
-        success: Ark::TrackDomainResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_retrieve
-    skip("Prism tests are disabled")
-
     response = @ark.tracking.retrieve("trackingId")
 
     assert_pattern do
-      response => Ark::TrackDomainResponse
+      response => Ark::Models::TrackingRetrieveResponse
     end
 
     assert_pattern do
       response => {
         data: Ark::TrackDomain,
         meta: Ark::APIMeta,
-        success: Ark::TrackDomainResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_update
-    skip("Prism tests are disabled")
-
     response = @ark.tracking.update("trackingId")
 
     assert_pattern do
-      response => Ark::TrackDomainResponse
+      response => Ark::Models::TrackingUpdateResponse
     end
 
     assert_pattern do
       response => {
         data: Ark::TrackDomain,
         meta: Ark::APIMeta,
-        success: Ark::TrackDomainResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_list
-    skip("Prism tests are disabled")
-
     response = @ark.tracking.list
 
     assert_pattern do
@@ -70,32 +62,28 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::TrackingListResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::TrackingListResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_delete
-    skip("Prism tests are disabled")
-
     response = @ark.tracking.delete("trackingId")
 
     assert_pattern do
-      response => Ark::SuccessResponse
+      response => Ark::Models::TrackingDeleteResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::SuccessResponse::Data,
+        data: Ark::Models::TrackingDeleteResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::SuccessResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_verify
-    skip("Prism tests are disabled")
-
     response = @ark.tracking.verify("trackingId")
 
     assert_pattern do
@@ -106,7 +94,7 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::TrackingVerifyResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::TrackingVerifyResponse::Success
+        success: true | false
       }
     end
   end
