@@ -20,17 +20,17 @@ module Ark
       sig { params(meta: Ark::APIMeta::OrHash).void }
       attr_writer :meta
 
-      sig { returns(Ark::Models::DomainDeleteResponse::Success::TaggedBoolean) }
+      sig { returns(T::Boolean) }
       attr_accessor :success
 
       sig do
         params(
           data: Ark::Models::DomainDeleteResponse::Data::OrHash,
           meta: Ark::APIMeta::OrHash,
-          success: Ark::Models::DomainDeleteResponse::Success::OrBoolean
+          success: T::Boolean
         ).returns(T.attached_class)
       end
-      def self.new(data:, meta:, success:)
+      def self.new(data:, meta:, success: true)
       end
 
       sig do
@@ -38,7 +38,7 @@ module Ark
           {
             data: Ark::Models::DomainDeleteResponse::Data,
             meta: Ark::APIMeta,
-            success: Ark::Models::DomainDeleteResponse::Success::TaggedBoolean
+            success: T::Boolean
           }
         )
       end
@@ -63,27 +63,6 @@ module Ark
 
         sig { override.returns({ message: String }) }
         def to_hash
-        end
-      end
-
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TaggedBoolean =
-          T.type_alias do
-            T.all(T::Boolean, Ark::Models::DomainDeleteResponse::Success)
-          end
-        OrBoolean = T.type_alias { T::Boolean }
-
-        TRUE =
-          T.let(true, Ark::Models::DomainDeleteResponse::Success::TaggedBoolean)
-
-        sig do
-          override.returns(
-            T::Array[Ark::Models::DomainDeleteResponse::Success::TaggedBoolean]
-          )
-        end
-        def self.values
         end
       end
     end

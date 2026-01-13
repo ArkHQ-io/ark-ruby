@@ -1,123 +1,32 @@
 module Ark
   module Models
     type suppression_list_response =
-      {
-        data: Ark::Models::SuppressionListResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionListResponse::success
-      }
+      { id: String, address: String, created_at: Time, reason: String }
 
     class SuppressionListResponse < Ark::Internal::Type::BaseModel
-      attr_accessor data: Ark::Models::SuppressionListResponse::Data
+      attr_accessor id: String
 
-      attr_accessor meta: Ark::APIMeta
+      attr_accessor address: String
 
-      attr_accessor success: Ark::Models::SuppressionListResponse::success
+      attr_accessor created_at: Time
+
+      attr_reader reason: String?
+
+      def reason=: (String) -> String
 
       def initialize: (
-        data: Ark::Models::SuppressionListResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionListResponse::success
+        id: String,
+        address: String,
+        created_at: Time,
+        ?reason: String
       ) -> void
 
       def to_hash: -> {
-        data: Ark::Models::SuppressionListResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionListResponse::success
+        id: String,
+        address: String,
+        created_at: Time,
+        reason: String
       }
-
-      type data =
-        {
-          pagination: Ark::Models::SuppressionListResponse::Data::Pagination,
-          suppressions: ::Array[Ark::Models::SuppressionListResponse::Data::Suppression]
-        }
-
-      class Data < Ark::Internal::Type::BaseModel
-        attr_accessor pagination: Ark::Models::SuppressionListResponse::Data::Pagination
-
-        attr_accessor suppressions: ::Array[Ark::Models::SuppressionListResponse::Data::Suppression]
-
-        def initialize: (
-          pagination: Ark::Models::SuppressionListResponse::Data::Pagination,
-          suppressions: ::Array[Ark::Models::SuppressionListResponse::Data::Suppression]
-        ) -> void
-
-        def to_hash: -> {
-          pagination: Ark::Models::SuppressionListResponse::Data::Pagination,
-          suppressions: ::Array[Ark::Models::SuppressionListResponse::Data::Suppression]
-        }
-
-        type pagination =
-          {
-            page: Integer,
-            per_page: Integer,
-            total: Integer,
-            total_pages: Integer
-          }
-
-        class Pagination < Ark::Internal::Type::BaseModel
-          attr_accessor page: Integer
-
-          attr_accessor per_page: Integer
-
-          attr_accessor total: Integer
-
-          attr_accessor total_pages: Integer
-
-          def initialize: (
-            page: Integer,
-            per_page: Integer,
-            total: Integer,
-            total_pages: Integer
-          ) -> void
-
-          def to_hash: -> {
-            page: Integer,
-            per_page: Integer,
-            total: Integer,
-            total_pages: Integer
-          }
-        end
-
-        type suppression =
-          { id: String, address: String, created_at: Time, reason: String }
-
-        class Suppression < Ark::Internal::Type::BaseModel
-          attr_accessor id: String
-
-          attr_accessor address: String
-
-          attr_accessor created_at: Time
-
-          attr_reader reason: String?
-
-          def reason=: (String) -> String
-
-          def initialize: (
-            id: String,
-            address: String,
-            created_at: Time,
-            ?reason: String
-          ) -> void
-
-          def to_hash: -> {
-            id: String,
-            address: String,
-            created_at: Time,
-            reason: String
-          }
-        end
-      end
-
-      type success = true
-
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE: true
-
-        def self?.values: -> ::Array[Ark::Models::SuppressionListResponse::success]
-      end
     end
   end
 end

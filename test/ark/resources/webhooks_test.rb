@@ -19,7 +19,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::WebhookCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::WebhookCreateResponse::Success
+        success: true | false
       }
     end
   end
@@ -35,7 +35,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::WebhookRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::WebhookRetrieveResponse::Success
+        success: true | false
       }
     end
   end
@@ -51,7 +51,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::WebhookUpdateResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::WebhookUpdateResponse::Success
+        success: true | false
       }
     end
   end
@@ -67,7 +67,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::WebhookListResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::WebhookListResponse::Success
+        success: true | false
       }
     end
   end
@@ -83,7 +83,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::WebhookDeleteResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::WebhookDeleteResponse::Success
+        success: true | false
       }
     end
   end
@@ -99,7 +99,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::WebhookTestResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::WebhookTestResponse::Success
+        success: true | false
       }
     end
   end
