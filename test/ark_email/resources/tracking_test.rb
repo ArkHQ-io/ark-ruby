@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class ArkEmail::Test::Resources::TrackingTest < ArkEmail::Test::ResourceTest
   def test_create_required_params
-    response = @ark.tracking.create(domain_id: "123", name: "track")
+    response = @ark.tracking.create(domain_id: 123, name: "track")
 
     assert_pattern do
       response => ArkEmail::Models::TrackingCreateResponse

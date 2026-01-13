@@ -11,51 +11,39 @@ module ArkEmail
           T.any(ArkEmail::TrackingUpdateParams, ArkEmail::Internal::AnyHash)
         end
 
-      # Comma-separated list of domains to exclude from click tracking
+      # Comma-separated list of domains to exclude from click tracking (accepts null)
       sig { returns(T.nilable(String)) }
-      attr_reader :excluded_click_domains
+      attr_accessor :excluded_click_domains
 
-      sig { params(excluded_click_domains: String).void }
-      attr_writer :excluded_click_domains
-
-      # Enable or disable SSL for tracking URLs
+      # Enable or disable SSL for tracking URLs (accepts null)
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :ssl_enabled
+      attr_accessor :ssl_enabled
 
-      sig { params(ssl_enabled: T::Boolean).void }
-      attr_writer :ssl_enabled
-
-      # Enable or disable click tracking
+      # Enable or disable click tracking (accepts null)
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :track_clicks
+      attr_accessor :track_clicks
 
-      sig { params(track_clicks: T::Boolean).void }
-      attr_writer :track_clicks
-
-      # Enable or disable open tracking
+      # Enable or disable open tracking (accepts null)
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :track_opens
-
-      sig { params(track_opens: T::Boolean).void }
-      attr_writer :track_opens
+      attr_accessor :track_opens
 
       sig do
         params(
-          excluded_click_domains: String,
-          ssl_enabled: T::Boolean,
-          track_clicks: T::Boolean,
-          track_opens: T::Boolean,
+          excluded_click_domains: T.nilable(String),
+          ssl_enabled: T.nilable(T::Boolean),
+          track_clicks: T.nilable(T::Boolean),
+          track_opens: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # Comma-separated list of domains to exclude from click tracking
+        # Comma-separated list of domains to exclude from click tracking (accepts null)
         excluded_click_domains: nil,
-        # Enable or disable SSL for tracking URLs
+        # Enable or disable SSL for tracking URLs (accepts null)
         ssl_enabled: nil,
-        # Enable or disable click tracking
+        # Enable or disable click tracking (accepts null)
         track_clicks: nil,
-        # Enable or disable open tracking
+        # Enable or disable open tracking (accepts null)
         track_opens: nil,
         request_options: {}
       )
@@ -64,10 +52,10 @@ module ArkEmail
       sig do
         override.returns(
           {
-            excluded_click_domains: String,
-            ssl_enabled: T::Boolean,
-            track_clicks: T::Boolean,
-            track_opens: T::Boolean,
+            excluded_click_domains: T.nilable(String),
+            ssl_enabled: T.nilable(T::Boolean),
+            track_clicks: T.nilable(T::Boolean),
+            track_opens: T.nilable(T::Boolean),
             request_options: ArkEmail::RequestOptions
           }
         )

@@ -54,17 +54,17 @@ module ArkEmail
       optional :cc, ArkEmail::Internal::Type::ArrayOf[String], nil?: true
 
       # @!attribute headers
-      #   Custom email headers
+      #   Custom email headers (accepts null)
       #
       #   @return [Hash{Symbol=>String}, nil]
-      optional :headers, ArkEmail::Internal::Type::HashOf[String]
+      optional :headers, ArkEmail::Internal::Type::HashOf[String], nil?: true
 
       # @!attribute html
-      #   HTML body content. Maximum 5MB (5,242,880 characters). Combined with
-      #   attachments, the total message must not exceed 14MB.
+      #   HTML body content (accepts null). Maximum 5MB (5,242,880 characters). Combined
+      #   with attachments, the total message must not exceed 14MB.
       #
       #   @return [String, nil]
-      optional :html, String
+      optional :html, String, nil?: true
 
       # @!attribute reply_to
       #   Reply-to address (accepts null)
@@ -73,17 +73,17 @@ module ArkEmail
       optional :reply_to, String, api_name: :replyTo, nil?: true
 
       # @!attribute tag
-      #   Tag for categorization and filtering
+      #   Tag for categorization and filtering (accepts null)
       #
       #   @return [String, nil]
-      optional :tag, String
+      optional :tag, String, nil?: true
 
       # @!attribute text
-      #   Plain text body (auto-generated from HTML if not provided). Maximum 5MB
-      #   (5,242,880 characters).
+      #   Plain text body (accepts null, auto-generated from HTML if not provided).
+      #   Maximum 5MB (5,242,880 characters).
       #
       #   @return [String, nil]
-      optional :text, String
+      optional :text, String, nil?: true
 
       # @!attribute idempotency_key
       #
@@ -106,15 +106,15 @@ module ArkEmail
       #
       #   @param cc [Array<String>, nil] CC recipients (accepts null)
       #
-      #   @param headers [Hash{Symbol=>String}] Custom email headers
+      #   @param headers [Hash{Symbol=>String}, nil] Custom email headers (accepts null)
       #
-      #   @param html [String] HTML body content.
+      #   @param html [String, nil] HTML body content (accepts null).
       #
       #   @param reply_to [String, nil] Reply-to address (accepts null)
       #
-      #   @param tag [String] Tag for categorization and filtering
+      #   @param tag [String, nil] Tag for categorization and filtering (accepts null)
       #
-      #   @param text [String] Plain text body (auto-generated from HTML if not provided).
+      #   @param text [String, nil] Plain text body (accepts null, auto-generated from HTML if not provided).
       #
       #   @param idempotency_key [String]
       #

@@ -12,41 +12,32 @@ module ArkEmail
         end
 
       # ID of the sending domain to attach this track domain to
-      sig { returns(String) }
+      sig { returns(Integer) }
       attr_accessor :domain_id
 
       # Subdomain name (e.g., 'track' for track.yourdomain.com)
       sig { returns(String) }
       attr_accessor :name
 
-      # Enable SSL for tracking URLs (recommended)
+      # Enable SSL for tracking URLs (accepts null, defaults to true)
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :ssl_enabled
+      attr_accessor :ssl_enabled
 
-      sig { params(ssl_enabled: T::Boolean).void }
-      attr_writer :ssl_enabled
-
-      # Enable click tracking
+      # Enable click tracking (accepts null, defaults to true)
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :track_clicks
+      attr_accessor :track_clicks
 
-      sig { params(track_clicks: T::Boolean).void }
-      attr_writer :track_clicks
-
-      # Enable open tracking (tracking pixel)
+      # Enable open tracking (tracking pixel, accepts null, defaults to true)
       sig { returns(T.nilable(T::Boolean)) }
-      attr_reader :track_opens
-
-      sig { params(track_opens: T::Boolean).void }
-      attr_writer :track_opens
+      attr_accessor :track_opens
 
       sig do
         params(
-          domain_id: String,
+          domain_id: Integer,
           name: String,
-          ssl_enabled: T::Boolean,
-          track_clicks: T::Boolean,
-          track_opens: T::Boolean,
+          ssl_enabled: T.nilable(T::Boolean),
+          track_clicks: T.nilable(T::Boolean),
+          track_opens: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -55,11 +46,11 @@ module ArkEmail
         domain_id:,
         # Subdomain name (e.g., 'track' for track.yourdomain.com)
         name:,
-        # Enable SSL for tracking URLs (recommended)
+        # Enable SSL for tracking URLs (accepts null, defaults to true)
         ssl_enabled: nil,
-        # Enable click tracking
+        # Enable click tracking (accepts null, defaults to true)
         track_clicks: nil,
-        # Enable open tracking (tracking pixel)
+        # Enable open tracking (tracking pixel, accepts null, defaults to true)
         track_opens: nil,
         request_options: {}
       )
@@ -68,11 +59,11 @@ module ArkEmail
       sig do
         override.returns(
           {
-            domain_id: String,
+            domain_id: Integer,
             name: String,
-            ssl_enabled: T::Boolean,
-            track_clicks: T::Boolean,
-            track_opens: T::Boolean,
+            ssl_enabled: T.nilable(T::Boolean),
+            track_clicks: T.nilable(T::Boolean),
+            track_opens: T.nilable(T::Boolean),
             request_options: ArkEmail::RequestOptions
           }
         )

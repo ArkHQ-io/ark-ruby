@@ -156,15 +156,15 @@ module ArkEmail
       #
       # @param cc [Array<String>, nil] Body param: CC recipients (accepts null)
       #
-      # @param headers [Hash{Symbol=>String}] Body param: Custom email headers
+      # @param headers [Hash{Symbol=>String}, nil] Body param: Custom email headers (accepts null)
       #
-      # @param html [String] Body param: HTML body content.
+      # @param html [String, nil] Body param: HTML body content (accepts null).
       #
       # @param reply_to [String, nil] Body param: Reply-to address (accepts null)
       #
-      # @param tag [String] Body param: Tag for categorization and filtering
+      # @param tag [String, nil] Body param: Tag for categorization and filtering (accepts null)
       #
-      # @param text [String] Body param: Plain text body (auto-generated from HTML if not provided).
+      # @param text [String, nil] Body param: Plain text body (accepts null, auto-generated from HTML if not provi
       #
       # @param idempotency_key [String] Header param: Unique key for idempotent requests. If a request with this key was
       #

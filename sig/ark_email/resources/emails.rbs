@@ -36,11 +36,11 @@ module ArkEmail
         ?attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?,
         ?bcc: ::Array[String]?,
         ?cc: ::Array[String]?,
-        ?headers: ::Hash[Symbol, String],
-        ?html: String,
+        ?headers: ::Hash[Symbol, String]?,
+        ?html: String?,
         ?reply_to: String?,
-        ?tag: String,
-        ?text: String,
+        ?tag: String?,
+        ?text: String?,
         ?idempotency_key: String,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::EmailSendResponse
