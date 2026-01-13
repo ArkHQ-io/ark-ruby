@@ -9,11 +9,11 @@ module ArkEmail
       # value before tracking will work.
       sig do
         params(
-          domain_id: String,
+          domain_id: Integer,
           name: String,
-          ssl_enabled: T::Boolean,
-          track_clicks: T::Boolean,
-          track_opens: T::Boolean,
+          ssl_enabled: T.nilable(T::Boolean),
+          track_clicks: T.nilable(T::Boolean),
+          track_opens: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::TrackingCreateResponse)
       end
@@ -22,11 +22,11 @@ module ArkEmail
         domain_id:,
         # Subdomain name (e.g., 'track' for track.yourdomain.com)
         name:,
-        # Enable SSL for tracking URLs (recommended)
+        # Enable SSL for tracking URLs (accepts null, defaults to true)
         ssl_enabled: nil,
-        # Enable click tracking
+        # Enable click tracking (accepts null, defaults to true)
         track_clicks: nil,
-        # Enable open tracking (tracking pixel)
+        # Enable open tracking (tracking pixel, accepts null, defaults to true)
         track_opens: nil,
         request_options: {}
       )
@@ -57,23 +57,23 @@ module ArkEmail
       sig do
         params(
           tracking_id: String,
-          excluded_click_domains: String,
-          ssl_enabled: T::Boolean,
-          track_clicks: T::Boolean,
-          track_opens: T::Boolean,
+          excluded_click_domains: T.nilable(String),
+          ssl_enabled: T.nilable(T::Boolean),
+          track_clicks: T.nilable(T::Boolean),
+          track_opens: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::TrackingUpdateResponse)
       end
       def update(
         # Track domain ID or UUID
         tracking_id,
-        # Comma-separated list of domains to exclude from click tracking
+        # Comma-separated list of domains to exclude from click tracking (accepts null)
         excluded_click_domains: nil,
-        # Enable or disable SSL for tracking URLs
+        # Enable or disable SSL for tracking URLs (accepts null)
         ssl_enabled: nil,
-        # Enable or disable click tracking
+        # Enable or disable click tracking (accepts null)
         track_clicks: nil,
-        # Enable or disable open tracking
+        # Enable or disable open tracking (accepts null)
         track_opens: nil,
         request_options: {}
       )

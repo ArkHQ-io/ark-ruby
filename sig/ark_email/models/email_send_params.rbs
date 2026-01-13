@@ -8,11 +8,11 @@ module ArkEmail
         attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?,
         bcc: ::Array[String]?,
         cc: ::Array[String]?,
-        headers: ::Hash[Symbol, String],
-        html: String,
+        headers: ::Hash[Symbol, String]?,
+        html: String?,
         reply_to: String?,
-        tag: String,
-        text: String,
+        tag: String?,
+        text: String?,
         idempotency_key: String
       }
       & ArkEmail::Internal::Type::request_parameters
@@ -33,23 +33,15 @@ module ArkEmail
 
       attr_accessor cc: ::Array[String]?
 
-      attr_reader headers: ::Hash[Symbol, String]?
+      attr_accessor headers: ::Hash[Symbol, String]?
 
-      def headers=: (::Hash[Symbol, String]) -> ::Hash[Symbol, String]
-
-      attr_reader html: String?
-
-      def html=: (String) -> String
+      attr_accessor html: String?
 
       attr_accessor reply_to: String?
 
-      attr_reader tag: String?
+      attr_accessor tag: String?
 
-      def tag=: (String) -> String
-
-      attr_reader text: String?
-
-      def text=: (String) -> String
+      attr_accessor text: String?
 
       attr_reader idempotency_key: String?
 
@@ -62,11 +54,11 @@ module ArkEmail
         ?attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?,
         ?bcc: ::Array[String]?,
         ?cc: ::Array[String]?,
-        ?headers: ::Hash[Symbol, String],
-        ?html: String,
+        ?headers: ::Hash[Symbol, String]?,
+        ?html: String?,
         ?reply_to: String?,
-        ?tag: String,
-        ?text: String,
+        ?tag: String?,
+        ?text: String?,
         ?idempotency_key: String,
         ?request_options: ArkEmail::request_opts
       ) -> void
@@ -78,11 +70,11 @@ module ArkEmail
         attachments: ::Array[ArkEmail::EmailSendParams::Attachment]?,
         bcc: ::Array[String]?,
         cc: ::Array[String]?,
-        headers: ::Hash[Symbol, String],
-        html: String,
+        headers: ::Hash[Symbol, String]?,
+        html: String?,
         reply_to: String?,
-        tag: String,
-        text: String,
+        tag: String?,
+        text: String?,
         idempotency_key: String,
         request_options: ArkEmail::RequestOptions
       }

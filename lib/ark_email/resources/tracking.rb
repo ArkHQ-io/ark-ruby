@@ -10,15 +10,15 @@ module ArkEmail
       #
       # @overload create(domain_id:, name:, ssl_enabled: nil, track_clicks: nil, track_opens: nil, request_options: {})
       #
-      # @param domain_id [String] ID of the sending domain to attach this track domain to
+      # @param domain_id [Integer] ID of the sending domain to attach this track domain to
       #
       # @param name [String] Subdomain name (e.g., 'track' for track.yourdomain.com)
       #
-      # @param ssl_enabled [Boolean] Enable SSL for tracking URLs (recommended)
+      # @param ssl_enabled [Boolean, nil] Enable SSL for tracking URLs (accepts null, defaults to true)
       #
-      # @param track_clicks [Boolean] Enable click tracking
+      # @param track_clicks [Boolean, nil] Enable click tracking (accepts null, defaults to true)
       #
-      # @param track_opens [Boolean] Enable open tracking (tracking pixel)
+      # @param track_opens [Boolean, nil] Enable open tracking (tracking pixel, accepts null, defaults to true)
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -69,13 +69,13 @@ module ArkEmail
       #
       # @param tracking_id [String] Track domain ID or UUID
       #
-      # @param excluded_click_domains [String] Comma-separated list of domains to exclude from click tracking
+      # @param excluded_click_domains [String, nil] Comma-separated list of domains to exclude from click tracking (accepts null)
       #
-      # @param ssl_enabled [Boolean] Enable or disable SSL for tracking URLs
+      # @param ssl_enabled [Boolean, nil] Enable or disable SSL for tracking URLs (accepts null)
       #
-      # @param track_clicks [Boolean] Enable or disable click tracking
+      # @param track_clicks [Boolean, nil] Enable or disable click tracking (accepts null)
       #
-      # @param track_opens [Boolean] Enable or disable open tracking
+      # @param track_opens [Boolean, nil] Enable or disable open tracking (accepts null)
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #

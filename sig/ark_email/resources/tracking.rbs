@@ -2,11 +2,11 @@ module ArkEmail
   module Resources
     class Tracking
       def create: (
-        domain_id: String,
+        domain_id: Integer,
         name: String,
-        ?ssl_enabled: bool,
-        ?track_clicks: bool,
-        ?track_opens: bool,
+        ?ssl_enabled: bool?,
+        ?track_clicks: bool?,
+        ?track_opens: bool?,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::TrackingCreateResponse
 
@@ -17,10 +17,10 @@ module ArkEmail
 
       def update: (
         String tracking_id,
-        ?excluded_click_domains: String,
-        ?ssl_enabled: bool,
-        ?track_clicks: bool,
-        ?track_opens: bool,
+        ?excluded_click_domains: String?,
+        ?ssl_enabled: bool?,
+        ?track_clicks: bool?,
+        ?track_opens: bool?,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::TrackingUpdateResponse
 
