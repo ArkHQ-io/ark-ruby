@@ -23,7 +23,7 @@ module Ark
           all_events: T::Boolean,
           enabled: T::Boolean,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::WebhookResponse)
+        ).returns(Ark::Models::WebhookCreateResponse)
       end
       def create(
         # Events to subscribe to:
@@ -53,7 +53,7 @@ module Ark
         params(
           webhook_id: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::WebhookResponse)
+        ).returns(Ark::Models::WebhookRetrieveResponse)
       end
       def retrieve(webhook_id, request_options: {})
       end
@@ -68,7 +68,7 @@ module Ark
           name: String,
           url: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::WebhookResponse)
+        ).returns(Ark::Models::WebhookUpdateResponse)
       end
       def update(
         webhook_id,
@@ -95,7 +95,7 @@ module Ark
         params(
           webhook_id: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::SuccessResponse)
+        ).returns(Ark::Models::WebhookDeleteResponse)
       end
       def delete(webhook_id, request_options: {})
       end

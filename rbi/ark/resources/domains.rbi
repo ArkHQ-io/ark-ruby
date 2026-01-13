@@ -17,7 +17,7 @@ module Ark
         params(
           name: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::DomainResponse)
+        ).returns(Ark::Models::DomainCreateResponse)
       end
       def create(
         # Domain name (e.g., "mail.example.com")
@@ -31,7 +31,7 @@ module Ark
         params(
           domain_id: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::DomainResponse)
+        ).returns(Ark::Models::DomainRetrieveResponse)
       end
       def retrieve(
         # Domain ID or domain name
@@ -57,7 +57,7 @@ module Ark
         params(
           domain_id: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::SuccessResponse)
+        ).returns(Ark::Models::DomainDeleteResponse)
       end
       def delete(domain_id, request_options: {})
       end
@@ -70,7 +70,7 @@ module Ark
         params(
           domain_id: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::DomainResponse)
+        ).returns(Ark::Models::DomainVerifyResponse)
       end
       def verify(domain_id, request_options: {})
       end

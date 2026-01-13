@@ -49,7 +49,9 @@ module Ark
           tag: String,
           to: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::Internal::EmailsPage[Ark::Models::EmailListResponse])
+        ).returns(
+          Ark::Internal::PageNumberPagination[Ark::Models::EmailListResponse]
+        )
       end
       def list(
         # Return emails sent after this timestamp (Unix seconds or ISO 8601)
@@ -85,9 +87,9 @@ module Ark
         params(
           email_id: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::Models::EmailGetDeliveriesResponse)
+        ).returns(Ark::Models::EmailRetrieveDeliveriesResponse)
       end
-      def get_deliveries(email_id, request_options: {})
+      def retrieve_deliveries(email_id, request_options: {})
       end
 
       # Retry delivery of a failed or soft-bounced email. Creates a new delivery
@@ -132,7 +134,7 @@ module Ark
           text: String,
           idempotency_key: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::SendEmail)
+        ).returns(Ark::Models::EmailSendResponse)
       end
       def send_(
         # Body param: Sender email address. Must be from a verified domain.
@@ -211,7 +213,7 @@ module Ark
           mail_from: String,
           rcpt_to: T::Array[String],
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::SendEmail)
+        ).returns(Ark::Models::EmailSendRawResponse)
       end
       def send_raw(
         # Base64-encoded RFC 2822 message

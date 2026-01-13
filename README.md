@@ -32,14 +32,14 @@ ark = Ark::Client.new(
   api_key: ENV["ARK_API_KEY"] # This is the default and can be omitted
 )
 
-send_email = ark.emails.send_(
+response = ark.emails.send_(
   from: "hello@yourdomain.com",
   subject: "Hello World",
   to: ["user@example.com"],
   html: "<h1>Welcome!</h1>"
 )
 
-puts(send_email.data)
+puts(response.data)
 ```
 
 ### Pagination
@@ -180,7 +180,7 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-send_email =
+response =
   ark.emails.send_(
     from: "hello@yourdomain.com",
     subject: "Hello World",
@@ -193,7 +193,7 @@ send_email =
     }
   )
 
-puts(send_email[:my_undocumented_property])
+puts(response[:my_undocumented_property])
 ```
 
 #### Undocumented request params

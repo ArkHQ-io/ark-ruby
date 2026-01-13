@@ -440,11 +440,9 @@ module Ark
         # @return [Hash{Symbol=>Object}]
         #
         # @example
-        #   # `delivery` is a `Ark::Delivery`
-        #   delivery => {
-        #     id: id,
-        #     status: status,
-        #     timestamp: timestamp
+        #   # `api_meta` is a `Ark::APIMeta`
+        #   api_meta => {
+        #     request_id: request_id
         #   }
         def deconstruct_keys(keys)
           (keys || self.class.known_fields.keys)

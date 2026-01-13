@@ -4,8 +4,6 @@ require_relative "../test_helper"
 
 class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
   def test_create_required_params
-    skip("Prism tests are disabled")
-
     response = @ark.suppressions.create(address: "user@example.com")
 
     assert_pattern do
@@ -16,14 +14,12 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionCreateResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_retrieve
-    skip("Prism tests are disabled")
-
     response = @ark.suppressions.retrieve("dev@stainless.com")
 
     assert_pattern do
@@ -39,12 +35,10 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
   end
 
   def test_list
-    skip("Prism tests are disabled")
-
     response = @ark.suppressions.list
 
     assert_pattern do
-      response => Ark::Internal::EmailsPage
+      response => Ark::Internal::PageNumberPagination
     end
 
     row = response.to_enum.first
@@ -58,32 +52,28 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       row => {
         data: Ark::Models::SuppressionListResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionListResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_delete
-    skip("Prism tests are disabled")
-
     response = @ark.suppressions.delete("dev@stainless.com")
 
     assert_pattern do
-      response => Ark::SuccessResponse
+      response => Ark::Models::SuppressionDeleteResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::SuccessResponse::Data,
+        data: Ark::Models::SuppressionDeleteResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::SuccessResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_bulk_create_required_params
-    skip("Prism tests are disabled")
-
     response = @ark.suppressions.bulk_create(suppressions: [{address: "dev@stainless.com"}])
 
     assert_pattern do
@@ -94,7 +84,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionBulkCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionBulkCreateResponse::Success
+        success: true | false
       }
     end
   end

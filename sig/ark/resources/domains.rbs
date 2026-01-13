@@ -4,12 +4,12 @@ module Ark
       def create: (
         name: String,
         ?request_options: Ark::request_opts
-      ) -> Ark::DomainResponse
+      ) -> Ark::Models::DomainCreateResponse
 
       def retrieve: (
         String domain_id,
         ?request_options: Ark::request_opts
-      ) -> Ark::DomainResponse
+      ) -> Ark::Models::DomainRetrieveResponse
 
       def list: (
         ?request_options: Ark::request_opts
@@ -18,12 +18,12 @@ module Ark
       def delete: (
         String domain_id,
         ?request_options: Ark::request_opts
-      ) -> Ark::SuccessResponse
+      ) -> Ark::Models::DomainDeleteResponse
 
       def verify: (
         String domain_id,
         ?request_options: Ark::request_opts
-      ) -> Ark::DomainResponse
+      ) -> Ark::Models::DomainVerifyResponse
 
       def initialize: (client: Ark::Client) -> void
     end

@@ -8,12 +8,12 @@ module Ark
         ?all_events: bool,
         ?enabled: bool,
         ?request_options: Ark::request_opts
-      ) -> Ark::WebhookResponse
+      ) -> Ark::Models::WebhookCreateResponse
 
       def retrieve: (
         String webhook_id,
         ?request_options: Ark::request_opts
-      ) -> Ark::WebhookResponse
+      ) -> Ark::Models::WebhookRetrieveResponse
 
       def update: (
         String webhook_id,
@@ -23,7 +23,7 @@ module Ark
         ?name: String,
         ?url: String,
         ?request_options: Ark::request_opts
-      ) -> Ark::WebhookResponse
+      ) -> Ark::Models::WebhookUpdateResponse
 
       def list: (
         ?request_options: Ark::request_opts
@@ -32,7 +32,7 @@ module Ark
       def delete: (
         String webhook_id,
         ?request_options: Ark::request_opts
-      ) -> Ark::SuccessResponse
+      ) -> Ark::Models::WebhookDeleteResponse
 
       def test_: (
         String webhook_id,

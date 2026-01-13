@@ -8,12 +8,12 @@ module Ark
         ?track_clicks: bool,
         ?track_opens: bool,
         ?request_options: Ark::request_opts
-      ) -> Ark::TrackDomainResponse
+      ) -> Ark::Models::TrackingCreateResponse
 
       def retrieve: (
         String tracking_id,
         ?request_options: Ark::request_opts
-      ) -> Ark::TrackDomainResponse
+      ) -> Ark::Models::TrackingRetrieveResponse
 
       def update: (
         String tracking_id,
@@ -22,7 +22,7 @@ module Ark
         ?track_clicks: bool,
         ?track_opens: bool,
         ?request_options: Ark::request_opts
-      ) -> Ark::TrackDomainResponse
+      ) -> Ark::Models::TrackingUpdateResponse
 
       def list: (
         ?request_options: Ark::request_opts
@@ -31,7 +31,7 @@ module Ark
       def delete: (
         String tracking_id,
         ?request_options: Ark::request_opts
-      ) -> Ark::SuccessResponse
+      ) -> Ark::Models::TrackingDeleteResponse
 
       def verify: (
         String tracking_id,

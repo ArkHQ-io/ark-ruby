@@ -17,12 +17,12 @@ module Ark
         ?tag: String,
         ?to: String,
         ?request_options: Ark::request_opts
-      ) -> Ark::Internal::EmailsPage[Ark::Models::EmailListResponse]
+      ) -> Ark::Internal::PageNumberPagination[Ark::Models::EmailListResponse]
 
-      def get_deliveries: (
+      def retrieve_deliveries: (
         String email_id,
         ?request_options: Ark::request_opts
-      ) -> Ark::Models::EmailGetDeliveriesResponse
+      ) -> Ark::Models::EmailRetrieveDeliveriesResponse
 
       def retry_: (
         String email_id,
@@ -43,7 +43,7 @@ module Ark
         ?text: String,
         ?idempotency_key: String,
         ?request_options: Ark::request_opts
-      ) -> Ark::SendEmail
+      ) -> Ark::Models::EmailSendResponse
 
       def send_batch: (
         emails: ::Array[Ark::EmailSendBatchParams::Email],
@@ -57,7 +57,7 @@ module Ark
         mail_from: String,
         rcpt_to: ::Array[String],
         ?request_options: Ark::request_opts
-      ) -> Ark::SendEmail
+      ) -> Ark::Models::EmailSendRawResponse
 
       def initialize: (client: Ark::Client) -> void
     end
