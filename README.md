@@ -8,7 +8,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 
 Documentation for releases of this gem can be found [on RubyDoc](https://gemdocs.org/gems/ark).
 
-The REST API documentation can be found on [arkhq.io](https://arkhq.io/support).
+The REST API documentation can be found on [arkhq.io](https://arkhq.io/docs).
 
 ## Installation
 
@@ -17,7 +17,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "ark", "~> 0.2.0"
+gem "ark", "~> 0.3.0"
 ```
 
 <!-- x-release-please-end -->
@@ -32,9 +32,42 @@ ark = Ark::Client.new(
   api_key: ENV["ARK_API_KEY"] # This is the default and can be omitted
 )
 
-send_email = ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
+response = ark.emails.send_(
+  from: "hello@yourdomain.com",
+  subject: "Hello World",
+  to: ["user@example.com"],
+  html: "<h1>Welcome!</h1>"
+)
 
-puts(send_email.data)
+puts(response.data)
+```
+
+### Pagination
+
+List methods in the Ark API are paginated.
+
+This library provides auto-paginating iterators with each list response, so you do not have to request successive pages manually:
+
+```ruby
+page = ark.emails.list(page: 1, per_page: 10)
+
+# Fetch single item from page.
+email = page.data[0]
+puts(email.id)
+
+# Automatically fetches more pages as needed.
+page.auto_paging_each do |email|
+  puts(email.id)
+end
+```
+
+Alternatively, you can use the `#next_page?` and `#next_page` methods for more granular control working with pages.
+
+```ruby
+if page.next_page?
+  new_page = page.next_page
+  puts(new_page.data[0].id)
+end
 ```
 
 ### Handling errors
@@ -43,7 +76,12 @@ When the library is unable to connect to the API, or if the API returns a non-su
 
 ```ruby
 begin
-  email = ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
+  email = ark.emails.send_(
+    from: "hello@yourdomain.com",
+    subject: "Hello World",
+    to: ["user@example.com"],
+    html: "<h1>Welcome!</h1>"
+  )
 rescue Ark::Errors::APIConnectionError => e
   puts("The server could not be reached")
   puts(e.cause)  # an underlying Exception, likely raised within `net/http`
@@ -87,9 +125,10 @@ ark = Ark::Client.new(
 
 # Or, configure per-request:
 ark.emails.send_(
-  from: "Acme <hello@acme.com>",
+  from: "hello@yourdomain.com",
   subject: "Hello World",
   to: ["user@example.com"],
+  html: "<h1>Welcome!</h1>",
   request_options: {max_retries: 5}
 )
 ```
@@ -106,9 +145,10 @@ ark = Ark::Client.new(
 
 # Or, configure per-request:
 ark.emails.send_(
-  from: "Acme <hello@acme.com>",
+  from: "hello@yourdomain.com",
   subject: "Hello World",
   to: ["user@example.com"],
+  html: "<h1>Welcome!</h1>",
   request_options: {timeout: 5}
 )
 ```
@@ -140,11 +180,12 @@ You can send undocumented parameters to any endpoint, and read undocumented resp
 Note: the `extra_` parameters of the same name overrides the documented parameters.
 
 ```ruby
-send_email =
+response =
   ark.emails.send_(
-    from: "Acme <hello@acme.com>",
+    from: "hello@yourdomain.com",
     subject: "Hello World",
     to: ["user@example.com"],
+    html: "<h1>Welcome!</h1>",
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -152,7 +193,7 @@ send_email =
     }
   )
 
-puts(send_email[:my_undocumented_property])
+puts(response[:my_undocumented_property])
 ```
 
 #### Undocumented request params
@@ -190,17 +231,32 @@ This library provides comprehensive [RBI](https://sorbet.org/docs/rbi) definitio
 You can provide typesafe request parameters like so:
 
 ```ruby
-ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
+ark.emails.send_(
+  from: "hello@yourdomain.com",
+  subject: "Hello World",
+  to: ["user@example.com"],
+  html: "<h1>Welcome!</h1>"
+)
 ```
 
 Or, equivalently:
 
 ```ruby
 # Hashes work, but are not typesafe:
-ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
+ark.emails.send_(
+  from: "hello@yourdomain.com",
+  subject: "Hello World",
+  to: ["user@example.com"],
+  html: "<h1>Welcome!</h1>"
+)
 
 # You can also splat a full Params class:
-params = Ark::EmailSendParams.new(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
+params = Ark::EmailSendParams.new(
+  from: "hello@yourdomain.com",
+  subject: "Hello World",
+  to: ["user@example.com"],
+  html: "<h1>Welcome!</h1>"
+)
 ark.emails.send_(**params)
 ```
 

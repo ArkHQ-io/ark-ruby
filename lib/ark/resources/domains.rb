@@ -20,7 +20,7 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::DomainResponse]
+      # @return [Ark::Models::DomainCreateResponse]
       #
       # @see Ark::Models::DomainCreateParams
       def create(params)
@@ -29,7 +29,7 @@ module Ark
           method: :post,
           path: "domains",
           body: parsed,
-          model: Ark::DomainResponse,
+          model: Ark::Models::DomainCreateResponse,
           options: options
         )
       end
@@ -42,14 +42,14 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::DomainResponse]
+      # @return [Ark::Models::DomainRetrieveResponse]
       #
       # @see Ark::Models::DomainRetrieveParams
       def retrieve(domain_id, params = {})
         @client.request(
           method: :get,
           path: ["domains/%1$s", domain_id],
-          model: Ark::DomainResponse,
+          model: Ark::Models::DomainRetrieveResponse,
           options: params[:request_options]
         )
       end
@@ -82,14 +82,14 @@ module Ark
       # @param domain_id [String]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::SuccessResponse]
+      # @return [Ark::Models::DomainDeleteResponse]
       #
       # @see Ark::Models::DomainDeleteParams
       def delete(domain_id, params = {})
         @client.request(
           method: :delete,
           path: ["domains/%1$s", domain_id],
-          model: Ark::SuccessResponse,
+          model: Ark::Models::DomainDeleteResponse,
           options: params[:request_options]
         )
       end
@@ -104,14 +104,14 @@ module Ark
       # @param domain_id [String]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::DomainResponse]
+      # @return [Ark::Models::DomainVerifyResponse]
       #
       # @see Ark::Models::DomainVerifyParams
       def verify(domain_id, params = {})
         @client.request(
           method: :post,
           path: ["domains/%1$s/verify", domain_id],
-          model: Ark::DomainResponse,
+          model: Ark::Models::DomainVerifyResponse,
           options: params[:request_options]
         )
       end

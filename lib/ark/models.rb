@@ -41,8 +41,6 @@ module Ark
 
   APIMeta = Ark::Models::APIMeta
 
-  Delivery = Ark::Models::Delivery
-
   DNSRecord = Ark::Models::DNSRecord
 
   DomainCreateParams = Ark::Models::DomainCreateParams
@@ -51,15 +49,13 @@ module Ark
 
   DomainListParams = Ark::Models::DomainListParams
 
-  DomainResponse = Ark::Models::DomainResponse
-
   DomainRetrieveParams = Ark::Models::DomainRetrieveParams
 
   DomainVerifyParams = Ark::Models::DomainVerifyParams
 
-  EmailGetDeliveriesParams = Ark::Models::EmailGetDeliveriesParams
-
   EmailListParams = Ark::Models::EmailListParams
+
+  EmailRetrieveDeliveriesParams = Ark::Models::EmailRetrieveDeliveriesParams
 
   EmailRetrieveParams = Ark::Models::EmailRetrieveParams
 
@@ -70,12 +66,6 @@ module Ark
   EmailSendParams = Ark::Models::EmailSendParams
 
   EmailSendRawParams = Ark::Models::EmailSendRawParams
-
-  Pagination = Ark::Models::Pagination
-
-  SendEmail = Ark::Models::SendEmail
-
-  SuccessResponse = Ark::Models::SuccessResponse
 
   SuppressionBulkCreateParams = Ark::Models::SuppressionBulkCreateParams
 
@@ -88,8 +78,6 @@ module Ark
   SuppressionRetrieveParams = Ark::Models::SuppressionRetrieveParams
 
   TrackDomain = Ark::Models::TrackDomain
-
-  TrackDomainResponse = Ark::Models::TrackDomainResponse
 
   TrackingCreateParams = Ark::Models::TrackingCreateParams
 
@@ -108,8 +96,6 @@ module Ark
   WebhookDeleteParams = Ark::Models::WebhookDeleteParams
 
   WebhookListParams = Ark::Models::WebhookListParams
-
-  WebhookResponse = Ark::Models::WebhookResponse
 
   WebhookRetrieveParams = Ark::Models::WebhookRetrieveParams
 

@@ -33,7 +33,7 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::WebhookResponse]
+      # @return [Ark::Models::WebhookCreateResponse]
       #
       # @see Ark::Models::WebhookCreateParams
       def create(params)
@@ -42,7 +42,7 @@ module Ark
           method: :post,
           path: "webhooks",
           body: parsed,
-          model: Ark::WebhookResponse,
+          model: Ark::Models::WebhookCreateResponse,
           options: options
         )
       end
@@ -54,14 +54,14 @@ module Ark
       # @param webhook_id [String]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::WebhookResponse]
+      # @return [Ark::Models::WebhookRetrieveResponse]
       #
       # @see Ark::Models::WebhookRetrieveParams
       def retrieve(webhook_id, params = {})
         @client.request(
           method: :get,
           path: ["webhooks/%1$s", webhook_id],
-          model: Ark::WebhookResponse,
+          model: Ark::Models::WebhookRetrieveResponse,
           options: params[:request_options]
         )
       end
@@ -78,7 +78,7 @@ module Ark
       # @param url [String]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::WebhookResponse]
+      # @return [Ark::Models::WebhookUpdateResponse]
       #
       # @see Ark::Models::WebhookUpdateParams
       def update(webhook_id, params = {})
@@ -87,7 +87,7 @@ module Ark
           method: :patch,
           path: ["webhooks/%1$s", webhook_id],
           body: parsed,
-          model: Ark::WebhookResponse,
+          model: Ark::Models::WebhookUpdateResponse,
           options: options
         )
       end
@@ -117,14 +117,14 @@ module Ark
       # @param webhook_id [String]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::SuccessResponse]
+      # @return [Ark::Models::WebhookDeleteResponse]
       #
       # @see Ark::Models::WebhookDeleteParams
       def delete(webhook_id, params = {})
         @client.request(
           method: :delete,
           path: ["webhooks/%1$s", webhook_id],
-          model: Ark::SuccessResponse,
+          model: Ark::Models::WebhookDeleteResponse,
           options: params[:request_options]
         )
       end

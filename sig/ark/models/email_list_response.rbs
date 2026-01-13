@@ -2,135 +2,75 @@ module Ark
   module Models
     type email_list_response =
       {
-        data: Ark::Models::EmailListResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::EmailListResponse::success
+        id: String,
+        token: String,
+        from: String,
+        status: Ark::Models::EmailListResponse::status,
+        subject: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        to: String,
+        tag: String
       }
 
     class EmailListResponse < Ark::Internal::Type::BaseModel
-      attr_accessor data: Ark::Models::EmailListResponse::Data
+      attr_accessor id: String
 
-      attr_accessor meta: Ark::APIMeta
+      attr_accessor token: String
 
-      attr_accessor success: Ark::Models::EmailListResponse::success
+      attr_accessor from: String
+
+      attr_accessor status: Ark::Models::EmailListResponse::status
+
+      attr_accessor subject: String
+
+      attr_accessor timestamp: Float
+
+      attr_accessor timestamp_iso: Time
+
+      attr_accessor to: String
+
+      attr_reader tag: String?
+
+      def tag=: (String) -> String
 
       def initialize: (
-        data: Ark::Models::EmailListResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::EmailListResponse::success
+        id: String,
+        token: String,
+        from: String,
+        status: Ark::Models::EmailListResponse::status,
+        subject: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        to: String,
+        ?tag: String
       ) -> void
 
       def to_hash: -> {
-        data: Ark::Models::EmailListResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::EmailListResponse::success
+        id: String,
+        token: String,
+        from: String,
+        status: Ark::Models::EmailListResponse::status,
+        subject: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        to: String,
+        tag: String
       }
 
-      type data =
-        {
-          messages: ::Array[Ark::Models::EmailListResponse::Data::Message],
-          pagination: Ark::Pagination
-        }
+      type status = :pending | :sent | :softfail | :hardfail | :bounced | :held
 
-      class Data < Ark::Internal::Type::BaseModel
-        attr_accessor messages: ::Array[Ark::Models::EmailListResponse::Data::Message]
-
-        attr_accessor pagination: Ark::Pagination
-
-        def initialize: (
-          messages: ::Array[Ark::Models::EmailListResponse::Data::Message],
-          pagination: Ark::Pagination
-        ) -> void
-
-        def to_hash: -> {
-          messages: ::Array[Ark::Models::EmailListResponse::Data::Message],
-          pagination: Ark::Pagination
-        }
-
-        type message =
-          {
-            id: String,
-            token: String,
-            from: String,
-            status: Ark::Models::EmailListResponse::Data::Message::status,
-            subject: String,
-            timestamp: Float,
-            timestamp_iso: Time,
-            to: String,
-            tag: String
-          }
-
-        class Message < Ark::Internal::Type::BaseModel
-          attr_accessor id: String
-
-          attr_accessor token: String
-
-          attr_accessor from: String
-
-          attr_accessor status: Ark::Models::EmailListResponse::Data::Message::status
-
-          attr_accessor subject: String
-
-          attr_accessor timestamp: Float
-
-          attr_accessor timestamp_iso: Time
-
-          attr_accessor to: String
-
-          attr_reader tag: String?
-
-          def tag=: (String) -> String
-
-          def initialize: (
-            id: String,
-            token: String,
-            from: String,
-            status: Ark::Models::EmailListResponse::Data::Message::status,
-            subject: String,
-            timestamp: Float,
-            timestamp_iso: Time,
-            to: String,
-            ?tag: String
-          ) -> void
-
-          def to_hash: -> {
-            id: String,
-            token: String,
-            from: String,
-            status: Ark::Models::EmailListResponse::Data::Message::status,
-            subject: String,
-            timestamp: Float,
-            timestamp_iso: Time,
-            to: String,
-            tag: String
-          }
-
-          type status =
-            :pending | :sent | :softfail | :hardfail | :bounced | :held
-
-          module Status
-            extend Ark::Internal::Type::Enum
-
-            PENDING: :pending
-            SENT: :sent
-            SOFTFAIL: :softfail
-            HARDFAIL: :hardfail
-            BOUNCED: :bounced
-            HELD: :held
-
-            def self?.values: -> ::Array[Ark::Models::EmailListResponse::Data::Message::status]
-          end
-        end
-      end
-
-      type success = true
-
-      module Success
+      module Status
         extend Ark::Internal::Type::Enum
 
-        TRUE: true
+        PENDING: :pending
+        SENT: :sent
+        SOFTFAIL: :softfail
+        HARDFAIL: :hardfail
+        BOUNCED: :bounced
+        HELD: :held
 
-        def self?.values: -> ::Array[Ark::Models::EmailListResponse::success]
+        def self?.values: -> ::Array[Ark::Models::EmailListResponse::status]
       end
     end
   end

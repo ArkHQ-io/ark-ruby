@@ -67,7 +67,7 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::EmailListResponse]
+      # @return [Ark::Internal::PageNumberPagination<Ark::Models::EmailListResponse>]
       #
       # @see Ark::Models::EmailListParams
       def list(params = {})
@@ -76,6 +76,7 @@ module Ark
           method: :get,
           path: "emails",
           query: parsed.transform_keys(per_page: "perPage"),
+          page: Ark::Internal::PageNumberPagination,
           model: Ark::Models::EmailListResponse,
           options: options
         )
@@ -84,19 +85,19 @@ module Ark
       # Get the history of delivery attempts for an email, including SMTP response codes
       # and timestamps.
       #
-      # @overload get_deliveries(email_id, request_options: {})
+      # @overload retrieve_deliveries(email_id, request_options: {})
       #
       # @param email_id [String]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::EmailGetDeliveriesResponse]
+      # @return [Ark::Models::EmailRetrieveDeliveriesResponse]
       #
-      # @see Ark::Models::EmailGetDeliveriesParams
-      def get_deliveries(email_id, params = {})
+      # @see Ark::Models::EmailRetrieveDeliveriesParams
+      def retrieve_deliveries(email_id, params = {})
         @client.request(
           method: :get,
           path: ["emails/%1$s/deliveries", email_id],
-          model: Ark::Models::EmailGetDeliveriesResponse,
+          model: Ark::Models::EmailRetrieveDeliveriesResponse,
           options: params[:request_options]
         )
       end
@@ -169,7 +170,7 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::SendEmail]
+      # @return [Ark::Models::EmailSendResponse]
       #
       # @see Ark::Models::EmailSendParams
       def send_(params)
@@ -180,7 +181,7 @@ module Ark
           path: "emails",
           headers: parsed.slice(*header_params.keys).transform_keys(header_params),
           body: parsed.except(*header_params.keys),
-          model: Ark::SendEmail,
+          model: Ark::Models::EmailSendResponse,
           options: options
         )
       end
@@ -237,7 +238,7 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::SendEmail]
+      # @return [Ark::Models::EmailSendRawResponse]
       #
       # @see Ark::Models::EmailSendRawParams
       def send_raw(params)
@@ -246,7 +247,7 @@ module Ark
           method: :post,
           path: "emails/raw",
           body: parsed,
-          model: Ark::SendEmail,
+          model: Ark::Models::EmailSendRawResponse,
           options: options
         )
       end

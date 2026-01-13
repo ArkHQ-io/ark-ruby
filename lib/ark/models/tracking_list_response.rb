@@ -6,47 +6,37 @@ module Ark
     class TrackingListResponse < Ark::Internal::Type::BaseModel
       # @!attribute data
       #
-      #   @return [Ark::Models::TrackingListResponse::Data, nil]
-      optional :data, -> { Ark::Models::TrackingListResponse::Data }
+      #   @return [Ark::Models::TrackingListResponse::Data]
+      required :data, -> { Ark::Models::TrackingListResponse::Data }
 
       # @!attribute meta
       #
-      #   @return [Ark::Models::APIMeta, nil]
-      optional :meta, -> { Ark::APIMeta }
+      #   @return [Ark::Models::APIMeta]
+      required :meta, -> { Ark::APIMeta }
 
       # @!attribute success
       #
-      #   @return [Boolean, Ark::Models::TrackingListResponse::Success, nil]
-      optional :success, enum: -> { Ark::Models::TrackingListResponse::Success }
+      #   @return [Boolean, true]
+      required :success, const: true
 
-      # @!method initialize(data: nil, meta: nil, success: nil)
+      # @!method initialize(data:, meta:, success: true)
       #   @param data [Ark::Models::TrackingListResponse::Data]
       #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, Ark::Models::TrackingListResponse::Success]
+      #   @param success [Boolean, true]
 
       # @see Ark::Models::TrackingListResponse#data
       class Data < Ark::Internal::Type::BaseModel
         # @!attribute track_domains
         #
-        #   @return [Array<Ark::Models::TrackDomain>, nil]
-        optional :track_domains,
+        #   @return [Array<Ark::Models::TrackDomain>]
+        required :track_domains,
                  -> {
                    Ark::Internal::Type::ArrayOf[Ark::TrackDomain]
                  },
                  api_name: :trackDomains
 
-        # @!method initialize(track_domains: nil)
+        # @!method initialize(track_domains:)
         #   @param track_domains [Array<Ark::Models::TrackDomain>]
-      end
-
-      # @see Ark::Models::TrackingListResponse#success
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE = true
-
-        # @!method self.values
-        #   @return [Array<Boolean>]
       end
     end
   end

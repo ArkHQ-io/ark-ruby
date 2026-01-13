@@ -16,13 +16,13 @@ module Ark
 
       # @!attribute success
       #
-      #   @return [Boolean, Ark::Models::SuppressionBulkCreateResponse::Success]
-      required :success, enum: -> { Ark::Models::SuppressionBulkCreateResponse::Success }
+      #   @return [Boolean, true]
+      required :success, const: true
 
-      # @!method initialize(data:, meta:, success:)
+      # @!method initialize(data:, meta:, success: true)
       #   @param data [Ark::Models::SuppressionBulkCreateResponse::Data]
       #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, Ark::Models::SuppressionBulkCreateResponse::Success]
+      #   @param success [Boolean, true]
 
       # @see Ark::Models::SuppressionBulkCreateResponse#data
       class Data < Ark::Internal::Type::BaseModel
@@ -58,16 +58,6 @@ module Ark
         #   @param total_requested [Integer] Total addresses in request
         #
         #   @param updated [Integer] Already suppressed addresses (updated reason)
-      end
-
-      # @see Ark::Models::SuppressionBulkCreateResponse#success
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE = true
-
-        # @!method self.values
-        #   @return [Array<Boolean>]
       end
     end
   end

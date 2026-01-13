@@ -22,19 +22,17 @@ module Ark
       sig { params(meta: Ark::APIMeta::OrHash).void }
       attr_writer :meta
 
-      sig do
-        returns(Ark::Models::SuppressionCreateResponse::Success::TaggedBoolean)
-      end
+      sig { returns(T::Boolean) }
       attr_accessor :success
 
       sig do
         params(
           data: Ark::Models::SuppressionCreateResponse::Data::OrHash,
           meta: Ark::APIMeta::OrHash,
-          success: Ark::Models::SuppressionCreateResponse::Success::OrBoolean
+          success: T::Boolean
         ).returns(T.attached_class)
       end
-      def self.new(data:, meta:, success:)
+      def self.new(data:, meta:, success: true)
       end
 
       sig do
@@ -42,8 +40,7 @@ module Ark
           {
             data: Ark::Models::SuppressionCreateResponse::Data,
             meta: Ark::APIMeta,
-            success:
-              Ark::Models::SuppressionCreateResponse::Success::TaggedBoolean
+            success: T::Boolean
           }
         )
       end
@@ -100,32 +97,6 @@ module Ark
           )
         end
         def to_hash
-        end
-      end
-
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TaggedBoolean =
-          T.type_alias do
-            T.all(T::Boolean, Ark::Models::SuppressionCreateResponse::Success)
-          end
-        OrBoolean = T.type_alias { T::Boolean }
-
-        TRUE =
-          T.let(
-            true,
-            Ark::Models::SuppressionCreateResponse::Success::TaggedBoolean
-          )
-
-        sig do
-          override.returns(
-            T::Array[
-              Ark::Models::SuppressionCreateResponse::Success::TaggedBoolean
-            ]
-          )
-        end
-        def self.values
         end
       end
     end

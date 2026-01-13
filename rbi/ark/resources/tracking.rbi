@@ -15,7 +15,7 @@ module Ark
           track_clicks: T::Boolean,
           track_opens: T::Boolean,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::TrackDomainResponse)
+        ).returns(Ark::Models::TrackingCreateResponse)
       end
       def create(
         # ID of the sending domain to attach this track domain to
@@ -37,7 +37,7 @@ module Ark
         params(
           tracking_id: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::TrackDomainResponse)
+        ).returns(Ark::Models::TrackingRetrieveResponse)
       end
       def retrieve(
         # Track domain ID or UUID
@@ -62,7 +62,7 @@ module Ark
           track_clicks: T::Boolean,
           track_opens: T::Boolean,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::TrackDomainResponse)
+        ).returns(Ark::Models::TrackingUpdateResponse)
       end
       def update(
         # Track domain ID or UUID
@@ -95,7 +95,7 @@ module Ark
         params(
           tracking_id: String,
           request_options: Ark::RequestOptions::OrHash
-        ).returns(Ark::SuccessResponse)
+        ).returns(Ark::Models::TrackingDeleteResponse)
       end
       def delete(
         # Track domain ID or UUID

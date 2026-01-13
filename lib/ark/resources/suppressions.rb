@@ -57,7 +57,7 @@ module Ark
       # @param per_page [Integer]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::SuppressionListResponse]
+      # @return [Ark::Internal::PageNumberPagination<Ark::Models::SuppressionListResponse>]
       #
       # @see Ark::Models::SuppressionListParams
       def list(params = {})
@@ -66,6 +66,7 @@ module Ark
           method: :get,
           path: "suppressions",
           query: parsed.transform_keys(per_page: "perPage"),
+          page: Ark::Internal::PageNumberPagination,
           model: Ark::Models::SuppressionListResponse,
           options: options
         )
@@ -79,14 +80,14 @@ module Ark
       # @param email [String]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::SuccessResponse]
+      # @return [Ark::Models::SuppressionDeleteResponse]
       #
       # @see Ark::Models::SuppressionDeleteParams
       def delete(email, params = {})
         @client.request(
           method: :delete,
           path: ["suppressions/%1$s", email],
-          model: Ark::SuccessResponse,
+          model: Ark::Models::SuppressionDeleteResponse,
           options: params[:request_options]
         )
       end

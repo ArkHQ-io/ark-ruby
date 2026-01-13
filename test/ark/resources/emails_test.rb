@@ -4,8 +4,6 @@ require_relative "../test_helper"
 
 class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
   def test_retrieve
-    skip("Prism tests are disabled")
-
     response = @ark.emails.retrieve("emailId")
 
     assert_pattern do
@@ -16,50 +14,57 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailRetrieveResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_list
-    skip("Prism tests are disabled")
-
     response = @ark.emails.list
 
     assert_pattern do
-      response => Ark::Models::EmailListResponse
+      response => Ark::Internal::PageNumberPagination
+    end
+
+    row = response.to_enum.first
+    return if row.nil?
+
+    assert_pattern do
+      row => Ark::Models::EmailListResponse
     end
 
     assert_pattern do
-      response => {
-        data: Ark::Models::EmailListResponse::Data,
-        meta: Ark::APIMeta,
-        success: Ark::Models::EmailListResponse::Success
+      row => {
+        id: String,
+        token: String,
+        from: String,
+        status: Ark::Models::EmailListResponse::Status,
+        subject: String,
+        timestamp: Float,
+        timestamp_iso: Time,
+        to: String,
+        tag: String | nil
       }
     end
   end
 
-  def test_get_deliveries
-    skip("Prism tests are disabled")
-
-    response = @ark.emails.get_deliveries("emailId")
+  def test_retrieve_deliveries
+    response = @ark.emails.retrieve_deliveries("emailId")
 
     assert_pattern do
-      response => Ark::Models::EmailGetDeliveriesResponse
+      response => Ark::Models::EmailRetrieveDeliveriesResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::Models::EmailGetDeliveriesResponse::Data,
+        data: Ark::Models::EmailRetrieveDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailGetDeliveriesResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_retry_
-    skip("Prism tests are disabled")
-
     response = @ark.emails.retry_("emailId")
 
     assert_pattern do
@@ -68,34 +73,31 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       response => {
-        data: Ark::Models::EmailRetryResponse::Data | nil,
-        success: Ark::Internal::Type::Boolean | nil
+        data: Ark::Models::EmailRetryResponse::Data,
+        meta: Ark::APIMeta,
+        success: true | false
       }
     end
   end
 
   def test_send__required_params
-    skip("Prism tests are disabled")
-
     response =
       @ark.emails.send_(from: "Acme <hello@acme.com>", subject: "Hello World", to: ["user@example.com"])
 
     assert_pattern do
-      response => Ark::SendEmail
+      response => Ark::Models::EmailSendResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::SendEmail::Data,
+        data: Ark::Models::EmailSendResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::SendEmail::Success
+        success: true | false
       }
     end
   end
 
   def test_send_batch_required_params
-    skip("Prism tests are disabled")
-
     response =
       @ark.emails.send_batch(
         emails: [
@@ -113,26 +115,24 @@ class Ark::Test::Resources::EmailsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::EmailSendBatchResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::EmailSendBatchResponse::Success
+        success: true | false
       }
     end
   end
 
   def test_send_raw_required_params
-    skip("Prism tests are disabled")
-
     response =
       @ark.emails.send_raw(data: "data", mail_from: "dev@stainless.com", rcpt_to: ["dev@stainless.com"])
 
     assert_pattern do
-      response => Ark::SendEmail
+      response => Ark::Models::EmailSendRawResponse
     end
 
     assert_pattern do
       response => {
-        data: Ark::SendEmail::Data,
+        data: Ark::Models::EmailSendRawResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::SendEmail::Success
+        success: true | false
       }
     end
   end
