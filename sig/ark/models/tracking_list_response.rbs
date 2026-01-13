@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::TrackingListResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::TrackingListResponse::success
       }
 
     class TrackingListResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: true
+      attr_accessor success: Ark::Models::TrackingListResponse::success
 
       def initialize: (
         data: Ark::Models::TrackingListResponse::Data,
         meta: Ark::APIMeta,
-        ?success: true
+        success: Ark::Models::TrackingListResponse::success
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::TrackingListResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::TrackingListResponse::success
       }
 
       type data = { track_domains: ::Array[Ark::TrackDomain] }
@@ -34,6 +34,16 @@ module Ark
         def initialize: (track_domains: ::Array[Ark::TrackDomain]) -> void
 
         def to_hash: -> { track_domains: ::Array[Ark::TrackDomain] }
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::TrackingListResponse::success]
       end
     end
   end

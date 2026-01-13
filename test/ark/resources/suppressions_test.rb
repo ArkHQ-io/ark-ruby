@@ -16,7 +16,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::SuppressionCreateResponse::Success
       }
     end
   end
@@ -58,7 +58,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       row => {
         data: Ark::Models::SuppressionListResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::SuppressionListResponse::Success
       }
     end
   end
@@ -76,7 +76,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::SuccessResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::SuccessResponse::Success
       }
     end
   end
@@ -94,7 +94,7 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::SuppressionBulkCreateResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::SuppressionBulkCreateResponse::Success
       }
     end
   end
