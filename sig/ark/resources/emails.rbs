@@ -17,7 +17,7 @@ module Ark
         ?tag: String,
         ?to: String,
         ?request_options: Ark::request_opts
-      ) -> Ark::Models::EmailListResponse
+      ) -> Ark::Internal::EmailsPage[Ark::Models::EmailListResponse]
 
       def get_deliveries: (
         String email_id,

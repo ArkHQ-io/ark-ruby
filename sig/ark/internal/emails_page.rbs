@@ -1,31 +1,28 @@
 module Ark
   module Internal
-    class SuppressionsPage[Elem]
+    class EmailsPage[Elem]
       include Ark::Internal::Type::BasePage[Elem]
 
       attr_accessor data: Data
 
       def inspect: -> String
 
-      type data = { pagination: Data::Pagination, suppressions: ::Array[top] }
+      type data = { messages: ::Array[top], pagination: Data::Pagination }
       class Data < Ark::Internal::Type::BaseModel
+        attr_reader messages: ::Array[top]?
+
+        def messages=: (::Array[top]) -> ::Array[top]
+
         attr_reader pagination: Data::Pagination?
 
         def pagination=: (Data::Pagination) -> Data::Pagination
 
-        attr_reader suppressions: ::Array[top]?
-
-        def suppressions=: (::Array[top]) -> ::Array[top]
-
         def initialize: (
-          ?pagination: Data::Pagination,
-          ?suppressions: ::Array[top]
+          ?messages: ::Array[top],
+          ?pagination: Data::Pagination
         ) -> void
 
-        def to_hash: -> {
-          pagination: Data::Pagination,
-          suppressions: ::Array[top]
-        }
+        def to_hash: -> { messages: ::Array[top], pagination: Data::Pagination }
 
         type pagination = { page: Integer, total_pages: Integer }
 

@@ -57,7 +57,7 @@ module Ark
       # @param per_page [Integer]
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Models::SuppressionListResponse]
+      # @return [Ark::Internal::EmailsPage<Ark::Models::SuppressionListResponse>]
       #
       # @see Ark::Models::SuppressionListParams
       def list(params = {})
@@ -66,6 +66,7 @@ module Ark
           method: :get,
           path: "suppressions",
           query: parsed.transform_keys(per_page: "perPage"),
+          page: Ark::Internal::EmailsPage,
           model: Ark::Models::SuppressionListResponse,
           options: options
         )
