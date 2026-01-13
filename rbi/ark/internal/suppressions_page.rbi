@@ -57,29 +57,17 @@ module Ark
           OrHash =
             T.type_alias { T.any(Data::Pagination, Ark::Internal::AnyHash) }
 
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :page
+          sig { returns(Integer) }
+          attr_accessor :page
 
-          sig { params(page: Integer).void }
-          attr_writer :page
+          sig { returns(Integer) }
+          attr_accessor :per_page
 
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :per_page
+          sig { returns(Integer) }
+          attr_accessor :total
 
-          sig { params(per_page: Integer).void }
-          attr_writer :per_page
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :total
-
-          sig { params(total: Integer).void }
-          attr_writer :total
-
-          sig { returns(T.nilable(Integer)) }
-          attr_reader :total_pages
-
-          sig { params(total_pages: Integer).void }
-          attr_writer :total_pages
+          sig { returns(Integer) }
+          attr_accessor :total_pages
 
           sig do
             params(
@@ -89,7 +77,7 @@ module Ark
               total_pages: Integer
             ).returns(T.attached_class)
           end
-          def self.new(page: nil, per_page: nil, total: nil, total_pages: nil)
+          def self.new(page:, per_page:, total:, total_pages:)
           end
 
           sig do

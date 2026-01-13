@@ -113,25 +113,25 @@ module Ark
         class Pagination < Ark::Internal::Type::BaseModel
           # @!attribute page
           #
-          #   @return [Integer, nil]
-          optional :page, Integer
+          #   @return [Integer]
+          required :page, Integer
 
           # @!attribute per_page
           #
-          #   @return [Integer, nil]
-          optional :per_page, Integer, api_name: :perPage
+          #   @return [Integer]
+          required :per_page, Integer, api_name: :perPage
 
           # @!attribute total
           #
-          #   @return [Integer, nil]
-          optional :total, Integer
+          #   @return [Integer]
+          required :total, Integer
 
           # @!attribute total_pages
           #
-          #   @return [Integer, nil]
-          optional :total_pages, Integer, api_name: :totalPages
+          #   @return [Integer]
+          required :total_pages, Integer, api_name: :totalPages
 
-          # @!method initialize(page: nil, per_page: nil, total: nil, total_pages: nil)
+          # @!method initialize(page:, per_page:, total:, total_pages:)
           #   @param page [Integer]
           #   @param per_page [Integer]
           #   @param total [Integer]
