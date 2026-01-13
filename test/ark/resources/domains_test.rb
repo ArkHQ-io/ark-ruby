@@ -16,7 +16,7 @@ class Ark::Test::Resources::DomainsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::DomainResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::DomainResponse::Success
       }
     end
   end
@@ -34,7 +34,7 @@ class Ark::Test::Resources::DomainsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::DomainResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::DomainResponse::Success
       }
     end
   end
@@ -52,7 +52,7 @@ class Ark::Test::Resources::DomainsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::DomainListResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::DomainListResponse::Success
       }
     end
   end
@@ -70,7 +70,7 @@ class Ark::Test::Resources::DomainsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::SuccessResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::SuccessResponse::Success
       }
     end
   end
@@ -88,7 +88,7 @@ class Ark::Test::Resources::DomainsTest < Ark::Test::ResourceTest
       response => {
         data: Ark::DomainResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::DomainResponse::Success
       }
     end
   end
