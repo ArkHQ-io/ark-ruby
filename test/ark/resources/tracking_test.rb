@@ -16,7 +16,7 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
       response => {
         data: Ark::TrackDomain,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::TrackDomainResponse::Success
       }
     end
   end
@@ -34,7 +34,7 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
       response => {
         data: Ark::TrackDomain,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::TrackDomainResponse::Success
       }
     end
   end
@@ -52,7 +52,7 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
       response => {
         data: Ark::TrackDomain,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::TrackDomainResponse::Success
       }
     end
   end
@@ -70,7 +70,7 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::TrackingListResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::TrackingListResponse::Success
       }
     end
   end
@@ -88,7 +88,7 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
       response => {
         data: Ark::SuccessResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::SuccessResponse::Success
       }
     end
   end
@@ -106,7 +106,7 @@ class Ark::Test::Resources::TrackingTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::TrackingVerifyResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::TrackingVerifyResponse::Success
       }
     end
   end

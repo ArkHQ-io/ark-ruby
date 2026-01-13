@@ -16,13 +16,13 @@ module Ark
 
       # @!attribute success
       #
-      #   @return [Boolean, true]
-      required :success, const: true
+      #   @return [Boolean, Ark::Models::WebhookResponse::Success]
+      required :success, enum: -> { Ark::WebhookResponse::Success }
 
-      # @!method initialize(data:, meta:, success: true)
+      # @!method initialize(data:, meta:, success:)
       #   @param data [Ark::Models::WebhookResponse::Data]
       #   @param meta [Ark::Models::APIMeta]
-      #   @param success [Boolean, true]
+      #   @param success [Boolean, Ark::Models::WebhookResponse::Success]
 
       # @see Ark::Models::WebhookResponse#data
       class Data < Ark::Internal::Type::BaseModel
@@ -104,6 +104,16 @@ module Ark
           # @!method self.values
           #   @return [Array<Symbol>]
         end
+      end
+
+      # @see Ark::Models::WebhookResponse#success
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE = true
+
+        # @!method self.values
+        #   @return [Array<Boolean>]
       end
     end
   end
