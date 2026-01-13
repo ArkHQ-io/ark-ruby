@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::WebhookDeleteResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::WebhookDeleteResponse::success
       }
 
     class WebhookDeleteResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: true
+      attr_accessor success: Ark::Models::WebhookDeleteResponse::success
 
       def initialize: (
         data: Ark::Models::WebhookDeleteResponse::Data,
         meta: Ark::APIMeta,
-        ?success: true
+        success: Ark::Models::WebhookDeleteResponse::success
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::WebhookDeleteResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::WebhookDeleteResponse::success
       }
 
       type data = { message: String }
@@ -34,6 +34,16 @@ module Ark
         def initialize: (message: String) -> void
 
         def to_hash: -> { message: String }
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::WebhookDeleteResponse::success]
       end
     end
   end

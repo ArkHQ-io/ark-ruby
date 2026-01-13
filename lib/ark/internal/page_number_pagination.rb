@@ -10,8 +10,8 @@ module Ark
     #   end
     #
     # @example
-    #   page_number_pagination.auto_paging_each do |email|
-    #     puts(email)
+    #   page_number_pagination.auto_paging_each do |item|
+    #     puts(item)
     #   end
     class PageNumberPagination
       include Ark::Internal::Type::BasePage

@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::WebhookRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::WebhookRetrieveResponse::success
       }
 
     class WebhookRetrieveResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: true
+      attr_accessor success: Ark::Models::WebhookRetrieveResponse::success
 
       def initialize: (
         data: Ark::Models::WebhookRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        ?success: true
+        success: Ark::Models::WebhookRetrieveResponse::success
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::WebhookRetrieveResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::WebhookRetrieveResponse::success
       }
 
       type data =
@@ -101,6 +101,16 @@ module Ark
 
           def self?.values: -> ::Array[Ark::Models::WebhookRetrieveResponse::Data::event]
         end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::WebhookRetrieveResponse::success]
       end
     end
   end

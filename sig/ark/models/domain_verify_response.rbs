@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::DomainVerifyResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::DomainVerifyResponse::success
       }
 
     class DomainVerifyResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: true
+      attr_accessor success: Ark::Models::DomainVerifyResponse::success
 
       def initialize: (
         data: Ark::Models::DomainVerifyResponse::Data,
         meta: Ark::APIMeta,
-        ?success: true
+        success: Ark::Models::DomainVerifyResponse::success
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::DomainVerifyResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::DomainVerifyResponse::success
       }
 
       type data =
@@ -98,6 +98,16 @@ module Ark
             spf: Ark::DNSRecord
           }
         end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::DomainVerifyResponse::success]
       end
     end
   end

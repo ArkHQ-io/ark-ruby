@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::EmailRetrieveDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::EmailRetrieveDeliveriesResponse::success
       }
 
     class EmailRetrieveDeliveriesResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: true
+      attr_accessor success: Ark::Models::EmailRetrieveDeliveriesResponse::success
 
       def initialize: (
         data: Ark::Models::EmailRetrieveDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        ?success: true
+        success: Ark::Models::EmailRetrieveDeliveriesResponse::success
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::EmailRetrieveDeliveriesResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::EmailRetrieveDeliveriesResponse::success
       }
 
       type data =
@@ -111,6 +111,16 @@ module Ark
             sent_with_ssl: bool
           }
         end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::EmailRetrieveDeliveriesResponse::success]
       end
     end
   end

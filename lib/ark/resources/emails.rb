@@ -67,7 +67,7 @@ module Ark
       #
       # @param request_options [Ark::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [Ark::Internal::PageNumberPagination<Ark::Models::EmailListResponse>]
+      # @return [Ark::Models::EmailListResponse]
       #
       # @see Ark::Models::EmailListParams
       def list(params = {})
@@ -76,7 +76,6 @@ module Ark
           method: :get,
           path: "emails",
           query: parsed.transform_keys(per_page: "perPage"),
-          page: Ark::Internal::PageNumberPagination,
           model: Ark::Models::EmailListResponse,
           options: options
         )
