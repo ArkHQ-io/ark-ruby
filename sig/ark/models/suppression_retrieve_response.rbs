@@ -1,60 +1,62 @@
 module Ark
   module Models
     type suppression_retrieve_response =
-      {
-        data: Ark::Models::SuppressionRetrieveResponse::Data,
-        meta: Ark::APIMeta,
-        success: true
-      }
+      { data: Ark::Models::SuppressionRetrieveResponse::Data, success: bool }
 
     class SuppressionRetrieveResponse < Ark::Internal::Type::BaseModel
-      attr_accessor data: Ark::Models::SuppressionRetrieveResponse::Data
+      attr_reader data: Ark::Models::SuppressionRetrieveResponse::Data?
 
-      attr_accessor meta: Ark::APIMeta
+      def data=: (
+        Ark::Models::SuppressionRetrieveResponse::Data
+      ) -> Ark::Models::SuppressionRetrieveResponse::Data
 
-      attr_accessor success: true
+      attr_reader success: bool?
+
+      def success=: (bool) -> bool
 
       def initialize: (
-        data: Ark::Models::SuppressionRetrieveResponse::Data,
-        meta: Ark::APIMeta,
-        ?success: true
+        ?data: Ark::Models::SuppressionRetrieveResponse::Data,
+        ?success: bool
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::SuppressionRetrieveResponse::Data,
-        meta: Ark::APIMeta,
-        success: true
+        success: bool
       }
 
       type data =
         {
           address: String,
-          suppressed: bool,
           created_at: Time?,
-          reason: String?
+          reason: String?,
+          suppressed: bool
         }
 
       class Data < Ark::Internal::Type::BaseModel
-        attr_accessor address: String
+        attr_reader address: String?
 
-        attr_accessor suppressed: bool
+        def address=: (String) -> String
 
         attr_accessor created_at: Time?
 
         attr_accessor reason: String?
 
+        attr_reader suppressed: bool?
+
+        def suppressed=: (bool) -> bool
+
         def initialize: (
-          address: String,
-          suppressed: bool,
+          ?address: String,
           ?created_at: Time?,
-          ?reason: String?
+          ?reason: String?,
+          ?suppressed: bool
         ) -> void
 
         def to_hash: -> {
           address: String,
-          suppressed: bool,
           created_at: Time?,
-          reason: String?
+          reason: String?,
+          suppressed: bool
         }
       end
     end
