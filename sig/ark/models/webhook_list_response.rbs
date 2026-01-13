@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::WebhookListResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::WebhookListResponse::success
       }
 
     class WebhookListResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: true
+      attr_accessor success: Ark::Models::WebhookListResponse::success
 
       def initialize: (
         data: Ark::Models::WebhookListResponse::Data,
         meta: Ark::APIMeta,
-        ?success: true
+        success: Ark::Models::WebhookListResponse::success
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::WebhookListResponse::Data,
         meta: Ark::APIMeta,
-        success: true
+        success: Ark::Models::WebhookListResponse::success
       }
 
       type data =
@@ -76,6 +76,16 @@ module Ark
             url: String
           }
         end
+      end
+
+      type success = true
+
+      module Success
+        extend Ark::Internal::Type::Enum
+
+        TRUE: true
+
+        def self?.values: -> ::Array[Ark::Models::WebhookListResponse::success]
       end
     end
   end

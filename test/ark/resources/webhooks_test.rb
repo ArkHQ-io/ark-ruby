@@ -21,7 +21,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::WebhookResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::WebhookResponse::Success
       }
     end
   end
@@ -39,7 +39,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::WebhookResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::WebhookResponse::Success
       }
     end
   end
@@ -57,7 +57,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::WebhookResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::WebhookResponse::Success
       }
     end
   end
@@ -75,7 +75,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::WebhookListResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::WebhookListResponse::Success
       }
     end
   end
@@ -93,7 +93,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::SuccessResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::SuccessResponse::Success
       }
     end
   end
@@ -111,7 +111,7 @@ class Ark::Test::Resources::WebhooksTest < Ark::Test::ResourceTest
       response => {
         data: Ark::Models::WebhookTestResponse::Data,
         meta: Ark::APIMeta,
-        success: true | false
+        success: Ark::Models::WebhookTestResponse::Success
       }
     end
   end
