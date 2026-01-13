@@ -52,12 +52,12 @@ This library provides auto-paginating iterators with each list response, so you 
 page = ark.emails.list(page: 1, per_page: 10)
 
 # Fetch single item from page.
-email = page.data&.messages[0]
-puts(email.id)
+email = page.data[0]
+puts(email.data)
 
 # Automatically fetches more pages as needed.
 page.auto_paging_each do |email|
-  puts(email.id)
+  puts(email.data)
 end
 ```
 
@@ -66,7 +66,7 @@ Alternatively, you can use the `#next_page?` and `#next_page` methods for more g
 ```ruby
 if page.next_page?
   new_page = page.next_page
-  puts(new_page.data&.messages[0].id)
+  puts(new_page.data[0].data)
 end
 ```
 

@@ -28,8 +28,9 @@ class Ark::Test::Resources::SuppressionsTest < Ark::Test::ResourceTest
 
     assert_pattern do
       response => {
-        data: Ark::Models::SuppressionRetrieveResponse::Data | nil,
-        success: Ark::Internal::Type::Boolean | nil
+        data: Ark::Models::SuppressionRetrieveResponse::Data,
+        meta: Ark::APIMeta,
+        success: true | false
       }
     end
   end
