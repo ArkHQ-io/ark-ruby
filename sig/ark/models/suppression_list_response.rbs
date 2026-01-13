@@ -4,7 +4,7 @@ module Ark
       {
         data: Ark::Models::SuppressionListResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionListResponse::success
+        success: true
       }
 
     class SuppressionListResponse < Ark::Internal::Type::BaseModel
@@ -12,18 +12,18 @@ module Ark
 
       attr_accessor meta: Ark::APIMeta
 
-      attr_accessor success: Ark::Models::SuppressionListResponse::success
+      attr_accessor success: true
 
       def initialize: (
         data: Ark::Models::SuppressionListResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionListResponse::success
+        ?success: true
       ) -> void
 
       def to_hash: -> {
         data: Ark::Models::SuppressionListResponse::Data,
         meta: Ark::APIMeta,
-        success: Ark::Models::SuppressionListResponse::success
+        success: true
       }
 
       type data =
@@ -75,16 +75,6 @@ module Ark
             reason: String
           }
         end
-      end
-
-      type success = true
-
-      module Success
-        extend Ark::Internal::Type::Enum
-
-        TRUE: true
-
-        def self?.values: -> ::Array[Ark::Models::SuppressionListResponse::success]
       end
     end
   end
