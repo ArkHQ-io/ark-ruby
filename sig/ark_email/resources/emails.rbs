@@ -38,6 +38,7 @@ module ArkEmail
         ?cc: ::Array[String]?,
         ?headers: ::Hash[Symbol, String]?,
         ?html: String?,
+        ?metadata: ::Hash[Symbol, String]?,
         ?reply_to: String?,
         ?tag: String?,
         ?text: String?,

@@ -142,7 +142,7 @@ module ArkEmail
       # - `GET /emails/{id}/deliveries` - View delivery attempts
       # - `POST /emails/{id}/retry` - Retry failed delivery
       #
-      # @overload send_(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
+      # @overload send_(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, metadata: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
       #
       # @param from [String] Body param: Sender email address. Must be from a verified domain.
       #
@@ -159,6 +159,8 @@ module ArkEmail
       # @param headers [Hash{Symbol=>String}, nil] Body param: Custom email headers (accepts null)
       #
       # @param html [String, nil] Body param: HTML body content (accepts null).
+      #
+      # @param metadata [Hash{Symbol=>String}, nil] Body param: Custom key-value pairs attached to an email for webhook correlation.
       #
       # @param reply_to [String, nil] Body param: Reply-to address (accepts null)
       #

@@ -10,6 +10,7 @@ module ArkEmail
         cc: ::Array[String]?,
         headers: ::Hash[Symbol, String]?,
         html: String?,
+        metadata: ::Hash[Symbol, String]?,
         reply_to: String?,
         tag: String?,
         text: String?,
@@ -37,6 +38,8 @@ module ArkEmail
 
       attr_accessor html: String?
 
+      attr_accessor metadata: ::Hash[Symbol, String]?
+
       attr_accessor reply_to: String?
 
       attr_accessor tag: String?
@@ -56,6 +59,7 @@ module ArkEmail
         ?cc: ::Array[String]?,
         ?headers: ::Hash[Symbol, String]?,
         ?html: String?,
+        ?metadata: ::Hash[Symbol, String]?,
         ?reply_to: String?,
         ?tag: String?,
         ?text: String?,
@@ -72,6 +76,7 @@ module ArkEmail
         cc: ::Array[String]?,
         headers: ::Hash[Symbol, String]?,
         html: String?,
+        metadata: ::Hash[Symbol, String]?,
         reply_to: String?,
         tag: String?,
         text: String?,

@@ -72,6 +72,19 @@ module ArkEmail
         sig { returns(T.nilable(String)) }
         attr_accessor :html
 
+        # Custom key-value pairs attached to an email for webhook correlation.
+        #
+        # When you send an email with metadata, these key-value pairs are:
+        #
+        # - **Stored** with the message
+        # - **Returned** in all webhook event payloads (MessageSent, MessageBounced, etc.)
+        # - **Never visible** to email recipients
+        #
+        # This is useful for correlating webhook events with your internal systems (e.g.,
+        # user IDs, order IDs, campaign identifiers).
+        sig { returns(T.nilable(T::Hash[Symbol, String])) }
+        attr_accessor :metadata
+
         sig { returns(T.nilable(String)) }
         attr_accessor :tag
 
@@ -83,11 +96,29 @@ module ArkEmail
             subject: String,
             to: T::Array[String],
             html: T.nilable(String),
+            metadata: T.nilable(T::Hash[Symbol, String]),
             tag: T.nilable(String),
             text: T.nilable(String)
           ).returns(T.attached_class)
         end
-        def self.new(subject:, to:, html: nil, tag: nil, text: nil)
+        def self.new(
+          subject:,
+          to:,
+          html: nil,
+          # Custom key-value pairs attached to an email for webhook correlation.
+          #
+          # When you send an email with metadata, these key-value pairs are:
+          #
+          # - **Stored** with the message
+          # - **Returned** in all webhook event payloads (MessageSent, MessageBounced, etc.)
+          # - **Never visible** to email recipients
+          #
+          # This is useful for correlating webhook events with your internal systems (e.g.,
+          # user IDs, order IDs, campaign identifiers).
+          metadata: nil,
+          tag: nil,
+          text: nil
+        )
         end
 
         sig do
@@ -96,6 +127,7 @@ module ArkEmail
               subject: String,
               to: T::Array[String],
               html: T.nilable(String),
+              metadata: T.nilable(T::Hash[Symbol, String]),
               tag: T.nilable(String),
               text: T.nilable(String)
             }
