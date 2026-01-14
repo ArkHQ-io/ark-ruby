@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7.0 (2026-01-14)
+
+Full Changelog: [v0.6.0...v0.7.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.6.0...v0.7.0)
+
+### Features
+
+* **api:** add metadata ([ce7e4f9](https://github.com/ArkHQ-io/ark-ruby/commit/ce7e4f902f732cd6cddd18d7efe81faddb6400c4))
+
+
+### Chores
+
+* fix typo in descriptions ([56e8b92](https://github.com/ArkHQ-io/ark-ruby/commit/56e8b9247d89c53d9e522e5785f52be79b7abdd7))
+
 ## 0.6.0 (2026-01-13)
 
 Full Changelog: [v0.5.2...v0.6.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.5.2...v0.6.0)

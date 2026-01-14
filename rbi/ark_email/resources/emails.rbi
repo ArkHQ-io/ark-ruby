@@ -132,6 +132,7 @@ module ArkEmail
           cc: T.nilable(T::Array[String]),
           headers: T.nilable(T::Hash[Symbol, String]),
           html: T.nilable(String),
+          metadata: T.nilable(T::Hash[Symbol, String]),
           reply_to: T.nilable(String),
           tag: T.nilable(String),
           text: T.nilable(String),
@@ -165,6 +166,17 @@ module ArkEmail
         # Body param: HTML body content (accepts null). Maximum 5MB (5,242,880
         # characters). Combined with attachments, the total message must not exceed 14MB.
         html: nil,
+        # Body param: Custom key-value pairs attached to an email for webhook correlation.
+        #
+        # When you send an email with metadata, these key-value pairs are:
+        #
+        # - **Stored** with the message
+        # - **Returned** in all webhook event payloads (MessageSent, MessageBounced, etc.)
+        # - **Never visible** to email recipients
+        #
+        # This is useful for correlating webhook events with your internal systems (e.g.,
+        # user IDs, order IDs, campaign identifiers).
+        metadata: nil,
         # Body param: Reply-to address (accepts null)
         reply_to: nil,
         # Body param: Tag for categorization and filtering (accepts null)
@@ -195,7 +207,7 @@ module ArkEmail
         ).returns(ArkEmail::Models::EmailSendBatchResponse)
       end
       def send_batch(
-        # Body param:
+        # Body param
         emails:,
         # Body param: Sender email for all messages
         from:,

@@ -48,6 +48,21 @@ module ArkEmail
         #   @return [String, nil]
         optional :html, String, nil?: true
 
+        # @!attribute metadata
+        #   Custom key-value pairs attached to an email for webhook correlation.
+        #
+        #   When you send an email with metadata, these key-value pairs are:
+        #
+        #   - **Stored** with the message
+        #   - **Returned** in all webhook event payloads (MessageSent, MessageBounced, etc.)
+        #   - **Never visible** to email recipients
+        #
+        #   This is useful for correlating webhook events with your internal systems (e.g.,
+        #   user IDs, order IDs, campaign identifiers).
+        #
+        #   @return [Hash{Symbol=>String}, nil]
+        optional :metadata, ArkEmail::Internal::Type::HashOf[String], nil?: true
+
         # @!attribute tag
         #
         #   @return [String, nil]
@@ -58,11 +73,20 @@ module ArkEmail
         #   @return [String, nil]
         optional :text, String, nil?: true
 
-        # @!method initialize(subject:, to:, html: nil, tag: nil, text: nil)
+        # @!method initialize(subject:, to:, html: nil, metadata: nil, tag: nil, text: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {ArkEmail::Models::EmailSendBatchParams::Email} for more details.
+        #
         #   @param subject [String]
+        #
         #   @param to [Array<String>]
+        #
         #   @param html [String, nil]
+        #
+        #   @param metadata [Hash{Symbol=>String}, nil] Custom key-value pairs attached to an email for webhook correlation.
+        #
         #   @param tag [String, nil]
+        #
         #   @param text [String, nil]
       end
     end
