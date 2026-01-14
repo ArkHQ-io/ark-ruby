@@ -66,6 +66,21 @@ module ArkEmail
       #   @return [String, nil]
       optional :html, String, nil?: true
 
+      # @!attribute metadata
+      #   Custom key-value pairs attached to an email for webhook correlation.
+      #
+      #   When you send an email with metadata, these key-value pairs are:
+      #
+      #   - **Stored** with the message
+      #   - **Returned** in all webhook event payloads (MessageSent, MessageBounced, etc.)
+      #   - **Never visible** to email recipients
+      #
+      #   This is useful for correlating webhook events with your internal systems (e.g.,
+      #   user IDs, order IDs, campaign identifiers).
+      #
+      #   @return [Hash{Symbol=>String}, nil]
+      optional :metadata, ArkEmail::Internal::Type::HashOf[String], nil?: true
+
       # @!attribute reply_to
       #   Reply-to address (accepts null)
       #
@@ -90,7 +105,7 @@ module ArkEmail
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, metadata: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::EmailSendParams} for more details.
       #
@@ -109,6 +124,8 @@ module ArkEmail
       #   @param headers [Hash{Symbol=>String}, nil] Custom email headers (accepts null)
       #
       #   @param html [String, nil] HTML body content (accepts null).
+      #
+      #   @param metadata [Hash{Symbol=>String}, nil] Custom key-value pairs attached to an email for webhook correlation.
       #
       #   @param reply_to [String, nil] Reply-to address (accepts null)
       #
