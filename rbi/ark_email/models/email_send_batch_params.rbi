@@ -82,6 +82,14 @@ module ArkEmail
         #
         # This is useful for correlating webhook events with your internal systems (e.g.,
         # user IDs, order IDs, campaign identifiers).
+        #
+        # **Validation Rules:**
+        #
+        # - Maximum 10 keys per email
+        # - Keys: 1-40 characters, must start with a letter, only alphanumeric and
+        #   underscores (`^[a-zA-Z][a-zA-Z0-9_]*$`)
+        # - Values: 1-500 characters, no control characters (newlines, tabs, etc.)
+        # - Total size: 4KB maximum (JSON-encoded)
         sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_accessor :metadata
 
@@ -116,6 +124,14 @@ module ArkEmail
           #
           # This is useful for correlating webhook events with your internal systems (e.g.,
           # user IDs, order IDs, campaign identifiers).
+          #
+          # **Validation Rules:**
+          #
+          # - Maximum 10 keys per email
+          # - Keys: 1-40 characters, must start with a letter, only alphanumeric and
+          #   underscores (`^[a-zA-Z][a-zA-Z0-9_]*$`)
+          # - Values: 1-500 characters, no control characters (newlines, tabs, etc.)
+          # - Total size: 4KB maximum (JSON-encoded)
           metadata: nil,
           # Tag for categorization and filtering
           tag: nil,
