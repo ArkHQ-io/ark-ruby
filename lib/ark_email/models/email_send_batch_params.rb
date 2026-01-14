@@ -64,6 +64,7 @@ module ArkEmail
         optional :metadata, ArkEmail::Internal::Type::HashOf[String], nil?: true
 
         # @!attribute tag
+        #   Tag for categorization and filtering
         #
         #   @return [String, nil]
         optional :tag, String, nil?: true
@@ -85,7 +86,7 @@ module ArkEmail
         #
         #   @param metadata [Hash{Symbol=>String}, nil] Custom key-value pairs attached to an email for webhook correlation.
         #
-        #   @param tag [String, nil]
+        #   @param tag [String, nil] Tag for categorization and filtering
         #
         #   @param text [String, nil]
       end
