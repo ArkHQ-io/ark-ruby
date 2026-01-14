@@ -85,6 +85,7 @@ module ArkEmail
         sig { returns(T.nilable(T::Hash[Symbol, String])) }
         attr_accessor :metadata
 
+        # Tag for categorization and filtering
         sig { returns(T.nilable(String)) }
         attr_accessor :tag
 
@@ -116,6 +117,7 @@ module ArkEmail
           # This is useful for correlating webhook events with your internal systems (e.g.,
           # user IDs, order IDs, campaign identifiers).
           metadata: nil,
+          # Tag for categorization and filtering
           tag: nil,
           text: nil
         )
