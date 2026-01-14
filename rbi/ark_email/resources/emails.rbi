@@ -195,7 +195,7 @@ module ArkEmail
         ).returns(ArkEmail::Models::EmailSendBatchResponse)
       end
       def send_batch(
-        # Body param:
+        # Body param
         emails:,
         # Body param: Sender email for all messages
         from:,
