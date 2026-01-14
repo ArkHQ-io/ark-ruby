@@ -199,7 +199,7 @@ module ArkEmail
       #
       # @overload send_batch(emails:, from:, idempotency_key: nil, request_options: {})
       #
-      # @param emails [Array<ArkEmail::Models::EmailSendBatchParams::Email>] Body param:
+      # @param emails [Array<ArkEmail::Models::EmailSendBatchParams::Email>] Body param
       #
       # @param from [String] Body param: Sender email for all messages
       #
