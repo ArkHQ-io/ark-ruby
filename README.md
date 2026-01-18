@@ -26,7 +26,7 @@ To use this gem, install via Bundler by adding the following to your application
 <!-- x-release-please-start-version -->
 
 ```ruby
-gem "ark-email", "~> 0.7.0"
+gem "ark-email", "~> 0.8.0"
 ```
 
 <!-- x-release-please-end -->
@@ -45,7 +45,9 @@ response = ark.emails.send_(
   from: "hello@yourdomain.com",
   subject: "Hello World",
   to: ["user@example.com"],
-  html: "<h1>Welcome!</h1>"
+  html: "<h1>Welcome!</h1>",
+  metadata: {user_id: "usr_123", campaign: "onboarding"},
+  tag: "welcome"
 )
 
 puts(response.data)
@@ -89,7 +91,9 @@ begin
     from: "hello@yourdomain.com",
     subject: "Hello World",
     to: ["user@example.com"],
-    html: "<h1>Welcome!</h1>"
+    html: "<h1>Welcome!</h1>",
+    metadata: {user_id: "usr_123", campaign: "onboarding"},
+    tag: "welcome"
   )
 rescue ArkEmail::Errors::APIConnectionError => e
   puts("The server could not be reached")
@@ -138,6 +142,8 @@ ark.emails.send_(
   subject: "Hello World",
   to: ["user@example.com"],
   html: "<h1>Welcome!</h1>",
+  metadata: {user_id: "usr_123", campaign: "onboarding"},
+  tag: "welcome",
   request_options: {max_retries: 5}
 )
 ```
@@ -158,6 +164,8 @@ ark.emails.send_(
   subject: "Hello World",
   to: ["user@example.com"],
   html: "<h1>Welcome!</h1>",
+  metadata: {user_id: "usr_123", campaign: "onboarding"},
+  tag: "welcome",
   request_options: {timeout: 5}
 )
 ```
@@ -195,6 +203,8 @@ response =
     subject: "Hello World",
     to: ["user@example.com"],
     html: "<h1>Welcome!</h1>",
+    metadata: {user_id: "usr_123", campaign: "onboarding"},
+    tag: "welcome",
     request_options: {
       extra_query: {my_query_parameter: value},
       extra_body: {my_body_parameter: value},
@@ -244,7 +254,9 @@ ark.emails.send_(
   from: "hello@yourdomain.com",
   subject: "Hello World",
   to: ["user@example.com"],
-  html: "<h1>Welcome!</h1>"
+  html: "<h1>Welcome!</h1>",
+  metadata: {user_id: "usr_123", campaign: "onboarding"},
+  tag: "welcome"
 )
 ```
 
@@ -256,7 +268,9 @@ ark.emails.send_(
   from: "hello@yourdomain.com",
   subject: "Hello World",
   to: ["user@example.com"],
-  html: "<h1>Welcome!</h1>"
+  html: "<h1>Welcome!</h1>",
+  metadata: {user_id: "usr_123", campaign: "onboarding"},
+  tag: "welcome"
 )
 
 # You can also splat a full Params class:
@@ -264,7 +278,9 @@ params = ArkEmail::EmailSendParams.new(
   from: "hello@yourdomain.com",
   subject: "Hello World",
   to: ["user@example.com"],
-  html: "<h1>Welcome!</h1>"
+  html: "<h1>Welcome!</h1>",
+  metadata: {user_id: "usr_123", campaign: "onboarding"},
+  tag: "welcome"
 )
 ark.emails.send_(**params)
 ```
