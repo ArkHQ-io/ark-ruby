@@ -83,6 +83,57 @@ class ArkEmail::Test::Resources::WebhooksTest < ArkEmail::Test::ResourceTest
     end
   end
 
+  def test_list_deliveries
+    response = @ark.webhooks.list_deliveries("webhookId")
+
+    assert_pattern do
+      response => ArkEmail::Models::WebhookListDeliveriesResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: ^(ArkEmail::Internal::Type::ArrayOf[ArkEmail::Models::WebhookListDeliveriesResponse::Data]),
+        meta: ArkEmail::APIMeta,
+        page: Integer,
+        per_page: Integer,
+        total: Integer,
+        total_pages: Integer
+      }
+    end
+  end
+
+  def test_replay_delivery_required_params
+    response = @ark.webhooks.replay_delivery("deliveryId", webhook_id: "webhookId")
+
+    assert_pattern do
+      response => ArkEmail::Models::WebhookReplayDeliveryResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: ArkEmail::Models::WebhookReplayDeliveryResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true | false
+      }
+    end
+  end
+
+  def test_retrieve_delivery_required_params
+    response = @ark.webhooks.retrieve_delivery("deliveryId", webhook_id: "webhookId")
+
+    assert_pattern do
+      response => ArkEmail::Models::WebhookRetrieveDeliveryResponse
+    end
+
+    assert_pattern do
+      response => {
+        data: ArkEmail::Models::WebhookRetrieveDeliveryResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true | false
+      }
+    end
+  end
+
   def test_test__required_params
     response = @ark.webhooks.test_("webhookId", event: :MessageSent)
 

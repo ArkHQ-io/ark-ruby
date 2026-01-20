@@ -129,6 +129,133 @@ module ArkEmail
         )
       end
 
+      # Get a paginated list of delivery attempts for a specific webhook.
+      #
+      # Use this to:
+      #
+      # - Monitor webhook health and delivery success rate
+      # - Debug failed deliveries
+      # - Find specific events to replay
+      #
+      # **Filtering:**
+      #
+      # - Filter by success/failure to find problematic deliveries
+      # - Filter by event type to find specific events
+      # - Filter by time range for debugging recent issues
+      #
+      # **Retry behavior:** Failed deliveries are automatically retried with exponential
+      # backoff over ~3 days. Check `willRetry` to see if more attempts are scheduled.
+      #
+      # @overload list_deliveries(webhook_id, after: nil, before: nil, event: nil, page: nil, per_page: nil, success: nil, request_options: {})
+      #
+      # @param webhook_id [String] Webhook ID or UUID
+      #
+      # @param after [Integer] Only deliveries after this Unix timestamp
+      #
+      # @param before [Integer] Only deliveries before this Unix timestamp
+      #
+      # @param event [Symbol, ArkEmail::Models::WebhookListDeliveriesParams::Event] Filter by event type
+      #
+      # @param page [Integer] Page number (default 1)
+      #
+      # @param per_page [Integer] Items per page (default 30, max 100)
+      #
+      # @param success [Boolean] Filter by delivery success (true = 2xx response, false = non-2xx or error)
+      #
+      # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [ArkEmail::Models::WebhookListDeliveriesResponse]
+      #
+      # @see ArkEmail::Models::WebhookListDeliveriesParams
+      def list_deliveries(webhook_id, params = {})
+        parsed, options = ArkEmail::WebhookListDeliveriesParams.dump_request(params)
+        @client.request(
+          method: :get,
+          path: ["webhooks/%1$s/deliveries", webhook_id],
+          query: parsed.transform_keys(per_page: "perPage"),
+          model: ArkEmail::Models::WebhookListDeliveriesResponse,
+          options: options
+        )
+      end
+
+      # Re-send a webhook delivery to your endpoint.
+      #
+      # **Use cases:**
+      #
+      # - Recover from transient failures after fixing your endpoint
+      # - Test endpoint changes with real historical data
+      # - Retry deliveries that failed due to downtime
+      #
+      # **How it works:**
+      #
+      # 1. Fetches the original payload from the delivery
+      # 2. Generates a new timestamp and signature
+      # 3. Sends to your webhook URL immediately
+      # 4. Returns the result (does not queue for retry if it fails)
+      #
+      # **Note:** The webhook must be enabled to replay deliveries.
+      #
+      # @overload replay_delivery(delivery_id, webhook_id:, request_options: {})
+      #
+      # @param delivery_id [String] Delivery ID (UUID) to replay
+      #
+      # @param webhook_id [String] Webhook ID or UUID
+      #
+      # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [ArkEmail::Models::WebhookReplayDeliveryResponse]
+      #
+      # @see ArkEmail::Models::WebhookReplayDeliveryParams
+      def replay_delivery(delivery_id, params)
+        parsed, options = ArkEmail::WebhookReplayDeliveryParams.dump_request(params)
+        webhook_id =
+          parsed.delete(:webhook_id) do
+            raise ArgumentError.new("missing required path argument #{_1}")
+          end
+        @client.request(
+          method: :post,
+          path: ["webhooks/%1$s/deliveries/%2$s/replay", webhook_id, delivery_id],
+          model: ArkEmail::Models::WebhookReplayDeliveryResponse,
+          options: options
+        )
+      end
+
+      # Get detailed information about a specific webhook delivery attempt.
+      #
+      # Returns:
+      #
+      # - The complete request payload that was sent
+      # - Request headers including the signature
+      # - Response status code and body from your endpoint
+      # - Timing information
+      #
+      # Use this to debug why a delivery failed or verify what data was sent.
+      #
+      # @overload retrieve_delivery(delivery_id, webhook_id:, request_options: {})
+      #
+      # @param delivery_id [String] Delivery ID (UUID)
+      #
+      # @param webhook_id [String] Webhook ID or UUID
+      #
+      # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [ArkEmail::Models::WebhookRetrieveDeliveryResponse]
+      #
+      # @see ArkEmail::Models::WebhookRetrieveDeliveryParams
+      def retrieve_delivery(delivery_id, params)
+        parsed, options = ArkEmail::WebhookRetrieveDeliveryParams.dump_request(params)
+        webhook_id =
+          parsed.delete(:webhook_id) do
+            raise ArgumentError.new("missing required path argument #{_1}")
+          end
+        @client.request(
+          method: :get,
+          path: ["webhooks/%1$s/deliveries/%2$s", webhook_id, delivery_id],
+          model: ArkEmail::Models::WebhookRetrieveDeliveryResponse,
+          options: options
+        )
+      end
+
       # Send a test payload to your webhook endpoint and verify it receives the data
       # correctly.
       #
