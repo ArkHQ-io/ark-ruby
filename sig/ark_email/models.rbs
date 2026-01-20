@@ -55,7 +55,13 @@ module ArkEmail
 
   class WebhookDeleteParams = ArkEmail::Models::WebhookDeleteParams
 
+  class WebhookListDeliveriesParams = ArkEmail::Models::WebhookListDeliveriesParams
+
   class WebhookListParams = ArkEmail::Models::WebhookListParams
+
+  class WebhookReplayDeliveryParams = ArkEmail::Models::WebhookReplayDeliveryParams
+
+  class WebhookRetrieveDeliveryParams = ArkEmail::Models::WebhookRetrieveDeliveryParams
 
   class WebhookRetrieveParams = ArkEmail::Models::WebhookRetrieveParams
 

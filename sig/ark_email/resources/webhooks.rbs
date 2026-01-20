@@ -34,6 +34,29 @@ module ArkEmail
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::WebhookDeleteResponse
 
+      def list_deliveries: (
+        String webhook_id,
+        ?after: Integer,
+        ?before: Integer,
+        ?event: ArkEmail::Models::WebhookListDeliveriesParams::event,
+        ?page: Integer,
+        ?per_page: Integer,
+        ?success: bool,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::WebhookListDeliveriesResponse
+
+      def replay_delivery: (
+        String delivery_id,
+        webhook_id: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::WebhookReplayDeliveryResponse
+
+      def retrieve_delivery: (
+        String delivery_id,
+        webhook_id: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::WebhookRetrieveDeliveryResponse
+
       def test_: (
         String webhook_id,
         event: ArkEmail::Models::WebhookTestParams::event,

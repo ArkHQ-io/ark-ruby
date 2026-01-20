@@ -1,0 +1,23 @@
+module ArkEmail
+  module Models
+    type webhook_replay_delivery_params =
+      { webhook_id: String } & ArkEmail::Internal::Type::request_parameters
+
+    class WebhookReplayDeliveryParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_accessor webhook_id: String
+
+      def initialize: (
+        webhook_id: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        webhook_id: String,
+        request_options: ArkEmail::RequestOptions
+      }
+    end
+  end
+end
