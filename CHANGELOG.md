@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.8.0 (2026-01-20)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** add webhook deliveries ([bf74654](https://github.com/ArkHQ-io/ark-ruby/commit/bf746548583f88e32cac7cc8875388c7222b581a))
+* **api:** api update ([4218931](https://github.com/ArkHQ-io/ark-ruby/commit/42189310508e7607e2447dd93c15b510ca70ea0f))
+* **api:** api update ([81372c5](https://github.com/ArkHQ-io/ark-ruby/commit/81372c535c36671ff15d83309a88c5108f3d2115))
+* **api:** manual updates ([3934561](https://github.com/ArkHQ-io/ark-ruby/commit/3934561e4a5c942d344349d637471c36829ac318))
+
+
+### Chores
+
+* **internal:** update `actions/checkout` version ([45fbb7d](https://github.com/ArkHQ-io/ark-ruby/commit/45fbb7d77eff7f081c44e2174711183c7113a5df))
+
 ## 0.7.0 (2026-01-14)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.6.0...v0.7.0)
