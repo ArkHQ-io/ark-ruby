@@ -11,7 +11,7 @@ module ArkEmail
           T.any(ArkEmail::EmailSendParams, ArkEmail::Internal::AnyHash)
         end
 
-      # Sender email address. Must be from a verified domain.
+      # Sender email address. Must be from a verified domain OR use sandbox mode.
       #
       # **Supported formats:**
       #
@@ -20,6 +20,10 @@ module ArkEmail
       # - With quoted name: `"Acme Support" <support@yourdomain.com>`
       #
       # The domain portion must match a verified sending domain in your account.
+      #
+      # **Sandbox mode:** Use `sandbox@arkhq.io` to send test emails without domain
+      # verification. Sandbox emails can only be sent to organization members and are
+      # limited to 10 per day.
       sig { returns(String) }
       attr_accessor :from
 
@@ -114,7 +118,7 @@ module ArkEmail
         ).returns(T.attached_class)
       end
       def self.new(
-        # Sender email address. Must be from a verified domain.
+        # Sender email address. Must be from a verified domain OR use sandbox mode.
         #
         # **Supported formats:**
         #
@@ -123,6 +127,10 @@ module ArkEmail
         # - With quoted name: `"Acme Support" <support@yourdomain.com>`
         #
         # The domain portion must match a verified sending domain in your account.
+        #
+        # **Sandbox mode:** Use `sandbox@arkhq.io` to send test emails without domain
+        # verification. Sandbox emails can only be sent to organization members and are
+        # limited to 10 per day.
         from:,
         # Email subject line
         subject:,

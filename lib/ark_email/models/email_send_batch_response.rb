@@ -51,7 +51,17 @@ module ArkEmail
         #   @return [Integer]
         required :total, Integer
 
-        # @!method initialize(accepted:, failed:, messages:, total:)
+        # @!attribute sandbox
+        #   Whether this batch was sent in sandbox mode. Only present (and true) for sandbox
+        #   emails sent from @arkhq.io addresses.
+        #
+        #   @return [Boolean, nil]
+        optional :sandbox, ArkEmail::Internal::Type::Boolean
+
+        # @!method initialize(accepted:, failed:, messages:, total:, sandbox: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {ArkEmail::Models::EmailSendBatchResponse::Data} for more details.
+        #
         #   @param accepted [Integer] Successfully accepted emails
         #
         #   @param failed [Integer] Failed emails
@@ -59,6 +69,8 @@ module ArkEmail
         #   @param messages [Hash{Symbol=>ArkEmail::Models::EmailSendBatchResponse::Data::Message}] Map of recipient email to message info
         #
         #   @param total [Integer] Total emails in the batch
+        #
+        #   @param sandbox [Boolean] Whether this batch was sent in sandbox mode.
 
         class Message < ArkEmail::Internal::Type::BaseModel
           # @!attribute id

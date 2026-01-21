@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.0 (2026-01-21)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** add sandbox domain ([d61ffa2](https://github.com/ArkHQ-io/ark-ruby/commit/d61ffa220016820c5620ba168461e82fab223ed4))
+
 ## 0.8.0 (2026-01-20)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.7.0...v0.8.0)
