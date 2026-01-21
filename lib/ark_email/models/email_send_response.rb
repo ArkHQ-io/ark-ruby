@@ -50,7 +50,17 @@ module ArkEmail
         #   @return [String, nil]
         optional :message_id, String, api_name: :messageId
 
-        # @!method initialize(id:, status:, to:, message_id: nil)
+        # @!attribute sandbox
+        #   Whether this email was sent in sandbox mode. Only present (and true) for sandbox
+        #   emails sent from @arkhq.io addresses.
+        #
+        #   @return [Boolean, nil]
+        optional :sandbox, ArkEmail::Internal::Type::Boolean
+
+        # @!method initialize(id:, status:, to:, message_id: nil, sandbox: nil)
+        #   Some parameter documentations has been truncated, see
+        #   {ArkEmail::Models::EmailSendResponse::Data} for more details.
+        #
         #   @param id [String] Unique message ID (format: msg*{id}*{token})
         #
         #   @param status [Symbol, ArkEmail::Models::EmailSendResponse::Data::Status] Current delivery status
@@ -58,6 +68,8 @@ module ArkEmail
         #   @param to [Array<String>] List of recipient addresses
         #
         #   @param message_id [String] SMTP Message-ID header value
+        #
+        #   @param sandbox [Boolean] Whether this email was sent in sandbox mode.
 
         # Current delivery status
         #

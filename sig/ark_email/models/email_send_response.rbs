@@ -31,7 +31,8 @@ module ArkEmail
           id: String,
           status: ArkEmail::Models::EmailSendResponse::Data::status,
           to: ::Array[String],
-          message_id: String
+          message_id: String,
+          sandbox: bool
         }
 
       class Data < ArkEmail::Internal::Type::BaseModel
@@ -45,18 +46,24 @@ module ArkEmail
 
         def message_id=: (String) -> String
 
+        attr_reader sandbox: bool?
+
+        def sandbox=: (bool) -> bool
+
         def initialize: (
           id: String,
           status: ArkEmail::Models::EmailSendResponse::Data::status,
           to: ::Array[String],
-          ?message_id: String
+          ?message_id: String,
+          ?sandbox: bool
         ) -> void
 
         def to_hash: -> {
           id: String,
           status: ArkEmail::Models::EmailSendResponse::Data::status,
           to: ::Array[String],
-          message_id: String
+          message_id: String,
+          sandbox: bool
         }
 
         type status = :pending | :sent

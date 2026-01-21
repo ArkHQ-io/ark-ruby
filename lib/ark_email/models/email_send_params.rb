@@ -8,7 +8,7 @@ module ArkEmail
       include ArkEmail::Internal::Type::RequestParameters
 
       # @!attribute from
-      #   Sender email address. Must be from a verified domain.
+      #   Sender email address. Must be from a verified domain OR use sandbox mode.
       #
       #   **Supported formats:**
       #
@@ -17,6 +17,10 @@ module ArkEmail
       #   - With quoted name: `"Acme Support" <support@yourdomain.com>`
       #
       #   The domain portion must match a verified sending domain in your account.
+      #
+      #   **Sandbox mode:** Use `sandbox@arkhq.io` to send test emails without domain
+      #   verification. Sandbox emails can only be sent to organization members and are
+      #   limited to 10 per day.
       #
       #   @return [String]
       required :from, String
@@ -117,7 +121,7 @@ module ArkEmail
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::EmailSendParams} for more details.
       #
-      #   @param from [String] Sender email address. Must be from a verified domain.
+      #   @param from [String] Sender email address. Must be from a verified domain OR use sandbox mode.
       #
       #   @param subject [String] Email subject line
       #

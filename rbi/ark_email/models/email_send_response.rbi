@@ -82,12 +82,21 @@ module ArkEmail
         sig { params(message_id: String).void }
         attr_writer :message_id
 
+        # Whether this email was sent in sandbox mode. Only present (and true) for sandbox
+        # emails sent from @arkhq.io addresses.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :sandbox
+
+        sig { params(sandbox: T::Boolean).void }
+        attr_writer :sandbox
+
         sig do
           params(
             id: String,
             status: ArkEmail::Models::EmailSendResponse::Data::Status::OrSymbol,
             to: T::Array[String],
-            message_id: String
+            message_id: String,
+            sandbox: T::Boolean
           ).returns(T.attached_class)
         end
         def self.new(
@@ -98,7 +107,10 @@ module ArkEmail
           # List of recipient addresses
           to:,
           # SMTP Message-ID header value
-          message_id: nil
+          message_id: nil,
+          # Whether this email was sent in sandbox mode. Only present (and true) for sandbox
+          # emails sent from @arkhq.io addresses.
+          sandbox: nil
         )
         end
 
@@ -109,7 +121,8 @@ module ArkEmail
               status:
                 ArkEmail::Models::EmailSendResponse::Data::Status::TaggedSymbol,
               to: T::Array[String],
-              message_id: String
+              message_id: String,
+              sandbox: T::Boolean
             }
           )
         end
