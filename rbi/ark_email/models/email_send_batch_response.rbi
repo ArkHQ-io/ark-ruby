@@ -84,6 +84,14 @@ module ArkEmail
         sig { returns(Integer) }
         attr_accessor :total
 
+        # Whether this batch was sent in sandbox mode. Only present (and true) for sandbox
+        # emails sent from @arkhq.io addresses.
+        sig { returns(T.nilable(T::Boolean)) }
+        attr_reader :sandbox
+
+        sig { params(sandbox: T::Boolean).void }
+        attr_writer :sandbox
+
         sig do
           params(
             accepted: Integer,
@@ -93,7 +101,8 @@ module ArkEmail
                 Symbol,
                 ArkEmail::Models::EmailSendBatchResponse::Data::Message::OrHash
               ],
-            total: Integer
+            total: Integer,
+            sandbox: T::Boolean
           ).returns(T.attached_class)
         end
         def self.new(
@@ -104,7 +113,10 @@ module ArkEmail
           # Map of recipient email to message info
           messages:,
           # Total emails in the batch
-          total:
+          total:,
+          # Whether this batch was sent in sandbox mode. Only present (and true) for sandbox
+          # emails sent from @arkhq.io addresses.
+          sandbox: nil
         )
         end
 
@@ -118,7 +130,8 @@ module ArkEmail
                   Symbol,
                   ArkEmail::Models::EmailSendBatchResponse::Data::Message
                 ],
-              total: Integer
+              total: Integer,
+              sandbox: T::Boolean
             }
           )
         end

@@ -31,7 +31,8 @@ module ArkEmail
           accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
-          total: Integer
+          total: Integer,
+          sandbox: bool
         }
 
       class Data < ArkEmail::Internal::Type::BaseModel
@@ -43,18 +44,24 @@ module ArkEmail
 
         attr_accessor total: Integer
 
+        attr_reader sandbox: bool?
+
+        def sandbox=: (bool) -> bool
+
         def initialize: (
           accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
-          total: Integer
+          total: Integer,
+          ?sandbox: bool
         ) -> void
 
         def to_hash: -> {
           accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
-          total: Integer
+          total: Integer,
+          sandbox: bool
         }
 
         type message = { id: String, token: String }

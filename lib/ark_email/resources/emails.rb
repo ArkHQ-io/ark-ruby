@@ -144,7 +144,7 @@ module ArkEmail
       #
       # @overload send_(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, metadata: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
       #
-      # @param from [String] Body param: Sender email address. Must be from a verified domain.
+      # @param from [String] Body param: Sender email address. Must be from a verified domain OR use sandbox
       #
       # @param subject [String] Body param: Email subject line
       #

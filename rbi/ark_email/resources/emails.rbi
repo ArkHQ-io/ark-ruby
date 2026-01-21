@@ -141,7 +141,8 @@ module ArkEmail
         ).returns(ArkEmail::Models::EmailSendResponse)
       end
       def send_(
-        # Body param: Sender email address. Must be from a verified domain.
+        # Body param: Sender email address. Must be from a verified domain OR use sandbox
+        # mode.
         #
         # **Supported formats:**
         #
@@ -150,6 +151,10 @@ module ArkEmail
         # - With quoted name: `"Acme Support" <support@yourdomain.com>`
         #
         # The domain portion must match a verified sending domain in your account.
+        #
+        # **Sandbox mode:** Use `sandbox@arkhq.io` to send test emails without domain
+        # verification. Sandbox emails can only be sent to organization members and are
+        # limited to 10 per day.
         from:,
         # Body param: Email subject line
         subject:,
