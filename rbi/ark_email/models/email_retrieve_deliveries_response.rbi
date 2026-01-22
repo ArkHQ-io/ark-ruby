@@ -61,14 +61,6 @@ module ArkEmail
             )
           end
 
-        # Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
-        # `true` when the raw message content is still available (not expired). Messages
-        # older than the retention period cannot be retried.
-        sig { returns(T::Boolean) }
-        attr_accessor :can_retry_manually
-
-        # Chronological list of delivery attempts for this message. Each attempt includes
-        # SMTP response codes and timestamps.
         sig do
           returns(
             T::Array[
@@ -78,110 +70,42 @@ module ArkEmail
         end
         attr_accessor :deliveries
 
-        # Internal numeric message ID
-        sig { returns(Integer) }
+        # Internal message ID
+        sig { returns(String) }
         attr_accessor :message_id
 
-        # Unique message token for API references
+        # Message token
         sig { returns(String) }
         attr_accessor :message_token
 
-        # Information about the current retry state of a message that is queued for
-        # delivery. Only present when the message is in the delivery queue.
-        sig do
-          returns(
-            T.nilable(
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState
-            )
-          )
-        end
-        attr_reader :retry_state
-
         sig do
           params(
-            retry_state:
-              T.nilable(
-                ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState::OrHash
-              )
-          ).void
-        end
-        attr_writer :retry_state
-
-        # Current message status (lowercase). Possible values:
-        #
-        # - `pending` - Initial state, awaiting first delivery attempt
-        # - `sent` - Successfully delivered
-        # - `softfail` - Temporary failure, will retry automatically
-        # - `hardfail` - Permanent failure, will not retry
-        # - `held` - Held for manual review (suppression list, etc.)
-        # - `bounced` - Bounced by recipient server
-        sig do
-          returns(
-            ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
-          )
-        end
-        attr_accessor :status
-
-        sig do
-          params(
-            can_retry_manually: T::Boolean,
             deliveries:
               T::Array[
                 ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery::OrHash
               ],
-            message_id: Integer,
-            message_token: String,
-            retry_state:
-              T.nilable(
-                ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState::OrHash
-              ),
-            status:
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::OrSymbol
+            message_id: String,
+            message_token: String
           ).returns(T.attached_class)
         end
         def self.new(
-          # Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
-          # `true` when the raw message content is still available (not expired). Messages
-          # older than the retention period cannot be retried.
-          can_retry_manually:,
-          # Chronological list of delivery attempts for this message. Each attempt includes
-          # SMTP response codes and timestamps.
           deliveries:,
-          # Internal numeric message ID
+          # Internal message ID
           message_id:,
-          # Unique message token for API references
-          message_token:,
-          # Information about the current retry state of a message that is queued for
-          # delivery. Only present when the message is in the delivery queue.
-          retry_state:,
-          # Current message status (lowercase). Possible values:
-          #
-          # - `pending` - Initial state, awaiting first delivery attempt
-          # - `sent` - Successfully delivered
-          # - `softfail` - Temporary failure, will retry automatically
-          # - `hardfail` - Permanent failure, will not retry
-          # - `held` - Held for manual review (suppression list, etc.)
-          # - `bounced` - Bounced by recipient server
-          status:
+          # Message token
+          message_token:
         )
         end
 
         sig do
           override.returns(
             {
-              can_retry_manually: T::Boolean,
               deliveries:
                 T::Array[
                   ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery
                 ],
-              message_id: Integer,
-              message_token: String,
-              retry_state:
-                T.nilable(
-                  ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState
-                ),
-              status:
-                ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
+              message_id: String,
+              message_token: String
             }
           )
         end
@@ -288,167 +212,6 @@ module ArkEmail
             )
           end
           def to_hash
-          end
-        end
-
-        class RetryState < ArkEmail::Internal::Type::BaseModel
-          OrHash =
-            T.type_alias do
-              T.any(
-                ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState,
-                ArkEmail::Internal::AnyHash
-              )
-            end
-
-          # Current attempt number (0-indexed). The first delivery attempt is 0, the first
-          # retry is 1, and so on.
-          sig { returns(Integer) }
-          attr_accessor :attempt
-
-          # Number of attempts remaining before the message is hard-failed. Calculated as
-          # `maxAttempts - attempt`.
-          sig { returns(Integer) }
-          attr_accessor :attempts_remaining
-
-          # Whether this queue entry was created by a manual retry request. Manual retries
-          # bypass certain hold conditions like suppression lists.
-          sig { returns(T::Boolean) }
-          attr_accessor :manual
-
-          # Maximum number of delivery attempts before the message is hard-failed.
-          # Configured at the server level.
-          sig { returns(Integer) }
-          attr_accessor :max_attempts
-
-          # Whether the message is currently being processed by a delivery worker. When
-          # `true`, the message is actively being sent.
-          sig { returns(T::Boolean) }
-          attr_accessor :processing
-
-          # Unix timestamp of when the next retry attempt is scheduled. `null` if the
-          # message is ready for immediate processing or currently being processed.
-          sig { returns(T.nilable(Float)) }
-          attr_accessor :next_retry_at
-
-          # ISO 8601 formatted timestamp of the next retry attempt. `null` if the message is
-          # ready for immediate processing.
-          sig { returns(T.nilable(Time)) }
-          attr_accessor :next_retry_at_iso
-
-          # Information about the current retry state of a message that is queued for
-          # delivery. Only present when the message is in the delivery queue.
-          sig do
-            params(
-              attempt: Integer,
-              attempts_remaining: Integer,
-              manual: T::Boolean,
-              max_attempts: Integer,
-              processing: T::Boolean,
-              next_retry_at: T.nilable(Float),
-              next_retry_at_iso: T.nilable(Time)
-            ).returns(T.attached_class)
-          end
-          def self.new(
-            # Current attempt number (0-indexed). The first delivery attempt is 0, the first
-            # retry is 1, and so on.
-            attempt:,
-            # Number of attempts remaining before the message is hard-failed. Calculated as
-            # `maxAttempts - attempt`.
-            attempts_remaining:,
-            # Whether this queue entry was created by a manual retry request. Manual retries
-            # bypass certain hold conditions like suppression lists.
-            manual:,
-            # Maximum number of delivery attempts before the message is hard-failed.
-            # Configured at the server level.
-            max_attempts:,
-            # Whether the message is currently being processed by a delivery worker. When
-            # `true`, the message is actively being sent.
-            processing:,
-            # Unix timestamp of when the next retry attempt is scheduled. `null` if the
-            # message is ready for immediate processing or currently being processed.
-            next_retry_at: nil,
-            # ISO 8601 formatted timestamp of the next retry attempt. `null` if the message is
-            # ready for immediate processing.
-            next_retry_at_iso: nil
-          )
-          end
-
-          sig do
-            override.returns(
-              {
-                attempt: Integer,
-                attempts_remaining: Integer,
-                manual: T::Boolean,
-                max_attempts: Integer,
-                processing: T::Boolean,
-                next_retry_at: T.nilable(Float),
-                next_retry_at_iso: T.nilable(Time)
-              }
-            )
-          end
-          def to_hash
-          end
-        end
-
-        # Current message status (lowercase). Possible values:
-        #
-        # - `pending` - Initial state, awaiting first delivery attempt
-        # - `sent` - Successfully delivered
-        # - `softfail` - Temporary failure, will retry automatically
-        # - `hardfail` - Permanent failure, will not retry
-        # - `held` - Held for manual review (suppression list, etc.)
-        # - `bounced` - Bounced by recipient server
-        module Status
-          extend ArkEmail::Internal::Type::Enum
-
-          TaggedSymbol =
-            T.type_alias do
-              T.all(
-                Symbol,
-                ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status
-              )
-            end
-          OrSymbol = T.type_alias { T.any(Symbol, String) }
-
-          PENDING =
-            T.let(
-              :pending,
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
-            )
-          SENT =
-            T.let(
-              :sent,
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
-            )
-          SOFTFAIL =
-            T.let(
-              :softfail,
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
-            )
-          HARDFAIL =
-            T.let(
-              :hardfail,
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
-            )
-          HELD =
-            T.let(
-              :held,
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
-            )
-          BOUNCED =
-            T.let(
-              :bounced,
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
-            )
-
-          sig do
-            override.returns(
-              T::Array[
-                ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
-              ]
-            )
-          end
-          def self.values
           end
         end
       end
