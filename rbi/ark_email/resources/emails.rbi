@@ -83,57 +83,15 @@ module ArkEmail
       )
       end
 
-      # Get the complete delivery history for an email, including SMTP response codes,
-      # timestamps, and current retry state.
-      #
-      # ## Response Fields
-      #
-      # ### Status
-      #
-      # The current status of the email:
-      #
-      # - `pending` - Awaiting first delivery attempt
-      # - `sent` - Successfully delivered to recipient server
-      # - `softfail` - Temporary failure, automatic retry scheduled
-      # - `hardfail` - Permanent failure, will not retry
-      # - `held` - Held for manual review
-      # - `bounced` - Bounced by recipient server
-      #
-      # ### Retry State
-      #
-      # When the email is in the delivery queue (`pending` or `softfail` status),
-      # `retryState` provides information about the retry schedule:
-      #
-      # - `attempt` - Current attempt number (0 = first attempt)
-      # - `maxAttempts` - Maximum attempts before hard-fail (typically 18)
-      # - `attemptsRemaining` - Attempts left before hard-fail
-      # - `nextRetryAt` - When the next retry is scheduled (Unix timestamp)
-      # - `processing` - Whether the email is currently being processed
-      # - `manual` - Whether this was triggered by a manual retry
-      #
-      # When the email has finished processing (`sent`, `hardfail`, `held`, `bounced`),
-      # `retryState` is `null`.
-      #
-      # ### Can Retry Manually
-      #
-      # Indicates whether you can call `POST /emails/{emailId}/retry` to manually retry
-      # the email. This is `true` when the raw message content is still available (not
-      # expired due to retention policy).
+      # Get the history of delivery attempts for an email, including SMTP response codes
+      # and timestamps.
       sig do
         params(
           email_id: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailRetrieveDeliveriesResponse)
       end
-      def retrieve_deliveries(
-        # Email identifier. Accepts multiple formats:
-        #
-        # - Message ID (numeric): `12345`
-        # - Message token: `aBc123XyZ`
-        # - Combined format: `msg_12345_aBc123XyZ`
-        email_id,
-        request_options: {}
-      )
+      def retrieve_deliveries(email_id, request_options: {})
       end
 
       # Retry delivery of a failed or soft-bounced email. Creates a new delivery
