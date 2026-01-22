@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.0 (2026-01-22)
+
+Full Changelog: [v0.9.0...v0.10.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.9.0...v0.10.0)
+
+### Features
+
+* **api:** improve GET delivery attempts ([863df8e](https://github.com/ArkHQ-io/ark-ruby/commit/863df8e1ca7e4e29f44fdd1ffb9583fc71e5245e))
+
 ## 0.9.0 (2026-01-21)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.8.0...v0.9.0)
