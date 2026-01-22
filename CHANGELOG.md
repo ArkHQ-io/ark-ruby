@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.11.0 (2026-01-22)
+
+Full Changelog: [v0.10.0...v0.11.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.10.0...v0.11.0)
+
+### Features
+
+* **api:** api update ([451702c](https://github.com/ArkHQ-io/ark-ruby/commit/451702c378dd03df067d91d5a6b86b5c3af6e1d5))
+* **api:** api update ([94327b4](https://github.com/ArkHQ-io/ark-ruby/commit/94327b43c646e4bf7d8ae97a6f9702d8e3768953))
+* **api:** fix incorrect webhook payload examples ([09c481a](https://github.com/ArkHQ-io/ark-ruby/commit/09c481add3ef93c3c494403d0abce3fd09a1083d))
+* **api:** manual updates ([d166dbe](https://github.com/ArkHQ-io/ark-ruby/commit/d166dbebf3aa3218cf3488cabadb957012114d01))
+
 ## 0.10.0 (2026-01-22)
 
 Full Changelog: [v0.9.0...v0.10.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.9.0...v0.10.0)
