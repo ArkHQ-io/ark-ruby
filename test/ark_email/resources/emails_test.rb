@@ -49,7 +49,7 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
   end
 
   def test_retrieve_deliveries
-    response = @ark.emails.retrieve_deliveries("emailId")
+    response = @ark.emails.retrieve_deliveries("msg_12345_aBc123XyZ")
 
     assert_pattern do
       response => ArkEmail::Models::EmailRetrieveDeliveriesResponse
