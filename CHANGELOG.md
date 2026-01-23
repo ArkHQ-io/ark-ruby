@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.13.0 (2026-01-23)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** fix from in Send raw MIME email ([cc449e8](https://github.com/ArkHQ-io/ark-ruby/commit/cc449e8446159fdda2c063f8ecc3c49397a5946f))
+* **api:** improve raw MIME error handling ([ecbba2f](https://github.com/ArkHQ-io/ark-ruby/commit/ecbba2fe4af6f1116b4581adf8d5bfcc4be11140))
+
 ## 0.12.0 (2026-01-23)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.11.0...v0.12.0)

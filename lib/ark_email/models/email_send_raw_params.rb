@@ -8,13 +8,25 @@ module ArkEmail
       include ArkEmail::Internal::Type::RequestParameters
 
       # @!attribute from
-      #   Sender email address
+      #   Sender email address. Must be from a verified domain.
+      #
+      #   **Supported formats:**
+      #
+      #   - Email only: `hello@yourdomain.com`
+      #   - With display name: `Acme <hello@yourdomain.com>`
+      #   - With quoted name: `"Acme Support" <support@yourdomain.com>`
+      #
+      #   The domain portion must match a verified sending domain in your account.
       #
       #   @return [String]
       required :from, String
 
       # @!attribute raw_message
-      #   Base64-encoded RFC 2822 MIME message
+      #   Base64-encoded RFC 2822 MIME message.
+      #
+      #   **You must base64-encode your raw email before sending.** The raw email should
+      #   include headers (From, To, Subject, Content-Type, etc.) followed by a blank line
+      #   and the message body.
       #
       #   @return [String]
       required :raw_message, String, api_name: :rawMessage
@@ -32,9 +44,12 @@ module ArkEmail
       optional :bounce, ArkEmail::Internal::Type::Boolean, nil?: true
 
       # @!method initialize(from:, raw_message:, to:, bounce: nil, request_options: {})
-      #   @param from [String] Sender email address
+      #   Some parameter documentations has been truncated, see
+      #   {ArkEmail::Models::EmailSendRawParams} for more details.
       #
-      #   @param raw_message [String] Base64-encoded RFC 2822 MIME message
+      #   @param from [String] Sender email address. Must be from a verified domain.
+      #
+      #   @param raw_message [String] Base64-encoded RFC 2822 MIME message.
       #
       #   @param to [Array<String>] Recipient email addresses
       #

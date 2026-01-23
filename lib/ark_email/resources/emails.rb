@@ -263,16 +263,21 @@ module ArkEmail
         )
       end
 
+      # Some parameter documentations has been truncated, see
+      # {ArkEmail::Models::EmailSendRawParams} for more details.
+      #
       # Send a pre-formatted RFC 2822 MIME message. Use this for advanced use cases or
       # when migrating from systems that generate raw email content.
       #
-      # The `rawMessage` field should contain the base64-encoded raw email.
+      # **Important:** The `rawMessage` field must be base64-encoded. Your raw MIME
+      # message (with headers like From, To, Subject, Content-Type, followed by a blank
+      # line and the body) must be encoded to base64 before sending.
       #
       # @overload send_raw(from:, raw_message:, to:, bounce: nil, request_options: {})
       #
-      # @param from [String] Sender email address
+      # @param from [String] Sender email address. Must be from a verified domain.
       #
-      # @param raw_message [String] Base64-encoded RFC 2822 MIME message
+      # @param raw_message [String] Base64-encoded RFC 2822 MIME message.
       #
       # @param to [Array<String>] Recipient email addresses
       #
