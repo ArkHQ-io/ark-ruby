@@ -287,7 +287,15 @@ module ArkEmail
         ).returns(ArkEmail::Models::EmailSendRawResponse)
       end
       def send_raw(
-        # Sender email address
+        # Sender email address. Must be from a verified domain.
+        #
+        # **Supported formats:**
+        #
+        # - Email only: `hello@yourdomain.com`
+        # - With display name: `Acme <hello@yourdomain.com>`
+        # - With quoted name: `"Acme Support" <support@yourdomain.com>`
+        #
+        # The domain portion must match a verified sending domain in your account.
         from:,
         # Base64-encoded RFC 2822 MIME message
         raw_message:,
