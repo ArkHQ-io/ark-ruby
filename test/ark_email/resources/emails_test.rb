@@ -122,7 +122,7 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
 
   def test_send_raw_required_params
     response =
-      @ark.emails.send_raw(data: "data", mail_from: "dev@stainless.com", rcpt_to: ["dev@stainless.com"])
+      @ark.emails.send_raw(from: "dev@stainless.com", raw_message: "rawMessage", to: ["dev@stainless.com"])
 
     assert_pattern do
       response => ArkEmail::Models::EmailSendRawResponse

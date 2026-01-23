@@ -7,23 +7,23 @@ module ArkEmail
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
 
-      # @!attribute data
-      #   Base64-encoded RFC 2822 message
+      # @!attribute from
+      #   Sender email address
       #
       #   @return [String]
-      required :data, String
+      required :from, String
 
-      # @!attribute mail_from
-      #   Envelope sender address
+      # @!attribute raw_message
+      #   Base64-encoded RFC 2822 MIME message
       #
       #   @return [String]
-      required :mail_from, String, api_name: :mailFrom
+      required :raw_message, String, api_name: :rawMessage
 
-      # @!attribute rcpt_to
-      #   Envelope recipient addresses
+      # @!attribute to
+      #   Recipient email addresses
       #
       #   @return [Array<String>]
-      required :rcpt_to, ArkEmail::Internal::Type::ArrayOf[String], api_name: :rcptTo
+      required :to, ArkEmail::Internal::Type::ArrayOf[String]
 
       # @!attribute bounce
       #   Whether this is a bounce message (accepts null)
@@ -31,12 +31,12 @@ module ArkEmail
       #   @return [Boolean, nil]
       optional :bounce, ArkEmail::Internal::Type::Boolean, nil?: true
 
-      # @!method initialize(data:, mail_from:, rcpt_to:, bounce: nil, request_options: {})
-      #   @param data [String] Base64-encoded RFC 2822 message
+      # @!method initialize(from:, raw_message:, to:, bounce: nil, request_options: {})
+      #   @param from [String] Sender email address
       #
-      #   @param mail_from [String] Envelope sender address
+      #   @param raw_message [String] Base64-encoded RFC 2822 MIME message
       #
-      #   @param rcpt_to [Array<String>] Envelope recipient addresses
+      #   @param to [Array<String>] Recipient email addresses
       #
       #   @param bounce [Boolean, nil] Whether this is a bounce message (accepts null)
       #

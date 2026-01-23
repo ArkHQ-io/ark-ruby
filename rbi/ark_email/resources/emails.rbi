@@ -276,23 +276,23 @@ module ArkEmail
       # Send a pre-formatted RFC 2822 MIME message. Use this for advanced use cases or
       # when migrating from systems that generate raw email content.
       #
-      # The `data` field should contain the base64-encoded raw email.
+      # The `rawMessage` field should contain the base64-encoded raw email.
       sig do
         params(
-          data: String,
-          mail_from: String,
-          rcpt_to: T::Array[String],
+          from: String,
+          raw_message: String,
+          to: T::Array[String],
           bounce: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailSendRawResponse)
       end
       def send_raw(
-        # Base64-encoded RFC 2822 message
-        data:,
-        # Envelope sender address
-        mail_from:,
-        # Envelope recipient addresses
-        rcpt_to:,
+        # Sender email address
+        from:,
+        # Base64-encoded RFC 2822 MIME message
+        raw_message:,
+        # Recipient email addresses
+        to:,
         # Whether this is a bounce message (accepts null)
         bounce: nil,
         request_options: {}
