@@ -276,7 +276,9 @@ module ArkEmail
       # Send a pre-formatted RFC 2822 MIME message. Use this for advanced use cases or
       # when migrating from systems that generate raw email content.
       #
-      # The `rawMessage` field should contain the base64-encoded raw email.
+      # **Important:** The `rawMessage` field must be base64-encoded. Your raw MIME
+      # message (with headers like From, To, Subject, Content-Type, followed by a blank
+      # line and the body) must be encoded to base64 before sending.
       sig do
         params(
           from: String,
@@ -297,7 +299,11 @@ module ArkEmail
         #
         # The domain portion must match a verified sending domain in your account.
         from:,
-        # Base64-encoded RFC 2822 MIME message
+        # Base64-encoded RFC 2822 MIME message.
+        #
+        # **You must base64-encode your raw email before sending.** The raw email should
+        # include headers (From, To, Subject, Content-Type, etc.) followed by a blank line
+        # and the message body.
         raw_message:,
         # Recipient email addresses
         to:,
