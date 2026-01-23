@@ -23,7 +23,11 @@ module ArkEmail
       sig { returns(String) }
       attr_accessor :from
 
-      # Base64-encoded RFC 2822 MIME message
+      # Base64-encoded RFC 2822 MIME message.
+      #
+      # **You must base64-encode your raw email before sending.** The raw email should
+      # include headers (From, To, Subject, Content-Type, etc.) followed by a blank line
+      # and the message body.
       sig { returns(String) }
       attr_accessor :raw_message
 
@@ -55,7 +59,11 @@ module ArkEmail
         #
         # The domain portion must match a verified sending domain in your account.
         from:,
-        # Base64-encoded RFC 2822 MIME message
+        # Base64-encoded RFC 2822 MIME message.
+        #
+        # **You must base64-encode your raw email before sending.** The raw email should
+        # include headers (From, To, Subject, Content-Type, etc.) followed by a blank line
+        # and the message body.
         raw_message:,
         # Recipient email addresses
         to:,

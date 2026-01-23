@@ -22,7 +22,11 @@ module ArkEmail
       required :from, String
 
       # @!attribute raw_message
-      #   Base64-encoded RFC 2822 MIME message
+      #   Base64-encoded RFC 2822 MIME message.
+      #
+      #   **You must base64-encode your raw email before sending.** The raw email should
+      #   include headers (From, To, Subject, Content-Type, etc.) followed by a blank line
+      #   and the message body.
       #
       #   @return [String]
       required :raw_message, String, api_name: :rawMessage
@@ -45,7 +49,7 @@ module ArkEmail
       #
       #   @param from [String] Sender email address. Must be from a verified domain.
       #
-      #   @param raw_message [String] Base64-encoded RFC 2822 MIME message
+      #   @param raw_message [String] Base64-encoded RFC 2822 MIME message.
       #
       #   @param to [Array<String>] Recipient email addresses
       #
