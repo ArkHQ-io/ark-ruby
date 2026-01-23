@@ -1,38 +1,33 @@
 module ArkEmail
   module Models
     type email_send_raw_params =
-      {
-        data: String,
-        mail_from: String,
-        rcpt_to: ::Array[String],
-        bounce: bool?
-      }
+      { from: String, raw_message: String, to: ::Array[String], bounce: bool? }
       & ArkEmail::Internal::Type::request_parameters
 
     class EmailSendRawParams < ArkEmail::Internal::Type::BaseModel
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
 
-      attr_accessor data: String
+      attr_accessor from: String
 
-      attr_accessor mail_from: String
+      attr_accessor raw_message: String
 
-      attr_accessor rcpt_to: ::Array[String]
+      attr_accessor to: ::Array[String]
 
       attr_accessor bounce: bool?
 
       def initialize: (
-        data: String,
-        mail_from: String,
-        rcpt_to: ::Array[String],
+        from: String,
+        raw_message: String,
+        to: ::Array[String],
         ?bounce: bool?,
         ?request_options: ArkEmail::request_opts
       ) -> void
 
       def to_hash: -> {
-        data: String,
-        mail_from: String,
-        rcpt_to: ::Array[String],
+        from: String,
+        raw_message: String,
+        to: ::Array[String],
         bounce: bool?,
         request_options: ArkEmail::RequestOptions
       }

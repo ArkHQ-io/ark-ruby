@@ -11,17 +11,17 @@ module ArkEmail
           T.any(ArkEmail::EmailSendRawParams, ArkEmail::Internal::AnyHash)
         end
 
-      # Base64-encoded RFC 2822 message
+      # Sender email address
       sig { returns(String) }
-      attr_accessor :data
+      attr_accessor :from
 
-      # Envelope sender address
+      # Base64-encoded RFC 2822 MIME message
       sig { returns(String) }
-      attr_accessor :mail_from
+      attr_accessor :raw_message
 
-      # Envelope recipient addresses
+      # Recipient email addresses
       sig { returns(T::Array[String]) }
-      attr_accessor :rcpt_to
+      attr_accessor :to
 
       # Whether this is a bounce message (accepts null)
       sig { returns(T.nilable(T::Boolean)) }
@@ -29,20 +29,20 @@ module ArkEmail
 
       sig do
         params(
-          data: String,
-          mail_from: String,
-          rcpt_to: T::Array[String],
+          from: String,
+          raw_message: String,
+          to: T::Array[String],
           bounce: T.nilable(T::Boolean),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
-        # Base64-encoded RFC 2822 message
-        data:,
-        # Envelope sender address
-        mail_from:,
-        # Envelope recipient addresses
-        rcpt_to:,
+        # Sender email address
+        from:,
+        # Base64-encoded RFC 2822 MIME message
+        raw_message:,
+        # Recipient email addresses
+        to:,
         # Whether this is a bounce message (accepts null)
         bounce: nil,
         request_options: {}
@@ -52,9 +52,9 @@ module ArkEmail
       sig do
         override.returns(
           {
-            data: String,
-            mail_from: String,
-            rcpt_to: T::Array[String],
+            from: String,
+            raw_message: String,
+            to: T::Array[String],
             bounce: T.nilable(T::Boolean),
             request_options: ArkEmail::RequestOptions
           }

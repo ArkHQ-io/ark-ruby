@@ -54,9 +54,9 @@ module ArkEmail
       ) -> ArkEmail::Models::EmailSendBatchResponse
 
       def send_raw: (
-        data: String,
-        mail_from: String,
-        rcpt_to: ::Array[String],
+        from: String,
+        raw_message: String,
+        to: ::Array[String],
         ?bounce: bool?,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::EmailSendRawResponse
