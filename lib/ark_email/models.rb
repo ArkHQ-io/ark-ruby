@@ -67,6 +67,14 @@ module ArkEmail
 
   EmailSendRawParams = ArkEmail::Models::EmailSendRawParams
 
+  LogEntry = ArkEmail::Models::LogEntry
+
+  LogEntryDetail = ArkEmail::Models::LogEntryDetail
+
+  LogListParams = ArkEmail::Models::LogListParams
+
+  LogRetrieveParams = ArkEmail::Models::LogRetrieveParams
+
   SuppressionBulkCreateParams = ArkEmail::Models::SuppressionBulkCreateParams
 
   SuppressionCreateParams = ArkEmail::Models::SuppressionCreateParams

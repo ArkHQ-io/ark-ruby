@@ -27,6 +27,14 @@ module ArkEmail
 
   class EmailSendRawParams = ArkEmail::Models::EmailSendRawParams
 
+  class LogEntry = ArkEmail::Models::LogEntry
+
+  class LogEntryDetail = ArkEmail::Models::LogEntryDetail
+
+  class LogListParams = ArkEmail::Models::LogListParams
+
+  class LogRetrieveParams = ArkEmail::Models::LogRetrieveParams
+
   class SuppressionBulkCreateParams = ArkEmail::Models::SuppressionBulkCreateParams
 
   class SuppressionCreateParams = ArkEmail::Models::SuppressionCreateParams
