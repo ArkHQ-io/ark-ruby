@@ -37,11 +37,14 @@ module ArkEmail
           timestamp: Float,
           timestamp_iso: Time,
           to: String,
+          activity: ArkEmail::Models::EmailRetrieveResponse::Data::Activity,
+          attachments: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Attachment],
           deliveries: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Delivery],
           headers: ::Hash[Symbol, String],
           html_body: String,
           message_id: String,
           plain_body: String,
+          raw_message: String,
           spam: bool,
           spam_score: Float,
           tag: String
@@ -66,6 +69,18 @@ module ArkEmail
 
         attr_accessor to: String
 
+        attr_reader activity: ArkEmail::Models::EmailRetrieveResponse::Data::Activity?
+
+        def activity=: (
+          ArkEmail::Models::EmailRetrieveResponse::Data::Activity
+        ) -> ArkEmail::Models::EmailRetrieveResponse::Data::Activity
+
+        attr_reader attachments: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Attachment]?
+
+        def attachments=: (
+          ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Attachment]
+        ) -> ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Attachment]
+
         attr_reader deliveries: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Delivery]?
 
         def deliveries=: (
@@ -87,6 +102,10 @@ module ArkEmail
         attr_reader plain_body: String?
 
         def plain_body=: (String) -> String
+
+        attr_reader raw_message: String?
+
+        def raw_message=: (String) -> String
 
         attr_reader spam: bool?
 
@@ -110,11 +129,14 @@ module ArkEmail
           timestamp: Float,
           timestamp_iso: Time,
           to: String,
+          ?activity: ArkEmail::Models::EmailRetrieveResponse::Data::Activity,
+          ?attachments: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Attachment],
           ?deliveries: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Delivery],
           ?headers: ::Hash[Symbol, String],
           ?html_body: String,
           ?message_id: String,
           ?plain_body: String,
+          ?raw_message: String,
           ?spam: bool,
           ?spam_score: Float,
           ?tag: String
@@ -130,11 +152,14 @@ module ArkEmail
           timestamp: Float,
           timestamp_iso: Time,
           to: String,
+          activity: ArkEmail::Models::EmailRetrieveResponse::Data::Activity,
+          attachments: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Attachment],
           deliveries: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Delivery],
           headers: ::Hash[Symbol, String],
           html_body: String,
           message_id: String,
           plain_body: String,
+          raw_message: String,
           spam: bool,
           spam_score: Float,
           tag: String
@@ -165,6 +190,160 @@ module ArkEmail
           HELD: :held
 
           def self?.values: -> ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::status]
+        end
+
+        type activity =
+          {
+            clicks: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click],
+            opens: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open]
+          }
+
+        class Activity < ArkEmail::Internal::Type::BaseModel
+          attr_reader clicks: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click]?
+
+          def clicks=: (
+            ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click]
+          ) -> ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click]
+
+          attr_reader opens: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open]?
+
+          def opens=: (
+            ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open]
+          ) -> ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open]
+
+          def initialize: (
+            ?clicks: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click],
+            ?opens: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open]
+          ) -> void
+
+          def to_hash: -> {
+            clicks: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click],
+            opens: ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open]
+          }
+
+          type click =
+            {
+              ip_address: String,
+              timestamp: Float,
+              timestamp_iso: Time,
+              url: String,
+              user_agent: String
+            }
+
+          class Click < ArkEmail::Internal::Type::BaseModel
+            attr_reader ip_address: String?
+
+            def ip_address=: (String) -> String
+
+            attr_reader timestamp: Float?
+
+            def timestamp=: (Float) -> Float
+
+            attr_reader timestamp_iso: Time?
+
+            def timestamp_iso=: (Time) -> Time
+
+            attr_reader url: String?
+
+            def url=: (String) -> String
+
+            attr_reader user_agent: String?
+
+            def user_agent=: (String) -> String
+
+            def initialize: (
+              ?ip_address: String,
+              ?timestamp: Float,
+              ?timestamp_iso: Time,
+              ?url: String,
+              ?user_agent: String
+            ) -> void
+
+            def to_hash: -> {
+              ip_address: String,
+              timestamp: Float,
+              timestamp_iso: Time,
+              url: String,
+              user_agent: String
+            }
+          end
+
+          type open_ =
+            {
+              ip_address: String,
+              timestamp: Float,
+              timestamp_iso: Time,
+              user_agent: String
+            }
+
+          class Open < ArkEmail::Internal::Type::BaseModel
+            attr_reader ip_address: String?
+
+            def ip_address=: (String) -> String
+
+            attr_reader timestamp: Float?
+
+            def timestamp=: (Float) -> Float
+
+            attr_reader timestamp_iso: Time?
+
+            def timestamp_iso=: (Time) -> Time
+
+            attr_reader user_agent: String?
+
+            def user_agent=: (String) -> String
+
+            def initialize: (
+              ?ip_address: String,
+              ?timestamp: Float,
+              ?timestamp_iso: Time,
+              ?user_agent: String
+            ) -> void
+
+            def to_hash: -> {
+              ip_address: String,
+              timestamp: Float,
+              timestamp_iso: Time,
+              user_agent: String
+            }
+          end
+        end
+
+        type attachment =
+          {
+            content_type: String,
+            data: String,
+            filename: String,
+            hash_: String,
+            size: Integer
+          }
+
+        class Attachment < ArkEmail::Internal::Type::BaseModel
+          attr_accessor content_type: String
+
+          attr_accessor data: String
+
+          attr_accessor filename: String
+
+          attr_accessor hash_: String
+
+          attr_accessor size: Integer
+
+          def initialize: (
+            content_type: String,
+            data: String,
+            filename: String,
+            hash_: String,
+            size: Integer
+          ) -> void
+
+          def to_hash: -> {
+            content_type: String,
+            data: String,
+            filename: String,
+            hash_: String,
+            size: Integer
+          }
         end
 
         type delivery =
