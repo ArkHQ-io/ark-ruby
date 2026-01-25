@@ -89,6 +89,19 @@ module ArkEmail
         #   @return [String]
         required :to, String
 
+        # @!attribute activity
+        #   Opens and clicks tracking data (included if expand=activity)
+        #
+        #   @return [ArkEmail::Models::EmailRetrieveResponse::Data::Activity, nil]
+        optional :activity, -> { ArkEmail::Models::EmailRetrieveResponse::Data::Activity }
+
+        # @!attribute attachments
+        #   File attachments (included if expand=attachments)
+        #
+        #   @return [Array<ArkEmail::Models::EmailRetrieveResponse::Data::Attachment>, nil]
+        optional :attachments,
+                 -> { ArkEmail::Internal::Type::ArrayOf[ArkEmail::Models::EmailRetrieveResponse::Data::Attachment] }
+
         # @!attribute deliveries
         #   Delivery attempt history (included if expand=deliveries)
         #
@@ -120,6 +133,13 @@ module ArkEmail
         #   @return [String, nil]
         optional :plain_body, String, api_name: :plainBody
 
+        # @!attribute raw_message
+        #   Complete raw MIME message, base64 encoded (included if expand=raw). Decode this
+        #   to get the original RFC 2822 formatted email.
+        #
+        #   @return [String, nil]
+        optional :raw_message, String, api_name: :rawMessage
+
         # @!attribute spam
         #   Whether the message was flagged as spam
         #
@@ -138,7 +158,7 @@ module ArkEmail
         #   @return [String, nil]
         optional :tag, String
 
-        # @!method initialize(id:, token:, from:, scope:, status:, subject:, timestamp:, timestamp_iso:, to:, deliveries: nil, headers: nil, html_body: nil, message_id: nil, plain_body: nil, spam: nil, spam_score: nil, tag: nil)
+        # @!method initialize(id:, token:, from:, scope:, status:, subject:, timestamp:, timestamp_iso:, to:, activity: nil, attachments: nil, deliveries: nil, headers: nil, html_body: nil, message_id: nil, plain_body: nil, raw_message: nil, spam: nil, spam_score: nil, tag: nil)
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::EmailRetrieveResponse::Data} for more details.
         #
@@ -160,6 +180,10 @@ module ArkEmail
         #
         #   @param to [String] Recipient address
         #
+        #   @param activity [ArkEmail::Models::EmailRetrieveResponse::Data::Activity] Opens and clicks tracking data (included if expand=activity)
+        #
+        #   @param attachments [Array<ArkEmail::Models::EmailRetrieveResponse::Data::Attachment>] File attachments (included if expand=attachments)
+        #
         #   @param deliveries [Array<ArkEmail::Models::EmailRetrieveResponse::Data::Delivery>] Delivery attempt history (included if expand=deliveries)
         #
         #   @param headers [Hash{Symbol=>String}] Email headers (included if expand=headers)
@@ -169,6 +193,8 @@ module ArkEmail
         #   @param message_id [String] SMTP Message-ID header
         #
         #   @param plain_body [String] Plain text body (included if expand=content)
+        #
+        #   @param raw_message [String] Complete raw MIME message, base64 encoded (included if expand=raw).
         #
         #   @param spam [Boolean] Whether the message was flagged as spam
         #
@@ -211,6 +237,156 @@ module ArkEmail
 
           # @!method self.values
           #   @return [Array<Symbol>]
+        end
+
+        # @see ArkEmail::Models::EmailRetrieveResponse::Data#activity
+        class Activity < ArkEmail::Internal::Type::BaseModel
+          # @!attribute clicks
+          #   List of link click events
+          #
+          #   @return [Array<ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click>, nil]
+          optional :clicks,
+                   -> { ArkEmail::Internal::Type::ArrayOf[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click] }
+
+          # @!attribute opens
+          #   List of email open events
+          #
+          #   @return [Array<ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open>, nil]
+          optional :opens,
+                   -> { ArkEmail::Internal::Type::ArrayOf[ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open] }
+
+          # @!method initialize(clicks: nil, opens: nil)
+          #   Opens and clicks tracking data (included if expand=activity)
+          #
+          #   @param clicks [Array<ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Click>] List of link click events
+          #
+          #   @param opens [Array<ArkEmail::Models::EmailRetrieveResponse::Data::Activity::Open>] List of email open events
+
+          class Click < ArkEmail::Internal::Type::BaseModel
+            # @!attribute ip_address
+            #   IP address of the clicker
+            #
+            #   @return [String, nil]
+            optional :ip_address, String, api_name: :ipAddress
+
+            # @!attribute timestamp
+            #   Unix timestamp of the click event
+            #
+            #   @return [Float, nil]
+            optional :timestamp, Float
+
+            # @!attribute timestamp_iso
+            #   ISO 8601 timestamp of the click event
+            #
+            #   @return [Time, nil]
+            optional :timestamp_iso, Time, api_name: :timestampIso
+
+            # @!attribute url
+            #   URL that was clicked
+            #
+            #   @return [String, nil]
+            optional :url, String
+
+            # @!attribute user_agent
+            #   User agent of the email client
+            #
+            #   @return [String, nil]
+            optional :user_agent, String, api_name: :userAgent
+
+            # @!method initialize(ip_address: nil, timestamp: nil, timestamp_iso: nil, url: nil, user_agent: nil)
+            #   @param ip_address [String] IP address of the clicker
+            #
+            #   @param timestamp [Float] Unix timestamp of the click event
+            #
+            #   @param timestamp_iso [Time] ISO 8601 timestamp of the click event
+            #
+            #   @param url [String] URL that was clicked
+            #
+            #   @param user_agent [String] User agent of the email client
+          end
+
+          class Open < ArkEmail::Internal::Type::BaseModel
+            # @!attribute ip_address
+            #   IP address of the opener
+            #
+            #   @return [String, nil]
+            optional :ip_address, String, api_name: :ipAddress
+
+            # @!attribute timestamp
+            #   Unix timestamp of the open event
+            #
+            #   @return [Float, nil]
+            optional :timestamp, Float
+
+            # @!attribute timestamp_iso
+            #   ISO 8601 timestamp of the open event
+            #
+            #   @return [Time, nil]
+            optional :timestamp_iso, Time, api_name: :timestampIso
+
+            # @!attribute user_agent
+            #   User agent of the email client
+            #
+            #   @return [String, nil]
+            optional :user_agent, String, api_name: :userAgent
+
+            # @!method initialize(ip_address: nil, timestamp: nil, timestamp_iso: nil, user_agent: nil)
+            #   @param ip_address [String] IP address of the opener
+            #
+            #   @param timestamp [Float] Unix timestamp of the open event
+            #
+            #   @param timestamp_iso [Time] ISO 8601 timestamp of the open event
+            #
+            #   @param user_agent [String] User agent of the email client
+          end
+        end
+
+        class Attachment < ArkEmail::Internal::Type::BaseModel
+          # @!attribute content_type
+          #   MIME type of the attachment
+          #
+          #   @return [String]
+          required :content_type, String, api_name: :contentType
+
+          # @!attribute data
+          #   Base64 encoded attachment content. Decode this to get the raw file bytes.
+          #
+          #   @return [String]
+          required :data, String
+
+          # @!attribute filename
+          #   Original filename of the attachment
+          #
+          #   @return [String]
+          required :filename, String
+
+          # @!attribute hash_
+          #   SHA256 hash of the attachment content for verification
+          #
+          #   @return [String]
+          required :hash_, String, api_name: :hash
+
+          # @!attribute size
+          #   Size of the attachment in bytes
+          #
+          #   @return [Integer]
+          required :size, Integer
+
+          # @!method initialize(content_type:, data:, filename:, hash_:, size:)
+          #   Some parameter documentations has been truncated, see
+          #   {ArkEmail::Models::EmailRetrieveResponse::Data::Attachment} for more details.
+          #
+          #   An email attachment retrieved from a sent message
+          #
+          #   @param content_type [String] MIME type of the attachment
+          #
+          #   @param data [String] Base64 encoded attachment content. Decode this to get the raw file bytes.
+          #
+          #   @param filename [String] Original filename of the attachment
+          #
+          #   @param hash_ [String] SHA256 hash of the attachment content for verification
+          #
+          #   @param size [Integer] Size of the attachment in bytes
         end
 
         class Delivery < ArkEmail::Internal::Type::BaseModel

@@ -1,0 +1,97 @@
+module ArkEmail
+  module Models
+    type log_entry_detail =
+      {
+        request: ArkEmail::LogEntryDetail::Request,
+        response: ArkEmail::LogEntryDetail::Response
+      }
+
+    class LogEntryDetail < ArkEmail::Models::LogEntry
+      def request: -> ArkEmail::LogEntryDetail::Request?
+
+      def request=: (
+        ArkEmail::LogEntryDetail::Request _
+      ) -> ArkEmail::LogEntryDetail::Request
+
+      def response: -> ArkEmail::LogEntryDetail::Response?
+
+      def response=: (
+        ArkEmail::LogEntryDetail::Response _
+      ) -> ArkEmail::LogEntryDetail::Response
+
+      def initialize: (
+        ?request: ArkEmail::LogEntryDetail::Request,
+        ?response: ArkEmail::LogEntryDetail::Response
+      ) -> void
+
+      def to_hash: -> {
+        request: ArkEmail::LogEntryDetail::Request,
+        response: ArkEmail::LogEntryDetail::Response
+      }
+
+      type request =
+        {
+          body: ArkEmail::Models::LogEntryDetail::Request::body?,
+          body_size: Integer?
+        }
+
+      class Request < ArkEmail::Internal::Type::BaseModel
+        attr_accessor body: ArkEmail::Models::LogEntryDetail::Request::body?
+
+        attr_accessor body_size: Integer?
+
+        def initialize: (
+          ?body: ArkEmail::Models::LogEntryDetail::Request::body?,
+          ?body_size: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          body: ArkEmail::Models::LogEntryDetail::Request::body?,
+          body_size: Integer?
+        }
+
+        type body = ::Hash[Symbol, top] | String
+
+        module Body
+          extend ArkEmail::Internal::Type::Union
+
+          def self?.variants: -> ::Array[ArkEmail::Models::LogEntryDetail::Request::body]
+
+          UnionMember0Map: ArkEmail::Internal::Type::Converter
+        end
+      end
+
+      type response =
+        {
+          body: ArkEmail::Models::LogEntryDetail::Response::body?,
+          body_size: Integer?
+        }
+
+      class Response < ArkEmail::Internal::Type::BaseModel
+        attr_accessor body: ArkEmail::Models::LogEntryDetail::Response::body?
+
+        attr_accessor body_size: Integer?
+
+        def initialize: (
+          ?body: ArkEmail::Models::LogEntryDetail::Response::body?,
+          ?body_size: Integer?
+        ) -> void
+
+        def to_hash: -> {
+          body: ArkEmail::Models::LogEntryDetail::Response::body?,
+          body_size: Integer?
+        }
+
+        type body = ::Hash[Symbol, top] | String
+
+        module Body
+          extend ArkEmail::Internal::Type::Union
+
+          def self?.variants: -> ::Array[ArkEmail::Models::LogEntryDetail::Response::body]
+
+          UnionMember0Map: ArkEmail::Internal::Type::Converter
+        end
+      end
+    end
+  end
+end
