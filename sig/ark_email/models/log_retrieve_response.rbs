@@ -1,0 +1,26 @@
+module ArkEmail
+  module Models
+    type log_retrieve_response =
+      { data: ArkEmail::LogEntryDetail, meta: ArkEmail::APIMeta, success: true }
+
+    class LogRetrieveResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::LogEntryDetail
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::LogEntryDetail,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::LogEntryDetail,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+    end
+  end
+end

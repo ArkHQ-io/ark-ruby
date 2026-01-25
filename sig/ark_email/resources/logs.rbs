@@ -1,0 +1,25 @@
+module ArkEmail
+  module Resources
+    class Logs
+      def retrieve: (
+        String request_id,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::LogRetrieveResponse
+
+      def list: (
+        ?credential_id: String,
+        ?end_date: Time,
+        ?endpoint: String,
+        ?page: Integer,
+        ?per_page: Integer,
+        ?request_id: String,
+        ?start_date: Time,
+        ?status: ArkEmail::Models::LogListParams::status,
+        ?status_code: Integer,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Internal::PageNumberPagination[ArkEmail::LogEntry]
+
+      def initialize: (client: ArkEmail::Client) -> void
+    end
+  end
+end

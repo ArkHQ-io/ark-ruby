@@ -20,6 +20,8 @@ module ArkEmail
 
     attr_reader tracking: ArkEmail::Resources::Tracking
 
+    attr_reader logs: ArkEmail::Resources::Logs
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

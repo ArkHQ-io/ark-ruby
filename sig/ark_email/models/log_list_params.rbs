@@ -1,0 +1,97 @@
+module ArkEmail
+  module Models
+    type log_list_params =
+      {
+        credential_id: String,
+        end_date: Time,
+        endpoint: String,
+        page: Integer,
+        per_page: Integer,
+        request_id: String,
+        start_date: Time,
+        status: ArkEmail::Models::LogListParams::status,
+        status_code: Integer
+      }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class LogListParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_reader credential_id: String?
+
+      def credential_id=: (String) -> String
+
+      attr_reader end_date: Time?
+
+      def end_date=: (Time) -> Time
+
+      attr_reader endpoint: String?
+
+      def endpoint=: (String) -> String
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader per_page: Integer?
+
+      def per_page=: (Integer) -> Integer
+
+      attr_reader request_id: String?
+
+      def request_id=: (String) -> String
+
+      attr_reader start_date: Time?
+
+      def start_date=: (Time) -> Time
+
+      attr_reader status: ArkEmail::Models::LogListParams::status?
+
+      def status=: (
+        ArkEmail::Models::LogListParams::status
+      ) -> ArkEmail::Models::LogListParams::status
+
+      attr_reader status_code: Integer?
+
+      def status_code=: (Integer) -> Integer
+
+      def initialize: (
+        ?credential_id: String,
+        ?end_date: Time,
+        ?endpoint: String,
+        ?page: Integer,
+        ?per_page: Integer,
+        ?request_id: String,
+        ?start_date: Time,
+        ?status: ArkEmail::Models::LogListParams::status,
+        ?status_code: Integer,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        credential_id: String,
+        end_date: Time,
+        endpoint: String,
+        page: Integer,
+        per_page: Integer,
+        request_id: String,
+        start_date: Time,
+        status: ArkEmail::Models::LogListParams::status,
+        status_code: Integer,
+        request_options: ArkEmail::RequestOptions
+      }
+
+      type status = :success | :error
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        SUCCESS: :success
+        ERROR: :error
+
+        def self?.values: -> ::Array[ArkEmail::Models::LogListParams::status]
+      end
+    end
+  end
+end
