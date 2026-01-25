@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.14.0 (2026-01-25)
+
+Full Changelog: [v0.13.0...v0.14.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.13.0...v0.14.0)
+
+### Features
+
+* **api:** manual updates ([6dca604](https://github.com/ArkHQ-io/ark-ruby/commit/6dca6047d8ad0da294e0da824a5495d606483c88))
+* **api:** update email details to include attachments ([a74ec7c](https://github.com/ArkHQ-io/ark-ruby/commit/a74ec7c9330db27a2a2fc35e4364f70544ba8b43))
+
 ## 0.13.0 (2026-01-23)
 
 Full Changelog: [v0.12.0...v0.13.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.12.0...v0.13.0)
