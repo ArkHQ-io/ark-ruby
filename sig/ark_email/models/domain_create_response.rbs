@@ -76,7 +76,8 @@ module ArkEmail
           {
             dkim: ArkEmail::DNSRecord?,
             return_path: ArkEmail::DNSRecord?,
-            spf: ArkEmail::DNSRecord?
+            spf: ArkEmail::DNSRecord?,
+            zone: String
           }
 
         class DNSRecords < ArkEmail::Internal::Type::BaseModel
@@ -86,16 +87,22 @@ module ArkEmail
 
           attr_accessor spf: ArkEmail::DNSRecord?
 
+          attr_reader zone: String?
+
+          def zone=: (String) -> String
+
           def initialize: (
             ?dkim: ArkEmail::DNSRecord?,
             ?return_path: ArkEmail::DNSRecord?,
-            ?spf: ArkEmail::DNSRecord?
+            ?spf: ArkEmail::DNSRecord?,
+            ?zone: String
           ) -> void
 
           def to_hash: -> {
             dkim: ArkEmail::DNSRecord?,
             return_path: ArkEmail::DNSRecord?,
-            spf: ArkEmail::DNSRecord?
+            spf: ArkEmail::DNSRecord?,
+            zone: String
           }
         end
       end
