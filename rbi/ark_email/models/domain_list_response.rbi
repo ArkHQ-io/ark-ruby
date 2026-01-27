@@ -95,44 +95,38 @@ module ArkEmail
               )
             end
 
-          # Domain ID
-          sig { returns(String) }
+          # Unique domain identifier
+          sig { returns(Integer) }
           attr_accessor :id
 
-          sig { returns(T::Boolean) }
-          attr_accessor :dns_ok
-
+          # The domain name used for sending emails
           sig { returns(String) }
           attr_accessor :name
 
+          # Whether all DNS records (SPF, DKIM, Return Path) are correctly configured.
+          # Domain must be verified before sending emails.
           sig { returns(T::Boolean) }
           attr_accessor :verified
 
           sig do
-            params(
-              id: String,
-              dns_ok: T::Boolean,
-              name: String,
-              verified: T::Boolean
-            ).returns(T.attached_class)
+            params(id: Integer, name: String, verified: T::Boolean).returns(
+              T.attached_class
+            )
           end
           def self.new(
-            # Domain ID
+            # Unique domain identifier
             id:,
-            dns_ok:,
+            # The domain name used for sending emails
             name:,
+            # Whether all DNS records (SPF, DKIM, Return Path) are correctly configured.
+            # Domain must be verified before sending emails.
             verified:
           )
           end
 
           sig do
             override.returns(
-              {
-                id: String,
-                dns_ok: T::Boolean,
-                name: String,
-                verified: T::Boolean
-              }
+              { id: Integer, name: String, verified: T::Boolean }
             )
           end
           def to_hash

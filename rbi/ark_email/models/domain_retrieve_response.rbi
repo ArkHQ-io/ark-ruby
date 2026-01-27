@@ -61,47 +61,60 @@ module ArkEmail
             )
           end
 
-        # Domain ID
-        sig { returns(String) }
+        # Unique domain identifier
+        sig { returns(Integer) }
         attr_accessor :id
 
+        # Timestamp when the domain was added
         sig { returns(Time) }
         attr_accessor :created_at
 
+        # DNS records that must be added to your domain's DNS settings. Null if records
+        # are not yet generated.
         sig do
-          returns(ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords)
+          returns(
+            T.nilable(
+              ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords
+            )
+          )
         end
         attr_reader :dns_records
 
         sig do
           params(
             dns_records:
-              ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords::OrHash
+              T.nilable(
+                ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords::OrHash
+              )
           ).void
         end
         attr_writer :dns_records
 
-        # Domain name
+        # The domain name used for sending emails
         sig { returns(String) }
         attr_accessor :name
 
+        # UUID of the domain
         sig { returns(String) }
         attr_accessor :uuid
 
-        # Whether DNS is verified
+        # Whether all DNS records (SPF, DKIM, Return Path) are correctly configured.
+        # Domain must be verified before sending emails.
         sig { returns(T::Boolean) }
         attr_accessor :verified
 
-        # When the domain was verified (null if not verified)
+        # Timestamp when the domain ownership was verified, or null if not yet verified
         sig { returns(T.nilable(Time)) }
         attr_accessor :verified_at
 
         sig do
           params(
-            id: String,
+            id: Integer,
             created_at: Time,
             dns_records:
-              ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords::OrHash,
+              T.nilable(
+                ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords::OrHash
+              ),
             name: String,
             uuid: String,
             verified: T::Boolean,
@@ -109,16 +122,21 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
-          # Domain ID
+          # Unique domain identifier
           id:,
+          # Timestamp when the domain was added
           created_at:,
+          # DNS records that must be added to your domain's DNS settings. Null if records
+          # are not yet generated.
           dns_records:,
-          # Domain name
+          # The domain name used for sending emails
           name:,
+          # UUID of the domain
           uuid:,
-          # Whether DNS is verified
+          # Whether all DNS records (SPF, DKIM, Return Path) are correctly configured.
+          # Domain must be verified before sending emails.
           verified:,
-          # When the domain was verified (null if not verified)
+          # Timestamp when the domain ownership was verified, or null if not yet verified
           verified_at: nil
         )
         end
@@ -126,10 +144,12 @@ module ArkEmail
         sig do
           override.returns(
             {
-              id: String,
+              id: Integer,
               created_at: Time,
               dns_records:
-                ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords,
+                T.nilable(
+                  ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords
+                ),
               name: String,
               uuid: String,
               verified: T::Boolean,
@@ -149,40 +169,54 @@ module ArkEmail
               )
             end
 
-          sig { returns(ArkEmail::DNSRecord) }
+          # A DNS record that needs to be configured in your domain's DNS settings
+          sig { returns(T.nilable(ArkEmail::DNSRecord)) }
           attr_reader :dkim
 
-          sig { params(dkim: ArkEmail::DNSRecord::OrHash).void }
+          sig { params(dkim: T.nilable(ArkEmail::DNSRecord::OrHash)).void }
           attr_writer :dkim
 
-          sig { returns(ArkEmail::DNSRecord) }
+          # A DNS record that needs to be configured in your domain's DNS settings
+          sig { returns(T.nilable(ArkEmail::DNSRecord)) }
           attr_reader :return_path
 
-          sig { params(return_path: ArkEmail::DNSRecord::OrHash).void }
+          sig do
+            params(return_path: T.nilable(ArkEmail::DNSRecord::OrHash)).void
+          end
           attr_writer :return_path
 
-          sig { returns(ArkEmail::DNSRecord) }
+          # A DNS record that needs to be configured in your domain's DNS settings
+          sig { returns(T.nilable(ArkEmail::DNSRecord)) }
           attr_reader :spf
 
-          sig { params(spf: ArkEmail::DNSRecord::OrHash).void }
+          sig { params(spf: T.nilable(ArkEmail::DNSRecord::OrHash)).void }
           attr_writer :spf
 
+          # DNS records that must be added to your domain's DNS settings. Null if records
+          # are not yet generated.
           sig do
             params(
-              dkim: ArkEmail::DNSRecord::OrHash,
-              return_path: ArkEmail::DNSRecord::OrHash,
-              spf: ArkEmail::DNSRecord::OrHash
+              dkim: T.nilable(ArkEmail::DNSRecord::OrHash),
+              return_path: T.nilable(ArkEmail::DNSRecord::OrHash),
+              spf: T.nilable(ArkEmail::DNSRecord::OrHash)
             ).returns(T.attached_class)
           end
-          def self.new(dkim:, return_path:, spf:)
+          def self.new(
+            # A DNS record that needs to be configured in your domain's DNS settings
+            dkim: nil,
+            # A DNS record that needs to be configured in your domain's DNS settings
+            return_path: nil,
+            # A DNS record that needs to be configured in your domain's DNS settings
+            spf: nil
+          )
           end
 
           sig do
             override.returns(
               {
-                dkim: ArkEmail::DNSRecord,
-                return_path: ArkEmail::DNSRecord,
-                spf: ArkEmail::DNSRecord
+                dkim: T.nilable(ArkEmail::DNSRecord),
+                return_path: T.nilable(ArkEmail::DNSRecord),
+                spf: T.nilable(ArkEmail::DNSRecord)
               }
             )
           end
