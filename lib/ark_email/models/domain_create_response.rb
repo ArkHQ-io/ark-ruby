@@ -42,6 +42,16 @@ module ArkEmail
         #   DNS records that must be added to your domain's DNS settings. Null if records
         #   are not yet generated.
         #
+        #   **Important:** The `name` field contains the relative hostname that you should
+        #   enter in your DNS provider. Most DNS providers auto-append the zone name, so you
+        #   only need to enter the relative part.
+        #
+        #   For subdomains like `mail.example.com`, the zone is `example.com`, so:
+        #
+        #   - SPF `name` would be `mail` (not `@`)
+        #   - DKIM `name` would be `ark-xyz._domainkey.mail`
+        #   - Return Path `name` would be `psrp.mail`
+        #
         #   @return [ArkEmail::Models::DomainCreateResponse::Data::DNSRecords, nil]
         required :dns_records,
                  -> { ArkEmail::Models::DomainCreateResponse::Data::DNSRecords },
@@ -94,32 +104,97 @@ module ArkEmail
         # @see ArkEmail::Models::DomainCreateResponse::Data#dns_records
         class DNSRecords < ArkEmail::Internal::Type::BaseModel
           # @!attribute dkim
-          #   A DNS record that needs to be configured in your domain's DNS settings
+          #   A DNS record that needs to be configured in your domain's DNS settings.
+          #
+          #   The `name` field contains the relative hostname to enter in your DNS provider
+          #   (which auto-appends the zone). The `fullName` field contains the complete
+          #   fully-qualified domain name (FQDN) for reference.
+          #
+          #   **Example for subdomain `mail.example.com`:**
+          #
+          #   - `name`: `"mail"` (what you enter in DNS provider)
+          #   - `fullName`: `"mail.example.com"` (the complete hostname)
+          #
+          #   **Example for root domain `example.com`:**
+          #
+          #   - `name`: `"@"` (DNS shorthand for apex/root)
+          #   - `fullName`: `"example.com"`
           #
           #   @return [ArkEmail::Models::DNSRecord, nil]
           optional :dkim, -> { ArkEmail::DNSRecord }, nil?: true
 
           # @!attribute return_path
-          #   A DNS record that needs to be configured in your domain's DNS settings
+          #   A DNS record that needs to be configured in your domain's DNS settings.
+          #
+          #   The `name` field contains the relative hostname to enter in your DNS provider
+          #   (which auto-appends the zone). The `fullName` field contains the complete
+          #   fully-qualified domain name (FQDN) for reference.
+          #
+          #   **Example for subdomain `mail.example.com`:**
+          #
+          #   - `name`: `"mail"` (what you enter in DNS provider)
+          #   - `fullName`: `"mail.example.com"` (the complete hostname)
+          #
+          #   **Example for root domain `example.com`:**
+          #
+          #   - `name`: `"@"` (DNS shorthand for apex/root)
+          #   - `fullName`: `"example.com"`
           #
           #   @return [ArkEmail::Models::DNSRecord, nil]
           optional :return_path, -> { ArkEmail::DNSRecord }, api_name: :returnPath, nil?: true
 
           # @!attribute spf
-          #   A DNS record that needs to be configured in your domain's DNS settings
+          #   A DNS record that needs to be configured in your domain's DNS settings.
+          #
+          #   The `name` field contains the relative hostname to enter in your DNS provider
+          #   (which auto-appends the zone). The `fullName` field contains the complete
+          #   fully-qualified domain name (FQDN) for reference.
+          #
+          #   **Example for subdomain `mail.example.com`:**
+          #
+          #   - `name`: `"mail"` (what you enter in DNS provider)
+          #   - `fullName`: `"mail.example.com"` (the complete hostname)
+          #
+          #   **Example for root domain `example.com`:**
+          #
+          #   - `name`: `"@"` (DNS shorthand for apex/root)
+          #   - `fullName`: `"example.com"`
           #
           #   @return [ArkEmail::Models::DNSRecord, nil]
           optional :spf, -> { ArkEmail::DNSRecord }, nil?: true
 
-          # @!method initialize(dkim: nil, return_path: nil, spf: nil)
+          # @!attribute zone
+          #   The DNS zone (registrable domain) where records should be added. This is the
+          #   root domain that your DNS provider manages. For `mail.example.com`, the zone is
+          #   `example.com`. For `example.co.uk`, the zone is `example.co.uk`.
+          #
+          #   @return [String, nil]
+          optional :zone, String
+
+          # @!method initialize(dkim: nil, return_path: nil, spf: nil, zone: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {ArkEmail::Models::DomainCreateResponse::Data::DNSRecords} for more details.
+          #
           #   DNS records that must be added to your domain's DNS settings. Null if records
           #   are not yet generated.
           #
-          #   @param dkim [ArkEmail::Models::DNSRecord, nil] A DNS record that needs to be configured in your domain's DNS settings
+          #   **Important:** The `name` field contains the relative hostname that you should
+          #   enter in your DNS provider. Most DNS providers auto-append the zone name, so you
+          #   only need to enter the relative part.
           #
-          #   @param return_path [ArkEmail::Models::DNSRecord, nil] A DNS record that needs to be configured in your domain's DNS settings
+          #   For subdomains like `mail.example.com`, the zone is `example.com`, so:
           #
-          #   @param spf [ArkEmail::Models::DNSRecord, nil] A DNS record that needs to be configured in your domain's DNS settings
+          #   - SPF `name` would be `mail` (not `@`)
+          #   - DKIM `name` would be `ark-xyz._domainkey.mail`
+          #   - Return Path `name` would be `psrp.mail`
+          #
+          #   @param dkim [ArkEmail::Models::DNSRecord, nil] A DNS record that needs to be configured in your domain's DNS settings.
+          #
+          #   @param return_path [ArkEmail::Models::DNSRecord, nil] A DNS record that needs to be configured in your domain's DNS settings.
+          #
+          #   @param spf [ArkEmail::Models::DNSRecord, nil] A DNS record that needs to be configured in your domain's DNS settings.
+          #
+          #   @param zone [String] The DNS zone (registrable domain) where records should be added.
         end
       end
     end

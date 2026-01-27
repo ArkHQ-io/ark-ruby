@@ -3,8 +3,20 @@
 module ArkEmail
   module Models
     class DNSRecord < ArkEmail::Internal::Type::BaseModel
+      # @!attribute full_name
+      #   The complete fully-qualified domain name (FQDN). Use this as a reference to
+      #   verify the record is configured correctly.
+      #
+      #   @return [String]
+      required :full_name, String, api_name: :fullName
+
       # @!attribute name
-      #   The hostname where the record should be created (relative to your domain)
+      #   The relative hostname to enter in your DNS provider. Most DNS providers
+      #   auto-append the zone name, so you only need to enter this relative part.
+      #
+      #   - `"@"` means the apex/root of the zone (for root domains)
+      #   - `"mail"` for a subdomain like `mail.example.com`
+      #   - `"ark-xyz._domainkey.mail"` for DKIM on a subdomain
       #
       #   @return [String]
       required :name, String
@@ -32,13 +44,29 @@ module ArkEmail
       #   @return [Symbol, ArkEmail::Models::DNSRecord::Status, nil]
       optional :status, enum: -> { ArkEmail::DNSRecord::Status }, nil?: true
 
-      # @!method initialize(name:, type:, value:, status: nil)
+      # @!method initialize(full_name:, name:, type:, value:, status: nil)
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::DNSRecord} for more details.
       #
-      #   A DNS record that needs to be configured in your domain's DNS settings
+      #   A DNS record that needs to be configured in your domain's DNS settings.
       #
-      #   @param name [String] The hostname where the record should be created (relative to your domain)
+      #   The `name` field contains the relative hostname to enter in your DNS provider
+      #   (which auto-appends the zone). The `fullName` field contains the complete
+      #   fully-qualified domain name (FQDN) for reference.
+      #
+      #   **Example for subdomain `mail.example.com`:**
+      #
+      #   - `name`: `"mail"` (what you enter in DNS provider)
+      #   - `fullName`: `"mail.example.com"` (the complete hostname)
+      #
+      #   **Example for root domain `example.com`:**
+      #
+      #   - `name`: `"@"` (DNS shorthand for apex/root)
+      #   - `fullName`: `"example.com"`
+      #
+      #   @param full_name [String] The complete fully-qualified domain name (FQDN).
+      #
+      #   @param name [String] The relative hostname to enter in your DNS provider.
       #
       #   @param type [Symbol, ArkEmail::Models::DNSRecord::Type] The DNS record type to create
       #
