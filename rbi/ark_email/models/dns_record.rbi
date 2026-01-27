@@ -6,27 +6,28 @@ module ArkEmail
       OrHash =
         T.type_alias { T.any(ArkEmail::DNSRecord, ArkEmail::Internal::AnyHash) }
 
-      # DNS record name (hostname)
+      # The hostname where the record should be created (relative to your domain)
       sig { returns(String) }
       attr_accessor :name
 
-      # DNS record type
+      # The DNS record type to create
       sig { returns(ArkEmail::DNSRecord::Type::TaggedSymbol) }
       attr_accessor :type
 
-      # DNS record value
+      # The value to set for the DNS record
       sig { returns(String) }
       attr_accessor :value
 
-      # DNS verification status:
+      # Current verification status of this DNS record:
       #
-      # - `OK` - Record is correctly configured
-      # - `Missing` - Record not found in DNS
-      # - `Invalid` - Record exists but has wrong value
-      # - `null` - Not yet checked
+      # - `OK` - Record is correctly configured and verified
+      # - `Missing` - Record was not found in your DNS
+      # - `Invalid` - Record exists but has an incorrect value
+      # - `null` - Record has not been checked yet
       sig { returns(T.nilable(ArkEmail::DNSRecord::Status::TaggedSymbol)) }
       attr_accessor :status
 
+      # A DNS record that needs to be configured in your domain's DNS settings
       sig do
         params(
           name: String,
@@ -36,18 +37,18 @@ module ArkEmail
         ).returns(T.attached_class)
       end
       def self.new(
-        # DNS record name (hostname)
+        # The hostname where the record should be created (relative to your domain)
         name:,
-        # DNS record type
+        # The DNS record type to create
         type:,
-        # DNS record value
+        # The value to set for the DNS record
         value:,
-        # DNS verification status:
+        # Current verification status of this DNS record:
         #
-        # - `OK` - Record is correctly configured
-        # - `Missing` - Record not found in DNS
-        # - `Invalid` - Record exists but has wrong value
-        # - `null` - Not yet checked
+        # - `OK` - Record is correctly configured and verified
+        # - `Missing` - Record was not found in your DNS
+        # - `Invalid` - Record exists but has an incorrect value
+        # - `null` - Record has not been checked yet
         status: nil
       )
       end
@@ -65,7 +66,7 @@ module ArkEmail
       def to_hash
       end
 
-      # DNS record type
+      # The DNS record type to create
       module Type
         extend ArkEmail::Internal::Type::Enum
 
@@ -83,12 +84,12 @@ module ArkEmail
         end
       end
 
-      # DNS verification status:
+      # Current verification status of this DNS record:
       #
-      # - `OK` - Record is correctly configured
-      # - `Missing` - Record not found in DNS
-      # - `Invalid` - Record exists but has wrong value
-      # - `null` - Not yet checked
+      # - `OK` - Record is correctly configured and verified
+      # - `Missing` - Record was not found in your DNS
+      # - `Invalid` - Record exists but has an incorrect value
+      # - `null` - Record has not been checked yet
       module Status
         extend ArkEmail::Internal::Type::Enum
 

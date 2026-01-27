@@ -4,30 +4,30 @@ module ArkEmail
   module Models
     class DNSRecord < ArkEmail::Internal::Type::BaseModel
       # @!attribute name
-      #   DNS record name (hostname)
+      #   The hostname where the record should be created (relative to your domain)
       #
       #   @return [String]
       required :name, String
 
       # @!attribute type
-      #   DNS record type
+      #   The DNS record type to create
       #
       #   @return [Symbol, ArkEmail::Models::DNSRecord::Type]
       required :type, enum: -> { ArkEmail::DNSRecord::Type }
 
       # @!attribute value
-      #   DNS record value
+      #   The value to set for the DNS record
       #
       #   @return [String]
       required :value, String
 
       # @!attribute status
-      #   DNS verification status:
+      #   Current verification status of this DNS record:
       #
-      #   - `OK` - Record is correctly configured
-      #   - `Missing` - Record not found in DNS
-      #   - `Invalid` - Record exists but has wrong value
-      #   - `null` - Not yet checked
+      #   - `OK` - Record is correctly configured and verified
+      #   - `Missing` - Record was not found in your DNS
+      #   - `Invalid` - Record exists but has an incorrect value
+      #   - `null` - Record has not been checked yet
       #
       #   @return [Symbol, ArkEmail::Models::DNSRecord::Status, nil]
       optional :status, enum: -> { ArkEmail::DNSRecord::Status }, nil?: true
@@ -36,15 +36,17 @@ module ArkEmail
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::DNSRecord} for more details.
       #
-      #   @param name [String] DNS record name (hostname)
+      #   A DNS record that needs to be configured in your domain's DNS settings
       #
-      #   @param type [Symbol, ArkEmail::Models::DNSRecord::Type] DNS record type
+      #   @param name [String] The hostname where the record should be created (relative to your domain)
       #
-      #   @param value [String] DNS record value
+      #   @param type [Symbol, ArkEmail::Models::DNSRecord::Type] The DNS record type to create
       #
-      #   @param status [Symbol, ArkEmail::Models::DNSRecord::Status, nil] DNS verification status:
+      #   @param value [String] The value to set for the DNS record
+      #
+      #   @param status [Symbol, ArkEmail::Models::DNSRecord::Status, nil] Current verification status of this DNS record:
 
-      # DNS record type
+      # The DNS record type to create
       #
       # @see ArkEmail::Models::DNSRecord#type
       module Type
@@ -58,12 +60,12 @@ module ArkEmail
         #   @return [Array<Symbol>]
       end
 
-      # DNS verification status:
+      # Current verification status of this DNS record:
       #
-      # - `OK` - Record is correctly configured
-      # - `Missing` - Record not found in DNS
-      # - `Invalid` - Record exists but has wrong value
-      # - `null` - Not yet checked
+      # - `OK` - Record is correctly configured and verified
+      # - `Missing` - Record was not found in your DNS
+      # - `Invalid` - Record exists but has an incorrect value
+      # - `null` - Record has not been checked yet
       #
       # @see ArkEmail::Models::DNSRecord#status
       module Status

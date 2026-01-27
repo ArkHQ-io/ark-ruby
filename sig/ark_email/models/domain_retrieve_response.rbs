@@ -28,9 +28,9 @@ module ArkEmail
 
       type data =
         {
-          id: String,
+          id: Integer,
           created_at: Time,
-          dns_records: ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords,
+          dns_records: ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords?,
           name: String,
           uuid: String,
           verified: bool,
@@ -38,11 +38,11 @@ module ArkEmail
         }
 
       class Data < ArkEmail::Internal::Type::BaseModel
-        attr_accessor id: String
+        attr_accessor id: Integer
 
         attr_accessor created_at: Time
 
-        attr_accessor dns_records: ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords
+        attr_accessor dns_records: ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords?
 
         attr_accessor name: String
 
@@ -53,9 +53,9 @@ module ArkEmail
         attr_accessor verified_at: Time?
 
         def initialize: (
-          id: String,
+          id: Integer,
           created_at: Time,
-          dns_records: ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords,
+          dns_records: ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords?,
           name: String,
           uuid: String,
           verified: bool,
@@ -63,9 +63,9 @@ module ArkEmail
         ) -> void
 
         def to_hash: -> {
-          id: String,
+          id: Integer,
           created_at: Time,
-          dns_records: ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords,
+          dns_records: ArkEmail::Models::DomainRetrieveResponse::Data::DNSRecords?,
           name: String,
           uuid: String,
           verified: bool,
@@ -74,28 +74,28 @@ module ArkEmail
 
         type dns_records =
           {
-            dkim: ArkEmail::DNSRecord,
-            return_path: ArkEmail::DNSRecord,
-            spf: ArkEmail::DNSRecord
+            dkim: ArkEmail::DNSRecord?,
+            return_path: ArkEmail::DNSRecord?,
+            spf: ArkEmail::DNSRecord?
           }
 
         class DNSRecords < ArkEmail::Internal::Type::BaseModel
-          attr_accessor dkim: ArkEmail::DNSRecord
+          attr_accessor dkim: ArkEmail::DNSRecord?
 
-          attr_accessor return_path: ArkEmail::DNSRecord
+          attr_accessor return_path: ArkEmail::DNSRecord?
 
-          attr_accessor spf: ArkEmail::DNSRecord
+          attr_accessor spf: ArkEmail::DNSRecord?
 
           def initialize: (
-            dkim: ArkEmail::DNSRecord,
-            return_path: ArkEmail::DNSRecord,
-            spf: ArkEmail::DNSRecord
+            ?dkim: ArkEmail::DNSRecord?,
+            ?return_path: ArkEmail::DNSRecord?,
+            ?spf: ArkEmail::DNSRecord?
           ) -> void
 
           def to_hash: -> {
-            dkim: ArkEmail::DNSRecord,
-            return_path: ArkEmail::DNSRecord,
-            spf: ArkEmail::DNSRecord
+            dkim: ArkEmail::DNSRecord?,
+            return_path: ArkEmail::DNSRecord?,
+            spf: ArkEmail::DNSRecord?
           }
         end
       end
