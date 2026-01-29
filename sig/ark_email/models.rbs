@@ -59,6 +59,8 @@ module ArkEmail
 
   class TrackingVerifyParams = ArkEmail::Models::TrackingVerifyParams
 
+  class UsageRetrieveParams = ArkEmail::Models::UsageRetrieveParams
+
   class WebhookCreateParams = ArkEmail::Models::WebhookCreateParams
 
   class WebhookDeleteParams = ArkEmail::Models::WebhookDeleteParams

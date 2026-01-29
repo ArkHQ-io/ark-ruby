@@ -106,8 +106,6 @@ module ArkEmail
           | :MessageLinkClicked
           | :MessageLoaded
           | :DomainDNSError
-          | :SendLimitApproaching
-          | :SendLimitExceeded
 
         module Event
           extend ArkEmail::Internal::Type::Enum
@@ -120,8 +118,6 @@ module ArkEmail
           MESSAGE_LINK_CLICKED: :MessageLinkClicked
           MESSAGE_LOADED: :MessageLoaded
           DOMAIN_DNS_ERROR: :DomainDNSError
-          SEND_LIMIT_APPROACHING: :SendLimitApproaching
-          SEND_LIMIT_EXCEEDED: :SendLimitExceeded
 
           def self?.values: -> ::Array[ArkEmail::Models::WebhookRetrieveDeliveryResponse::Data::event]
         end

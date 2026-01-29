@@ -99,6 +99,8 @@ module ArkEmail
 
   TrackingVerifyParams = ArkEmail::Models::TrackingVerifyParams
 
+  UsageRetrieveParams = ArkEmail::Models::UsageRetrieveParams
+
   WebhookCreateParams = ArkEmail::Models::WebhookCreateParams
 
   WebhookDeleteParams = ArkEmail::Models::WebhookDeleteParams
