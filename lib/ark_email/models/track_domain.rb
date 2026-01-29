@@ -16,7 +16,8 @@ module ArkEmail
       required :created_at, Time, api_name: :createdAt
 
       # @!attribute dns_ok
-      #   Whether DNS is correctly configured
+      #   Whether the tracking CNAME record is correctly configured. Must be true to use
+      #   tracking features.
       #
       #   @return [Boolean]
       required :dns_ok, ArkEmail::Internal::Type::Boolean, api_name: :dnsOk
@@ -94,11 +95,14 @@ module ArkEmail
       optional :updated_at, Time, api_name: :updatedAt, nil?: true
 
       # @!method initialize(id:, created_at:, dns_ok:, domain_id:, full_name:, name:, ssl_enabled:, track_clicks:, track_opens:, dns_checked_at: nil, dns_error: nil, dns_record: nil, dns_status: nil, excluded_click_domains: nil, updated_at: nil)
+      #   Some parameter documentations has been truncated, see
+      #   {ArkEmail::Models::TrackDomain} for more details.
+      #
       #   @param id [String] Track domain ID
       #
       #   @param created_at [Time] When the track domain was created
       #
-      #   @param dns_ok [Boolean] Whether DNS is correctly configured
+      #   @param dns_ok [Boolean] Whether the tracking CNAME record is correctly configured. Must be true to use t
       #
       #   @param domain_id [String] ID of the parent sending domain
       #

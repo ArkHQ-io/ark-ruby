@@ -40,30 +40,18 @@ module ArkEmail
           domains: ::Array[ArkEmail::Models::DomainListResponse::Data::Domain]
         }
 
-        type domain = { id: String, dns_ok: bool, name: String, verified: bool }
+        type domain = { id: Integer, name: String, verified: bool }
 
         class Domain < ArkEmail::Internal::Type::BaseModel
-          attr_accessor id: String
-
-          attr_accessor dns_ok: bool
+          attr_accessor id: Integer
 
           attr_accessor name: String
 
           attr_accessor verified: bool
 
-          def initialize: (
-            id: String,
-            dns_ok: bool,
-            name: String,
-            verified: bool
-          ) -> void
+          def initialize: (id: Integer, name: String, verified: bool) -> void
 
-          def to_hash: -> {
-            id: String,
-            dns_ok: bool,
-            name: String,
-            verified: bool
-          }
+          def to_hash: -> { id: Integer, name: String, verified: bool }
         end
       end
     end

@@ -16,7 +16,8 @@ module ArkEmail
       sig { returns(Time) }
       attr_accessor :created_at
 
-      # Whether DNS is correctly configured
+      # Whether the tracking CNAME record is correctly configured. Must be true to use
+      # tracking features.
       sig { returns(T::Boolean) }
       attr_accessor :dns_ok
 
@@ -99,7 +100,8 @@ module ArkEmail
         id:,
         # When the track domain was created
         created_at:,
-        # Whether DNS is correctly configured
+        # Whether the tracking CNAME record is correctly configured. Must be true to use
+        # tracking features.
         dns_ok:,
         # ID of the parent sending domain
         domain_id:,

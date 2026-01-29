@@ -6,29 +6,55 @@ module ArkEmail
       OrHash =
         T.type_alias { T.any(ArkEmail::DNSRecord, ArkEmail::Internal::AnyHash) }
 
-      # DNS record name (hostname)
+      # The complete fully-qualified domain name (FQDN). Use this as a reference to
+      # verify the record is configured correctly.
+      sig { returns(String) }
+      attr_accessor :full_name
+
+      # The relative hostname to enter in your DNS provider. Most DNS providers
+      # auto-append the zone name, so you only need to enter this relative part.
+      #
+      # - `"@"` means the apex/root of the zone (for root domains)
+      # - `"mail"` for a subdomain like `mail.example.com`
+      # - `"ark-xyz._domainkey.mail"` for DKIM on a subdomain
       sig { returns(String) }
       attr_accessor :name
 
-      # DNS record type
+      # The DNS record type to create
       sig { returns(ArkEmail::DNSRecord::Type::TaggedSymbol) }
       attr_accessor :type
 
-      # DNS record value
+      # The value to set for the DNS record
       sig { returns(String) }
       attr_accessor :value
 
-      # DNS verification status:
+      # Current verification status of this DNS record:
       #
-      # - `OK` - Record is correctly configured
-      # - `Missing` - Record not found in DNS
-      # - `Invalid` - Record exists but has wrong value
-      # - `null` - Not yet checked
+      # - `OK` - Record is correctly configured and verified
+      # - `Missing` - Record was not found in your DNS
+      # - `Invalid` - Record exists but has an incorrect value
+      # - `null` - Record has not been checked yet
       sig { returns(T.nilable(ArkEmail::DNSRecord::Status::TaggedSymbol)) }
       attr_accessor :status
 
+      # A DNS record that needs to be configured in your domain's DNS settings.
+      #
+      # The `name` field contains the relative hostname to enter in your DNS provider
+      # (which auto-appends the zone). The `fullName` field contains the complete
+      # fully-qualified domain name (FQDN) for reference.
+      #
+      # **Example for subdomain `mail.example.com`:**
+      #
+      # - `name`: `"mail"` (what you enter in DNS provider)
+      # - `fullName`: `"mail.example.com"` (the complete hostname)
+      #
+      # **Example for root domain `example.com`:**
+      #
+      # - `name`: `"@"` (DNS shorthand for apex/root)
+      # - `fullName`: `"example.com"`
       sig do
         params(
+          full_name: String,
           name: String,
           type: ArkEmail::DNSRecord::Type::OrSymbol,
           value: String,
@@ -36,18 +62,26 @@ module ArkEmail
         ).returns(T.attached_class)
       end
       def self.new(
-        # DNS record name (hostname)
-        name:,
-        # DNS record type
-        type:,
-        # DNS record value
-        value:,
-        # DNS verification status:
+        # The complete fully-qualified domain name (FQDN). Use this as a reference to
+        # verify the record is configured correctly.
+        full_name:,
+        # The relative hostname to enter in your DNS provider. Most DNS providers
+        # auto-append the zone name, so you only need to enter this relative part.
         #
-        # - `OK` - Record is correctly configured
-        # - `Missing` - Record not found in DNS
-        # - `Invalid` - Record exists but has wrong value
-        # - `null` - Not yet checked
+        # - `"@"` means the apex/root of the zone (for root domains)
+        # - `"mail"` for a subdomain like `mail.example.com`
+        # - `"ark-xyz._domainkey.mail"` for DKIM on a subdomain
+        name:,
+        # The DNS record type to create
+        type:,
+        # The value to set for the DNS record
+        value:,
+        # Current verification status of this DNS record:
+        #
+        # - `OK` - Record is correctly configured and verified
+        # - `Missing` - Record was not found in your DNS
+        # - `Invalid` - Record exists but has an incorrect value
+        # - `null` - Record has not been checked yet
         status: nil
       )
       end
@@ -55,6 +89,7 @@ module ArkEmail
       sig do
         override.returns(
           {
+            full_name: String,
             name: String,
             type: ArkEmail::DNSRecord::Type::TaggedSymbol,
             value: String,
@@ -65,7 +100,7 @@ module ArkEmail
       def to_hash
       end
 
-      # DNS record type
+      # The DNS record type to create
       module Type
         extend ArkEmail::Internal::Type::Enum
 
@@ -83,12 +118,12 @@ module ArkEmail
         end
       end
 
-      # DNS verification status:
+      # Current verification status of this DNS record:
       #
-      # - `OK` - Record is correctly configured
-      # - `Missing` - Record not found in DNS
-      # - `Invalid` - Record exists but has wrong value
-      # - `null` - Not yet checked
+      # - `OK` - Record is correctly configured and verified
+      # - `Missing` - Record was not found in your DNS
+      # - `Invalid` - Record exists but has an incorrect value
+      # - `null` - Record has not been checked yet
       module Status
         extend ArkEmail::Internal::Type::Enum
 
