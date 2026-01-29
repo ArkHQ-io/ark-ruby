@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.15.0 (2026-01-29)
+
+Full Changelog: [v0.14.0...v0.15.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.14.0...v0.15.0)
+
+### Features
+
+* **api:** add usage and SendLimit Headers ([82a3ef2](https://github.com/ArkHQ-io/ark-ruby/commit/82a3ef2e4e91a97d9194304c82c1fe3daa9c6d7b))
+* **api:** api update ([5e6a325](https://github.com/ArkHQ-io/ark-ruby/commit/5e6a325e656a4708985e0f9b02adec7947ceff3d))
+* **api:** domain list improvement ([c5dd0aa](https://github.com/ArkHQ-io/ark-ruby/commit/c5dd0aae60d7bd626b13c34dab6a502832fe50d7))
+
+
+### Bug Fixes
+
+* **docs:** fix mcp installation instructions for remote servers ([c5e6779](https://github.com/ArkHQ-io/ark-ruby/commit/c5e677982f2b09306b5cff24e6bb1c563a121f3b))
+
 ## 0.14.0 (2026-01-25)
 
 Full Changelog: [v0.13.0...v0.14.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.13.0...v0.14.0)

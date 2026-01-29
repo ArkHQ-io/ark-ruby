@@ -37,34 +37,33 @@ module ArkEmail
 
         class Domain < ArkEmail::Internal::Type::BaseModel
           # @!attribute id
-          #   Domain ID
+          #   Unique domain identifier
           #
-          #   @return [String]
-          required :id, String
-
-          # @!attribute dns_ok
-          #
-          #   @return [Boolean]
-          required :dns_ok, ArkEmail::Internal::Type::Boolean, api_name: :dnsOk
+          #   @return [Integer]
+          required :id, Integer
 
           # @!attribute name
+          #   The domain name used for sending emails
           #
           #   @return [String]
           required :name, String
 
           # @!attribute verified
+          #   Whether all DNS records (SPF, DKIM, Return Path) are correctly configured.
+          #   Domain must be verified before sending emails.
           #
           #   @return [Boolean]
           required :verified, ArkEmail::Internal::Type::Boolean
 
-          # @!method initialize(id:, dns_ok:, name:, verified:)
-          #   @param id [String] Domain ID
+          # @!method initialize(id:, name:, verified:)
+          #   Some parameter documentations has been truncated, see
+          #   {ArkEmail::Models::DomainListResponse::Data::Domain} for more details.
           #
-          #   @param dns_ok [Boolean]
+          #   @param id [Integer] Unique domain identifier
           #
-          #   @param name [String]
+          #   @param name [String] The domain name used for sending emails
           #
-          #   @param verified [Boolean]
+          #   @param verified [Boolean] Whether all DNS records (SPF, DKIM, Return Path) are correctly configured. Domai
         end
       end
     end

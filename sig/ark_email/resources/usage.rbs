@@ -1,0 +1,11 @@
+module ArkEmail
+  module Resources
+    class Usage
+      def retrieve: (
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::UsageRetrieveResponse
+
+      def initialize: (client: ArkEmail::Client) -> void
+    end
+  end
+end
