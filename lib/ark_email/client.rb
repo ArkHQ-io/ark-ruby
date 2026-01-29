@@ -42,6 +42,9 @@ module ArkEmail
     # @return [ArkEmail::Resources::Logs]
     attr_reader :logs
 
+    # @return [ArkEmail::Resources::Usage]
+    attr_reader :usage
+
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -101,6 +104,7 @@ module ArkEmail
       @webhooks = ArkEmail::Resources::Webhooks.new(client: self)
       @tracking = ArkEmail::Resources::Tracking.new(client: self)
       @logs = ArkEmail::Resources::Logs.new(client: self)
+      @usage = ArkEmail::Resources::Usage.new(client: self)
     end
   end
 end
