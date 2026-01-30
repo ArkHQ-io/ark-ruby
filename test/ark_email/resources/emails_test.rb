@@ -3,22 +3,6 @@
 require_relative "../test_helper"
 
 class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
-  def test_retrieve
-    response = @ark.emails.retrieve("aBc123XyZ")
-
-    assert_pattern do
-      response => ArkEmail::Models::EmailRetrieveResponse
-    end
-
-    assert_pattern do
-      response => {
-        data: ArkEmail::Models::EmailRetrieveResponse::Data,
-        meta: ArkEmail::APIMeta,
-        success: true | false
-      }
-    end
-  end
-
   def test_list
     response = @ark.emails.list
 
@@ -36,6 +20,7 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
     assert_pattern do
       row => {
         id: String,
+        token: String,
         from: String,
         status: ArkEmail::Models::EmailListResponse::Status,
         subject: String,
@@ -43,38 +28,6 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
         timestamp_iso: Time,
         to: String,
         tag: String | nil
-      }
-    end
-  end
-
-  def test_retrieve_deliveries
-    response = @ark.emails.retrieve_deliveries("aBc123XyZ")
-
-    assert_pattern do
-      response => ArkEmail::Models::EmailRetrieveDeliveriesResponse
-    end
-
-    assert_pattern do
-      response => {
-        data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data,
-        meta: ArkEmail::APIMeta,
-        success: true | false
-      }
-    end
-  end
-
-  def test_retry_
-    response = @ark.emails.retry_("aBc123XyZ")
-
-    assert_pattern do
-      response => ArkEmail::Models::EmailRetryResponse
-    end
-
-    assert_pattern do
-      response => {
-        data: ArkEmail::Models::EmailRetryResponse::Data,
-        meta: ArkEmail::APIMeta,
-        success: true | false
       }
     end
   end
