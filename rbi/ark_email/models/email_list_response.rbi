@@ -11,12 +11,9 @@ module ArkEmail
           )
         end
 
-      # Internal message ID
+      # Unique message identifier (token)
       sig { returns(String) }
       attr_accessor :id
-
-      sig { returns(String) }
-      attr_accessor :token
 
       sig { returns(String) }
       attr_accessor :from
@@ -53,7 +50,6 @@ module ArkEmail
       sig do
         params(
           id: String,
-          token: String,
           from: String,
           status: ArkEmail::Models::EmailListResponse::Status::OrSymbol,
           subject: String,
@@ -64,9 +60,8 @@ module ArkEmail
         ).returns(T.attached_class)
       end
       def self.new(
-        # Internal message ID
+        # Unique message identifier (token)
         id:,
-        token:,
         from:,
         # Current delivery status:
         #
@@ -89,7 +84,6 @@ module ArkEmail
         override.returns(
           {
             id: String,
-            token: String,
             from: String,
             status: ArkEmail::Models::EmailListResponse::Status::TaggedSymbol,
             subject: String,

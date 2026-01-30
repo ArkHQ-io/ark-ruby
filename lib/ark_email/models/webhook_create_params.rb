@@ -75,8 +75,6 @@ module ArkEmail
         MESSAGE_LINK_CLICKED = :MessageLinkClicked
         MESSAGE_LOADED = :MessageLoaded
         DOMAIN_DNS_ERROR = :DomainDNSError
-        SEND_LIMIT_APPROACHING = :SendLimitApproaching
-        SEND_LIMIT_EXCEEDED = :SendLimitExceeded
 
         # @!method self.values
         #   @return [Array<Symbol>]
