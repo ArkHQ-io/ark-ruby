@@ -1,0 +1,190 @@
+module ArkEmail
+  module Models
+    type email_retrieve_deliveries_response =
+      {
+        data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class EmailRetrieveDeliveriesResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        {
+          id: String,
+          can_retry_manually: bool,
+          deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
+          retry_state: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState?,
+          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor id: String
+
+        attr_accessor can_retry_manually: bool
+
+        attr_accessor deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery]
+
+        attr_accessor retry_state: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState?
+
+        attr_accessor status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status
+
+        def initialize: (
+          id: String,
+          can_retry_manually: bool,
+          deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
+          retry_state: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState?,
+          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status
+        ) -> void
+
+        def to_hash: -> {
+          id: String,
+          can_retry_manually: bool,
+          deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
+          retry_state: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState?,
+          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status
+        }
+
+        type delivery =
+          {
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            code: Integer,
+            details: String,
+            output: String,
+            sent_with_ssl: bool
+          }
+
+        class Delivery < ArkEmail::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor status: String
+
+          attr_accessor timestamp: Float
+
+          attr_accessor timestamp_iso: Time
+
+          attr_reader code: Integer?
+
+          def code=: (Integer) -> Integer
+
+          attr_reader details: String?
+
+          def details=: (String) -> String
+
+          attr_reader output: String?
+
+          def output=: (String) -> String
+
+          attr_reader sent_with_ssl: bool?
+
+          def sent_with_ssl=: (bool) -> bool
+
+          def initialize: (
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            ?code: Integer,
+            ?details: String,
+            ?output: String,
+            ?sent_with_ssl: bool
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            status: String,
+            timestamp: Float,
+            timestamp_iso: Time,
+            code: Integer,
+            details: String,
+            output: String,
+            sent_with_ssl: bool
+          }
+        end
+
+        type retry_state =
+          {
+            attempt: Integer,
+            attempts_remaining: Integer,
+            manual: bool,
+            max_attempts: Integer,
+            processing: bool,
+            next_retry_at: Float?,
+            next_retry_at_iso: Time?
+          }
+
+        class RetryState < ArkEmail::Internal::Type::BaseModel
+          attr_accessor attempt: Integer
+
+          attr_accessor attempts_remaining: Integer
+
+          attr_accessor manual: bool
+
+          attr_accessor max_attempts: Integer
+
+          attr_accessor processing: bool
+
+          attr_accessor next_retry_at: Float?
+
+          attr_accessor next_retry_at_iso: Time?
+
+          def initialize: (
+            attempt: Integer,
+            attempts_remaining: Integer,
+            manual: bool,
+            max_attempts: Integer,
+            processing: bool,
+            ?next_retry_at: Float?,
+            ?next_retry_at_iso: Time?
+          ) -> void
+
+          def to_hash: -> {
+            attempt: Integer,
+            attempts_remaining: Integer,
+            manual: bool,
+            max_attempts: Integer,
+            processing: bool,
+            next_retry_at: Float?,
+            next_retry_at_iso: Time?
+          }
+        end
+
+        type status =
+          :pending | :sent | :softfail | :hardfail | :held | :bounced
+
+        module Status
+          extend ArkEmail::Internal::Type::Enum
+
+          PENDING: :pending
+          SENT: :sent
+          SOFTFAIL: :softfail
+          HARDFAIL: :hardfail
+          HELD: :held
+          BOUNCED: :bounced
+
+          def self?.values: -> ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status]
+        end
+      end
+    end
+  end
+end

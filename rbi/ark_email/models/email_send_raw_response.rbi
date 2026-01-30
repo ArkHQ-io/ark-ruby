@@ -59,7 +59,7 @@ module ArkEmail
             )
           end
 
-        # Unique message ID (format: msg*{id}*{token})
+        # Unique message identifier (token)
         sig { returns(String) }
         attr_accessor :id
 
@@ -101,7 +101,7 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
-          # Unique message ID (format: msg*{id}*{token})
+          # Unique message identifier (token)
           id:,
           # Current delivery status
           status:,

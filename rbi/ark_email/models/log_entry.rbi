@@ -323,7 +323,7 @@ module ArkEmail
             T.any(ArkEmail::LogEntry::Email, ArkEmail::Internal::AnyHash)
           end
 
-        # Email message ID
+        # Email message identifier (token)
         sig { returns(T.nilable(String)) }
         attr_reader :id
 
@@ -341,7 +341,7 @@ module ArkEmail
           )
         end
         def self.new(
-          # Email message ID
+          # Email message identifier (token)
           id: nil,
           # Number of recipients
           recipient_count: nil
