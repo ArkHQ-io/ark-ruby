@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.18.0 (2026-01-30)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* **api:** api update ([787e993](https://github.com/ArkHQ-io/ark-ruby/commit/787e99301d21537f66833fdebe070ad6473fa7b2))
+
 ## 0.17.0 (2026-01-30)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.16.0...v0.17.0)
