@@ -144,16 +144,6 @@ module ArkEmail
             :DomainDNSError,
             ArkEmail::WebhookCreateParams::Event::TaggedSymbol
           )
-        SEND_LIMIT_APPROACHING =
-          T.let(
-            :SendLimitApproaching,
-            ArkEmail::WebhookCreateParams::Event::TaggedSymbol
-          )
-        SEND_LIMIT_EXCEEDED =
-          T.let(
-            :SendLimitExceeded,
-            ArkEmail::WebhookCreateParams::Event::TaggedSymbol
-          )
 
         sig do
           override.returns(
