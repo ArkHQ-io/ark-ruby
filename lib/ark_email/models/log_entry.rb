@@ -231,7 +231,7 @@ module ArkEmail
       # @see ArkEmail::Models::LogEntry#email
       class Email < ArkEmail::Internal::Type::BaseModel
         # @!attribute id
-        #   Email message identifier (token)
+        #   Email message ID
         #
         #   @return [String, nil]
         optional :id, String
@@ -245,7 +245,7 @@ module ArkEmail
         # @!method initialize(id: nil, recipient_count: nil)
         #   Email-specific data (for email endpoints)
         #
-        #   @param id [String] Email message identifier (token)
+        #   @param id [String] Email message ID
         #
         #   @param recipient_count [Integer, nil] Number of recipients
       end

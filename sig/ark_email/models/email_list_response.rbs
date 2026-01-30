@@ -3,6 +3,7 @@ module ArkEmail
     type email_list_response =
       {
         id: String,
+        token: String,
         from: String,
         status: ArkEmail::Models::EmailListResponse::status,
         subject: String,
@@ -14,6 +15,8 @@ module ArkEmail
 
     class EmailListResponse < ArkEmail::Internal::Type::BaseModel
       attr_accessor id: String
+
+      attr_accessor token: String
 
       attr_accessor from: String
 
@@ -33,6 +36,7 @@ module ArkEmail
 
       def initialize: (
         id: String,
+        token: String,
         from: String,
         status: ArkEmail::Models::EmailListResponse::status,
         subject: String,
@@ -44,6 +48,7 @@ module ArkEmail
 
       def to_hash: -> {
         id: String,
+        token: String,
         from: String,
         status: ArkEmail::Models::EmailListResponse::status,
         subject: String,

@@ -74,13 +74,20 @@ module ArkEmail
 
         class Message < ArkEmail::Internal::Type::BaseModel
           # @!attribute id
-          #   Message identifier (token)
+          #   Message ID
           #
           #   @return [String]
           required :id, String
 
-          # @!method initialize(id:)
-          #   @param id [String] Message identifier (token)
+          # @!attribute token
+          #
+          #   @return [String]
+          required :token, String
+
+          # @!method initialize(id:, token:)
+          #   @param id [String] Message ID
+          #
+          #   @param token [String]
         end
       end
     end

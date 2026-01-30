@@ -17,13 +17,6 @@ module ArkEmail
 
   EmailListParams = ArkEmail::Models::EmailListParams
 
-  EmailRetrieveDeliveriesParams =
-    ArkEmail::Models::EmailRetrieveDeliveriesParams
-
-  EmailRetrieveParams = ArkEmail::Models::EmailRetrieveParams
-
-  EmailRetryParams = ArkEmail::Models::EmailRetryParams
-
   EmailSendBatchParams = ArkEmail::Models::EmailSendBatchParams
 
   EmailSendParams = ArkEmail::Models::EmailSendParams
