@@ -26,14 +26,16 @@ module ArkEmail
         success: true
       }
 
-      type data = { message: String }
+      type data = { id: String, message: String }
 
       class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor id: String
+
         attr_accessor message: String
 
-        def initialize: (message: String) -> void
+        def initialize: (id: String, message: String) -> void
 
-        def to_hash: -> { message: String }
+        def to_hash: -> { id: String, message: String }
       end
     end
   end

@@ -26,8 +26,14 @@ module ArkEmail
 
       # @see ArkEmail::Models::EmailRetrieveDeliveriesResponse#data
       class Data < ArkEmail::Internal::Type::BaseModel
+        # @!attribute id
+        #   Message identifier (token)
+        #
+        #   @return [String]
+        required :id, String
+
         # @!attribute can_retry_manually
-        #   Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
+        #   Whether the message can be manually retried via `POST /emails/{id}/retry`.
         #   `true` when the raw message content is still available (not expired). Messages
         #   older than the retention period cannot be retried.
         #
@@ -41,18 +47,6 @@ module ArkEmail
         #   @return [Array<ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery>]
         required :deliveries,
                  -> { ArkEmail::Internal::Type::ArrayOf[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery] }
-
-        # @!attribute message_id
-        #   Internal numeric message ID
-        #
-        #   @return [Integer]
-        required :message_id, Integer, api_name: :messageId
-
-        # @!attribute message_token
-        #   Unique message token for API references
-        #
-        #   @return [String]
-        required :message_token, String, api_name: :messageToken
 
         # @!attribute retry_state
         #   Information about the current retry state of a message that is queued for
@@ -77,17 +71,15 @@ module ArkEmail
         #   @return [Symbol, ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status]
         required :status, enum: -> { ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status }
 
-        # @!method initialize(can_retry_manually:, deliveries:, message_id:, message_token:, retry_state:, status:)
+        # @!method initialize(id:, can_retry_manually:, deliveries:, retry_state:, status:)
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data} for more details.
         #
-        #   @param can_retry_manually [Boolean] Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
+        #   @param id [String] Message identifier (token)
+        #
+        #   @param can_retry_manually [Boolean] Whether the message can be manually retried via `POST /emails/{id}/retry`.
         #
         #   @param deliveries [Array<ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery>] Chronological list of delivery attempts for this message.
-        #
-        #   @param message_id [Integer] Internal numeric message ID
-        #
-        #   @param message_token [String] Unique message token for API references
         #
         #   @param retry_state [ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState, nil] Information about the current retry state of a message that is queued for delive
         #

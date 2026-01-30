@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
   def test_retrieve
-    response = @ark.emails.retrieve("emailId")
+    response = @ark.emails.retrieve("aBc123XyZ")
 
     assert_pattern do
       response => ArkEmail::Models::EmailRetrieveResponse
@@ -36,7 +36,6 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
     assert_pattern do
       row => {
         id: String,
-        token: String,
         from: String,
         status: ArkEmail::Models::EmailListResponse::Status,
         subject: String,
@@ -49,7 +48,7 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
   end
 
   def test_retrieve_deliveries
-    response = @ark.emails.retrieve_deliveries("msg_12345_aBc123XyZ")
+    response = @ark.emails.retrieve_deliveries("aBc123XyZ")
 
     assert_pattern do
       response => ArkEmail::Models::EmailRetrieveDeliveriesResponse
@@ -65,7 +64,7 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
   end
 
   def test_retry_
-    response = @ark.emails.retry_("emailId")
+    response = @ark.emails.retry_("aBc123XyZ")
 
     assert_pattern do
       response => ArkEmail::Models::EmailRetryResponse

@@ -26,12 +26,20 @@ module ArkEmail
 
       # @see ArkEmail::Models::EmailRetryResponse#data
       class Data < ArkEmail::Internal::Type::BaseModel
+        # @!attribute id
+        #   Email identifier (token)
+        #
+        #   @return [String]
+        required :id, String
+
         # @!attribute message
         #
         #   @return [String]
         required :message, String
 
-        # @!method initialize(message:)
+        # @!method initialize(id:, message:)
+        #   @param id [String] Email identifier (token)
+        #
         #   @param message [String]
       end
     end

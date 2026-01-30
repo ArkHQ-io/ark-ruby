@@ -10,14 +10,14 @@ module ArkEmail
       # headers, or delivery attempts.
       sig do
         params(
-          email_id: String,
+          id: String,
           expand: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailRetrieveResponse)
       end
       def retrieve(
-        # The email ID (from send response) or message token
-        email_id,
+        # The email identifier (token returned from send response)
+        id,
         # Comma-separated list of fields to include:
         #
         # - `full` - Include all expanded fields in a single request
@@ -119,22 +119,18 @@ module ArkEmail
       #
       # ### Can Retry Manually
       #
-      # Indicates whether you can call `POST /emails/{emailId}/retry` to manually retry
-      # the email. This is `true` when the raw message content is still available (not
+      # Indicates whether you can call `POST /emails/{id}/retry` to manually retry the
+      # email. This is `true` when the raw message content is still available (not
       # expired due to retention policy).
       sig do
         params(
-          email_id: String,
+          id: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailRetrieveDeliveriesResponse)
       end
       def retrieve_deliveries(
-        # Email identifier. Accepts multiple formats:
-        #
-        # - Message ID (numeric): `12345`
-        # - Message token: `aBc123XyZ`
-        # - Combined format: `msg_12345_aBc123XyZ`
-        email_id,
+        # Email identifier (the token returned when sending an email).
+        id,
         request_options: {}
       )
       end
@@ -145,11 +141,15 @@ module ArkEmail
       # Only works for emails that have failed or are in a retryable state.
       sig do
         params(
-          email_id: String,
+          id: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailRetryResponse)
       end
-      def retry_(email_id, request_options: {})
+      def retry_(
+        # The email identifier (token returned from send response)
+        id,
+        request_options: {}
+      )
       end
 
       # Send a single email message. The email is accepted for immediate delivery and
