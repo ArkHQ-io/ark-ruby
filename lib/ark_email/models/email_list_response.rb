@@ -5,10 +5,15 @@ module ArkEmail
     # @see ArkEmail::Resources::Emails#list
     class EmailListResponse < ArkEmail::Internal::Type::BaseModel
       # @!attribute id
-      #   Unique message identifier (token)
+      #   Internal message ID
       #
       #   @return [String]
       required :id, String
+
+      # @!attribute token
+      #
+      #   @return [String]
+      required :token, String
 
       # @!attribute from
       #
@@ -53,11 +58,13 @@ module ArkEmail
       #   @return [String, nil]
       optional :tag, String
 
-      # @!method initialize(id:, from:, status:, subject:, timestamp:, timestamp_iso:, to:, tag: nil)
+      # @!method initialize(id:, token:, from:, status:, subject:, timestamp:, timestamp_iso:, to:, tag: nil)
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::EmailListResponse} for more details.
       #
-      #   @param id [String] Unique message identifier (token)
+      #   @param id [String] Internal message ID
+      #
+      #   @param token [String]
       #
       #   @param from [String]
       #
