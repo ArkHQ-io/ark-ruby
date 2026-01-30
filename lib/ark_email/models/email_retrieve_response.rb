@@ -27,18 +27,10 @@ module ArkEmail
       # @see ArkEmail::Models::EmailRetrieveResponse#data
       class Data < ArkEmail::Internal::Type::BaseModel
         # @!attribute id
-        #   Internal message ID
+        #   Unique message identifier (token)
         #
         #   @return [String]
         required :id, String
-
-        # @!attribute token
-        #   Unique message token used to retrieve this email via API. Combined with id to
-        #   form the full message identifier: msg*{id}*{token} Use this token with GET
-        #   /emails/{emailId} where emailId = "msg*{id}*{token}"
-        #
-        #   @return [String]
-        required :token, String
 
         # @!attribute from
         #   Sender address
@@ -158,13 +150,11 @@ module ArkEmail
         #   @return [String, nil]
         optional :tag, String
 
-        # @!method initialize(id:, token:, from:, scope:, status:, subject:, timestamp:, timestamp_iso:, to:, activity: nil, attachments: nil, deliveries: nil, headers: nil, html_body: nil, message_id: nil, plain_body: nil, raw_message: nil, spam: nil, spam_score: nil, tag: nil)
+        # @!method initialize(id:, from:, scope:, status:, subject:, timestamp:, timestamp_iso:, to:, activity: nil, attachments: nil, deliveries: nil, headers: nil, html_body: nil, message_id: nil, plain_body: nil, raw_message: nil, spam: nil, spam_score: nil, tag: nil)
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::EmailRetrieveResponse::Data} for more details.
         #
-        #   @param id [String] Internal message ID
-        #
-        #   @param token [String] Unique message token used to retrieve this email via API.
+        #   @param id [String] Unique message identifier (token)
         #
         #   @param from [String] Sender address
         #

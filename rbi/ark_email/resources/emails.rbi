@@ -16,7 +16,7 @@ module ArkEmail
         ).returns(ArkEmail::Models::EmailRetrieveResponse)
       end
       def retrieve(
-        # The email ID (from send response) or message token
+        # The email identifier (token returned from send response)
         email_id,
         # Comma-separated list of fields to include:
         #
@@ -129,11 +129,7 @@ module ArkEmail
         ).returns(ArkEmail::Models::EmailRetrieveDeliveriesResponse)
       end
       def retrieve_deliveries(
-        # Email identifier. Accepts multiple formats:
-        #
-        # - Message ID (numeric): `12345`
-        # - Message token: `aBc123XyZ`
-        # - Combined format: `msg_12345_aBc123XyZ`
+        # Email identifier (the token returned when sending an email).
         email_id,
         request_options: {}
       )
@@ -149,7 +145,11 @@ module ArkEmail
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailRetryResponse)
       end
-      def retry_(email_id, request_options: {})
+      def retry_(
+        # The email identifier (token returned from send response)
+        email_id,
+        request_options: {}
+      )
       end
 
       # Send a single email message. The email is accepted for immediate delivery and

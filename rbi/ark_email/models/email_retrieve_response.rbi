@@ -59,15 +59,9 @@ module ArkEmail
             )
           end
 
-        # Internal message ID
+        # Unique message identifier (token)
         sig { returns(String) }
         attr_accessor :id
-
-        # Unique message token used to retrieve this email via API. Combined with id to
-        # form the full message identifier: msg*{id}*{token} Use this token with GET
-        # /emails/{emailId} where emailId = "msg*{id}*{token}"
-        sig { returns(String) }
-        attr_accessor :token
 
         # Sender address
         sig { returns(String) }
@@ -230,7 +224,6 @@ module ArkEmail
         sig do
           params(
             id: String,
-            token: String,
             from: String,
             scope:
               ArkEmail::Models::EmailRetrieveResponse::Data::Scope::OrSymbol,
@@ -261,12 +254,8 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
-          # Internal message ID
+          # Unique message identifier (token)
           id:,
-          # Unique message token used to retrieve this email via API. Combined with id to
-          # form the full message identifier: msg*{id}*{token} Use this token with GET
-          # /emails/{emailId} where emailId = "msg*{id}*{token}"
-          token:,
           # Sender address
           from:,
           # Message direction
@@ -318,7 +307,6 @@ module ArkEmail
           override.returns(
             {
               id: String,
-              token: String,
               from: String,
               scope:
                 ArkEmail::Models::EmailRetrieveResponse::Data::Scope::TaggedSymbol,

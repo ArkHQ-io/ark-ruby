@@ -64,16 +64,14 @@ module ArkEmail
           sandbox: bool
         }
 
-        type message = { id: String, token: String }
+        type message = { id: String }
 
         class Message < ArkEmail::Internal::Type::BaseModel
           attr_accessor id: String
 
-          attr_accessor token: String
+          def initialize: (id: String) -> void
 
-          def initialize: (id: String, token: String) -> void
-
-          def to_hash: -> { id: String, token: String }
+          def to_hash: -> { id: String }
         end
       end
     end
