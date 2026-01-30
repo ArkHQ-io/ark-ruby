@@ -2,7 +2,7 @@ module ArkEmail
   module Resources
     class Emails
       def retrieve: (
-        String email_id,
+        String id,
         ?expand: String,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::EmailRetrieveResponse
@@ -20,12 +20,12 @@ module ArkEmail
       ) -> ArkEmail::Internal::PageNumberPagination[ArkEmail::Models::EmailListResponse]
 
       def retrieve_deliveries: (
-        String email_id,
+        String id,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::EmailRetrieveDeliveriesResponse
 
       def retry_: (
-        String email_id,
+        String id,
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::EmailRetryResponse
 

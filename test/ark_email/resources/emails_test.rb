@@ -36,7 +36,6 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
     assert_pattern do
       row => {
         id: String,
-        token: String,
         from: String,
         status: ArkEmail::Models::EmailListResponse::Status,
         subject: String,

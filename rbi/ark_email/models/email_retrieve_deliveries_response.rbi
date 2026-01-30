@@ -65,7 +65,7 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :id
 
-        # Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
+        # Whether the message can be manually retried via `POST /emails/{id}/retry`.
         # `true` when the raw message content is still available (not expired). Messages
         # older than the retention period cannot be retried.
         sig { returns(T::Boolean) }
@@ -137,7 +137,7 @@ module ArkEmail
         def self.new(
           # Message identifier (token)
           id:,
-          # Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
+          # Whether the message can be manually retried via `POST /emails/{id}/retry`.
           # `true` when the raw message content is still available (not expired). Messages
           # older than the retention period cannot be retried.
           can_retry_manually:,
