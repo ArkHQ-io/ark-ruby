@@ -61,6 +61,10 @@ module ArkEmail
             )
           end
 
+        # Message identifier (token)
+        sig { returns(String) }
+        attr_accessor :id
+
         # Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
         # `true` when the raw message content is still available (not expired). Messages
         # older than the retention period cannot be retried.
@@ -77,14 +81,6 @@ module ArkEmail
           )
         end
         attr_accessor :deliveries
-
-        # Internal numeric message ID
-        sig { returns(Integer) }
-        attr_accessor :message_id
-
-        # Unique message token for API references
-        sig { returns(String) }
-        attr_accessor :message_token
 
         # Information about the current retry state of a message that is queued for
         # delivery. Only present when the message is in the delivery queue.
@@ -124,13 +120,12 @@ module ArkEmail
 
         sig do
           params(
+            id: String,
             can_retry_manually: T::Boolean,
             deliveries:
               T::Array[
                 ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery::OrHash
               ],
-            message_id: Integer,
-            message_token: String,
             retry_state:
               T.nilable(
                 ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState::OrHash
@@ -140,6 +135,8 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
+          # Message identifier (token)
+          id:,
           # Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
           # `true` when the raw message content is still available (not expired). Messages
           # older than the retention period cannot be retried.
@@ -147,10 +144,6 @@ module ArkEmail
           # Chronological list of delivery attempts for this message. Each attempt includes
           # SMTP response codes and timestamps.
           deliveries:,
-          # Internal numeric message ID
-          message_id:,
-          # Unique message token for API references
-          message_token:,
           # Information about the current retry state of a message that is queued for
           # delivery. Only present when the message is in the delivery queue.
           retry_state:,
@@ -169,13 +162,12 @@ module ArkEmail
         sig do
           override.returns(
             {
+              id: String,
               can_retry_manually: T::Boolean,
               deliveries:
                 T::Array[
                   ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery
                 ],
-              message_id: Integer,
-              message_token: String,
               retry_state:
                 T.nilable(
                   ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState

@@ -14,7 +14,7 @@ module ArkEmail
       #
       # @overload retrieve(email_id, expand: nil, request_options: {})
       #
-      # @param email_id [String] The email ID (from send response) or message token
+      # @param email_id [String] The email identifier (token returned from send response)
       #
       # @param expand [String] Comma-separated list of fields to include:
       #
@@ -124,7 +124,7 @@ module ArkEmail
       #
       # @overload retrieve_deliveries(email_id, request_options: {})
       #
-      # @param email_id [String] Email identifier. Accepts multiple formats:
+      # @param email_id [String] Email identifier (the token returned when sending an email).
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -147,7 +147,8 @@ module ArkEmail
       #
       # @overload retry_(email_id, request_options: {})
       #
-      # @param email_id [String]
+      # @param email_id [String] The email identifier (token returned from send response)
+      #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [ArkEmail::Models::EmailRetryResponse]

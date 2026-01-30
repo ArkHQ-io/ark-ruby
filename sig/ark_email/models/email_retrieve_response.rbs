@@ -29,7 +29,6 @@ module ArkEmail
       type data =
         {
           id: String,
-          token: String,
           from: String,
           scope: ArkEmail::Models::EmailRetrieveResponse::Data::scope,
           status: ArkEmail::Models::EmailRetrieveResponse::Data::status,
@@ -52,8 +51,6 @@ module ArkEmail
 
       class Data < ArkEmail::Internal::Type::BaseModel
         attr_accessor id: String
-
-        attr_accessor token: String
 
         attr_accessor from: String
 
@@ -121,7 +118,6 @@ module ArkEmail
 
         def initialize: (
           id: String,
-          token: String,
           from: String,
           scope: ArkEmail::Models::EmailRetrieveResponse::Data::scope,
           status: ArkEmail::Models::EmailRetrieveResponse::Data::status,
@@ -144,7 +140,6 @@ module ArkEmail
 
         def to_hash: -> {
           id: String,
-          token: String,
           from: String,
           scope: ArkEmail::Models::EmailRetrieveResponse::Data::scope,
           status: ArkEmail::Models::EmailRetrieveResponse::Data::status,
