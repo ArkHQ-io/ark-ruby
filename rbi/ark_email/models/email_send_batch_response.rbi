@@ -147,18 +147,22 @@ module ArkEmail
               )
             end
 
-          # Message identifier (token)
+          # Message ID
           sig { returns(String) }
           attr_accessor :id
 
-          sig { params(id: String).returns(T.attached_class) }
+          sig { returns(String) }
+          attr_accessor :token
+
+          sig { params(id: String, token: String).returns(T.attached_class) }
           def self.new(
-            # Message identifier (token)
-            id:
+            # Message ID
+            id:,
+            token:
           )
           end
 
-          sig { override.returns({ id: String }) }
+          sig { override.returns({ id: String, token: String }) }
           def to_hash
           end
         end
