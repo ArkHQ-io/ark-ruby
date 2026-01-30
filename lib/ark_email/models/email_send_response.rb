@@ -27,7 +27,7 @@ module ArkEmail
       # @see ArkEmail::Models::EmailSendResponse#data
       class Data < ArkEmail::Internal::Type::BaseModel
         # @!attribute id
-        #   Unique message ID (format: msg*{id}*{token})
+        #   Unique message identifier (token)
         #
         #   @return [String]
         required :id, String
@@ -61,7 +61,7 @@ module ArkEmail
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::EmailSendResponse::Data} for more details.
         #
-        #   @param id [String] Unique message ID (format: msg*{id}*{token})
+        #   @param id [String] Unique message identifier (token)
         #
         #   @param status [Symbol, ArkEmail::Models::EmailSendResponse::Data::Status] Current delivery status
         #

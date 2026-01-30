@@ -3,6 +3,35 @@
 module ArkEmail
   module Resources
     class Emails
+      # Retrieve detailed information about a specific email including delivery status,
+      # timestamps, and optionally the email content.
+      #
+      # Use the `expand` parameter to include additional data like the HTML/text body,
+      # headers, or delivery attempts.
+      sig do
+        params(
+          id: String,
+          expand: String,
+          request_options: ArkEmail::RequestOptions::OrHash
+        ).returns(ArkEmail::Models::EmailRetrieveResponse)
+      end
+      def retrieve(
+        # The email identifier (token returned from send response)
+        id,
+        # Comma-separated list of fields to include:
+        #
+        # - `full` - Include all expanded fields in a single request
+        # - `content` - HTML and plain text body
+        # - `headers` - Email headers
+        # - `deliveries` - Delivery attempt history
+        # - `activity` - Opens and clicks tracking data
+        # - `attachments` - File attachments with content (base64 encoded)
+        # - `raw` - Complete raw MIME message (base64 encoded)
+        expand: nil,
+        request_options: {}
+      )
+      end
+
       # Retrieve a paginated list of sent emails. Results are ordered by send time,
       # newest first.
       #
@@ -53,6 +82,72 @@ module ArkEmail
         tag: nil,
         # Filter by recipient email address
         to: nil,
+        request_options: {}
+      )
+      end
+
+      # Get the complete delivery history for an email, including SMTP response codes,
+      # timestamps, and current retry state.
+      #
+      # ## Response Fields
+      #
+      # ### Status
+      #
+      # The current status of the email:
+      #
+      # - `pending` - Awaiting first delivery attempt
+      # - `sent` - Successfully delivered to recipient server
+      # - `softfail` - Temporary failure, automatic retry scheduled
+      # - `hardfail` - Permanent failure, will not retry
+      # - `held` - Held for manual review
+      # - `bounced` - Bounced by recipient server
+      #
+      # ### Retry State
+      #
+      # When the email is in the delivery queue (`pending` or `softfail` status),
+      # `retryState` provides information about the retry schedule:
+      #
+      # - `attempt` - Current attempt number (0 = first attempt)
+      # - `maxAttempts` - Maximum attempts before hard-fail (typically 18)
+      # - `attemptsRemaining` - Attempts left before hard-fail
+      # - `nextRetryAt` - When the next retry is scheduled (Unix timestamp)
+      # - `processing` - Whether the email is currently being processed
+      # - `manual` - Whether this was triggered by a manual retry
+      #
+      # When the email has finished processing (`sent`, `hardfail`, `held`, `bounced`),
+      # `retryState` is `null`.
+      #
+      # ### Can Retry Manually
+      #
+      # Indicates whether you can call `POST /emails/{id}/retry` to manually retry the
+      # email. This is `true` when the raw message content is still available (not
+      # expired due to retention policy).
+      sig do
+        params(
+          id: String,
+          request_options: ArkEmail::RequestOptions::OrHash
+        ).returns(ArkEmail::Models::EmailRetrieveDeliveriesResponse)
+      end
+      def retrieve_deliveries(
+        # Email identifier (the token returned when sending an email).
+        id,
+        request_options: {}
+      )
+      end
+
+      # Retry delivery of a failed or soft-bounced email. Creates a new delivery
+      # attempt.
+      #
+      # Only works for emails that have failed or are in a retryable state.
+      sig do
+        params(
+          id: String,
+          request_options: ArkEmail::RequestOptions::OrHash
+        ).returns(ArkEmail::Models::EmailRetryResponse)
+      end
+      def retry_(
+        # The email identifier (token returned from send response)
+        id,
         request_options: {}
       )
       end
