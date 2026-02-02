@@ -347,10 +347,14 @@ module ArkEmail
             status: String,
             timestamp: Float,
             timestamp_iso: Time,
+            classification: ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::classification?,
+            classification_code: Integer?,
             code: Integer,
             details: String,
             output: String,
-            sent_with_ssl: bool
+            remote_host: String?,
+            sent_with_ssl: bool,
+            smtp_enhanced_code: String?
           }
 
         class Delivery < ArkEmail::Internal::Type::BaseModel
@@ -361,6 +365,10 @@ module ArkEmail
           attr_accessor timestamp: Float
 
           attr_accessor timestamp_iso: Time
+
+          attr_accessor classification: ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::classification?
+
+          attr_accessor classification_code: Integer?
 
           attr_reader code: Integer?
 
@@ -374,19 +382,27 @@ module ArkEmail
 
           def output=: (String) -> String
 
+          attr_accessor remote_host: String?
+
           attr_reader sent_with_ssl: bool?
 
           def sent_with_ssl=: (bool) -> bool
+
+          attr_accessor smtp_enhanced_code: String?
 
           def initialize: (
             id: String,
             status: String,
             timestamp: Float,
             timestamp_iso: Time,
+            ?classification: ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::classification?,
+            ?classification_code: Integer?,
             ?code: Integer,
             ?details: String,
             ?output: String,
-            ?sent_with_ssl: bool
+            ?remote_host: String?,
+            ?sent_with_ssl: bool,
+            ?smtp_enhanced_code: String?
           ) -> void
 
           def to_hash: -> {
@@ -394,11 +410,50 @@ module ArkEmail
             status: String,
             timestamp: Float,
             timestamp_iso: Time,
+            classification: ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::classification?,
+            classification_code: Integer?,
             code: Integer,
             details: String,
             output: String,
-            sent_with_ssl: bool
+            remote_host: String?,
+            sent_with_ssl: bool,
+            smtp_enhanced_code: String?
           }
+
+          type classification =
+            :invalid_recipient
+            | :mailbox_full
+            | :message_too_large
+            | :spam_block
+            | :policy_violation
+            | :no_mailbox
+            | :not_accepting_mail
+            | :temporarily_unavailable
+            | :protocol_error
+            | :tls_required
+            | :connection_error
+            | :dns_error
+            | :unclassified
+
+          module Classification
+            extend ArkEmail::Internal::Type::Enum
+
+            INVALID_RECIPIENT: :invalid_recipient
+            MAILBOX_FULL: :mailbox_full
+            MESSAGE_TOO_LARGE: :message_too_large
+            SPAM_BLOCK: :spam_block
+            POLICY_VIOLATION: :policy_violation
+            NO_MAILBOX: :no_mailbox
+            NOT_ACCEPTING_MAIL: :not_accepting_mail
+            TEMPORARILY_UNAVAILABLE: :temporarily_unavailable
+            PROTOCOL_ERROR: :protocol_error
+            TLS_REQUIRED: :tls_required
+            CONNECTION_ERROR: :connection_error
+            DNS_ERROR: :dns_error
+            UNCLASSIFIED: :unclassified
+
+            def self?.values: -> ::Array[ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::classification]
+          end
         end
       end
     end
