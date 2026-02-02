@@ -212,14 +212,18 @@ module ArkEmail
           sig { params(code: Integer).void }
           attr_writer :code
 
-          # Status details
+          # Human-readable delivery summary. Format varies by status:
+          #
+          # - **sent**: `Message for {recipient} accepted by {ip}:{port} ({hostname})`
+          # - **softfail/hardfail**:
+          #   `{code} {classification}: Delivery to {recipient} failed at {ip}:{port} ({hostname})`
           sig { returns(T.nilable(String)) }
           attr_reader :details
 
           sig { params(details: String).void }
           attr_writer :details
 
-          # SMTP server response from the receiving mail server
+          # Raw SMTP response from the receiving mail server
           sig { returns(T.nilable(String)) }
           attr_reader :output
 
@@ -256,9 +260,13 @@ module ArkEmail
             timestamp_iso:,
             # SMTP response code
             code: nil,
-            # Status details
+            # Human-readable delivery summary. Format varies by status:
+            #
+            # - **sent**: `Message for {recipient} accepted by {ip}:{port} ({hostname})`
+            # - **softfail/hardfail**:
+            #   `{code} {classification}: Delivery to {recipient} failed at {ip}:{port} ({hostname})`
             details: nil,
-            # SMTP server response from the receiving mail server
+            # Raw SMTP response from the receiving mail server
             output: nil,
             # Whether TLS was used
             sent_with_ssl: nil
