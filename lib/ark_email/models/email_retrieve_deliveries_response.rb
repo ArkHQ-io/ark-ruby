@@ -117,13 +117,17 @@ module ArkEmail
           optional :code, Integer
 
           # @!attribute details
-          #   Status details
+          #   Human-readable delivery summary. Format varies by status:
+          #
+          #   - **sent**: `Message for {recipient} accepted by {ip}:{port} ({hostname})`
+          #   - **softfail/hardfail**:
+          #     `{code} {classification}: Delivery to {recipient} failed at {ip}:{port} ({hostname})`
           #
           #   @return [String, nil]
           optional :details, String
 
           # @!attribute output
-          #   SMTP server response from the receiving mail server
+          #   Raw SMTP response from the receiving mail server
           #
           #   @return [String, nil]
           optional :output, String
@@ -135,6 +139,10 @@ module ArkEmail
           optional :sent_with_ssl, ArkEmail::Internal::Type::Boolean, api_name: :sentWithSsl
 
           # @!method initialize(id:, status:, timestamp:, timestamp_iso:, code: nil, details: nil, output: nil, sent_with_ssl: nil)
+          #   Some parameter documentations has been truncated, see
+          #   {ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery} for more
+          #   details.
+          #
           #   @param id [String] Delivery attempt ID
           #
           #   @param status [String] Delivery status (lowercase)
@@ -145,9 +153,9 @@ module ArkEmail
           #
           #   @param code [Integer] SMTP response code
           #
-          #   @param details [String] Status details
+          #   @param details [String] Human-readable delivery summary. Format varies by status:
           #
-          #   @param output [String] SMTP server response from the receiving mail server
+          #   @param output [String] Raw SMTP response from the receiving mail server
           #
           #   @param sent_with_ssl [Boolean] Whether TLS was used
         end
