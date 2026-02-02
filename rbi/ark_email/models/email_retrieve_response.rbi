@@ -774,6 +774,25 @@ module ArkEmail
           sig { returns(Time) }
           attr_accessor :timestamp_iso
 
+          # Bounce classification category (present for failed deliveries). Helps understand
+          # why delivery failed for analytics and automated handling.
+          sig do
+            returns(
+              T.nilable(
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            )
+          end
+          attr_accessor :classification
+
+          # Numeric bounce classification code for programmatic handling. Codes:
+          # 10=invalid_recipient, 11=no_mailbox, 12=not_accepting_mail, 20=mailbox_full,
+          # 21=message_too_large, 30=spam_block, 31=policy_violation, 32=tls_required,
+          # 40=connection_error, 41=dns_error, 42=temporarily_unavailable,
+          # 50=protocol_error, 99=unclassified
+          sig { returns(T.nilable(Integer)) }
+          attr_accessor :classification_code
+
           # SMTP response code
           sig { returns(T.nilable(Integer)) }
           attr_reader :code
@@ -799,6 +818,11 @@ module ArkEmail
           sig { params(output: String).void }
           attr_writer :output
 
+          # Hostname of the remote mail server that processed the delivery. Present for all
+          # delivery attempts (successful and failed).
+          sig { returns(T.nilable(String)) }
+          attr_accessor :remote_host
+
           # Whether TLS was used
           sig { returns(T.nilable(T::Boolean)) }
           attr_reader :sent_with_ssl
@@ -806,16 +830,29 @@ module ArkEmail
           sig { params(sent_with_ssl: T::Boolean).void }
           attr_writer :sent_with_ssl
 
+          # RFC 3463 enhanced status code from SMTP response (e.g., "5.1.1", "4.2.2"). First
+          # digit: 2=success, 4=temporary, 5=permanent. Second digit: category (1=address,
+          # 2=mailbox, 7=security, etc.).
+          sig { returns(T.nilable(String)) }
+          attr_accessor :smtp_enhanced_code
+
           sig do
             params(
               id: String,
               status: String,
               timestamp: Float,
               timestamp_iso: Time,
+              classification:
+                T.nilable(
+                  ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::OrSymbol
+                ),
+              classification_code: T.nilable(Integer),
               code: Integer,
               details: String,
               output: String,
-              sent_with_ssl: T::Boolean
+              remote_host: T.nilable(String),
+              sent_with_ssl: T::Boolean,
+              smtp_enhanced_code: T.nilable(String)
             ).returns(T.attached_class)
           end
           def self.new(
@@ -827,6 +864,15 @@ module ArkEmail
             timestamp:,
             # ISO 8601 timestamp
             timestamp_iso:,
+            # Bounce classification category (present for failed deliveries). Helps understand
+            # why delivery failed for analytics and automated handling.
+            classification: nil,
+            # Numeric bounce classification code for programmatic handling. Codes:
+            # 10=invalid_recipient, 11=no_mailbox, 12=not_accepting_mail, 20=mailbox_full,
+            # 21=message_too_large, 30=spam_block, 31=policy_violation, 32=tls_required,
+            # 40=connection_error, 41=dns_error, 42=temporarily_unavailable,
+            # 50=protocol_error, 99=unclassified
+            classification_code: nil,
             # SMTP response code
             code: nil,
             # Human-readable delivery summary. Format varies by status:
@@ -837,8 +883,15 @@ module ArkEmail
             details: nil,
             # Raw SMTP response from the receiving mail server
             output: nil,
+            # Hostname of the remote mail server that processed the delivery. Present for all
+            # delivery attempts (successful and failed).
+            remote_host: nil,
             # Whether TLS was used
-            sent_with_ssl: nil
+            sent_with_ssl: nil,
+            # RFC 3463 enhanced status code from SMTP response (e.g., "5.1.1", "4.2.2"). First
+            # digit: 2=success, 4=temporary, 5=permanent. Second digit: category (1=address,
+            # 2=mailbox, 7=security, etc.).
+            smtp_enhanced_code: nil
           )
           end
 
@@ -849,14 +902,112 @@ module ArkEmail
                 status: String,
                 timestamp: Float,
                 timestamp_iso: Time,
+                classification:
+                  T.nilable(
+                    ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+                  ),
+                classification_code: T.nilable(Integer),
                 code: Integer,
                 details: String,
                 output: String,
-                sent_with_ssl: T::Boolean
+                remote_host: T.nilable(String),
+                sent_with_ssl: T::Boolean,
+                smtp_enhanced_code: T.nilable(String)
               }
             )
           end
           def to_hash
+          end
+
+          # Bounce classification category (present for failed deliveries). Helps understand
+          # why delivery failed for analytics and automated handling.
+          module Classification
+            extend ArkEmail::Internal::Type::Enum
+
+            TaggedSymbol =
+              T.type_alias do
+                T.all(
+                  Symbol,
+                  ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification
+                )
+              end
+            OrSymbol = T.type_alias { T.any(Symbol, String) }
+
+            INVALID_RECIPIENT =
+              T.let(
+                :invalid_recipient,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            MAILBOX_FULL =
+              T.let(
+                :mailbox_full,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            MESSAGE_TOO_LARGE =
+              T.let(
+                :message_too_large,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            SPAM_BLOCK =
+              T.let(
+                :spam_block,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            POLICY_VIOLATION =
+              T.let(
+                :policy_violation,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            NO_MAILBOX =
+              T.let(
+                :no_mailbox,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            NOT_ACCEPTING_MAIL =
+              T.let(
+                :not_accepting_mail,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            TEMPORARILY_UNAVAILABLE =
+              T.let(
+                :temporarily_unavailable,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            PROTOCOL_ERROR =
+              T.let(
+                :protocol_error,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            TLS_REQUIRED =
+              T.let(
+                :tls_required,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            CONNECTION_ERROR =
+              T.let(
+                :connection_error,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            DNS_ERROR =
+              T.let(
+                :dns_error,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+            UNCLASSIFIED =
+              T.let(
+                :unclassified,
+                ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+              )
+
+            sig do
+              override.returns(
+                T::Array[
+                  ArkEmail::Models::EmailRetrieveResponse::Data::Delivery::Classification::TaggedSymbol
+                ]
+              )
+            end
+            def self.values
+            end
           end
         end
       end

@@ -110,6 +110,25 @@ module ArkEmail
           #   @return [Time]
           required :timestamp_iso, Time, api_name: :timestampIso
 
+          # @!attribute classification
+          #   Bounce classification category (present for failed deliveries). Helps understand
+          #   why delivery failed for analytics and automated handling.
+          #
+          #   @return [Symbol, ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery::Classification, nil]
+          optional :classification,
+                   enum: -> { ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery::Classification },
+                   nil?: true
+
+          # @!attribute classification_code
+          #   Numeric bounce classification code for programmatic handling. Codes:
+          #   10=invalid_recipient, 11=no_mailbox, 12=not_accepting_mail, 20=mailbox_full,
+          #   21=message_too_large, 30=spam_block, 31=policy_violation, 32=tls_required,
+          #   40=connection_error, 41=dns_error, 42=temporarily_unavailable,
+          #   50=protocol_error, 99=unclassified
+          #
+          #   @return [Integer, nil]
+          optional :classification_code, Integer, api_name: :classificationCode, nil?: true
+
           # @!attribute code
           #   SMTP response code
           #
@@ -132,13 +151,28 @@ module ArkEmail
           #   @return [String, nil]
           optional :output, String
 
+          # @!attribute remote_host
+          #   Hostname of the remote mail server that processed the delivery. Present for all
+          #   delivery attempts (successful and failed).
+          #
+          #   @return [String, nil]
+          optional :remote_host, String, api_name: :remoteHost, nil?: true
+
           # @!attribute sent_with_ssl
           #   Whether TLS was used
           #
           #   @return [Boolean, nil]
           optional :sent_with_ssl, ArkEmail::Internal::Type::Boolean, api_name: :sentWithSsl
 
-          # @!method initialize(id:, status:, timestamp:, timestamp_iso:, code: nil, details: nil, output: nil, sent_with_ssl: nil)
+          # @!attribute smtp_enhanced_code
+          #   RFC 3463 enhanced status code from SMTP response (e.g., "5.1.1", "4.2.2"). First
+          #   digit: 2=success, 4=temporary, 5=permanent. Second digit: category (1=address,
+          #   2=mailbox, 7=security, etc.).
+          #
+          #   @return [String, nil]
+          optional :smtp_enhanced_code, String, api_name: :smtpEnhancedCode, nil?: true
+
+          # @!method initialize(id:, status:, timestamp:, timestamp_iso:, classification: nil, classification_code: nil, code: nil, details: nil, output: nil, remote_host: nil, sent_with_ssl: nil, smtp_enhanced_code: nil)
           #   Some parameter documentations has been truncated, see
           #   {ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery} for more
           #   details.
@@ -151,13 +185,46 @@ module ArkEmail
           #
           #   @param timestamp_iso [Time] ISO 8601 timestamp
           #
+          #   @param classification [Symbol, ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery::Classification, nil] Bounce classification category (present for failed deliveries).
+          #
+          #   @param classification_code [Integer, nil] Numeric bounce classification code for programmatic handling.
+          #
           #   @param code [Integer] SMTP response code
           #
           #   @param details [String] Human-readable delivery summary. Format varies by status:
           #
           #   @param output [String] Raw SMTP response from the receiving mail server
           #
+          #   @param remote_host [String, nil] Hostname of the remote mail server that processed the delivery.
+          #
           #   @param sent_with_ssl [Boolean] Whether TLS was used
+          #
+          #   @param smtp_enhanced_code [String, nil] RFC 3463 enhanced status code from SMTP response (e.g., "5.1.1", "4.2.2").
+
+          # Bounce classification category (present for failed deliveries). Helps understand
+          # why delivery failed for analytics and automated handling.
+          #
+          # @see ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery#classification
+          module Classification
+            extend ArkEmail::Internal::Type::Enum
+
+            INVALID_RECIPIENT = :invalid_recipient
+            MAILBOX_FULL = :mailbox_full
+            MESSAGE_TOO_LARGE = :message_too_large
+            SPAM_BLOCK = :spam_block
+            POLICY_VIOLATION = :policy_violation
+            NO_MAILBOX = :no_mailbox
+            NOT_ACCEPTING_MAIL = :not_accepting_mail
+            TEMPORARILY_UNAVAILABLE = :temporarily_unavailable
+            PROTOCOL_ERROR = :protocol_error
+            TLS_REQUIRED = :tls_required
+            CONNECTION_ERROR = :connection_error
+            DNS_ERROR = :dns_error
+            UNCLASSIFIED = :unclassified
+
+            # @!method self.values
+            #   @return [Array<Symbol>]
+          end
         end
 
         # @see ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data#retry_state
