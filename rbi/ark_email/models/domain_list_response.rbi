@@ -108,10 +108,28 @@ module ArkEmail
           sig { returns(T::Boolean) }
           attr_accessor :verified
 
+          # ID of the tenant this domain belongs to (included when filtering by tenant_id)
+          sig { returns(T.nilable(String)) }
+          attr_reader :tenant_id
+
+          sig { params(tenant_id: String).void }
+          attr_writer :tenant_id
+
+          # Name of the tenant this domain belongs to (included when filtering by tenant_id)
+          sig { returns(T.nilable(String)) }
+          attr_reader :tenant_name
+
+          sig { params(tenant_name: String).void }
+          attr_writer :tenant_name
+
           sig do
-            params(id: Integer, name: String, verified: T::Boolean).returns(
-              T.attached_class
-            )
+            params(
+              id: Integer,
+              name: String,
+              verified: T::Boolean,
+              tenant_id: String,
+              tenant_name: String
+            ).returns(T.attached_class)
           end
           def self.new(
             # Unique domain identifier
@@ -120,13 +138,23 @@ module ArkEmail
             name:,
             # Whether all DNS records (SPF, DKIM, Return Path) are correctly configured.
             # Domain must be verified before sending emails.
-            verified:
+            verified:,
+            # ID of the tenant this domain belongs to (included when filtering by tenant_id)
+            tenant_id: nil,
+            # Name of the tenant this domain belongs to (included when filtering by tenant_id)
+            tenant_name: nil
           )
           end
 
           sig do
             override.returns(
-              { id: Integer, name: String, verified: T::Boolean }
+              {
+                id: Integer,
+                name: String,
+                verified: T::Boolean,
+                tenant_id: String,
+                tenant_name: String
+              }
             )
           end
           def to_hash

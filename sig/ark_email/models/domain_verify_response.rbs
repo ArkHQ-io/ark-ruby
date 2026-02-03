@@ -34,6 +34,8 @@ module ArkEmail
           name: String,
           uuid: String,
           verified: bool,
+          tenant_id: String,
+          tenant_name: String,
           verified_at: Time?
         }
 
@@ -50,6 +52,14 @@ module ArkEmail
 
         attr_accessor verified: bool
 
+        attr_reader tenant_id: String?
+
+        def tenant_id=: (String) -> String
+
+        attr_reader tenant_name: String?
+
+        def tenant_name=: (String) -> String
+
         attr_accessor verified_at: Time?
 
         def initialize: (
@@ -59,6 +69,8 @@ module ArkEmail
           name: String,
           uuid: String,
           verified: bool,
+          ?tenant_id: String,
+          ?tenant_name: String,
           ?verified_at: Time?
         ) -> void
 
@@ -69,6 +81,8 @@ module ArkEmail
           name: String,
           uuid: String,
           verified: bool,
+          tenant_id: String,
+          tenant_name: String,
           verified_at: Time?
         }
 

@@ -1,6 +1,8 @@
 module ArkEmail
   module Resources
     class Tenants
+      attr_reader credentials: ArkEmail::Resources::Tenants::Credentials
+
       def create: (
         name: String,
         ?metadata: ::Hash[Symbol, ArkEmail::Models::TenantCreateParams::metadata?]?,

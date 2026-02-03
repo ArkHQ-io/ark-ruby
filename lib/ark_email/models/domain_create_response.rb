@@ -77,13 +77,25 @@ module ArkEmail
         #   @return [Boolean]
         required :verified, ArkEmail::Internal::Type::Boolean
 
+        # @!attribute tenant_id
+        #   ID of the tenant this domain belongs to
+        #
+        #   @return [String, nil]
+        optional :tenant_id, String
+
+        # @!attribute tenant_name
+        #   Name of the tenant this domain belongs to
+        #
+        #   @return [String, nil]
+        optional :tenant_name, String
+
         # @!attribute verified_at
         #   Timestamp when the domain ownership was verified, or null if not yet verified
         #
         #   @return [Time, nil]
         optional :verified_at, Time, api_name: :verifiedAt, nil?: true
 
-        # @!method initialize(id:, created_at:, dns_records:, name:, uuid:, verified:, verified_at: nil)
+        # @!method initialize(id:, created_at:, dns_records:, name:, uuid:, verified:, tenant_id: nil, tenant_name: nil, verified_at: nil)
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::DomainCreateResponse::Data} for more details.
         #
@@ -98,6 +110,10 @@ module ArkEmail
         #   @param uuid [String] UUID of the domain
         #
         #   @param verified [Boolean] Whether all DNS records (SPF, DKIM, Return Path) are correctly configured. Domai
+        #
+        #   @param tenant_id [String] ID of the tenant this domain belongs to
+        #
+        #   @param tenant_name [String] Name of the tenant this domain belongs to
         #
         #   @param verified_at [Time, nil] Timestamp when the domain ownership was verified, or null if not yet verified
 
