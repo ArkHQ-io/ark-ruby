@@ -40,6 +40,9 @@ module ArkEmail
     sig { returns(ArkEmail::Resources::Usage) }
     attr_reader :usage
 
+    sig { returns(ArkEmail::Resources::Tenants) }
+    attr_reader :tenants
+
     # @api private
     sig { override.returns(T::Hash[String, String]) }
     private def auth_headers

@@ -1,0 +1,38 @@
+module ArkEmail
+  module Resources
+    class Tenants
+      def create: (
+        name: String,
+        ?metadata: ::Hash[Symbol, ArkEmail::Models::TenantCreateParams::metadata?]?,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::TenantCreateResponse
+
+      def retrieve: (
+        String tenant_id,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::TenantRetrieveResponse
+
+      def update: (
+        String tenant_id,
+        ?metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?,
+        ?name: String,
+        ?status: ArkEmail::Models::TenantUpdateParams::status,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::TenantUpdateResponse
+
+      def list: (
+        ?page: Integer,
+        ?per_page: Integer,
+        ?status: ArkEmail::Models::TenantListParams::status,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Internal::PageNumberPagination[ArkEmail::Tenant]
+
+      def delete: (
+        String tenant_id,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::TenantDeleteResponse
+
+      def initialize: (client: ArkEmail::Client) -> void
+    end
+  end
+end
