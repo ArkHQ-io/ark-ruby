@@ -1,0 +1,39 @@
+module ArkEmail
+  module Models
+    type tenant_create_params =
+      {
+        name: String,
+        metadata: ::Hash[Symbol, ArkEmail::Models::TenantCreateParams::metadata?]?
+      }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class TenantCreateParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_accessor name: String
+
+      attr_accessor metadata: ::Hash[Symbol, ArkEmail::Models::TenantCreateParams::metadata?]?
+
+      def initialize: (
+        name: String,
+        ?metadata: ::Hash[Symbol, ArkEmail::Models::TenantCreateParams::metadata?]?,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        name: String,
+        metadata: ::Hash[Symbol, ArkEmail::Models::TenantCreateParams::metadata?]?,
+        request_options: ArkEmail::RequestOptions
+      }
+
+      type metadata = String | Float | bool
+
+      module Metadata
+        extend ArkEmail::Internal::Type::Union
+
+        def self?.variants: -> ::Array[ArkEmail::Models::TenantCreateParams::metadata]
+      end
+    end
+  end
+end

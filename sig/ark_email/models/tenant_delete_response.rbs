@@ -1,0 +1,40 @@
+module ArkEmail
+  module Models
+    type tenant_delete_response =
+      {
+        data: ArkEmail::Models::TenantDeleteResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class TenantDeleteResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::Models::TenantDeleteResponse::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::Models::TenantDeleteResponse::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::Models::TenantDeleteResponse::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data = { deleted: true }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor deleted: true
+
+        def initialize: (?deleted: true) -> void
+
+        def to_hash: -> { deleted: true }
+      end
+    end
+  end
+end

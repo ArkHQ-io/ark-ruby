@@ -1,0 +1,65 @@
+module ArkEmail
+  module Models
+    type tenant =
+      {
+        id: String,
+        created_at: Time,
+        metadata: ::Hash[Symbol, ArkEmail::Models::Tenant::metadata?],
+        name: String,
+        status: ArkEmail::Models::Tenant::status,
+        updated_at: Time
+      }
+
+    class Tenant < ArkEmail::Internal::Type::BaseModel
+      attr_accessor id: String
+
+      attr_accessor created_at: Time
+
+      attr_accessor metadata: ::Hash[Symbol, ArkEmail::Models::Tenant::metadata?]
+
+      attr_accessor name: String
+
+      attr_accessor status: ArkEmail::Models::Tenant::status
+
+      attr_accessor updated_at: Time
+
+      def initialize: (
+        id: String,
+        created_at: Time,
+        metadata: ::Hash[Symbol, ArkEmail::Models::Tenant::metadata?],
+        name: String,
+        status: ArkEmail::Models::Tenant::status,
+        updated_at: Time
+      ) -> void
+
+      def to_hash: -> {
+        id: String,
+        created_at: Time,
+        metadata: ::Hash[Symbol, ArkEmail::Models::Tenant::metadata?],
+        name: String,
+        status: ArkEmail::Models::Tenant::status,
+        updated_at: Time
+      }
+
+      type metadata = String | Float | bool
+
+      module Metadata
+        extend ArkEmail::Internal::Type::Union
+
+        def self?.variants: -> ::Array[ArkEmail::Models::Tenant::metadata]
+      end
+
+      type status = :active | :suspended | :archived
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        ACTIVE: :active
+        SUSPENDED: :suspended
+        ARCHIVED: :archived
+
+        def self?.values: -> ::Array[ArkEmail::Models::Tenant::status]
+      end
+    end
+  end
+end
