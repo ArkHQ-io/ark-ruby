@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.18.0 (2026-02-03)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* **api:** Add Tenants ([3ef25f0](https://github.com/ArkHQ-io/ark-ruby/commit/3ef25f095708d041a15fa89f77872bf0df541a1d))
+* **api:** api update ([787e993](https://github.com/ArkHQ-io/ark-ruby/commit/787e99301d21537f66833fdebe070ad6473fa7b2))
+* **api:** manual updates ([cdd14ab](https://github.com/ArkHQ-io/ark-ruby/commit/cdd14ab06e65b53f4c6b60af46110b3b7966b9ab))
+* **api:** manual updates ([e253498](https://github.com/ArkHQ-io/ark-ruby/commit/e2534989ba9f4ed2378ff37615ef9dadb7c08341))
+* **api:** manual updates ([d15f192](https://github.com/ArkHQ-io/ark-ruby/commit/d15f19216f575fc83493db293e9265cb208d0b6c))
+
+
+### Bug Fixes
+
+* **client:** always add content-length to post body, even when empty ([7ec49ee](https://github.com/ArkHQ-io/ark-ruby/commit/7ec49ee2f06a677b2bf6c976e0a5fa3d959c1b30))
+
 ## 0.17.0 (2026-01-30)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.16.0...v0.17.0)
