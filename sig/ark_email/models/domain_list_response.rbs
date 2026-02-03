@@ -40,7 +40,14 @@ module ArkEmail
           domains: ::Array[ArkEmail::Models::DomainListResponse::Data::Domain]
         }
 
-        type domain = { id: Integer, name: String, verified: bool }
+        type domain =
+          {
+            id: Integer,
+            name: String,
+            verified: bool,
+            tenant_id: String,
+            tenant_name: String
+          }
 
         class Domain < ArkEmail::Internal::Type::BaseModel
           attr_accessor id: Integer
@@ -49,9 +56,29 @@ module ArkEmail
 
           attr_accessor verified: bool
 
-          def initialize: (id: Integer, name: String, verified: bool) -> void
+          attr_reader tenant_id: String?
 
-          def to_hash: -> { id: Integer, name: String, verified: bool }
+          def tenant_id=: (String) -> String
+
+          attr_reader tenant_name: String?
+
+          def tenant_name=: (String) -> String
+
+          def initialize: (
+            id: Integer,
+            name: String,
+            verified: bool,
+            ?tenant_id: String,
+            ?tenant_name: String
+          ) -> void
+
+          def to_hash: -> {
+            id: Integer,
+            name: String,
+            verified: bool,
+            tenant_id: String,
+            tenant_name: String
+          }
         end
       end
     end

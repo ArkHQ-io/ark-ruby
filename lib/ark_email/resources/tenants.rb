@@ -3,6 +3,9 @@
 module ArkEmail
   module Resources
     class Tenants
+      # @return [ArkEmail::Resources::Tenants::Credentials]
+      attr_reader :credentials
+
       # Some parameter documentations has been truncated, see
       # {ArkEmail::Models::TenantCreateParams} for more details.
       #
@@ -138,6 +141,7 @@ module ArkEmail
       # @param client [ArkEmail::Client]
       def initialize(client:)
         @client = client
+        @credentials = ArkEmail::Resources::Tenants::Credentials.new(client: client)
       end
     end
   end

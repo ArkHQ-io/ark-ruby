@@ -109,6 +109,20 @@ module ArkEmail
         sig { returns(T::Boolean) }
         attr_accessor :verified
 
+        # ID of the tenant this domain belongs to
+        sig { returns(T.nilable(String)) }
+        attr_reader :tenant_id
+
+        sig { params(tenant_id: String).void }
+        attr_writer :tenant_id
+
+        # Name of the tenant this domain belongs to
+        sig { returns(T.nilable(String)) }
+        attr_reader :tenant_name
+
+        sig { params(tenant_name: String).void }
+        attr_writer :tenant_name
+
         # Timestamp when the domain ownership was verified, or null if not yet verified
         sig { returns(T.nilable(Time)) }
         attr_accessor :verified_at
@@ -124,6 +138,8 @@ module ArkEmail
             name: String,
             uuid: String,
             verified: T::Boolean,
+            tenant_id: String,
+            tenant_name: String,
             verified_at: T.nilable(Time)
           ).returns(T.attached_class)
         end
@@ -152,6 +168,10 @@ module ArkEmail
           # Whether all DNS records (SPF, DKIM, Return Path) are correctly configured.
           # Domain must be verified before sending emails.
           verified:,
+          # ID of the tenant this domain belongs to
+          tenant_id: nil,
+          # Name of the tenant this domain belongs to
+          tenant_name: nil,
           # Timestamp when the domain ownership was verified, or null if not yet verified
           verified_at: nil
         )
@@ -169,6 +189,8 @@ module ArkEmail
               name: String,
               uuid: String,
               verified: T::Boolean,
+              tenant_id: String,
+              tenant_name: String,
               verified_at: T.nilable(Time)
             }
           )

@@ -55,7 +55,19 @@ module ArkEmail
           #   @return [Boolean]
           required :verified, ArkEmail::Internal::Type::Boolean
 
-          # @!method initialize(id:, name:, verified:)
+          # @!attribute tenant_id
+          #   ID of the tenant this domain belongs to (included when filtering by tenant_id)
+          #
+          #   @return [String, nil]
+          optional :tenant_id, String
+
+          # @!attribute tenant_name
+          #   Name of the tenant this domain belongs to (included when filtering by tenant_id)
+          #
+          #   @return [String, nil]
+          optional :tenant_name, String
+
+          # @!method initialize(id:, name:, verified:, tenant_id: nil, tenant_name: nil)
           #   Some parameter documentations has been truncated, see
           #   {ArkEmail::Models::DomainListResponse::Data::Domain} for more details.
           #
@@ -64,6 +76,10 @@ module ArkEmail
           #   @param name [String] The domain name used for sending emails
           #
           #   @param verified [Boolean] Whether all DNS records (SPF, DKIM, Return Path) are correctly configured. Domai
+          #
+          #   @param tenant_id [String] ID of the tenant this domain belongs to (included when filtering by tenant_id)
+          #
+          #   @param tenant_name [String] Name of the tenant this domain belongs to (included when filtering by tenant_id)
         end
       end
     end

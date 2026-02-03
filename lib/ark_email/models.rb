@@ -95,6 +95,8 @@ module ArkEmail
 
   TenantRetrieveParams = ArkEmail::Models::TenantRetrieveParams
 
+  Tenants = ArkEmail::Models::Tenants
+
   TenantUpdateParams = ArkEmail::Models::TenantUpdateParams
 
   TrackDomain = ArkEmail::Models::TrackDomain

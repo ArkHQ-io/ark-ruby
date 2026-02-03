@@ -6,6 +6,9 @@ module ArkEmail
       # Add a new domain for sending emails. Returns DNS records that must be configured
       # before the domain can be verified.
       #
+      # **Required:** `tenant_id` to specify which tenant the domain belongs to. Each
+      # tenant gets their own isolated mail server for domain isolation.
+      #
       # **Required DNS records:**
       #
       # - **SPF** - TXT record for sender authentication
@@ -14,9 +17,11 @@ module ArkEmail
       #
       # After adding DNS records, call `POST /domains/{id}/verify` to verify.
       #
-      # @overload create(name:, request_options: {})
+      # @overload create(name:, tenant_id:, request_options: {})
       #
       # @param name [String] Domain name (e.g., "mail.example.com")
+      #
+      # @param tenant_id [String] ID of the tenant this domain belongs to
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -54,9 +59,14 @@ module ArkEmail
         )
       end
 
-      # Get all sending domains with their verification status
+      # Get all sending domains with their verification status.
       #
-      # @overload list(request_options: {})
+      # Optionally filter by `tenant_id` to list domains for a specific tenant. When
+      # filtered, response includes `tenant_id` and `tenant_name` for each domain.
+      #
+      # @overload list(tenant_id: nil, request_options: {})
+      #
+      # @param tenant_id [String] Filter domains by tenant ID
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -64,11 +74,13 @@ module ArkEmail
       #
       # @see ArkEmail::Models::DomainListParams
       def list(params = {})
+        parsed, options = ArkEmail::DomainListParams.dump_request(params)
         @client.request(
           method: :get,
           path: "domains",
+          query: parsed,
           model: ArkEmail::Models::DomainListResponse,
-          options: params[:request_options]
+          options: options
         )
       end
 

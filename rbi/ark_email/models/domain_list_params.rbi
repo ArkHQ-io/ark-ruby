@@ -11,15 +11,31 @@ module ArkEmail
           T.any(ArkEmail::DomainListParams, ArkEmail::Internal::AnyHash)
         end
 
+      # Filter domains by tenant ID
+      sig { returns(T.nilable(String)) }
+      attr_reader :tenant_id
+
+      sig { params(tenant_id: String).void }
+      attr_writer :tenant_id
+
       sig do
-        params(request_options: ArkEmail::RequestOptions::OrHash).returns(
-          T.attached_class
-        )
+        params(
+          tenant_id: String,
+          request_options: ArkEmail::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(
+        # Filter domains by tenant ID
+        tenant_id: nil,
+        request_options: {}
+      )
       end
 
-      sig { override.returns({ request_options: ArkEmail::RequestOptions }) }
+      sig do
+        override.returns(
+          { tenant_id: String, request_options: ArkEmail::RequestOptions }
+        )
+      end
       def to_hash
       end
     end

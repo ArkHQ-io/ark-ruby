@@ -3,6 +3,9 @@
 module ArkEmail
   module Resources
     class Tenants
+      sig { returns(ArkEmail::Resources::Tenants::Credentials) }
+      attr_reader :credentials
+
       # Create a new tenant.
       #
       # Returns the created tenant with a unique `id`. Store this ID in your database to

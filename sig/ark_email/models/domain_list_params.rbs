@@ -1,15 +1,25 @@
 module ArkEmail
   module Models
     type domain_list_params =
-      {  } & ArkEmail::Internal::Type::request_parameters
+      { tenant_id: String } & ArkEmail::Internal::Type::request_parameters
 
     class DomainListParams < ArkEmail::Internal::Type::BaseModel
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: ArkEmail::request_opts) -> void
+      attr_reader tenant_id: String?
 
-      def to_hash: -> { request_options: ArkEmail::RequestOptions }
+      def tenant_id=: (String) -> String
+
+      def initialize: (
+        ?tenant_id: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        tenant_id: String,
+        request_options: ArkEmail::RequestOptions
+      }
     end
   end
 end

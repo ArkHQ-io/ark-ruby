@@ -4,7 +4,7 @@ require_relative "../test_helper"
 
 class ArkEmail::Test::Resources::DomainsTest < ArkEmail::Test::ResourceTest
   def test_create_required_params
-    response = @ark.domains.create(name: "notifications.myapp.com")
+    response = @ark.domains.create(name: "notifications.myapp.com", tenant_id: "cm6abc123def456")
 
     assert_pattern do
       response => ArkEmail::Models::DomainCreateResponse

@@ -3,6 +3,8 @@
 module ArkEmail
   module Test
     module Resources
+      module Tenants
+      end
     end
   end
 end
