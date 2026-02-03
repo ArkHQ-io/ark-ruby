@@ -1,0 +1,15 @@
+module ArkEmail
+  module Models
+    type email_rates = { bounce_rate: Float, delivery_rate: Float }
+
+    class EmailRates < ArkEmail::Internal::Type::BaseModel
+      attr_accessor bounce_rate: Float
+
+      attr_accessor delivery_rate: Float
+
+      def initialize: (bounce_rate: Float, delivery_rate: Float) -> void
+
+      def to_hash: -> { bounce_rate: Float, delivery_rate: Float }
+    end
+  end
+end

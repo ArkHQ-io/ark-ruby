@@ -42,6 +42,9 @@ module ArkEmail
     # @return [ArkEmail::Resources::Logs]
     attr_reader :logs
 
+    # @return [ArkEmail::Resources::Limits]
+    attr_reader :limits
+
     # @return [ArkEmail::Resources::Usage]
     attr_reader :usage
 
@@ -107,6 +110,7 @@ module ArkEmail
       @webhooks = ArkEmail::Resources::Webhooks.new(client: self)
       @tracking = ArkEmail::Resources::Tracking.new(client: self)
       @logs = ArkEmail::Resources::Logs.new(client: self)
+      @limits = ArkEmail::Resources::Limits.new(client: self)
       @usage = ArkEmail::Resources::Usage.new(client: self)
       @tenants = ArkEmail::Resources::Tenants.new(client: self)
     end

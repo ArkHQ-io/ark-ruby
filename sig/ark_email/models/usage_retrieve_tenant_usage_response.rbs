@@ -1,0 +1,26 @@
+module ArkEmail
+  module Models
+    type usage_retrieve_tenant_usage_response =
+      { data: ArkEmail::TenantUsage, meta: ArkEmail::APIMeta, success: true }
+
+    class UsageRetrieveTenantUsageResponse < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::TenantUsage
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::TenantUsage,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::TenantUsage,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+    end
+  end
+end
