@@ -45,6 +45,18 @@ module ArkEmail
 
   class SuppressionRetrieveParams = ArkEmail::Models::SuppressionRetrieveParams
 
+  class Tenant = ArkEmail::Models::Tenant
+
+  class TenantCreateParams = ArkEmail::Models::TenantCreateParams
+
+  class TenantDeleteParams = ArkEmail::Models::TenantDeleteParams
+
+  class TenantListParams = ArkEmail::Models::TenantListParams
+
+  class TenantRetrieveParams = ArkEmail::Models::TenantRetrieveParams
+
+  class TenantUpdateParams = ArkEmail::Models::TenantUpdateParams
+
   class TrackDomain = ArkEmail::Models::TrackDomain
 
   class TrackingCreateParams = ArkEmail::Models::TrackingCreateParams

@@ -1,0 +1,62 @@
+module ArkEmail
+  module Models
+    type tenant_update_params =
+      {
+        metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?,
+        name: String,
+        status: ArkEmail::Models::TenantUpdateParams::status
+      }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class TenantUpdateParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_accessor metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?
+
+      attr_reader name: String?
+
+      def name=: (String) -> String
+
+      attr_reader status: ArkEmail::Models::TenantUpdateParams::status?
+
+      def status=: (
+        ArkEmail::Models::TenantUpdateParams::status
+      ) -> ArkEmail::Models::TenantUpdateParams::status
+
+      def initialize: (
+        ?metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?,
+        ?name: String,
+        ?status: ArkEmail::Models::TenantUpdateParams::status,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?,
+        name: String,
+        status: ArkEmail::Models::TenantUpdateParams::status,
+        request_options: ArkEmail::RequestOptions
+      }
+
+      type metadata = String | Float | bool
+
+      module Metadata
+        extend ArkEmail::Internal::Type::Union
+
+        def self?.variants: -> ::Array[ArkEmail::Models::TenantUpdateParams::metadata]
+      end
+
+      type status = :active | :suspended | :archived
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        ACTIVE: :active
+        SUSPENDED: :suspended
+        ARCHIVED: :archived
+
+        def self?.values: -> ::Array[ArkEmail::Models::TenantUpdateParams::status]
+      end
+    end
+  end
+end

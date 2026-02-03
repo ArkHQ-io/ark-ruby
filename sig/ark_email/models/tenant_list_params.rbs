@@ -1,0 +1,56 @@
+module ArkEmail
+  module Models
+    type tenant_list_params =
+      {
+        page: Integer,
+        per_page: Integer,
+        status: ArkEmail::Models::TenantListParams::status
+      }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class TenantListParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader per_page: Integer?
+
+      def per_page=: (Integer) -> Integer
+
+      attr_reader status: ArkEmail::Models::TenantListParams::status?
+
+      def status=: (
+        ArkEmail::Models::TenantListParams::status
+      ) -> ArkEmail::Models::TenantListParams::status
+
+      def initialize: (
+        ?page: Integer,
+        ?per_page: Integer,
+        ?status: ArkEmail::Models::TenantListParams::status,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        page: Integer,
+        per_page: Integer,
+        status: ArkEmail::Models::TenantListParams::status,
+        request_options: ArkEmail::RequestOptions
+      }
+
+      type status = :active | :suspended | :archived
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        ACTIVE: :active
+        SUSPENDED: :suspended
+        ARCHIVED: :archived
+
+        def self?.values: -> ::Array[ArkEmail::Models::TenantListParams::status]
+      end
+    end
+  end
+end
