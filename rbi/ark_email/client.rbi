@@ -37,6 +37,9 @@ module ArkEmail
     sig { returns(ArkEmail::Resources::Logs) }
     attr_reader :logs
 
+    sig { returns(ArkEmail::Resources::Limits) }
+    attr_reader :limits
+
     sig { returns(ArkEmail::Resources::Usage) }
     attr_reader :usage
 

@@ -5,6 +5,41 @@ module ArkEmail
         ?request_options: ArkEmail::request_opts
       ) -> ArkEmail::Models::UsageRetrieveResponse
 
+      def export: (
+        ?format_: ArkEmail::Models::UsageExportParams::format_,
+        ?min_sent: Integer,
+        ?period: String,
+        ?status: ArkEmail::Models::UsageExportParams::status,
+        ?timezone: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::usage_export_response
+
+      def list_by_tenant: (
+        ?limit: Integer,
+        ?min_sent: Integer,
+        ?offset: Integer,
+        ?period: String,
+        ?sort: ArkEmail::Models::UsageListByTenantParams::sort,
+        ?status: ArkEmail::Models::UsageListByTenantParams::status,
+        ?timezone: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Internal::OffsetPagination[ArkEmail::BulkTenantUsage::Tenant]
+
+      def retrieve_tenant_timeseries: (
+        String tenant_id,
+        ?granularity: ArkEmail::Models::UsageRetrieveTenantTimeseriesParams::granularity,
+        ?period: String,
+        ?timezone: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::UsageRetrieveTenantTimeseriesResponse
+
+      def retrieve_tenant_usage: (
+        String tenant_id,
+        ?period: String,
+        ?timezone: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> ArkEmail::Models::UsageRetrieveTenantUsageResponse
+
       def initialize: (client: ArkEmail::Client) -> void
     end
   end

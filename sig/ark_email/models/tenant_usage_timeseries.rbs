@@ -1,0 +1,100 @@
+module ArkEmail
+  module Models
+    type tenant_usage_timeseries =
+      {
+        data: ::Array[ArkEmail::TenantUsageTimeseries::Data],
+        granularity: ArkEmail::Models::TenantUsageTimeseries::granularity,
+        period: ArkEmail::UsagePeriod,
+        tenant_id: String,
+        tenant_name: String
+      }
+
+    class TenantUsageTimeseries < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ::Array[ArkEmail::TenantUsageTimeseries::Data]
+
+      attr_accessor granularity: ArkEmail::Models::TenantUsageTimeseries::granularity
+
+      attr_accessor period: ArkEmail::UsagePeriod
+
+      attr_accessor tenant_id: String
+
+      attr_accessor tenant_name: String
+
+      def initialize: (
+        data: ::Array[ArkEmail::TenantUsageTimeseries::Data],
+        granularity: ArkEmail::Models::TenantUsageTimeseries::granularity,
+        period: ArkEmail::UsagePeriod,
+        tenant_id: String,
+        tenant_name: String
+      ) -> void
+
+      def to_hash: -> {
+        data: ::Array[ArkEmail::TenantUsageTimeseries::Data],
+        granularity: ArkEmail::Models::TenantUsageTimeseries::granularity,
+        period: ArkEmail::UsagePeriod,
+        tenant_id: String,
+        tenant_name: String
+      }
+
+      type data =
+        {
+          bounced: Integer,
+          delivered: Integer,
+          hard_failed: Integer,
+          held: Integer,
+          sent: Integer,
+          soft_failed: Integer,
+          timestamp: Time
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor bounced: Integer
+
+        attr_accessor delivered: Integer
+
+        attr_accessor hard_failed: Integer
+
+        attr_accessor held: Integer
+
+        attr_accessor sent: Integer
+
+        attr_accessor soft_failed: Integer
+
+        attr_accessor timestamp: Time
+
+        def initialize: (
+          bounced: Integer,
+          delivered: Integer,
+          hard_failed: Integer,
+          held: Integer,
+          sent: Integer,
+          soft_failed: Integer,
+          timestamp: Time
+        ) -> void
+
+        def to_hash: -> {
+          bounced: Integer,
+          delivered: Integer,
+          hard_failed: Integer,
+          held: Integer,
+          sent: Integer,
+          soft_failed: Integer,
+          timestamp: Time
+        }
+      end
+
+      type granularity = :hour | :day | :week | :month
+
+      module Granularity
+        extend ArkEmail::Internal::Type::Enum
+
+        HOUR: :hour
+        DAY: :day
+        WEEK: :week
+        MONTH: :month
+
+        def self?.values: -> ::Array[ArkEmail::Models::TenantUsageTimeseries::granularity]
+      end
+    end
+  end
+end

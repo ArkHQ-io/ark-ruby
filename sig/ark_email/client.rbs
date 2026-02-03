@@ -22,6 +22,8 @@ module ArkEmail
 
     attr_reader logs: ArkEmail::Resources::Logs
 
+    attr_reader limits: ArkEmail::Resources::Limits
+
     attr_reader usage: ArkEmail::Resources::Usage
 
     attr_reader tenants: ArkEmail::Resources::Tenants

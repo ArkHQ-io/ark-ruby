@@ -3,6 +3,8 @@
 module ArkEmail
   APIMeta = ArkEmail::Models::APIMeta
 
+  BulkTenantUsage = ArkEmail::Models::BulkTenantUsage
+
   DNSRecord = ArkEmail::Models::DNSRecord
 
   DomainCreateParams = ArkEmail::Models::DomainCreateParams
@@ -15,7 +17,11 @@ module ArkEmail
 
   DomainVerifyParams = ArkEmail::Models::DomainVerifyParams
 
+  EmailCounts = ArkEmail::Models::EmailCounts
+
   EmailListParams = ArkEmail::Models::EmailListParams
+
+  EmailRates = ArkEmail::Models::EmailRates
 
   EmailRetrieveDeliveriesParams =
     ArkEmail::Models::EmailRetrieveDeliveriesParams
@@ -29,6 +35,10 @@ module ArkEmail
   EmailSendParams = ArkEmail::Models::EmailSendParams
 
   EmailSendRawParams = ArkEmail::Models::EmailSendRawParams
+
+  LimitRetrieveParams = ArkEmail::Models::LimitRetrieveParams
+
+  LimitsData = ArkEmail::Models::LimitsData
 
   LogEntry = ArkEmail::Models::LogEntry
 
@@ -62,6 +72,10 @@ module ArkEmail
 
   TenantUpdateParams = ArkEmail::Models::TenantUpdateParams
 
+  TenantUsage = ArkEmail::Models::TenantUsage
+
+  TenantUsageTimeseries = ArkEmail::Models::TenantUsageTimeseries
+
   TrackDomain = ArkEmail::Models::TrackDomain
 
   TrackingCreateParams = ArkEmail::Models::TrackingCreateParams
@@ -76,7 +90,19 @@ module ArkEmail
 
   TrackingVerifyParams = ArkEmail::Models::TrackingVerifyParams
 
+  UsageExportParams = ArkEmail::Models::UsageExportParams
+
+  UsageListByTenantParams = ArkEmail::Models::UsageListByTenantParams
+
+  UsagePeriod = ArkEmail::Models::UsagePeriod
+
   UsageRetrieveParams = ArkEmail::Models::UsageRetrieveParams
+
+  UsageRetrieveTenantTimeseriesParams =
+    ArkEmail::Models::UsageRetrieveTenantTimeseriesParams
+
+  UsageRetrieveTenantUsageParams =
+    ArkEmail::Models::UsageRetrieveTenantUsageParams
 
   WebhookCreateParams = ArkEmail::Models::WebhookCreateParams
 
