@@ -14,7 +14,7 @@ module ArkEmail
       #   When the tenant was created
       #
       #   @return [Time]
-      required :created_at, Time
+      required :created_at, Time, api_name: :createdAt
 
       # @!attribute metadata
       #   Custom key-value pairs for storing additional data
@@ -42,7 +42,7 @@ module ArkEmail
       #   When the tenant was last updated
       #
       #   @return [Time]
-      required :updated_at, Time
+      required :updated_at, Time, api_name: :updatedAt
 
       # @!method initialize(id:, created_at:, metadata:, name:, status:, updated_at:)
       #   Some parameter documentations has been truncated, see {ArkEmail::Models::Tenant}
