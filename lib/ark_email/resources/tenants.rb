@@ -6,6 +6,21 @@ module ArkEmail
       # @return [ArkEmail::Resources::Tenants::Credentials]
       attr_reader :credentials
 
+      # @return [ArkEmail::Resources::Tenants::Domains]
+      attr_reader :domains
+
+      # @return [ArkEmail::Resources::Tenants::Suppressions]
+      attr_reader :suppressions
+
+      # @return [ArkEmail::Resources::Tenants::Webhooks]
+      attr_reader :webhooks
+
+      # @return [ArkEmail::Resources::Tenants::Tracking]
+      attr_reader :tracking
+
+      # @return [ArkEmail::Resources::Tenants::Usage]
+      attr_reader :usage
+
       # Some parameter documentations has been truncated, see
       # {ArkEmail::Models::TenantCreateParams} for more details.
       #
@@ -142,6 +157,11 @@ module ArkEmail
       def initialize(client:)
         @client = client
         @credentials = ArkEmail::Resources::Tenants::Credentials.new(client: client)
+        @domains = ArkEmail::Resources::Tenants::Domains.new(client: client)
+        @suppressions = ArkEmail::Resources::Tenants::Suppressions.new(client: client)
+        @webhooks = ArkEmail::Resources::Tenants::Webhooks.new(client: client)
+        @tracking = ArkEmail::Resources::Tenants::Tracking.new(client: client)
+        @usage = ArkEmail::Resources::Tenants::Usage.new(client: client)
       end
     end
   end

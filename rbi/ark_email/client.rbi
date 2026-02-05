@@ -22,26 +22,14 @@ module ArkEmail
     sig { returns(ArkEmail::Resources::Emails) }
     attr_reader :emails
 
-    sig { returns(ArkEmail::Resources::Domains) }
-    attr_reader :domains
-
-    sig { returns(ArkEmail::Resources::Suppressions) }
-    attr_reader :suppressions
-
-    sig { returns(ArkEmail::Resources::Webhooks) }
-    attr_reader :webhooks
-
-    sig { returns(ArkEmail::Resources::Tracking) }
-    attr_reader :tracking
-
     sig { returns(ArkEmail::Resources::Logs) }
     attr_reader :logs
 
-    sig { returns(ArkEmail::Resources::Limits) }
-    attr_reader :limits
-
     sig { returns(ArkEmail::Resources::Usage) }
     attr_reader :usage
+
+    sig { returns(ArkEmail::Resources::Limits) }
+    attr_reader :limits
 
     sig { returns(ArkEmail::Resources::Tenants) }
     attr_reader :tenants

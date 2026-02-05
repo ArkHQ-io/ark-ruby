@@ -1,0 +1,38 @@
+module ArkEmail
+  module Resources
+    class Tenants
+      class Domains
+        def create: (
+          String tenant_id,
+          name: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::DomainCreateResponse
+
+        def retrieve: (
+          String domain_id,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::DomainRetrieveResponse
+
+        def list: (
+          String tenant_id,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::DomainListResponse
+
+        def delete: (
+          String domain_id,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::DomainDeleteResponse
+
+        def verify: (
+          String domain_id,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::DomainVerifyResponse
+
+        def initialize: (client: ArkEmail::Client) -> void
+      end
+    end
+  end
+end

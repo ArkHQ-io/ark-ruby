@@ -1,0 +1,30 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type suppression_create_params =
+        { address: String, reason: String? }
+        & ArkEmail::Internal::Type::request_parameters
+
+      class SuppressionCreateParams < ArkEmail::Internal::Type::BaseModel
+        extend ArkEmail::Internal::Type::RequestParameters::Converter
+        include ArkEmail::Internal::Type::RequestParameters
+
+        attr_accessor address: String
+
+        attr_accessor reason: String?
+
+        def initialize: (
+          address: String,
+          ?reason: String?,
+          ?request_options: ArkEmail::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          address: String,
+          reason: String?,
+          request_options: ArkEmail::RequestOptions
+        }
+      end
+    end
+  end
+end

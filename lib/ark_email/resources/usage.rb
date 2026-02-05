@@ -3,76 +3,79 @@
 module ArkEmail
   module Resources
     class Usage
-      # @deprecated
+      # Some parameter documentations has been truncated, see
+      # {ArkEmail::Models::UsageRetrieveParams} for more details.
       #
-      # > **Deprecated:** Use `GET /limits` instead for rate limits and send limits.
-      # > This endpoint will be removed in a future version.
-      #
-      # Returns current usage and limit information for your account.
-      #
-      # This endpoint is designed for:
-      #
-      # - **AI agents/MCP servers:** Check constraints before planning batch operations
-      # - **Monitoring dashboards:** Display current usage status
-      # - **Rate limit awareness:** Know remaining capacity before making requests
-      #
-      # **Response includes:**
-      #
-      # - `rateLimit` - API request rate limit (requests per second)
-      # - `sendLimit` - Email sending limit (emails per hour)
-      # - `billing` - Credit balance and auto-recharge configuration
-      #
-      # **Notes:**
-      #
-      # - This request counts against your rate limit
-      # - `sendLimit` may be null if Postal is temporarily unavailable
-      # - `billing` is null if billing is not configured
-      # - Send limit resets at the top of each hour
-      #
-      # **Migration:**
-      #
-      # - For rate limits and send limits, use `GET /limits`
-      # - For per-tenant usage analytics, use `GET /tenants/{tenantId}/usage`
-      # - For bulk tenant usage, use `GET /usage/by-tenant`
-      #
-      # @overload retrieve(request_options: {})
-      #
-      # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
-      #
-      # @return [ArkEmail::Models::UsageRetrieveResponse]
-      #
-      # @see ArkEmail::Models::UsageRetrieveParams
-      def retrieve(params = {})
-        @client.request(
-          method: :get,
-          path: "usage",
-          model: ArkEmail::Models::UsageRetrieveResponse,
-          options: params[:request_options]
-        )
-      end
-
-      # Export usage data for all tenants in a format suitable for billing systems.
+      # Returns aggregated email sending statistics for your entire organization. For
+      # per-tenant breakdown, use `GET /usage/tenants`.
       #
       # **Use cases:**
       #
-      # - Import into billing systems (Stripe, Chargebee, etc.)
-      # - Generate invoices
-      # - Archive usage data
+      # - Platform dashboards showing org-wide metrics
+      # - Quick health check on overall sending
+      # - Monitoring total volume and delivery rates
+      #
+      # **Response includes:**
+      #
+      # - `emails` - Aggregated email counts across all tenants
+      # - `rates` - Overall delivery and bounce rates
+      # - `tenants` - Tenant count summary (total, active, with activity)
+      #
+      # **Related endpoints:**
+      #
+      # - `GET /usage/tenants` - Paginated usage per tenant
+      # - `GET /usage/export` - Export usage data for billing
+      # - `GET /tenants/{tenantId}/usage` - Single tenant usage details
+      # - `GET /limits` - Rate limits and send limits
+      #
+      # @overload retrieve(period: nil, timezone: nil, request_options: {})
+      #
+      # @param period [String] Time period for usage data.
+      #
+      # @param timezone [String] Timezone for period calculations (IANA format)
+      #
+      # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
+      #
+      # @return [ArkEmail::Models::OrgUsageSummary]
+      #
+      # @see ArkEmail::Models::UsageRetrieveParams
+      def retrieve(params = {})
+        parsed, options = ArkEmail::UsageRetrieveParams.dump_request(params)
+        @client.request(
+          method: :get,
+          path: "usage",
+          query: parsed,
+          model: ArkEmail::OrgUsageSummary,
+          options: options
+        )
+      end
+
+      # Some parameter documentations has been truncated, see
+      # {ArkEmail::Models::UsageExportParams} for more details.
+      #
+      # Export email usage data for all tenants in CSV or JSON Lines format. Designed
+      # for billing system integration, data warehousing, and analytics.
+      #
+      # **Jobs to be done:**
+      #
+      # - Import usage data into billing systems (Stripe, Chargebee, etc.)
+      # - Load into data warehouses (Snowflake, BigQuery, etc.)
+      # - Process in spreadsheets (Excel, Google Sheets)
+      # - Feed into BI tools (Looker, Metabase, etc.)
       #
       # **Export formats:**
       #
-      # - `csv` - Comma-separated values (default)
-      # - `jsonl` - JSON Lines (one JSON object per line)
-      # - `json` - JSON array
+      # - `csv` - UTF-8 with BOM for Excel compatibility (default)
+      # - `jsonl` - JSON Lines (one JSON object per line, streamable)
+      #
+      # **CSV columns:** `tenant_id`, `tenant_name`, `external_id`, `status`, `sent`,
+      # `delivered`, `soft_failed`, `hard_failed`, `bounced`, `held`, `delivery_rate`,
+      # `bounce_rate`, `period_start`, `period_end`
       #
       # **Response headers:**
       #
-      # - `X-Total-Tenants` - Total number of tenants in export
-      # - `X-Total-Sent` - Total emails sent across all tenants
-      # - `Content-Disposition` - Suggested filename for download
-      #
-      # This endpoint returns up to 10,000 tenants per request. For organizations with
-      # more tenants, use the `/usage/by-tenant` endpoint with pagination.
+      # - `Content-Disposition` - Filename for download
+      # - `Content-Type` - `text/csv` or `application/x-ndjson`
       #
       # @overload export(format_: nil, min_sent: nil, period: nil, status: nil, timezone: nil, request_options: {})
       #
@@ -80,11 +83,11 @@ module ArkEmail
       #
       # @param min_sent [Integer] Only include tenants with at least this many emails sent
       #
-      # @param period [String] Time period for export. Defaults to current month.
+      # @param period [String] Time period for export.
       #
       # @param status [Symbol, ArkEmail::Models::UsageExportParams::Status] Filter by tenant status
       #
-      # @param timezone [String] Timezone for period calculations (IANA format). Defaults to UTC.
+      # @param timezone [String] Timezone for period calculations (IANA format)
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
@@ -96,157 +99,68 @@ module ArkEmail
         @client.request(
           method: :get,
           path: "usage/export",
-          query: parsed.transform_keys(format_: "format"),
+          query: parsed.transform_keys(format_: "format", min_sent: "minSent"),
           model: ArkEmail::Internal::Type::ArrayOf[ArkEmail::Models::UsageExportResponseItem],
           options: options
         )
       end
 
       # Some parameter documentations has been truncated, see
-      # {ArkEmail::Models::UsageListByTenantParams} for more details.
+      # {ArkEmail::Models::UsageListTenantsParams} for more details.
       #
-      # Returns email usage statistics for all tenants in your organization.
+      # Returns email usage statistics for all tenants in your organization. Results are
+      # paginated with page-based navigation.
       #
-      # **Use cases:**
+      # **Jobs to be done:**
       #
-      # - Generate monthly billing reports
+      # - Generate monthly billing invoices per tenant
       # - Build admin dashboards showing all customer usage
       # - Identify high-volume or problematic tenants
+      # - Track usage against plan limits
       #
       # **Sorting options:**
       #
       # - `sent`, `-sent` - Sort by emails sent (ascending/descending)
       # - `delivered`, `-delivered` - Sort by emails delivered
       # - `bounce_rate`, `-bounce_rate` - Sort by bounce rate
-      # - `name`, `-name` - Sort alphabetically by tenant name
+      # - `tenant_name`, `-tenant_name` - Sort alphabetically by tenant name
       #
       # **Filtering:**
       #
       # - `status` - Filter by tenant status (active, suspended, archived)
-      # - `min_sent` - Only include tenants with at least N emails sent
+      # - `minSent` - Only include tenants with at least N emails sent
       #
-      # Results are paginated. Use `limit` and `offset` for pagination.
+      # **Auto-pagination:** SDKs support iterating over all pages automatically.
       #
-      # @overload list_by_tenant(limit: nil, min_sent: nil, offset: nil, period: nil, sort: nil, status: nil, timezone: nil, request_options: {})
-      #
-      # @param limit [Integer] Maximum number of tenants to return (1-100)
+      # @overload list_tenants(min_sent: nil, page: nil, period: nil, per_page: nil, sort: nil, status: nil, timezone: nil, request_options: {})
       #
       # @param min_sent [Integer] Only include tenants with at least this many emails sent
       #
-      # @param offset [Integer] Number of tenants to skip for pagination
+      # @param page [Integer] Page number (1-indexed)
       #
       # @param period [String] Time period for usage data. Defaults to current month.
       #
-      # @param sort [Symbol, ArkEmail::Models::UsageListByTenantParams::Sort] Sort order for results. Prefix with `-` for descending order.
+      # @param per_page [Integer] Results per page (max 100)
       #
-      # @param status [Symbol, ArkEmail::Models::UsageListByTenantParams::Status] Filter by tenant status
+      # @param sort [Symbol, ArkEmail::Models::UsageListTenantsParams::Sort] Sort order for results. Prefix with `-` for descending order.
       #
-      # @param timezone [String] Timezone for period calculations (IANA format). Defaults to UTC.
-      #
-      # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
-      #
-      # @return [ArkEmail::Internal::OffsetPagination<ArkEmail::Models::BulkTenantUsage::Tenant>]
-      #
-      # @see ArkEmail::Models::UsageListByTenantParams
-      def list_by_tenant(params = {})
-        parsed, options = ArkEmail::UsageListByTenantParams.dump_request(params)
-        @client.request(
-          method: :get,
-          path: "usage/by-tenant",
-          query: parsed,
-          page: ArkEmail::Internal::OffsetPagination,
-          model: ArkEmail::BulkTenantUsage::Tenant,
-          options: options
-        )
-      end
-
-      # Returns time-bucketed email statistics for a specific tenant.
-      #
-      # **Use cases:**
-      #
-      # - Build usage charts and graphs
-      # - Identify sending patterns
-      # - Detect anomalies in delivery rates
-      #
-      # **Granularity options:**
-      #
-      # - `hour` - Hourly buckets (best for last 7 days)
-      # - `day` - Daily buckets (best for last 30-90 days)
-      # - `week` - Weekly buckets (best for last 6 months)
-      # - `month` - Monthly buckets (best for year-over-year)
-      #
-      # The response includes a data point for each time bucket with all email metrics.
-      #
-      # @overload retrieve_tenant_timeseries(tenant_id, granularity: nil, period: nil, timezone: nil, request_options: {})
-      #
-      # @param tenant_id [String] The tenant ID
-      #
-      # @param granularity [Symbol, ArkEmail::Models::UsageRetrieveTenantTimeseriesParams::Granularity] Time bucket size for data points
-      #
-      # @param period [String] Time period for timeseries data. Defaults to current month.
+      # @param status [Symbol, ArkEmail::Models::UsageListTenantsParams::Status] Filter by tenant status
       #
       # @param timezone [String] Timezone for period calculations (IANA format). Defaults to UTC.
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
-      # @return [ArkEmail::Models::UsageRetrieveTenantTimeseriesResponse]
+      # @return [ArkEmail::Internal::PageNumberPagination<ArkEmail::Models::TenantUsageItem>]
       #
-      # @see ArkEmail::Models::UsageRetrieveTenantTimeseriesParams
-      def retrieve_tenant_timeseries(tenant_id, params = {})
-        parsed, options = ArkEmail::UsageRetrieveTenantTimeseriesParams.dump_request(params)
+      # @see ArkEmail::Models::UsageListTenantsParams
+      def list_tenants(params = {})
+        parsed, options = ArkEmail::UsageListTenantsParams.dump_request(params)
         @client.request(
           method: :get,
-          path: ["tenants/%1$s/usage/timeseries", tenant_id],
-          query: parsed,
-          model: ArkEmail::Models::UsageRetrieveTenantTimeseriesResponse,
-          options: options
-        )
-      end
-
-      # Some parameter documentations has been truncated, see
-      # {ArkEmail::Models::UsageRetrieveTenantUsageParams} for more details.
-      #
-      # Returns email sending statistics for a specific tenant over a time period.
-      #
-      # **Use cases:**
-      #
-      # - Display usage dashboard to your customers
-      # - Calculate per-tenant billing
-      # - Monitor tenant health and delivery rates
-      #
-      # **Period formats:**
-      #
-      # - Shortcuts: `today`, `yesterday`, `this_week`, `last_week`, `this_month`,
-      #   `last_month`, `last_7_days`, `last_30_days`, `last_90_days`
-      # - Month: `2024-01` (full month)
-      # - Date range: `2024-01-01..2024-01-31`
-      # - Single day: `2024-01-15`
-      #
-      # **Response includes:**
-      #
-      # - `emails` - Counts for sent, delivered, soft_failed, hard_failed, bounced, held
-      # - `rates` - Delivery rate and bounce rate as decimals (0.95 = 95%)
-      #
-      # @overload retrieve_tenant_usage(tenant_id, period: nil, timezone: nil, request_options: {})
-      #
-      # @param tenant_id [String] The tenant ID
-      #
-      # @param period [String] Time period for usage data. Defaults to current month.
-      #
-      # @param timezone [String] Timezone for period calculations (IANA format). Defaults to UTC.
-      #
-      # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
-      #
-      # @return [ArkEmail::Models::UsageRetrieveTenantUsageResponse]
-      #
-      # @see ArkEmail::Models::UsageRetrieveTenantUsageParams
-      def retrieve_tenant_usage(tenant_id, params = {})
-        parsed, options = ArkEmail::UsageRetrieveTenantUsageParams.dump_request(params)
-        @client.request(
-          method: :get,
-          path: ["tenants/%1$s/usage", tenant_id],
-          query: parsed,
-          model: ArkEmail::Models::UsageRetrieveTenantUsageResponse,
+          path: "usage/tenants",
+          query: parsed.transform_keys(min_sent: "minSent", per_page: "perPage"),
+          page: ArkEmail::Internal::PageNumberPagination,
+          model: ArkEmail::TenantUsageItem,
           options: options
         )
       end

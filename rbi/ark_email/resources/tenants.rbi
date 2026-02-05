@@ -6,6 +6,21 @@ module ArkEmail
       sig { returns(ArkEmail::Resources::Tenants::Credentials) }
       attr_reader :credentials
 
+      sig { returns(ArkEmail::Resources::Tenants::Domains) }
+      attr_reader :domains
+
+      sig { returns(ArkEmail::Resources::Tenants::Suppressions) }
+      attr_reader :suppressions
+
+      sig { returns(ArkEmail::Resources::Tenants::Webhooks) }
+      attr_reader :webhooks
+
+      sig { returns(ArkEmail::Resources::Tenants::Tracking) }
+      attr_reader :tracking
+
+      sig { returns(ArkEmail::Resources::Tenants::Usage) }
+      attr_reader :usage
+
       # Create a new tenant.
       #
       # Returns the created tenant with a unique `id`. Store this ID in your database to

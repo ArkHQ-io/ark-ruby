@@ -1,0 +1,49 @@
+module ArkEmail
+  module Models
+    class TenantUsage = Tenants::TenantUsage
+
+    module Tenants
+      type tenant_usage =
+        {
+          emails: ArkEmail::EmailCounts,
+          period: ArkEmail::UsagePeriod,
+          rates: ArkEmail::EmailRates,
+          tenant_id: String,
+          tenant_name: String,
+          external_id: String?
+        }
+
+      class TenantUsage < ArkEmail::Internal::Type::BaseModel
+        attr_accessor emails: ArkEmail::EmailCounts
+
+        attr_accessor period: ArkEmail::UsagePeriod
+
+        attr_accessor rates: ArkEmail::EmailRates
+
+        attr_accessor tenant_id: String
+
+        attr_accessor tenant_name: String
+
+        attr_accessor external_id: String?
+
+        def initialize: (
+          emails: ArkEmail::EmailCounts,
+          period: ArkEmail::UsagePeriod,
+          rates: ArkEmail::EmailRates,
+          tenant_id: String,
+          tenant_name: String,
+          ?external_id: String?
+        ) -> void
+
+        def to_hash: -> {
+          emails: ArkEmail::EmailCounts,
+          period: ArkEmail::UsagePeriod,
+          rates: ArkEmail::EmailRates,
+          tenant_id: String,
+          tenant_name: String,
+          external_id: String?
+        }
+      end
+    end
+  end
+end

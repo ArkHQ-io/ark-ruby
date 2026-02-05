@@ -1,0 +1,24 @@
+module ArkEmail
+  module Resources
+    class Tenants
+      class Usage
+        def retrieve: (
+          String tenant_id,
+          ?period: String,
+          ?timezone: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::UsageRetrieveResponse
+
+        def retrieve_timeseries: (
+          String tenant_id,
+          ?granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity,
+          ?period: String,
+          ?timezone: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::UsageRetrieveTimeseriesResponse
+
+        def initialize: (client: ArkEmail::Client) -> void
+      end
+    end
+  end
+end

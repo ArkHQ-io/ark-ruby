@@ -27,7 +27,13 @@ module ArkEmail
       sig { params(min_sent: Integer).void }
       attr_writer :min_sent
 
-      # Time period for export. Defaults to current month.
+      # Time period for export.
+      #
+      # **Shortcuts:** `this_month`, `last_month`, `last_30_days`, etc.
+      #
+      # **Month format:** `2024-01` (YYYY-MM)
+      #
+      # **Custom range:** `2024-01-01..2024-01-15`
       sig { returns(T.nilable(String)) }
       attr_reader :period
 
@@ -41,7 +47,7 @@ module ArkEmail
       sig { params(status: ArkEmail::UsageExportParams::Status::OrSymbol).void }
       attr_writer :status
 
-      # Timezone for period calculations (IANA format). Defaults to UTC.
+      # Timezone for period calculations (IANA format)
       sig { returns(T.nilable(String)) }
       attr_reader :timezone
 
@@ -63,11 +69,17 @@ module ArkEmail
         format_: nil,
         # Only include tenants with at least this many emails sent
         min_sent: nil,
-        # Time period for export. Defaults to current month.
+        # Time period for export.
+        #
+        # **Shortcuts:** `this_month`, `last_month`, `last_30_days`, etc.
+        #
+        # **Month format:** `2024-01` (YYYY-MM)
+        #
+        # **Custom range:** `2024-01-01..2024-01-15`
         period: nil,
         # Filter by tenant status
         status: nil,
-        # Timezone for period calculations (IANA format). Defaults to UTC.
+        # Timezone for period calculations (IANA format)
         timezone: nil,
         request_options: {}
       )
@@ -98,7 +110,6 @@ module ArkEmail
 
         CSV = T.let(:csv, ArkEmail::UsageExportParams::Format::TaggedSymbol)
         JSONL = T.let(:jsonl, ArkEmail::UsageExportParams::Format::TaggedSymbol)
-        JSON = T.let(:json, ArkEmail::UsageExportParams::Format::TaggedSymbol)
 
         sig do
           override.returns(

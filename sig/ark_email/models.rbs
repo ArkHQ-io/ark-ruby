@@ -1,20 +1,6 @@
 module ArkEmail
   class APIMeta = ArkEmail::Models::APIMeta
 
-  class BulkTenantUsage = ArkEmail::Models::BulkTenantUsage
-
-  class DNSRecord = ArkEmail::Models::DNSRecord
-
-  class DomainCreateParams = ArkEmail::Models::DomainCreateParams
-
-  class DomainDeleteParams = ArkEmail::Models::DomainDeleteParams
-
-  class DomainListParams = ArkEmail::Models::DomainListParams
-
-  class DomainRetrieveParams = ArkEmail::Models::DomainRetrieveParams
-
-  class DomainVerifyParams = ArkEmail::Models::DomainVerifyParams
-
   class EmailCounts = ArkEmail::Models::EmailCounts
 
   class EmailListParams = ArkEmail::Models::EmailListParams
@@ -45,15 +31,7 @@ module ArkEmail
 
   class LogRetrieveParams = ArkEmail::Models::LogRetrieveParams
 
-  class SuppressionBulkCreateParams = ArkEmail::Models::SuppressionBulkCreateParams
-
-  class SuppressionCreateParams = ArkEmail::Models::SuppressionCreateParams
-
-  class SuppressionDeleteParams = ArkEmail::Models::SuppressionDeleteParams
-
-  class SuppressionListParams = ArkEmail::Models::SuppressionListParams
-
-  class SuppressionRetrieveParams = ArkEmail::Models::SuppressionRetrieveParams
+  class OrgUsageSummary = ArkEmail::Models::OrgUsageSummary
 
   class Tenant = ArkEmail::Models::Tenant
 
@@ -69,51 +47,13 @@ module ArkEmail
 
   class TenantUpdateParams = ArkEmail::Models::TenantUpdateParams
 
-  class TenantUsage = ArkEmail::Models::TenantUsage
-
-  class TenantUsageTimeseries = ArkEmail::Models::TenantUsageTimeseries
-
-  class TrackDomain = ArkEmail::Models::TrackDomain
-
-  class TrackingCreateParams = ArkEmail::Models::TrackingCreateParams
-
-  class TrackingDeleteParams = ArkEmail::Models::TrackingDeleteParams
-
-  class TrackingListParams = ArkEmail::Models::TrackingListParams
-
-  class TrackingRetrieveParams = ArkEmail::Models::TrackingRetrieveParams
-
-  class TrackingUpdateParams = ArkEmail::Models::TrackingUpdateParams
-
-  class TrackingVerifyParams = ArkEmail::Models::TrackingVerifyParams
+  class TenantUsageItem = ArkEmail::Models::TenantUsageItem
 
   class UsageExportParams = ArkEmail::Models::UsageExportParams
 
-  class UsageListByTenantParams = ArkEmail::Models::UsageListByTenantParams
+  class UsageListTenantsParams = ArkEmail::Models::UsageListTenantsParams
 
   class UsagePeriod = ArkEmail::Models::UsagePeriod
 
   class UsageRetrieveParams = ArkEmail::Models::UsageRetrieveParams
-
-  class UsageRetrieveTenantTimeseriesParams = ArkEmail::Models::UsageRetrieveTenantTimeseriesParams
-
-  class UsageRetrieveTenantUsageParams = ArkEmail::Models::UsageRetrieveTenantUsageParams
-
-  class WebhookCreateParams = ArkEmail::Models::WebhookCreateParams
-
-  class WebhookDeleteParams = ArkEmail::Models::WebhookDeleteParams
-
-  class WebhookListDeliveriesParams = ArkEmail::Models::WebhookListDeliveriesParams
-
-  class WebhookListParams = ArkEmail::Models::WebhookListParams
-
-  class WebhookReplayDeliveryParams = ArkEmail::Models::WebhookReplayDeliveryParams
-
-  class WebhookRetrieveDeliveryParams = ArkEmail::Models::WebhookRetrieveDeliveryParams
-
-  class WebhookRetrieveParams = ArkEmail::Models::WebhookRetrieveParams
-
-  class WebhookTestParams = ArkEmail::Models::WebhookTestParams
-
-  class WebhookUpdateParams = ArkEmail::Models::WebhookUpdateParams
 end
