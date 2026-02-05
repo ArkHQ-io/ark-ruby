@@ -1,0 +1,85 @@
+module ArkEmail
+  module Models
+    type org_usage_summary =
+      {
+        data: ArkEmail::OrgUsageSummary::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+    class OrgUsageSummary < ArkEmail::Internal::Type::BaseModel
+      attr_accessor data: ArkEmail::OrgUsageSummary::Data
+
+      attr_accessor meta: ArkEmail::APIMeta
+
+      attr_accessor success: true
+
+      def initialize: (
+        data: ArkEmail::OrgUsageSummary::Data,
+        meta: ArkEmail::APIMeta,
+        ?success: true
+      ) -> void
+
+      def to_hash: -> {
+        data: ArkEmail::OrgUsageSummary::Data,
+        meta: ArkEmail::APIMeta,
+        success: true
+      }
+
+      type data =
+        {
+          emails: ArkEmail::EmailCounts,
+          period: ArkEmail::UsagePeriod,
+          rates: ArkEmail::EmailRates,
+          tenants: ArkEmail::OrgUsageSummary::Data::Tenants
+        }
+
+      class Data < ArkEmail::Internal::Type::BaseModel
+        attr_accessor emails: ArkEmail::EmailCounts
+
+        attr_accessor period: ArkEmail::UsagePeriod
+
+        attr_accessor rates: ArkEmail::EmailRates
+
+        attr_accessor tenants: ArkEmail::OrgUsageSummary::Data::Tenants
+
+        def initialize: (
+          emails: ArkEmail::EmailCounts,
+          period: ArkEmail::UsagePeriod,
+          rates: ArkEmail::EmailRates,
+          tenants: ArkEmail::OrgUsageSummary::Data::Tenants
+        ) -> void
+
+        def to_hash: -> {
+          emails: ArkEmail::EmailCounts,
+          period: ArkEmail::UsagePeriod,
+          rates: ArkEmail::EmailRates,
+          tenants: ArkEmail::OrgUsageSummary::Data::Tenants
+        }
+
+        type tenants =
+          { active: Integer, total: Integer, with_activity: Integer }
+
+        class Tenants < ArkEmail::Internal::Type::BaseModel
+          attr_accessor active: Integer
+
+          attr_accessor total: Integer
+
+          attr_accessor with_activity: Integer
+
+          def initialize: (
+            active: Integer,
+            total: Integer,
+            with_activity: Integer
+          ) -> void
+
+          def to_hash: -> {
+            active: Integer,
+            total: Integer,
+            with_activity: Integer
+          }
+        end
+      end
+    end
+  end
+end

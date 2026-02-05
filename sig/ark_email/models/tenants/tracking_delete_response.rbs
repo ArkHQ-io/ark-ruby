@@ -1,0 +1,42 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type tracking_delete_response =
+        {
+          data: ArkEmail::Models::Tenants::TrackingDeleteResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class TrackingDeleteResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ArkEmail::Models::Tenants::TrackingDeleteResponse::Data
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ArkEmail::Models::Tenants::TrackingDeleteResponse::Data,
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ArkEmail::Models::Tenants::TrackingDeleteResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data = { message: String }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor message: String
+
+          def initialize: (message: String) -> void
+
+          def to_hash: -> { message: String }
+        end
+      end
+    end
+  end
+end

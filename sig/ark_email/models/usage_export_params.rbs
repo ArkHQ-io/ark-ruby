@@ -56,14 +56,13 @@ module ArkEmail
         request_options: ArkEmail::RequestOptions
       }
 
-      type format_ = :csv | :jsonl | :json
+      type format_ = :csv | :jsonl
 
       module Format
         extend ArkEmail::Internal::Type::Enum
 
         CSV: :csv
         JSONL: :jsonl
-        JSON: :json
 
         def self?.values: -> ::Array[ArkEmail::Models::UsageExportParams::format_]
       end

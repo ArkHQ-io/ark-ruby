@@ -1,0 +1,17 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type webhook_list_params =
+        {  } & ArkEmail::Internal::Type::request_parameters
+
+      class WebhookListParams < ArkEmail::Internal::Type::BaseModel
+        extend ArkEmail::Internal::Type::RequestParameters::Converter
+        include ArkEmail::Internal::Type::RequestParameters
+
+        def initialize: (?request_options: ArkEmail::request_opts) -> void
+
+        def to_hash: -> { request_options: ArkEmail::RequestOptions }
+      end
+    end
+  end
+end

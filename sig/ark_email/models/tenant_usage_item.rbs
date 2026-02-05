@@ -1,0 +1,57 @@
+module ArkEmail
+  module Models
+    type tenant_usage_item =
+      {
+        emails: ArkEmail::EmailCounts,
+        rates: ArkEmail::EmailRates,
+        status: ArkEmail::Models::TenantUsageItem::status,
+        tenant_id: String,
+        tenant_name: String,
+        external_id: String?
+      }
+
+    class TenantUsageItem < ArkEmail::Internal::Type::BaseModel
+      attr_accessor emails: ArkEmail::EmailCounts
+
+      attr_accessor rates: ArkEmail::EmailRates
+
+      attr_accessor status: ArkEmail::Models::TenantUsageItem::status
+
+      attr_accessor tenant_id: String
+
+      attr_accessor tenant_name: String
+
+      attr_accessor external_id: String?
+
+      def initialize: (
+        emails: ArkEmail::EmailCounts,
+        rates: ArkEmail::EmailRates,
+        status: ArkEmail::Models::TenantUsageItem::status,
+        tenant_id: String,
+        tenant_name: String,
+        ?external_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        emails: ArkEmail::EmailCounts,
+        rates: ArkEmail::EmailRates,
+        status: ArkEmail::Models::TenantUsageItem::status,
+        tenant_id: String,
+        tenant_name: String,
+        external_id: String?
+      }
+
+      type status = :active | :suspended | :archived
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        ACTIVE: :active
+        SUSPENDED: :suspended
+        ARCHIVED: :archived
+
+        def self?.values: -> ::Array[ArkEmail::Models::TenantUsageItem::status]
+      end
+    end
+  end
+end

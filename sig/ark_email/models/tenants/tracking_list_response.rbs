@@ -1,0 +1,46 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type tracking_list_response =
+        {
+          data: ArkEmail::Models::Tenants::TrackingListResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class TrackingListResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ArkEmail::Models::Tenants::TrackingListResponse::Data
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ArkEmail::Models::Tenants::TrackingListResponse::Data,
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ArkEmail::Models::Tenants::TrackingListResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data = { track_domains: ::Array[ArkEmail::Tenants::TrackDomain] }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor track_domains: ::Array[ArkEmail::Tenants::TrackDomain]
+
+          def initialize: (
+            track_domains: ::Array[ArkEmail::Tenants::TrackDomain]
+          ) -> void
+
+          def to_hash: -> {
+            track_domains: ::Array[ArkEmail::Tenants::TrackDomain]
+          }
+        end
+      end
+    end
+  end
+end

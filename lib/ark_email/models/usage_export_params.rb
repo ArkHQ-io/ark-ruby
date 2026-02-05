@@ -20,7 +20,13 @@ module ArkEmail
       optional :min_sent, Integer
 
       # @!attribute period
-      #   Time period for export. Defaults to current month.
+      #   Time period for export.
+      #
+      #   **Shortcuts:** `this_month`, `last_month`, `last_30_days`, etc.
+      #
+      #   **Month format:** `2024-01` (YYYY-MM)
+      #
+      #   **Custom range:** `2024-01-01..2024-01-15`
       #
       #   @return [String, nil]
       optional :period, String
@@ -32,21 +38,24 @@ module ArkEmail
       optional :status, enum: -> { ArkEmail::UsageExportParams::Status }
 
       # @!attribute timezone
-      #   Timezone for period calculations (IANA format). Defaults to UTC.
+      #   Timezone for period calculations (IANA format)
       #
       #   @return [String, nil]
       optional :timezone, String
 
       # @!method initialize(format_: nil, min_sent: nil, period: nil, status: nil, timezone: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {ArkEmail::Models::UsageExportParams} for more details.
+      #
       #   @param format_ [Symbol, ArkEmail::Models::UsageExportParams::Format] Export format
       #
       #   @param min_sent [Integer] Only include tenants with at least this many emails sent
       #
-      #   @param period [String] Time period for export. Defaults to current month.
+      #   @param period [String] Time period for export.
       #
       #   @param status [Symbol, ArkEmail::Models::UsageExportParams::Status] Filter by tenant status
       #
-      #   @param timezone [String] Timezone for period calculations (IANA format). Defaults to UTC.
+      #   @param timezone [String] Timezone for period calculations (IANA format)
       #
       #   @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}]
 
@@ -56,7 +65,6 @@ module ArkEmail
 
         CSV = :csv
         JSONL = :jsonl
-        JSON = :json
 
         # @!method self.values
         #   @return [Array<Symbol>]

@@ -3,6 +3,16 @@ module ArkEmail
     class Tenants
       attr_reader credentials: ArkEmail::Resources::Tenants::Credentials
 
+      attr_reader domains: ArkEmail::Resources::Tenants::Domains
+
+      attr_reader suppressions: ArkEmail::Resources::Tenants::Suppressions
+
+      attr_reader webhooks: ArkEmail::Resources::Tenants::Webhooks
+
+      attr_reader tracking: ArkEmail::Resources::Tenants::Tracking
+
+      attr_reader usage: ArkEmail::Resources::Tenants::Usage
+
       def create: (
         name: String,
         ?metadata: ::Hash[Symbol, ArkEmail::Models::TenantCreateParams::metadata?]?,

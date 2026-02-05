@@ -1,0 +1,80 @@
+module ArkEmail
+  module Resources
+    class Tenants
+      class Webhooks
+        def create: (
+          String tenant_id,
+          name: String,
+          url: String,
+          ?all_events: bool?,
+          ?enabled: bool?,
+          ?events: ::Array[ArkEmail::Models::Tenants::WebhookCreateParams::event]?,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookCreateResponse
+
+        def retrieve: (
+          String webhook_id,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookRetrieveResponse
+
+        def update: (
+          String webhook_id,
+          tenant_id: String,
+          ?all_events: bool?,
+          ?enabled: bool?,
+          ?events: ::Array[String]?,
+          ?name: String?,
+          ?url: String?,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookUpdateResponse
+
+        def list: (
+          String tenant_id,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookListResponse
+
+        def delete: (
+          String webhook_id,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookDeleteResponse
+
+        def list_deliveries: (
+          String webhook_id,
+          tenant_id: String,
+          ?after: Integer,
+          ?before: Integer,
+          ?event: ArkEmail::Models::Tenants::WebhookListDeliveriesParams::event,
+          ?page: Integer,
+          ?per_page: Integer,
+          ?success: bool,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookListDeliveriesResponse
+
+        def replay_delivery: (
+          String delivery_id,
+          tenant_id: String,
+          webhook_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookReplayDeliveryResponse
+
+        def retrieve_delivery: (
+          String delivery_id,
+          tenant_id: String,
+          webhook_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse
+
+        def test_: (
+          String webhook_id,
+          tenant_id: String,
+          event: ArkEmail::Models::Tenants::WebhookTestParams::event,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::WebhookTestResponse
+
+        def initialize: (client: ArkEmail::Client) -> void
+      end
+    end
+  end
+end

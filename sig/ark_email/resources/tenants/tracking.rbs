@@ -1,0 +1,52 @@
+module ArkEmail
+  module Resources
+    class Tenants
+      class Tracking
+        def create: (
+          String tenant_id,
+          domain_id: Integer,
+          name: String,
+          ?ssl_enabled: bool?,
+          ?track_clicks: bool?,
+          ?track_opens: bool?,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::TrackingCreateResponse
+
+        def retrieve: (
+          String tracking_id,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::TrackingRetrieveResponse
+
+        def update: (
+          String tracking_id,
+          tenant_id: String,
+          ?excluded_click_domains: String?,
+          ?ssl_enabled: bool?,
+          ?track_clicks: bool?,
+          ?track_opens: bool?,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::TrackingUpdateResponse
+
+        def list: (
+          String tenant_id,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::TrackingListResponse
+
+        def delete: (
+          String tracking_id,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::TrackingDeleteResponse
+
+        def verify: (
+          String tracking_id,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::TrackingVerifyResponse
+
+        def initialize: (client: ArkEmail::Client) -> void
+      end
+    end
+  end
+end

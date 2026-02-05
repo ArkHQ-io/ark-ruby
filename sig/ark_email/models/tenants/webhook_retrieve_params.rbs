@@ -1,0 +1,25 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type webhook_retrieve_params =
+        { tenant_id: String } & ArkEmail::Internal::Type::request_parameters
+
+      class WebhookRetrieveParams < ArkEmail::Internal::Type::BaseModel
+        extend ArkEmail::Internal::Type::RequestParameters::Converter
+        include ArkEmail::Internal::Type::RequestParameters
+
+        attr_accessor tenant_id: String
+
+        def initialize: (
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          tenant_id: String,
+          request_options: ArkEmail::RequestOptions
+        }
+      end
+    end
+  end
+end
