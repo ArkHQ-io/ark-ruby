@@ -39,6 +39,9 @@ module ArkEmail
     # @return [ArkEmail::Resources::Tenants]
     attr_reader :tenants
 
+    # @return [ArkEmail::Resources::Platform]
+    attr_reader :platform
+
     # @api private
     #
     # @return [Hash{String=>String}]
@@ -97,6 +100,7 @@ module ArkEmail
       @usage = ArkEmail::Resources::Usage.new(client: self)
       @limits = ArkEmail::Resources::Limits.new(client: self)
       @tenants = ArkEmail::Resources::Tenants.new(client: self)
+      @platform = ArkEmail::Resources::Platform.new(client: self)
     end
   end
 end

@@ -33,6 +33,8 @@ module ArkEmail
 
   class OrgUsageSummary = ArkEmail::Models::OrgUsageSummary
 
+  module Platform = ArkEmail::Models::Platform
+
   class Tenant = ArkEmail::Models::Tenant
 
   class TenantCreateParams = ArkEmail::Models::TenantCreateParams
