@@ -1,0 +1,74 @@
+module ArkEmail
+  module Models
+    module Platform
+      type webhook_list_response =
+        {
+          data: ::Array[ArkEmail::Models::Platform::WebhookListResponse::Data],
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class WebhookListResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ::Array[ArkEmail::Models::Platform::WebhookListResponse::Data]
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ::Array[ArkEmail::Models::Platform::WebhookListResponse::Data],
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ::Array[ArkEmail::Models::Platform::WebhookListResponse::Data],
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data =
+          {
+            id: String,
+            created_at: Time,
+            enabled: bool,
+            events: ::Array[String],
+            name: String,
+            url: String
+          }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor enabled: bool
+
+          attr_accessor events: ::Array[String]
+
+          attr_accessor name: String
+
+          attr_accessor url: String
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            enabled: bool,
+            events: ::Array[String],
+            name: String,
+            url: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            enabled: bool,
+            events: ::Array[String],
+            name: String,
+            url: String
+          }
+        end
+      end
+    end
+  end
+end

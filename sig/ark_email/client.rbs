@@ -20,6 +20,8 @@ module ArkEmail
 
     attr_reader tenants: ArkEmail::Resources::Tenants
 
+    attr_reader platform: ArkEmail::Resources::Platform
+
     private def auth_headers: -> ::Hash[String, String]
 
     def initialize: (

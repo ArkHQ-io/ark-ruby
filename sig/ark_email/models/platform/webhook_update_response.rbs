@@ -1,0 +1,104 @@
+module ArkEmail
+  module Models
+    module Platform
+      type webhook_update_response =
+        {
+          data: ArkEmail::Models::Platform::WebhookUpdateResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class WebhookUpdateResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ArkEmail::Models::Platform::WebhookUpdateResponse::Data
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ArkEmail::Models::Platform::WebhookUpdateResponse::Data,
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ArkEmail::Models::Platform::WebhookUpdateResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data =
+          {
+            id: String,
+            created_at: Time,
+            enabled: bool,
+            events: ::Array[ArkEmail::Models::Platform::WebhookUpdateResponse::Data::event],
+            name: String,
+            updated_at: Time,
+            url: String
+          }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor created_at: Time
+
+          attr_accessor enabled: bool
+
+          attr_accessor events: ::Array[ArkEmail::Models::Platform::WebhookUpdateResponse::Data::event]
+
+          attr_accessor name: String
+
+          attr_accessor updated_at: Time
+
+          attr_accessor url: String
+
+          def initialize: (
+            id: String,
+            created_at: Time,
+            enabled: bool,
+            events: ::Array[ArkEmail::Models::Platform::WebhookUpdateResponse::Data::event],
+            name: String,
+            updated_at: Time,
+            url: String
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            created_at: Time,
+            enabled: bool,
+            events: ::Array[ArkEmail::Models::Platform::WebhookUpdateResponse::Data::event],
+            name: String,
+            updated_at: Time,
+            url: String
+          }
+
+          type event =
+            :MessageSent
+            | :MessageDelayed
+            | :MessageDeliveryFailed
+            | :MessageHeld
+            | :MessageBounced
+            | :MessageLinkClicked
+            | :MessageLoaded
+            | :DomainDNSError
+
+          module Event
+            extend ArkEmail::Internal::Type::Enum
+
+            MESSAGE_SENT: :MessageSent
+            MESSAGE_DELAYED: :MessageDelayed
+            MESSAGE_DELIVERY_FAILED: :MessageDeliveryFailed
+            MESSAGE_HELD: :MessageHeld
+            MESSAGE_BOUNCED: :MessageBounced
+            MESSAGE_LINK_CLICKED: :MessageLinkClicked
+            MESSAGE_LOADED: :MessageLoaded
+            DOMAIN_DNS_ERROR: :DomainDNSError
+
+            def self?.values: -> ::Array[ArkEmail::Models::Platform::WebhookUpdateResponse::Data::event]
+          end
+        end
+      end
+    end
+  end
+end

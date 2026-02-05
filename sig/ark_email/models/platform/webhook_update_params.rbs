@@ -1,0 +1,78 @@
+module ArkEmail
+  module Models
+    module Platform
+      type webhook_update_params =
+        {
+          enabled: bool,
+          events: ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event],
+          name: String,
+          url: String
+        }
+        & ArkEmail::Internal::Type::request_parameters
+
+      class WebhookUpdateParams < ArkEmail::Internal::Type::BaseModel
+        extend ArkEmail::Internal::Type::RequestParameters::Converter
+        include ArkEmail::Internal::Type::RequestParameters
+
+        attr_reader enabled: bool?
+
+        def enabled=: (bool) -> bool
+
+        attr_reader events: ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event]?
+
+        def events=: (
+          ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event]
+        ) -> ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event]
+
+        attr_reader name: String?
+
+        def name=: (String) -> String
+
+        attr_reader url: String?
+
+        def url=: (String) -> String
+
+        def initialize: (
+          ?enabled: bool,
+          ?events: ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event],
+          ?name: String,
+          ?url: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          enabled: bool,
+          events: ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event],
+          name: String,
+          url: String,
+          request_options: ArkEmail::RequestOptions
+        }
+
+        type event =
+          :MessageSent
+          | :MessageDelayed
+          | :MessageDeliveryFailed
+          | :MessageHeld
+          | :MessageBounced
+          | :MessageLinkClicked
+          | :MessageLoaded
+          | :DomainDNSError
+
+        module Event
+          extend ArkEmail::Internal::Type::Enum
+
+          MESSAGE_SENT: :MessageSent
+          MESSAGE_DELAYED: :MessageDelayed
+          MESSAGE_DELIVERY_FAILED: :MessageDeliveryFailed
+          MESSAGE_HELD: :MessageHeld
+          MESSAGE_BOUNCED: :MessageBounced
+          MESSAGE_LINK_CLICKED: :MessageLinkClicked
+          MESSAGE_LOADED: :MessageLoaded
+          DOMAIN_DNS_ERROR: :DomainDNSError
+
+          def self?.values: -> ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event]
+        end
+      end
+    end
+  end
+end

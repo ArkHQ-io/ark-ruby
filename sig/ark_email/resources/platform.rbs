@@ -1,0 +1,9 @@
+module ArkEmail
+  module Resources
+    class Platform
+      attr_reader webhooks: ArkEmail::Resources::Platform::Webhooks
+
+      def initialize: (client: ArkEmail::Client) -> void
+    end
+  end
+end

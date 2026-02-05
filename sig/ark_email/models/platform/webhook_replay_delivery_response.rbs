@@ -1,0 +1,74 @@
+module ArkEmail
+  module Models
+    module Platform
+      type webhook_replay_delivery_response =
+        {
+          data: ArkEmail::Models::Platform::WebhookReplayDeliveryResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class WebhookReplayDeliveryResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ArkEmail::Models::Platform::WebhookReplayDeliveryResponse::Data
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ArkEmail::Models::Platform::WebhookReplayDeliveryResponse::Data,
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ArkEmail::Models::Platform::WebhookReplayDeliveryResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data =
+          {
+            duration: Integer,
+            new_delivery_id: String,
+            original_delivery_id: String,
+            status_code: Integer?,
+            success: bool,
+            timestamp: Time
+          }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor duration: Integer
+
+          attr_accessor new_delivery_id: String
+
+          attr_accessor original_delivery_id: String
+
+          attr_accessor status_code: Integer?
+
+          attr_accessor success: bool
+
+          attr_accessor timestamp: Time
+
+          def initialize: (
+            duration: Integer,
+            new_delivery_id: String,
+            original_delivery_id: String,
+            status_code: Integer?,
+            success: bool,
+            timestamp: Time
+          ) -> void
+
+          def to_hash: -> {
+            duration: Integer,
+            new_delivery_id: String,
+            original_delivery_id: String,
+            status_code: Integer?,
+            success: bool,
+            timestamp: Time
+          }
+        end
+      end
+    end
+  end
+end
