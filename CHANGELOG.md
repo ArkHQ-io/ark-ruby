@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.19.0 (2026-02-07)
+
+Full Changelog: [v0.18.0...v0.19.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.18.0...v0.19.0)
+
+### Features
+
+* **api:** add Credentials endpoint ([e1b4536](https://github.com/ArkHQ-io/ark-ruby/commit/e1b45361e3a4e4cfd9de4648def64e2622baea81))
+* **api:** add Platform webhooks ([56ac161](https://github.com/ArkHQ-io/ark-ruby/commit/56ac1617e16253ec182b5705621159edddb8791c))
+* **api:** endpoint updates ([f492b2e](https://github.com/ArkHQ-io/ark-ruby/commit/f492b2e39082aed03ef6d104a1e3d9695e3d66b6))
+* **api:** standardization improvements ([b187d9b](https://github.com/ArkHQ-io/ark-ruby/commit/b187d9b397de264ac9dbf6d7b882b28e6850ddf6))
+* **api:** tenant usage ([b3aca3d](https://github.com/ArkHQ-io/ark-ruby/commit/b3aca3dfd1957992552c18d94bba4cd6e1db31f3))
+
+
+### Bug Fixes
+
+* **client:** loosen json header parsing ([209ac67](https://github.com/ArkHQ-io/ark-ruby/commit/209ac6701b972d01b0d83ec8319bb6a36812909d))
+
+
+### Chores
+
+* **docs:** remove www prefix ([80b201f](https://github.com/ArkHQ-io/ark-ruby/commit/80b201fff6de57f5d2496f488e137ac1535304ef))
+
 ## 0.18.0 (2026-02-03)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.17.0...v0.18.0)
