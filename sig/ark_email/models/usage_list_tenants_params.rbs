@@ -1,0 +1,115 @@
+module ArkEmail
+  module Models
+    type usage_list_tenants_params =
+      {
+        min_sent: Integer,
+        page: Integer,
+        period: String,
+        per_page: Integer,
+        sort: ArkEmail::Models::UsageListTenantsParams::sort,
+        status: ArkEmail::Models::UsageListTenantsParams::status,
+        timezone: String
+      }
+      & ArkEmail::Internal::Type::request_parameters
+
+    class UsageListTenantsParams < ArkEmail::Internal::Type::BaseModel
+      extend ArkEmail::Internal::Type::RequestParameters::Converter
+      include ArkEmail::Internal::Type::RequestParameters
+
+      attr_reader min_sent: Integer?
+
+      def min_sent=: (Integer) -> Integer
+
+      attr_reader page: Integer?
+
+      def page=: (Integer) -> Integer
+
+      attr_reader period: String?
+
+      def period=: (String) -> String
+
+      attr_reader per_page: Integer?
+
+      def per_page=: (Integer) -> Integer
+
+      attr_reader sort: ArkEmail::Models::UsageListTenantsParams::sort?
+
+      def sort=: (
+        ArkEmail::Models::UsageListTenantsParams::sort
+      ) -> ArkEmail::Models::UsageListTenantsParams::sort
+
+      attr_reader status: ArkEmail::Models::UsageListTenantsParams::status?
+
+      def status=: (
+        ArkEmail::Models::UsageListTenantsParams::status
+      ) -> ArkEmail::Models::UsageListTenantsParams::status
+
+      attr_reader timezone: String?
+
+      def timezone=: (String) -> String
+
+      def initialize: (
+        ?min_sent: Integer,
+        ?page: Integer,
+        ?period: String,
+        ?per_page: Integer,
+        ?sort: ArkEmail::Models::UsageListTenantsParams::sort,
+        ?status: ArkEmail::Models::UsageListTenantsParams::status,
+        ?timezone: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        min_sent: Integer,
+        page: Integer,
+        period: String,
+        per_page: Integer,
+        sort: ArkEmail::Models::UsageListTenantsParams::sort,
+        status: ArkEmail::Models::UsageListTenantsParams::status,
+        timezone: String,
+        request_options: ArkEmail::RequestOptions
+      }
+
+      type sort =
+        :sent
+        | :"-sent"
+        | :delivered
+        | :"-delivered"
+        | :bounce_rate
+        | :"-bounce_rate"
+        | :delivery_rate
+        | :"-delivery_rate"
+        | :tenant_name
+        | :"-tenant_name"
+
+      module Sort
+        extend ArkEmail::Internal::Type::Enum
+
+        SENT: :sent
+        MINUS_SENT: :"-sent"
+        DELIVERED: :delivered
+        MINUS_DELIVERED: :"-delivered"
+        BOUNCE_RATE: :bounce_rate
+        MINUS_BOUNCE_RATE: :"-bounce_rate"
+        DELIVERY_RATE: :delivery_rate
+        MINUS_DELIVERY_RATE: :"-delivery_rate"
+        TENANT_NAME: :tenant_name
+        MINUS_TENANT_NAME: :"-tenant_name"
+
+        def self?.values: -> ::Array[ArkEmail::Models::UsageListTenantsParams::sort]
+      end
+
+      type status = :active | :suspended | :archived
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        ACTIVE: :active
+        SUSPENDED: :suspended
+        ARCHIVED: :archived
+
+        def self?.values: -> ::Array[ArkEmail::Models::UsageListTenantsParams::status]
+      end
+    end
+  end
+end

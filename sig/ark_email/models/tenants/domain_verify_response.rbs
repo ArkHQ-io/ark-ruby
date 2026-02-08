@@ -1,0 +1,127 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type domain_verify_response =
+        {
+          data: ArkEmail::Models::Tenants::DomainVerifyResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class DomainVerifyResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ArkEmail::Models::Tenants::DomainVerifyResponse::Data
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ArkEmail::Models::Tenants::DomainVerifyResponse::Data,
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ArkEmail::Models::Tenants::DomainVerifyResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data =
+          {
+            id: Integer,
+            created_at: Time,
+            dns_records: ArkEmail::Models::Tenants::DomainVerifyResponse::Data::DNSRecords?,
+            name: String,
+            uuid: String,
+            verified: bool,
+            tenant_id: String,
+            tenant_name: String,
+            verified_at: Time?
+          }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor id: Integer
+
+          attr_accessor created_at: Time
+
+          attr_accessor dns_records: ArkEmail::Models::Tenants::DomainVerifyResponse::Data::DNSRecords?
+
+          attr_accessor name: String
+
+          attr_accessor uuid: String
+
+          attr_accessor verified: bool
+
+          attr_reader tenant_id: String?
+
+          def tenant_id=: (String) -> String
+
+          attr_reader tenant_name: String?
+
+          def tenant_name=: (String) -> String
+
+          attr_accessor verified_at: Time?
+
+          def initialize: (
+            id: Integer,
+            created_at: Time,
+            dns_records: ArkEmail::Models::Tenants::DomainVerifyResponse::Data::DNSRecords?,
+            name: String,
+            uuid: String,
+            verified: bool,
+            ?tenant_id: String,
+            ?tenant_name: String,
+            ?verified_at: Time?
+          ) -> void
+
+          def to_hash: -> {
+            id: Integer,
+            created_at: Time,
+            dns_records: ArkEmail::Models::Tenants::DomainVerifyResponse::Data::DNSRecords?,
+            name: String,
+            uuid: String,
+            verified: bool,
+            tenant_id: String,
+            tenant_name: String,
+            verified_at: Time?
+          }
+
+          type dns_records =
+            {
+              dkim: ArkEmail::Tenants::DNSRecord?,
+              return_path: ArkEmail::Tenants::DNSRecord?,
+              spf: ArkEmail::Tenants::DNSRecord?,
+              zone: String
+            }
+
+          class DNSRecords < ArkEmail::Internal::Type::BaseModel
+            attr_accessor dkim: ArkEmail::Tenants::DNSRecord?
+
+            attr_accessor return_path: ArkEmail::Tenants::DNSRecord?
+
+            attr_accessor spf: ArkEmail::Tenants::DNSRecord?
+
+            attr_reader zone: String?
+
+            def zone=: (String) -> String
+
+            def initialize: (
+              ?dkim: ArkEmail::Tenants::DNSRecord?,
+              ?return_path: ArkEmail::Tenants::DNSRecord?,
+              ?spf: ArkEmail::Tenants::DNSRecord?,
+              ?zone: String
+            ) -> void
+
+            def to_hash: -> {
+              dkim: ArkEmail::Tenants::DNSRecord?,
+              return_path: ArkEmail::Tenants::DNSRecord?,
+              spf: ArkEmail::Tenants::DNSRecord?,
+              zone: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

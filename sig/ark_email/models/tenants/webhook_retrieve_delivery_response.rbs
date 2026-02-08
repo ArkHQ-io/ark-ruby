@@ -1,0 +1,160 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type webhook_retrieve_delivery_response =
+        {
+          data: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class WebhookRetrieveDeliveryResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data,
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data =
+          {
+            id: String,
+            attempt: Integer,
+            event: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::event,
+            request: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::Request,
+            response: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::Response,
+            status_code: Integer?,
+            success: bool,
+            timestamp: Time,
+            url: String,
+            webhook_id: String,
+            webhook_name: String,
+            will_retry: bool
+          }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor id: String
+
+          attr_accessor attempt: Integer
+
+          attr_accessor event: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::event
+
+          attr_accessor request: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::Request
+
+          attr_accessor response: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::Response
+
+          attr_accessor status_code: Integer?
+
+          attr_accessor success: bool
+
+          attr_accessor timestamp: Time
+
+          attr_accessor url: String
+
+          attr_accessor webhook_id: String
+
+          attr_accessor webhook_name: String
+
+          attr_accessor will_retry: bool
+
+          def initialize: (
+            id: String,
+            attempt: Integer,
+            event: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::event,
+            request: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::Request,
+            response: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::Response,
+            status_code: Integer?,
+            success: bool,
+            timestamp: Time,
+            url: String,
+            webhook_id: String,
+            webhook_name: String,
+            will_retry: bool
+          ) -> void
+
+          def to_hash: -> {
+            id: String,
+            attempt: Integer,
+            event: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::event,
+            request: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::Request,
+            response: ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::Response,
+            status_code: Integer?,
+            success: bool,
+            timestamp: Time,
+            url: String,
+            webhook_id: String,
+            webhook_name: String,
+            will_retry: bool
+          }
+
+          type event =
+            :MessageSent
+            | :MessageDelayed
+            | :MessageDeliveryFailed
+            | :MessageHeld
+            | :MessageBounced
+            | :MessageLinkClicked
+            | :MessageLoaded
+            | :DomainDNSError
+
+          module Event
+            extend ArkEmail::Internal::Type::Enum
+
+            MESSAGE_SENT: :MessageSent
+            MESSAGE_DELAYED: :MessageDelayed
+            MESSAGE_DELIVERY_FAILED: :MessageDeliveryFailed
+            MESSAGE_HELD: :MessageHeld
+            MESSAGE_BOUNCED: :MessageBounced
+            MESSAGE_LINK_CLICKED: :MessageLinkClicked
+            MESSAGE_LOADED: :MessageLoaded
+            DOMAIN_DNS_ERROR: :DomainDNSError
+
+            def self?.values: -> ::Array[ArkEmail::Models::Tenants::WebhookRetrieveDeliveryResponse::Data::event]
+          end
+
+          type request =
+            { headers: ::Hash[Symbol, String], payload: ::Hash[Symbol, top] }
+
+          class Request < ArkEmail::Internal::Type::BaseModel
+            attr_accessor headers: ::Hash[Symbol, String]
+
+            attr_accessor payload: ::Hash[Symbol, top]
+
+            def initialize: (
+              headers: ::Hash[Symbol, String],
+              payload: ::Hash[Symbol, top]
+            ) -> void
+
+            def to_hash: -> {
+              headers: ::Hash[Symbol, String],
+              payload: ::Hash[Symbol, top]
+            }
+          end
+
+          type response = { status_code: Integer?, body: String? }
+
+          class Response < ArkEmail::Internal::Type::BaseModel
+            attr_accessor status_code: Integer?
+
+            attr_accessor body: String?
+
+            def initialize: (status_code: Integer?, ?body: String?) -> void
+
+            def to_hash: -> { status_code: Integer?, body: String? }
+          end
+        end
+      end
+    end
+  end
+end

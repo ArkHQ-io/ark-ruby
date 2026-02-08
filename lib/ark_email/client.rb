@@ -27,26 +27,20 @@ module ArkEmail
     # @return [ArkEmail::Resources::Emails]
     attr_reader :emails
 
-    # @return [ArkEmail::Resources::Domains]
-    attr_reader :domains
-
-    # @return [ArkEmail::Resources::Suppressions]
-    attr_reader :suppressions
-
-    # @return [ArkEmail::Resources::Webhooks]
-    attr_reader :webhooks
-
-    # @return [ArkEmail::Resources::Tracking]
-    attr_reader :tracking
-
     # @return [ArkEmail::Resources::Logs]
     attr_reader :logs
 
     # @return [ArkEmail::Resources::Usage]
     attr_reader :usage
 
+    # @return [ArkEmail::Resources::Limits]
+    attr_reader :limits
+
     # @return [ArkEmail::Resources::Tenants]
     attr_reader :tenants
+
+    # @return [ArkEmail::Resources::Platform]
+    attr_reader :platform
 
     # @api private
     #
@@ -102,13 +96,11 @@ module ArkEmail
       )
 
       @emails = ArkEmail::Resources::Emails.new(client: self)
-      @domains = ArkEmail::Resources::Domains.new(client: self)
-      @suppressions = ArkEmail::Resources::Suppressions.new(client: self)
-      @webhooks = ArkEmail::Resources::Webhooks.new(client: self)
-      @tracking = ArkEmail::Resources::Tracking.new(client: self)
       @logs = ArkEmail::Resources::Logs.new(client: self)
       @usage = ArkEmail::Resources::Usage.new(client: self)
+      @limits = ArkEmail::Resources::Limits.new(client: self)
       @tenants = ArkEmail::Resources::Tenants.new(client: self)
+      @platform = ArkEmail::Resources::Platform.new(client: self)
     end
   end
 end

@@ -41,19 +41,11 @@ module ArkEmail
 
   APIMeta = ArkEmail::Models::APIMeta
 
-  DNSRecord = ArkEmail::Models::DNSRecord
-
-  DomainCreateParams = ArkEmail::Models::DomainCreateParams
-
-  DomainDeleteParams = ArkEmail::Models::DomainDeleteParams
-
-  DomainListParams = ArkEmail::Models::DomainListParams
-
-  DomainRetrieveParams = ArkEmail::Models::DomainRetrieveParams
-
-  DomainVerifyParams = ArkEmail::Models::DomainVerifyParams
+  EmailCounts = ArkEmail::Models::EmailCounts
 
   EmailListParams = ArkEmail::Models::EmailListParams
+
+  EmailRates = ArkEmail::Models::EmailRates
 
   EmailRetrieveDeliveriesParams = ArkEmail::Models::EmailRetrieveDeliveriesParams
 
@@ -67,6 +59,10 @@ module ArkEmail
 
   EmailSendRawParams = ArkEmail::Models::EmailSendRawParams
 
+  LimitRetrieveParams = ArkEmail::Models::LimitRetrieveParams
+
+  LimitsData = ArkEmail::Models::LimitsData
+
   LogEntry = ArkEmail::Models::LogEntry
 
   LogEntryDetail = ArkEmail::Models::LogEntryDetail
@@ -75,15 +71,9 @@ module ArkEmail
 
   LogRetrieveParams = ArkEmail::Models::LogRetrieveParams
 
-  SuppressionBulkCreateParams = ArkEmail::Models::SuppressionBulkCreateParams
+  OrgUsageSummary = ArkEmail::Models::OrgUsageSummary
 
-  SuppressionCreateParams = ArkEmail::Models::SuppressionCreateParams
-
-  SuppressionDeleteParams = ArkEmail::Models::SuppressionDeleteParams
-
-  SuppressionListParams = ArkEmail::Models::SuppressionListParams
-
-  SuppressionRetrieveParams = ArkEmail::Models::SuppressionRetrieveParams
+  Platform = ArkEmail::Models::Platform
 
   Tenant = ArkEmail::Models::Tenant
 
@@ -95,39 +85,17 @@ module ArkEmail
 
   TenantRetrieveParams = ArkEmail::Models::TenantRetrieveParams
 
+  Tenants = ArkEmail::Models::Tenants
+
   TenantUpdateParams = ArkEmail::Models::TenantUpdateParams
 
-  TrackDomain = ArkEmail::Models::TrackDomain
+  TenantUsageItem = ArkEmail::Models::TenantUsageItem
 
-  TrackingCreateParams = ArkEmail::Models::TrackingCreateParams
+  UsageExportParams = ArkEmail::Models::UsageExportParams
 
-  TrackingDeleteParams = ArkEmail::Models::TrackingDeleteParams
+  UsageListTenantsParams = ArkEmail::Models::UsageListTenantsParams
 
-  TrackingListParams = ArkEmail::Models::TrackingListParams
-
-  TrackingRetrieveParams = ArkEmail::Models::TrackingRetrieveParams
-
-  TrackingUpdateParams = ArkEmail::Models::TrackingUpdateParams
-
-  TrackingVerifyParams = ArkEmail::Models::TrackingVerifyParams
+  UsagePeriod = ArkEmail::Models::UsagePeriod
 
   UsageRetrieveParams = ArkEmail::Models::UsageRetrieveParams
-
-  WebhookCreateParams = ArkEmail::Models::WebhookCreateParams
-
-  WebhookDeleteParams = ArkEmail::Models::WebhookDeleteParams
-
-  WebhookListDeliveriesParams = ArkEmail::Models::WebhookListDeliveriesParams
-
-  WebhookListParams = ArkEmail::Models::WebhookListParams
-
-  WebhookReplayDeliveryParams = ArkEmail::Models::WebhookReplayDeliveryParams
-
-  WebhookRetrieveDeliveryParams = ArkEmail::Models::WebhookRetrieveDeliveryParams
-
-  WebhookRetrieveParams = ArkEmail::Models::WebhookRetrieveParams
-
-  WebhookTestParams = ArkEmail::Models::WebhookTestParams
-
-  WebhookUpdateParams = ArkEmail::Models::WebhookUpdateParams
 end

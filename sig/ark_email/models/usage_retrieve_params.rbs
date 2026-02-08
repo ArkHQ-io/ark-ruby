@@ -1,15 +1,32 @@
 module ArkEmail
   module Models
     type usage_retrieve_params =
-      {  } & ArkEmail::Internal::Type::request_parameters
+      { period: String, timezone: String }
+      & ArkEmail::Internal::Type::request_parameters
 
     class UsageRetrieveParams < ArkEmail::Internal::Type::BaseModel
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
 
-      def initialize: (?request_options: ArkEmail::request_opts) -> void
+      attr_reader period: String?
 
-      def to_hash: -> { request_options: ArkEmail::RequestOptions }
+      def period=: (String) -> String
+
+      attr_reader timezone: String?
+
+      def timezone=: (String) -> String
+
+      def initialize: (
+        ?period: String,
+        ?timezone: String,
+        ?request_options: ArkEmail::request_opts
+      ) -> void
+
+      def to_hash: -> {
+        period: String,
+        timezone: String,
+        request_options: ArkEmail::RequestOptions
+      }
     end
   end
 end

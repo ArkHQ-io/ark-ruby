@@ -1,0 +1,92 @@
+module ArkEmail
+  module Models
+    type usage_export_response_item =
+      {
+        bounce_rate: Float,
+        bounced: Integer,
+        delivered: Integer,
+        delivery_rate: Float,
+        hard_failed: Integer,
+        held: Integer,
+        sent: Integer,
+        soft_failed: Integer,
+        status: ArkEmail::Models::UsageExportResponseItem::status,
+        tenant_id: String,
+        tenant_name: String,
+        external_id: String?
+      }
+
+    class UsageExportResponseItem < ArkEmail::Internal::Type::BaseModel
+      attr_accessor bounce_rate: Float
+
+      attr_accessor bounced: Integer
+
+      attr_accessor delivered: Integer
+
+      attr_accessor delivery_rate: Float
+
+      attr_accessor hard_failed: Integer
+
+      attr_accessor held: Integer
+
+      attr_accessor sent: Integer
+
+      attr_accessor soft_failed: Integer
+
+      attr_accessor status: ArkEmail::Models::UsageExportResponseItem::status
+
+      attr_accessor tenant_id: String
+
+      attr_accessor tenant_name: String
+
+      attr_accessor external_id: String?
+
+      def initialize: (
+        bounce_rate: Float,
+        bounced: Integer,
+        delivered: Integer,
+        delivery_rate: Float,
+        hard_failed: Integer,
+        held: Integer,
+        sent: Integer,
+        soft_failed: Integer,
+        status: ArkEmail::Models::UsageExportResponseItem::status,
+        tenant_id: String,
+        tenant_name: String,
+        ?external_id: String?
+      ) -> void
+
+      def to_hash: -> {
+        bounce_rate: Float,
+        bounced: Integer,
+        delivered: Integer,
+        delivery_rate: Float,
+        hard_failed: Integer,
+        held: Integer,
+        sent: Integer,
+        soft_failed: Integer,
+        status: ArkEmail::Models::UsageExportResponseItem::status,
+        tenant_id: String,
+        tenant_name: String,
+        external_id: String?
+      }
+
+      type status = :active | :suspended | :archived
+
+      module Status
+        extend ArkEmail::Internal::Type::Enum
+
+        ACTIVE: :active
+        SUSPENDED: :suspended
+        ARCHIVED: :archived
+
+        def self?.values: -> ::Array[ArkEmail::Models::UsageExportResponseItem::status]
+      end
+    end
+
+    type usage_export_response =
+      ::Array[ArkEmail::Models::UsageExportResponseItem]
+
+    UsageExportResponse: ArkEmail::Internal::Type::Converter
+  end
+end

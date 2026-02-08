@@ -10,14 +10,14 @@ module ArkEmail
       # headers, or delivery attempts.
       sig do
         params(
-          id: String,
+          email_id: String,
           expand: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailRetrieveResponse)
       end
       def retrieve(
         # The email identifier (token returned from send response)
-        id,
+        email_id,
         # Comma-separated list of fields to include:
         #
         # - `full` - Include all expanded fields in a single request
@@ -39,7 +39,7 @@ module ArkEmail
       #
       # **Related endpoints:**
       #
-      # - `GET /emails/{id}` - Get full details of a specific email
+      # - `GET /emails/{emailId}` - Get full details of a specific email
       # - `POST /emails` - Send a new email
       sig do
         params(
@@ -119,18 +119,18 @@ module ArkEmail
       #
       # ### Can Retry Manually
       #
-      # Indicates whether you can call `POST /emails/{id}/retry` to manually retry the
-      # email. This is `true` when the raw message content is still available (not
+      # Indicates whether you can call `POST /emails/{emailId}/retry` to manually retry
+      # the email. This is `true` when the raw message content is still available (not
       # expired due to retention policy).
       sig do
         params(
-          id: String,
+          email_id: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailRetrieveDeliveriesResponse)
       end
       def retrieve_deliveries(
         # Email identifier (the token returned when sending an email).
-        id,
+        email_id,
         request_options: {}
       )
       end
@@ -141,13 +141,13 @@ module ArkEmail
       # Only works for emails that have failed or are in a retryable state.
       sig do
         params(
-          id: String,
+          email_id: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailRetryResponse)
       end
       def retry_(
         # The email identifier (token returned from send response)
-        id,
+        email_id,
         request_options: {}
       )
       end
@@ -163,9 +163,9 @@ module ArkEmail
       #
       # **Related endpoints:**
       #
-      # - `GET /emails/{id}` - Track delivery status
-      # - `GET /emails/{id}/deliveries` - View delivery attempts
-      # - `POST /emails/{id}/retry` - Retry failed delivery
+      # - `GET /emails/{emailId}` - Track delivery status
+      # - `GET /emails/{emailId}/deliveries` - View delivery attempts
+      # - `POST /emails/{emailId}/retry` - Retry failed delivery
       sig do
         params(
           from: String,

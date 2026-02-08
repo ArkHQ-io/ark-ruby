@@ -33,7 +33,7 @@ module ArkEmail
         required :id, String
 
         # @!attribute can_retry_manually
-        #   Whether the message can be manually retried via `POST /emails/{id}/retry`.
+        #   Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
         #   `true` when the raw message content is still available (not expired). Messages
         #   older than the retention period cannot be retried.
         #
@@ -77,7 +77,7 @@ module ArkEmail
         #
         #   @param id [String] Message identifier (token)
         #
-        #   @param can_retry_manually [Boolean] Whether the message can be manually retried via `POST /emails/{id}/retry`.
+        #   @param can_retry_manually [Boolean] Whether the message can be manually retried via `POST /emails/{emailId}/retry`.
         #
         #   @param deliveries [Array<ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery>] Chronological list of delivery attempts for this message.
         #

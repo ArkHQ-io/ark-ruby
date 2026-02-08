@@ -1,0 +1,25 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type domain_create_params =
+        { name: String } & ArkEmail::Internal::Type::request_parameters
+
+      class DomainCreateParams < ArkEmail::Internal::Type::BaseModel
+        extend ArkEmail::Internal::Type::RequestParameters::Converter
+        include ArkEmail::Internal::Type::RequestParameters
+
+        attr_accessor name: String
+
+        def initialize: (
+          name: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          name: String,
+          request_options: ArkEmail::RequestOptions
+        }
+      end
+    end
+  end
+end

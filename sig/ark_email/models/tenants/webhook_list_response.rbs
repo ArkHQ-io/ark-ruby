@@ -1,0 +1,86 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type webhook_list_response =
+        {
+          data: ArkEmail::Models::Tenants::WebhookListResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class WebhookListResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ArkEmail::Models::Tenants::WebhookListResponse::Data
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ArkEmail::Models::Tenants::WebhookListResponse::Data,
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ArkEmail::Models::Tenants::WebhookListResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data =
+          {
+            webhooks: ::Array[ArkEmail::Models::Tenants::WebhookListResponse::Data::Webhook]
+          }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor webhooks: ::Array[ArkEmail::Models::Tenants::WebhookListResponse::Data::Webhook]
+
+          def initialize: (
+            webhooks: ::Array[ArkEmail::Models::Tenants::WebhookListResponse::Data::Webhook]
+          ) -> void
+
+          def to_hash: -> {
+            webhooks: ::Array[ArkEmail::Models::Tenants::WebhookListResponse::Data::Webhook]
+          }
+
+          type webhook =
+            {
+              id: String,
+              enabled: bool,
+              events: ::Array[String],
+              name: String,
+              url: String
+            }
+
+          class Webhook < ArkEmail::Internal::Type::BaseModel
+            attr_accessor id: String
+
+            attr_accessor enabled: bool
+
+            attr_accessor events: ::Array[String]
+
+            attr_accessor name: String
+
+            attr_accessor url: String
+
+            def initialize: (
+              id: String,
+              enabled: bool,
+              events: ::Array[String],
+              name: String,
+              url: String
+            ) -> void
+
+            def to_hash: -> {
+              id: String,
+              enabled: bool,
+              events: ::Array[String],
+              name: String,
+              url: String
+            }
+          end
+        end
+      end
+    end
+  end
+end

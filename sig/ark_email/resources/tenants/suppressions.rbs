@@ -1,0 +1,35 @@
+module ArkEmail
+  module Resources
+    class Tenants
+      class Suppressions
+        def create: (
+          String tenant_id,
+          address: String,
+          ?reason: String?,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::SuppressionCreateResponse
+
+        def retrieve: (
+          String email,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::SuppressionRetrieveResponse
+
+        def list: (
+          String tenant_id,
+          ?page: Integer,
+          ?per_page: Integer,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Internal::PageNumberPagination[ArkEmail::Models::Tenants::SuppressionListResponse]
+
+        def delete: (
+          String email,
+          tenant_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Tenants::SuppressionDeleteResponse
+
+        def initialize: (client: ArkEmail::Client) -> void
+      end
+    end
+  end
+end

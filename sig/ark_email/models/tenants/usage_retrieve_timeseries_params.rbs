@@ -1,0 +1,59 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type usage_retrieve_timeseries_params =
+        {
+          granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity,
+          period: String,
+          timezone: String
+        }
+        & ArkEmail::Internal::Type::request_parameters
+
+      class UsageRetrieveTimeseriesParams < ArkEmail::Internal::Type::BaseModel
+        extend ArkEmail::Internal::Type::RequestParameters::Converter
+        include ArkEmail::Internal::Type::RequestParameters
+
+        attr_reader granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity?
+
+        def granularity=: (
+          ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity
+        ) -> ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity
+
+        attr_reader period: String?
+
+        def period=: (String) -> String
+
+        attr_reader timezone: String?
+
+        def timezone=: (String) -> String
+
+        def initialize: (
+          ?granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity,
+          ?period: String,
+          ?timezone: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity,
+          period: String,
+          timezone: String,
+          request_options: ArkEmail::RequestOptions
+        }
+
+        type granularity = :hour | :day | :week | :month
+
+        module Granularity
+          extend ArkEmail::Internal::Type::Enum
+
+          HOUR: :hour
+          DAY: :day
+          WEEK: :week
+          MONTH: :month
+
+          def self?.values: -> ::Array[ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity]
+        end
+      end
+    end
+  end
+end

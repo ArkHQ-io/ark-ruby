@@ -1,0 +1,67 @@
+module ArkEmail
+  module Resources
+    class Platform
+      class Webhooks
+        def create: (
+          name: String,
+          url: String,
+          ?events: ::Array[ArkEmail::Models::Platform::WebhookCreateParams::event],
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Platform::WebhookCreateResponse
+
+        def retrieve: (
+          String webhook_id,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Platform::WebhookRetrieveResponse
+
+        def update: (
+          String webhook_id,
+          ?enabled: bool,
+          ?events: ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event],
+          ?name: String,
+          ?url: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Platform::WebhookUpdateResponse
+
+        def list: (
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Platform::WebhookListResponse
+
+        def delete: (
+          String webhook_id,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Platform::WebhookDeleteResponse
+
+        def list_deliveries: (
+          ?after: Integer,
+          ?before: Integer,
+          ?event: ArkEmail::Models::Platform::WebhookListDeliveriesParams::event,
+          ?page: Integer,
+          ?per_page: Integer,
+          ?success: bool,
+          ?tenant_id: String,
+          ?webhook_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Internal::PageNumberPagination[ArkEmail::Models::Platform::WebhookListDeliveriesResponse]
+
+        def replay_delivery: (
+          String delivery_id,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Platform::WebhookReplayDeliveryResponse
+
+        def retrieve_delivery: (
+          String delivery_id,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Platform::WebhookRetrieveDeliveryResponse
+
+        def test_: (
+          String webhook_id,
+          event: ArkEmail::Models::Platform::WebhookTestParams::event,
+          ?request_options: ArkEmail::request_opts
+        ) -> ArkEmail::Models::Platform::WebhookTestResponse
+
+        def initialize: (client: ArkEmail::Client) -> void
+      end
+    end
+  end
+end

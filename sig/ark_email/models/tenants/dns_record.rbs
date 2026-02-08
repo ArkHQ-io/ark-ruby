@@ -1,0 +1,66 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type dns_record =
+        {
+          full_name: String,
+          name: String,
+          type: ArkEmail::Models::Tenants::DNSRecord::type_,
+          value: String,
+          status: ArkEmail::Models::Tenants::DNSRecord::status?
+        }
+
+      class DNSRecord < ArkEmail::Internal::Type::BaseModel
+        attr_accessor full_name: String
+
+        attr_accessor name: String
+
+        attr_accessor type: ArkEmail::Models::Tenants::DNSRecord::type_
+
+        attr_accessor value: String
+
+        attr_accessor status: ArkEmail::Models::Tenants::DNSRecord::status?
+
+        def initialize: (
+          full_name: String,
+          name: String,
+          type: ArkEmail::Models::Tenants::DNSRecord::type_,
+          value: String,
+          ?status: ArkEmail::Models::Tenants::DNSRecord::status?
+        ) -> void
+
+        def to_hash: -> {
+          full_name: String,
+          name: String,
+          type: ArkEmail::Models::Tenants::DNSRecord::type_,
+          value: String,
+          status: ArkEmail::Models::Tenants::DNSRecord::status?
+        }
+
+        type type_ = :TXT | :CNAME | :MX
+
+        module Type
+          extend ArkEmail::Internal::Type::Enum
+
+          TXT: :TXT
+          CNAME: :CNAME
+          MX: :MX
+
+          def self?.values: -> ::Array[ArkEmail::Models::Tenants::DNSRecord::type_]
+        end
+
+        type status = :OK | :Missing | :Invalid
+
+        module Status
+          extend ArkEmail::Internal::Type::Enum
+
+          OK: :OK
+          MISSING: :Missing
+          INVALID: :Invalid
+
+          def self?.values: -> ::Array[ArkEmail::Models::Tenants::DNSRecord::status]
+        end
+      end
+    end
+  end
+end

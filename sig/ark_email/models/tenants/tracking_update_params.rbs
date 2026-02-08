@@ -1,0 +1,48 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type tracking_update_params =
+        {
+          tenant_id: String,
+          excluded_click_domains: String?,
+          ssl_enabled: bool?,
+          track_clicks: bool?,
+          track_opens: bool?
+        }
+        & ArkEmail::Internal::Type::request_parameters
+
+      class TrackingUpdateParams < ArkEmail::Internal::Type::BaseModel
+        extend ArkEmail::Internal::Type::RequestParameters::Converter
+        include ArkEmail::Internal::Type::RequestParameters
+
+        attr_accessor tenant_id: String
+
+        attr_accessor excluded_click_domains: String?
+
+        attr_accessor ssl_enabled: bool?
+
+        attr_accessor track_clicks: bool?
+
+        attr_accessor track_opens: bool?
+
+        def initialize: (
+          tenant_id: String,
+          ?excluded_click_domains: String?,
+          ?ssl_enabled: bool?,
+          ?track_clicks: bool?,
+          ?track_opens: bool?,
+          ?request_options: ArkEmail::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          tenant_id: String,
+          excluded_click_domains: String?,
+          ssl_enabled: bool?,
+          track_clicks: bool?,
+          track_opens: bool?,
+          request_options: ArkEmail::RequestOptions
+        }
+      end
+    end
+  end
+end

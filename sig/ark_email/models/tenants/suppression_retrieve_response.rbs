@@ -1,0 +1,64 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type suppression_retrieve_response =
+        {
+          data: ArkEmail::Models::Tenants::SuppressionRetrieveResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+      class SuppressionRetrieveResponse < ArkEmail::Internal::Type::BaseModel
+        attr_accessor data: ArkEmail::Models::Tenants::SuppressionRetrieveResponse::Data
+
+        attr_accessor meta: ArkEmail::APIMeta
+
+        attr_accessor success: true
+
+        def initialize: (
+          data: ArkEmail::Models::Tenants::SuppressionRetrieveResponse::Data,
+          meta: ArkEmail::APIMeta,
+          ?success: true
+        ) -> void
+
+        def to_hash: -> {
+          data: ArkEmail::Models::Tenants::SuppressionRetrieveResponse::Data,
+          meta: ArkEmail::APIMeta,
+          success: true
+        }
+
+        type data =
+          {
+            address: String,
+            suppressed: bool,
+            created_at: Time?,
+            reason: String?
+          }
+
+        class Data < ArkEmail::Internal::Type::BaseModel
+          attr_accessor address: String
+
+          attr_accessor suppressed: bool
+
+          attr_accessor created_at: Time?
+
+          attr_accessor reason: String?
+
+          def initialize: (
+            address: String,
+            suppressed: bool,
+            ?created_at: Time?,
+            ?reason: String?
+          ) -> void
+
+          def to_hash: -> {
+            address: String,
+            suppressed: bool,
+            created_at: Time?,
+            reason: String?
+          }
+        end
+      end
+    end
+  end
+end

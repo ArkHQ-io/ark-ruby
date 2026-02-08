@@ -1,0 +1,97 @@
+module ArkEmail
+  module Models
+    module Tenants
+      type webhook_list_deliveries_params =
+        {
+          tenant_id: String,
+          after: Integer,
+          before: Integer,
+          event: ArkEmail::Models::Tenants::WebhookListDeliveriesParams::event,
+          page: Integer,
+          per_page: Integer,
+          success: bool
+        }
+        & ArkEmail::Internal::Type::request_parameters
+
+      class WebhookListDeliveriesParams < ArkEmail::Internal::Type::BaseModel
+        extend ArkEmail::Internal::Type::RequestParameters::Converter
+        include ArkEmail::Internal::Type::RequestParameters
+
+        attr_accessor tenant_id: String
+
+        attr_reader after: Integer?
+
+        def after=: (Integer) -> Integer
+
+        attr_reader before: Integer?
+
+        def before=: (Integer) -> Integer
+
+        attr_reader event: ArkEmail::Models::Tenants::WebhookListDeliveriesParams::event?
+
+        def event=: (
+          ArkEmail::Models::Tenants::WebhookListDeliveriesParams::event
+        ) -> ArkEmail::Models::Tenants::WebhookListDeliveriesParams::event
+
+        attr_reader page: Integer?
+
+        def page=: (Integer) -> Integer
+
+        attr_reader per_page: Integer?
+
+        def per_page=: (Integer) -> Integer
+
+        attr_reader success: bool?
+
+        def success=: (bool) -> bool
+
+        def initialize: (
+          tenant_id: String,
+          ?after: Integer,
+          ?before: Integer,
+          ?event: ArkEmail::Models::Tenants::WebhookListDeliveriesParams::event,
+          ?page: Integer,
+          ?per_page: Integer,
+          ?success: bool,
+          ?request_options: ArkEmail::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          tenant_id: String,
+          after: Integer,
+          before: Integer,
+          event: ArkEmail::Models::Tenants::WebhookListDeliveriesParams::event,
+          page: Integer,
+          per_page: Integer,
+          success: bool,
+          request_options: ArkEmail::RequestOptions
+        }
+
+        type event =
+          :MessageSent
+          | :MessageDelayed
+          | :MessageDeliveryFailed
+          | :MessageHeld
+          | :MessageBounced
+          | :MessageLinkClicked
+          | :MessageLoaded
+          | :DomainDNSError
+
+        module Event
+          extend ArkEmail::Internal::Type::Enum
+
+          MESSAGE_SENT: :MessageSent
+          MESSAGE_DELAYED: :MessageDelayed
+          MESSAGE_DELIVERY_FAILED: :MessageDeliveryFailed
+          MESSAGE_HELD: :MessageHeld
+          MESSAGE_BOUNCED: :MessageBounced
+          MESSAGE_LINK_CLICKED: :MessageLinkClicked
+          MESSAGE_LOADED: :MessageLoaded
+          DOMAIN_DNS_ERROR: :DomainDNSError
+
+          def self?.values: -> ::Array[ArkEmail::Models::Tenants::WebhookListDeliveriesParams::event]
+        end
+      end
+    end
+  end
+end

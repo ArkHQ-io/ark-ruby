@@ -12,9 +12,9 @@ module ArkEmail
       # Use the `expand` parameter to include additional data like the HTML/text body,
       # headers, or delivery attempts.
       #
-      # @overload retrieve(id, expand: nil, request_options: {})
+      # @overload retrieve(email_id, expand: nil, request_options: {})
       #
-      # @param id [String] The email identifier (token returned from send response)
+      # @param email_id [String] The email identifier (token returned from send response)
       #
       # @param expand [String] Comma-separated list of fields to include:
       #
@@ -23,11 +23,11 @@ module ArkEmail
       # @return [ArkEmail::Models::EmailRetrieveResponse]
       #
       # @see ArkEmail::Models::EmailRetrieveParams
-      def retrieve(id, params = {})
+      def retrieve(email_id, params = {})
         parsed, options = ArkEmail::EmailRetrieveParams.dump_request(params)
         @client.request(
           method: :get,
-          path: ["emails/%1$s", id],
+          path: ["emails/%1$s", email_id],
           query: parsed,
           model: ArkEmail::Models::EmailRetrieveResponse,
           options: options
@@ -44,7 +44,7 @@ module ArkEmail
       #
       # **Related endpoints:**
       #
-      # - `GET /emails/{id}` - Get full details of a specific email
+      # - `GET /emails/{emailId}` - Get full details of a specific email
       # - `POST /emails` - Send a new email
       #
       # @overload list(after: nil, before: nil, from: nil, page: nil, per_page: nil, status: nil, tag: nil, to: nil, request_options: {})
@@ -118,23 +118,23 @@ module ArkEmail
       #
       # ### Can Retry Manually
       #
-      # Indicates whether you can call `POST /emails/{id}/retry` to manually retry the
-      # email. This is `true` when the raw message content is still available (not
+      # Indicates whether you can call `POST /emails/{emailId}/retry` to manually retry
+      # the email. This is `true` when the raw message content is still available (not
       # expired due to retention policy).
       #
-      # @overload retrieve_deliveries(id, request_options: {})
+      # @overload retrieve_deliveries(email_id, request_options: {})
       #
-      # @param id [String] Email identifier (the token returned when sending an email).
+      # @param email_id [String] Email identifier (the token returned when sending an email).
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [ArkEmail::Models::EmailRetrieveDeliveriesResponse]
       #
       # @see ArkEmail::Models::EmailRetrieveDeliveriesParams
-      def retrieve_deliveries(id, params = {})
+      def retrieve_deliveries(email_id, params = {})
         @client.request(
           method: :get,
-          path: ["emails/%1$s/deliveries", id],
+          path: ["emails/%1$s/deliveries", email_id],
           model: ArkEmail::Models::EmailRetrieveDeliveriesResponse,
           options: params[:request_options]
         )
@@ -145,19 +145,19 @@ module ArkEmail
       #
       # Only works for emails that have failed or are in a retryable state.
       #
-      # @overload retry_(id, request_options: {})
+      # @overload retry_(email_id, request_options: {})
       #
-      # @param id [String] The email identifier (token returned from send response)
+      # @param email_id [String] The email identifier (token returned from send response)
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #
       # @return [ArkEmail::Models::EmailRetryResponse]
       #
       # @see ArkEmail::Models::EmailRetryParams
-      def retry_(id, params = {})
+      def retry_(email_id, params = {})
         @client.request(
           method: :post,
-          path: ["emails/%1$s/retry", id],
+          path: ["emails/%1$s/retry", email_id],
           model: ArkEmail::Models::EmailRetryResponse,
           options: params[:request_options]
         )
@@ -177,9 +177,9 @@ module ArkEmail
       #
       # **Related endpoints:**
       #
-      # - `GET /emails/{id}` - Track delivery status
-      # - `GET /emails/{id}/deliveries` - View delivery attempts
-      # - `POST /emails/{id}/retry` - Retry failed delivery
+      # - `GET /emails/{emailId}` - Track delivery status
+      # - `GET /emails/{emailId}/deliveries` - View delivery attempts
+      # - `POST /emails/{emailId}/retry` - Retry failed delivery
       #
       # @overload send_(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, metadata: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
       #
