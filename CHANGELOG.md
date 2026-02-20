@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.20.0 (2026-02-20)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** add tenantId to send ([d443493](https://github.com/ArkHQ-io/ark-ruby/commit/d4434933efda6c1cc2cab76c52319113f67aab91))
+
+
+### Chores
+
+* update mock server docs ([e0cbedc](https://github.com/ArkHQ-io/ark-ruby/commit/e0cbedce73ed0f6dbd683cb3dc04b8aa9937a434))
+
 ## 0.19.0 (2026-02-07)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.18.0...v0.19.0)
