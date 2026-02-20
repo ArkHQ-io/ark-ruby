@@ -30,6 +30,7 @@ module ArkEmail
         {
           id: String,
           status: ArkEmail::Models::EmailSendResponse::Data::status,
+          tenant_id: String,
           to: ::Array[String],
           message_id: String,
           sandbox: bool
@@ -39,6 +40,8 @@ module ArkEmail
         attr_accessor id: String
 
         attr_accessor status: ArkEmail::Models::EmailSendResponse::Data::status
+
+        attr_accessor tenant_id: String
 
         attr_accessor to: ::Array[String]
 
@@ -53,6 +56,7 @@ module ArkEmail
         def initialize: (
           id: String,
           status: ArkEmail::Models::EmailSendResponse::Data::status,
+          tenant_id: String,
           to: ::Array[String],
           ?message_id: String,
           ?sandbox: bool
@@ -61,6 +65,7 @@ module ArkEmail
         def to_hash: -> {
           id: String,
           status: ArkEmail::Models::EmailSendResponse::Data::status,
+          tenant_id: String,
           to: ::Array[String],
           message_id: String,
           sandbox: bool

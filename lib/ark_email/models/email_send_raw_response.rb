@@ -38,6 +38,12 @@ module ArkEmail
         #   @return [Symbol, ArkEmail::Models::EmailSendRawResponse::Data::Status]
         required :status, enum: -> { ArkEmail::Models::EmailSendRawResponse::Data::Status }
 
+        # @!attribute tenant_id
+        #   The tenant ID this email was sent from
+        #
+        #   @return [String]
+        required :tenant_id, String, api_name: :tenantId
+
         # @!attribute to
         #   List of recipient addresses
         #
@@ -57,13 +63,15 @@ module ArkEmail
         #   @return [Boolean, nil]
         optional :sandbox, ArkEmail::Internal::Type::Boolean
 
-        # @!method initialize(id:, status:, to:, message_id: nil, sandbox: nil)
+        # @!method initialize(id:, status:, tenant_id:, to:, message_id: nil, sandbox: nil)
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::EmailSendRawResponse::Data} for more details.
         #
         #   @param id [String] Unique message identifier (token)
         #
         #   @param status [Symbol, ArkEmail::Models::EmailSendRawResponse::Data::Status] Current delivery status
+        #
+        #   @param tenant_id [String] The tenant ID this email was sent from
         #
         #   @param to [Array<String>] List of recipient addresses
         #

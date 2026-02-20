@@ -4,6 +4,7 @@ module ArkEmail
       {
         emails: ::Array[ArkEmail::EmailSendBatchParams::Email],
         from: String,
+        tenant_id: String?,
         idempotency_key: String
       }
       & ArkEmail::Internal::Type::request_parameters
@@ -16,6 +17,8 @@ module ArkEmail
 
       attr_accessor from: String
 
+      attr_accessor tenant_id: String?
+
       attr_reader idempotency_key: String?
 
       def idempotency_key=: (String) -> String
@@ -23,6 +26,7 @@ module ArkEmail
       def initialize: (
         emails: ::Array[ArkEmail::EmailSendBatchParams::Email],
         from: String,
+        ?tenant_id: String?,
         ?idempotency_key: String,
         ?request_options: ArkEmail::request_opts
       ) -> void
@@ -30,6 +34,7 @@ module ArkEmail
       def to_hash: -> {
         emails: ::Array[ArkEmail::EmailSendBatchParams::Email],
         from: String,
+        tenant_id: String?,
         idempotency_key: String,
         request_options: ArkEmail::RequestOptions
       }

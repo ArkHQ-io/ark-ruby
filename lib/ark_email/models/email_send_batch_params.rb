@@ -18,15 +18,32 @@ module ArkEmail
       #   @return [String]
       required :from, String
 
+      # @!attribute tenant_id
+      #   The tenant ID to send this batch from. Determines which tenant's configuration
+      #   (domains, webhooks, tracking) is used.
+      #
+      #   - If your API key is scoped to a specific tenant, this must match that tenant or
+      #     be omitted.
+      #   - If your API key is org-level, specify the tenant to send from.
+      #   - If omitted, the organization's default tenant is used.
+      #
+      #   @return [String, nil]
+      optional :tenant_id, String, api_name: :tenantId, nil?: true
+
       # @!attribute idempotency_key
       #
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(emails:, from:, idempotency_key: nil, request_options: {})
+      # @!method initialize(emails:, from:, tenant_id: nil, idempotency_key: nil, request_options: {})
+      #   Some parameter documentations has been truncated, see
+      #   {ArkEmail::Models::EmailSendBatchParams} for more details.
+      #
       #   @param emails [Array<ArkEmail::Models::EmailSendBatchParams::Email>]
       #
       #   @param from [String] Sender email for all messages
+      #
+      #   @param tenant_id [String, nil] The tenant ID to send this batch from. Determines which tenant's
       #
       #   @param idempotency_key [String]
       #
