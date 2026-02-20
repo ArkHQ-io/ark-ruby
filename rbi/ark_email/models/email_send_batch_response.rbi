@@ -80,6 +80,10 @@ module ArkEmail
         end
         attr_accessor :messages
 
+        # The tenant ID this batch was sent from
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Total emails in the batch
         sig { returns(Integer) }
         attr_accessor :total
@@ -101,6 +105,7 @@ module ArkEmail
                 Symbol,
                 ArkEmail::Models::EmailSendBatchResponse::Data::Message::OrHash
               ],
+            tenant_id: String,
             total: Integer,
             sandbox: T::Boolean
           ).returns(T.attached_class)
@@ -112,6 +117,8 @@ module ArkEmail
           failed:,
           # Map of recipient email to message info
           messages:,
+          # The tenant ID this batch was sent from
+          tenant_id:,
           # Total emails in the batch
           total:,
           # Whether this batch was sent in sandbox mode. Only present (and true) for sandbox
@@ -130,6 +137,7 @@ module ArkEmail
                   Symbol,
                   ArkEmail::Models::EmailSendBatchResponse::Data::Message
                 ],
+              tenant_id: String,
               total: Integer,
               sandbox: T::Boolean
             }

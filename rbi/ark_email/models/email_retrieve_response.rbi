@@ -94,6 +94,10 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :subject
 
+        # The tenant ID this email belongs to
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Unix timestamp when the email was sent
         sig { returns(Float) }
         attr_accessor :timestamp
@@ -230,6 +234,7 @@ module ArkEmail
             status:
               ArkEmail::Models::EmailRetrieveResponse::Data::Status::OrSymbol,
             subject: String,
+            tenant_id: String,
             timestamp: Float,
             timestamp_iso: Time,
             to: String,
@@ -271,6 +276,8 @@ module ArkEmail
           status:,
           # Email subject line
           subject:,
+          # The tenant ID this email belongs to
+          tenant_id:,
           # Unix timestamp when the email was sent
           timestamp:,
           # ISO 8601 formatted timestamp
@@ -313,6 +320,7 @@ module ArkEmail
               status:
                 ArkEmail::Models::EmailRetrieveResponse::Data::Status::TaggedSymbol,
               subject: String,
+              tenant_id: String,
               timestamp: Float,
               timestamp_iso: Time,
               to: String,

@@ -181,7 +181,7 @@ module ArkEmail
       # - `GET /emails/{emailId}/deliveries` - View delivery attempts
       # - `POST /emails/{emailId}/retry` - Retry failed delivery
       #
-      # @overload send_(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, metadata: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
+      # @overload send_(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, metadata: nil, reply_to: nil, tag: nil, tenant_id: nil, text: nil, idempotency_key: nil, request_options: {})
       #
       # @param from [String] Body param: Sender email address. Must be from a verified domain OR use sandbox
       #
@@ -204,6 +204,8 @@ module ArkEmail
       # @param reply_to [String, nil] Body param: Reply-to address (accepts null)
       #
       # @param tag [String, nil] Body param: Tag for categorization and filtering (accepts null)
+      #
+      # @param tenant_id [String, nil] Body param: The tenant ID to send this email from. Determines which tenant's
       #
       # @param text [String, nil] Body param: Plain text body (accepts null, auto-generated from HTML if not provi
       #
@@ -238,11 +240,13 @@ module ArkEmail
       #
       # **Idempotency:** Supports `Idempotency-Key` header for safe retries.
       #
-      # @overload send_batch(emails:, from:, idempotency_key: nil, request_options: {})
+      # @overload send_batch(emails:, from:, tenant_id: nil, idempotency_key: nil, request_options: {})
       #
       # @param emails [Array<ArkEmail::Models::EmailSendBatchParams::Email>] Body param
       #
       # @param from [String] Body param: Sender email for all messages
+      #
+      # @param tenant_id [String, nil] Body param: The tenant ID to send this batch from. Determines which tenant's
       #
       # @param idempotency_key [String] Header param: Unique key for idempotent requests. If a request with this key was
       #
@@ -274,7 +278,7 @@ module ArkEmail
       # message (with headers like From, To, Subject, Content-Type, followed by a blank
       # line and the body) must be encoded to base64 before sending.
       #
-      # @overload send_raw(from:, raw_message:, to:, bounce: nil, request_options: {})
+      # @overload send_raw(from:, raw_message:, to:, bounce: nil, tenant_id: nil, request_options: {})
       #
       # @param from [String] Sender email address. Must be from a verified domain.
       #
@@ -283,6 +287,8 @@ module ArkEmail
       # @param to [Array<String>] Recipient email addresses
       #
       # @param bounce [Boolean, nil] Whether this is a bounce message (accepts null)
+      #
+      # @param tenant_id [String, nil] The tenant ID to send this email from. Determines which tenant's
       #
       # @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}, nil]
       #

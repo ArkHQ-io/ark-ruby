@@ -32,6 +32,10 @@ module ArkEmail
       sig { returns(String) }
       attr_accessor :subject
 
+      # The tenant ID this email belongs to
+      sig { returns(String) }
+      attr_accessor :tenant_id
+
       sig { returns(Float) }
       attr_accessor :timestamp
 
@@ -53,6 +57,7 @@ module ArkEmail
           from: String,
           status: ArkEmail::Models::EmailListResponse::Status::OrSymbol,
           subject: String,
+          tenant_id: String,
           timestamp: Float,
           timestamp_iso: Time,
           to: String,
@@ -73,6 +78,8 @@ module ArkEmail
         # - `held` - Held for manual review
         status:,
         subject:,
+        # The tenant ID this email belongs to
+        tenant_id:,
         timestamp:,
         timestamp_iso:,
         to:,
@@ -87,6 +94,7 @@ module ArkEmail
             from: String,
             status: ArkEmail::Models::EmailListResponse::Status::TaggedSymbol,
             subject: String,
+            tenant_id: String,
             timestamp: Float,
             timestamp_iso: Time,
             to: String,

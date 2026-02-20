@@ -71,7 +71,13 @@ module ArkEmail
         #   @return [Symbol, ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status]
         required :status, enum: -> { ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status }
 
-        # @!method initialize(id:, can_retry_manually:, deliveries:, retry_state:, status:)
+        # @!attribute tenant_id
+        #   The tenant ID this email belongs to
+        #
+        #   @return [String]
+        required :tenant_id, String, api_name: :tenantId
+
+        # @!method initialize(id:, can_retry_manually:, deliveries:, retry_state:, status:, tenant_id:)
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data} for more details.
         #
@@ -84,6 +90,8 @@ module ArkEmail
         #   @param retry_state [ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState, nil] Information about the current retry state of a message that is queued for delive
         #
         #   @param status [Symbol, ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status] Current message status (lowercase). Possible values:
+        #
+        #   @param tenant_id [String] The tenant ID this email belongs to
 
         class Delivery < ArkEmail::Internal::Type::BaseModel
           # @!attribute id
