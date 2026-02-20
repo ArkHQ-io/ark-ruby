@@ -118,6 +118,10 @@ module ArkEmail
         end
         attr_accessor :status
 
+        # The tenant ID this email belongs to
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         sig do
           params(
             id: String,
@@ -131,7 +135,8 @@ module ArkEmail
                 ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState::OrHash
               ),
             status:
-              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::OrSymbol
+              ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::OrSymbol,
+            tenant_id: String
           ).returns(T.attached_class)
         end
         def self.new(
@@ -155,7 +160,9 @@ module ArkEmail
           # - `hardfail` - Permanent failure, will not retry
           # - `held` - Held for manual review (suppression list, etc.)
           # - `bounced` - Bounced by recipient server
-          status:
+          status:,
+          # The tenant ID this email belongs to
+          tenant_id:
         )
         end
 
@@ -173,7 +180,8 @@ module ArkEmail
                   ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState
                 ),
               status:
-                ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol
+                ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Status::TaggedSymbol,
+              tenant_id: String
             }
           )
         end

@@ -39,12 +39,23 @@ module ArkEmail
       sig { returns(T.nilable(T::Boolean)) }
       attr_accessor :bounce
 
+      # The tenant ID to send this email from. Determines which tenant's configuration
+      # (domains, webhooks, tracking) is used.
+      #
+      # - If your API key is scoped to a specific tenant, this must match that tenant or
+      #   be omitted.
+      # - If your API key is org-level, specify the tenant to send from.
+      # - If omitted, the organization's default tenant is used.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tenant_id
+
       sig do
         params(
           from: String,
           raw_message: String,
           to: T::Array[String],
           bounce: T.nilable(T::Boolean),
+          tenant_id: T.nilable(String),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
@@ -69,6 +80,14 @@ module ArkEmail
         to:,
         # Whether this is a bounce message (accepts null)
         bounce: nil,
+        # The tenant ID to send this email from. Determines which tenant's configuration
+        # (domains, webhooks, tracking) is used.
+        #
+        # - If your API key is scoped to a specific tenant, this must match that tenant or
+        #   be omitted.
+        # - If your API key is org-level, specify the tenant to send from.
+        # - If omitted, the organization's default tenant is used.
+        tenant_id: nil,
         request_options: {}
       )
       end
@@ -80,6 +99,7 @@ module ArkEmail
             raw_message: String,
             to: T::Array[String],
             bounce: T.nilable(T::Boolean),
+            tenant_id: T.nilable(String),
             request_options: ArkEmail::RequestOptions
           }
         )

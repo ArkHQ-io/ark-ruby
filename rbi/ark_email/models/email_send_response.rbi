@@ -71,6 +71,10 @@ module ArkEmail
         end
         attr_accessor :status
 
+        # The tenant ID this email was sent from
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # List of recipient addresses
         sig { returns(T::Array[String]) }
         attr_accessor :to
@@ -94,6 +98,7 @@ module ArkEmail
           params(
             id: String,
             status: ArkEmail::Models::EmailSendResponse::Data::Status::OrSymbol,
+            tenant_id: String,
             to: T::Array[String],
             message_id: String,
             sandbox: T::Boolean
@@ -104,6 +109,8 @@ module ArkEmail
           id:,
           # Current delivery status
           status:,
+          # The tenant ID this email was sent from
+          tenant_id:,
           # List of recipient addresses
           to:,
           # SMTP Message-ID header value
@@ -120,6 +127,7 @@ module ArkEmail
               id: String,
               status:
                 ArkEmail::Models::EmailSendResponse::Data::Status::TaggedSymbol,
+              tenant_id: String,
               to: T::Array[String],
               message_id: String,
               sandbox: T::Boolean

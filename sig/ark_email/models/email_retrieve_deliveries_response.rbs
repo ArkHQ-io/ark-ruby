@@ -32,7 +32,8 @@ module ArkEmail
           can_retry_manually: bool,
           deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
           retry_state: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState?,
-          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status
+          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status,
+          tenant_id: String
         }
 
       class Data < ArkEmail::Internal::Type::BaseModel
@@ -46,12 +47,15 @@ module ArkEmail
 
         attr_accessor status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status
 
+        attr_accessor tenant_id: String
+
         def initialize: (
           id: String,
           can_retry_manually: bool,
           deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
           retry_state: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState?,
-          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status
+          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status,
+          tenant_id: String
         ) -> void
 
         def to_hash: -> {
@@ -59,7 +63,8 @@ module ArkEmail
           can_retry_manually: bool,
           deliveries: ::Array[ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::Delivery],
           retry_state: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::RetryState?,
-          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status
+          status: ArkEmail::Models::EmailRetrieveDeliveriesResponse::Data::status,
+          tenant_id: String
         }
 
         type delivery =
