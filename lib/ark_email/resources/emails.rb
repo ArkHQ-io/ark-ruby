@@ -2,6 +2,15 @@
 
 module ArkEmail
   module Resources
+    # Send and manage email messages.
+    #
+    # **Quick Reference:**
+    #
+    # - `POST /emails` - Send a single email
+    # - `POST /emails/batch` - Send up to 100 emails
+    # - `GET /emails/{emailId}` - Get email status and details
+    # - `GET /emails` - List sent emails
+    # - `POST /emails/{emailId}/retry` - Retry failed delivery
     class Emails
       # Some parameter documentations has been truncated, see
       # {ArkEmail::Models::EmailRetrieveParams} for more details.
@@ -25,10 +34,11 @@ module ArkEmail
       # @see ArkEmail::Models::EmailRetrieveParams
       def retrieve(email_id, params = {})
         parsed, options = ArkEmail::EmailRetrieveParams.dump_request(params)
+        query = ArkEmail::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: ["emails/%1$s", email_id],
-          query: parsed,
+          query: query,
           model: ArkEmail::Models::EmailRetrieveResponse,
           options: options
         )
@@ -72,10 +82,11 @@ module ArkEmail
       # @see ArkEmail::Models::EmailListParams
       def list(params = {})
         parsed, options = ArkEmail::EmailListParams.dump_request(params)
+        query = ArkEmail::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "emails",
-          query: parsed.transform_keys(per_page: "perPage"),
+          query: query.transform_keys(per_page: "perPage"),
           page: ArkEmail::Internal::PageNumberPagination,
           model: ArkEmail::Models::EmailListResponse,
           options: options

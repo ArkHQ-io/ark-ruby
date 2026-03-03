@@ -3,6 +3,61 @@
 module ArkEmail
   module Resources
     class Tenants
+      # Configure webhook endpoints for real-time notifications.
+      #
+      # Webhooks notify your application when email events occur:
+      #
+      # - Email delivered, bounced, or failed
+      # - Email opened or link clicked
+      # - Spam complaint received
+      #
+      # **Quick Reference:**
+      #
+      # - `POST /webhooks` - Create a webhook endpoint
+      # - `GET /webhooks` - List all webhooks
+      # - `POST /webhooks/{id}/test` - Test a webhook with sample data
+      # - `PATCH /webhooks/{id}` - Update webhook configuration
+      # - `DELETE /webhooks/{id}` - Remove a webhook
+      # - `GET /webhooks/{id}/deliveries` - List delivery attempts
+      # - `GET /webhooks/{id}/deliveries/{deliveryId}` - Get delivery details
+      # - `POST /webhooks/{id}/deliveries/{deliveryId}/replay` - Replay a delivery
+      #
+      # ## Webhook Signatures
+      #
+      # All webhooks are cryptographically signed using RSA-SHA256 for security. Each
+      # webhook request includes:
+      #
+      # | Header                | Description                                             |
+      # | --------------------- | ------------------------------------------------------- |
+      # | `X-Ark-Signature`     | Base64-encoded RSA-SHA256 signature of the request body |
+      # | `X-Ark-Signature-KID` | Key ID identifying which public key was used            |
+      #
+      # Verify signatures by fetching the public key from:
+      #
+      # ```
+      # GET https://mail.arkhq.io/.well-known/jwks.json
+      # ```
+      #
+      # ```javascript
+      # const crypto = require("crypto");
+      #
+      # async function verifyWebhook(payload, signatureBase64, publicKey) {
+      #   const signature = Buffer.from(signatureBase64, "base64");
+      #   const verifier = crypto.createVerify("RSA-SHA256");
+      #   verifier.update(payload);
+      #   return verifier.verify(publicKey, signature);
+      # }
+      #
+      # // In your webhook handler:
+      # const isValid = await verifyWebhook(
+      #   rawBody,
+      #   req.headers["x-ark-signature"],
+      #   cachedPublicKey
+      # );
+      # ```
+      #
+      # **Important:** Always verify signatures before processing webhook data. See the
+      # [Webhook Integration Guide](/guides/webhook-integration) for complete examples.
       class Webhooks
         # Some parameter documentations has been truncated, see
         # {ArkEmail::Models::Tenants::WebhookCreateParams} for more details.
@@ -207,6 +262,7 @@ module ArkEmail
         # @see ArkEmail::Models::Tenants::WebhookListDeliveriesParams
         def list_deliveries(webhook_id, params)
           parsed, options = ArkEmail::Tenants::WebhookListDeliveriesParams.dump_request(params)
+          query = ArkEmail::Internal::Util.encode_query_params(parsed)
           tenant_id =
             parsed.delete(:tenant_id) do
               raise ArgumentError.new("missing required path argument #{_1}")
@@ -214,7 +270,7 @@ module ArkEmail
           @client.request(
             method: :get,
             path: ["tenants/%1$s/webhooks/%2$s/deliveries", tenant_id, webhook_id],
-            query: parsed.transform_keys(per_page: "perPage"),
+            query: query.transform_keys(per_page: "perPage"),
             model: ArkEmail::Models::Tenants::WebhookListDeliveriesResponse,
             options: options
           )

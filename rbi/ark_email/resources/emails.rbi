@@ -2,6 +2,15 @@
 
 module ArkEmail
   module Resources
+    # Send and manage email messages.
+    #
+    # **Quick Reference:**
+    #
+    # - `POST /emails` - Send a single email
+    # - `POST /emails/batch` - Send up to 100 emails
+    # - `GET /emails/{emailId}` - Get email status and details
+    # - `GET /emails` - List sent emails
+    # - `POST /emails/{emailId}/retry` - Retry failed delivery
     class Emails
       # Retrieve detailed information about a specific email including delivery status,
       # timestamps, and optionally the email content.
