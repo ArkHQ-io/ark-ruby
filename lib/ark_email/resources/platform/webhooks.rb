@@ -189,10 +189,11 @@ module ArkEmail
         # @see ArkEmail::Models::Platform::WebhookListDeliveriesParams
         def list_deliveries(params = {})
           parsed, options = ArkEmail::Platform::WebhookListDeliveriesParams.dump_request(params)
+          query = ArkEmail::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: "platform/webhooks/deliveries",
-            query: parsed.transform_keys(per_page: "perPage", tenant_id: "tenantId", webhook_id: "webhookId"),
+            query: query.transform_keys(per_page: "perPage", tenant_id: "tenantId", webhook_id: "webhookId"),
             page: ArkEmail::Internal::PageNumberPagination,
             model: ArkEmail::Models::Platform::WebhookListDeliveriesResponse,
             options: options

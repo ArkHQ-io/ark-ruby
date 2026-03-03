@@ -3,6 +3,17 @@
 module ArkEmail
   module Resources
     class Tenants
+      # Manage the suppression list.
+      #
+      # Suppressed email addresses will not receive any emails. Addresses are
+      # automatically suppressed when they hard bounce or file spam complaints.
+      #
+      # **Quick Reference:**
+      #
+      # - `GET /suppressions` - List suppressed addresses
+      # - `POST /suppressions` - Add to suppression list
+      # - `DELETE /suppressions/{email}` - Remove from suppression list
+      # - `GET /suppressions/{email}` - Check if address is suppressed
       class Suppressions
         # Add an email address to the tenant's suppression list. The address will not
         # receive any emails from this tenant until removed.
@@ -76,10 +87,11 @@ module ArkEmail
         # @see ArkEmail::Models::Tenants::SuppressionListParams
         def list(tenant_id, params = {})
           parsed, options = ArkEmail::Tenants::SuppressionListParams.dump_request(params)
+          query = ArkEmail::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["tenants/%1$s/suppressions", tenant_id],
-            query: parsed.transform_keys(per_page: "perPage"),
+            query: query.transform_keys(per_page: "perPage"),
             page: ArkEmail::Internal::PageNumberPagination,
             model: ArkEmail::Models::Tenants::SuppressionListResponse,
             options: options

@@ -63,6 +63,7 @@ module ArkEmail
         # @see ArkEmail::Models::Tenants::CredentialRetrieveParams
         def retrieve(credential_id, params)
           parsed, options = ArkEmail::Tenants::CredentialRetrieveParams.dump_request(params)
+          query = ArkEmail::Internal::Util.encode_query_params(parsed)
           tenant_id =
             parsed.delete(:tenant_id) do
               raise ArgumentError.new("missing required path argument #{_1}")
@@ -70,7 +71,7 @@ module ArkEmail
           @client.request(
             method: :get,
             path: ["tenants/%1$s/credentials/%2$s", tenant_id, credential_id],
-            query: parsed,
+            query: query,
             model: ArkEmail::Models::Tenants::CredentialRetrieveResponse,
             options: options
           )
@@ -141,10 +142,11 @@ module ArkEmail
         # @see ArkEmail::Models::Tenants::CredentialListParams
         def list(tenant_id, params = {})
           parsed, options = ArkEmail::Tenants::CredentialListParams.dump_request(params)
+          query = ArkEmail::Internal::Util.encode_query_params(parsed)
           @client.request(
             method: :get,
             path: ["tenants/%1$s/credentials", tenant_id],
-            query: parsed.transform_keys(per_page: "perPage"),
+            query: query.transform_keys(per_page: "perPage"),
             page: ArkEmail::Internal::PageNumberPagination,
             model: ArkEmail::Models::Tenants::CredentialListResponse,
             options: options
