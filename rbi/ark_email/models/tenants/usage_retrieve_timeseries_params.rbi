@@ -15,6 +15,9 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Time bucket size for data points
         sig do
           returns(
@@ -49,6 +52,7 @@ module ArkEmail
 
         sig do
           params(
+            tenant_id: String,
             granularity:
               ArkEmail::Tenants::UsageRetrieveTimeseriesParams::Granularity::OrSymbol,
             period: String,
@@ -57,6 +61,7 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
+          tenant_id:,
           # Time bucket size for data points
           granularity: nil,
           # Time period for timeseries data. Defaults to current month.
@@ -70,6 +75,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              tenant_id: String,
               granularity:
                 ArkEmail::Tenants::UsageRetrieveTimeseriesParams::Granularity::OrSymbol,
               period: String,

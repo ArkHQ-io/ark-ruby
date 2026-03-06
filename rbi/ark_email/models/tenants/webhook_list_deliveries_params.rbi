@@ -18,6 +18,9 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :tenant_id
 
+        sig { returns(String) }
+        attr_accessor :webhook_id
+
         # Only deliveries after this Unix timestamp
         sig { returns(T.nilable(Integer)) }
         attr_reader :after
@@ -74,6 +77,7 @@ module ArkEmail
         sig do
           params(
             tenant_id: String,
+            webhook_id: String,
             after: Integer,
             before: Integer,
             event:
@@ -86,6 +90,7 @@ module ArkEmail
         end
         def self.new(
           tenant_id:,
+          webhook_id:,
           # Only deliveries after this Unix timestamp
           after: nil,
           # Only deliveries before this Unix timestamp
@@ -106,6 +111,7 @@ module ArkEmail
           override.returns(
             {
               tenant_id: String,
+              webhook_id: String,
               after: Integer,
               before: Integer,
               event:

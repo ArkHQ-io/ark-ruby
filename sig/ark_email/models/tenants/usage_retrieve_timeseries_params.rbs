@@ -3,6 +3,7 @@ module ArkEmail
     module Tenants
       type usage_retrieve_timeseries_params =
         {
+          tenant_id: String,
           granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity,
           period: String,
           timezone: String
@@ -12,6 +13,8 @@ module ArkEmail
       class UsageRetrieveTimeseriesParams < ArkEmail::Internal::Type::BaseModel
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
+
+        attr_accessor tenant_id: String
 
         attr_reader granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity?
 
@@ -28,6 +31,7 @@ module ArkEmail
         def timezone=: (String) -> String
 
         def initialize: (
+          tenant_id: String,
           ?granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity,
           ?period: String,
           ?timezone: String,
@@ -35,6 +39,7 @@ module ArkEmail
         ) -> void
 
         def to_hash: -> {
+          tenant_id: String,
           granularity: ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::granularity,
           period: String,
           timezone: String,

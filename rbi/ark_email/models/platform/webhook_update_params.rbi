@@ -15,6 +15,9 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :webhook_id
+
         # Enable or disable the webhook
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :enabled
@@ -56,6 +59,7 @@ module ArkEmail
 
         sig do
           params(
+            webhook_id: String,
             enabled: T::Boolean,
             events:
               T::Array[
@@ -67,6 +71,7 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
+          webhook_id:,
           # Enable or disable the webhook
           enabled: nil,
           # Events to subscribe to. Empty array means all events.
@@ -82,6 +87,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              webhook_id: String,
               enabled: T::Boolean,
               events:
                 T::Array[

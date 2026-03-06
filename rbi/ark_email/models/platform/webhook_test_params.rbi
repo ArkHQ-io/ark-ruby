@@ -15,17 +15,22 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :webhook_id
+
         # Event type to simulate
         sig { returns(ArkEmail::Platform::WebhookTestParams::Event::OrSymbol) }
         attr_accessor :event
 
         sig do
           params(
+            webhook_id: String,
             event: ArkEmail::Platform::WebhookTestParams::Event::OrSymbol,
             request_options: ArkEmail::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          webhook_id:,
           # Event type to simulate
           event:,
           request_options: {}
@@ -35,6 +40,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              webhook_id: String,
               event: ArkEmail::Platform::WebhookTestParams::Event::OrSymbol,
               request_options: ArkEmail::RequestOptions
             }

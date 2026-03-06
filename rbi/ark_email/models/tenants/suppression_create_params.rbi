@@ -15,6 +15,9 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Email address to suppress
         sig { returns(String) }
         attr_accessor :address
@@ -25,12 +28,14 @@ module ArkEmail
 
         sig do
           params(
+            tenant_id: String,
             address: String,
             reason: T.nilable(String),
             request_options: ArkEmail::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          tenant_id:,
           # Email address to suppress
           address:,
           # Reason for suppression (accepts null)
@@ -42,6 +47,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              tenant_id: String,
               address: String,
               reason: T.nilable(String),
               request_options: ArkEmail::RequestOptions

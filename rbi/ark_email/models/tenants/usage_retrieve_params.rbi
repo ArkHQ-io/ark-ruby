@@ -15,6 +15,9 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Time period for usage data. Defaults to current month.
         #
         # **Formats:**
@@ -39,12 +42,14 @@ module ArkEmail
 
         sig do
           params(
+            tenant_id: String,
             period: String,
             timezone: String,
             request_options: ArkEmail::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          tenant_id:,
           # Time period for usage data. Defaults to current month.
           #
           # **Formats:**
@@ -64,6 +69,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              tenant_id: String,
               period: String,
               timezone: String,
               request_options: ArkEmail::RequestOptions

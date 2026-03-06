@@ -8,6 +8,11 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute webhook_id
+        #
+        #   @return [String]
+        required :webhook_id, String
+
         # @!attribute enabled
         #   Enable or disable the webhook
         #
@@ -33,7 +38,9 @@ module ArkEmail
         #   @return [String, nil]
         optional :url, String
 
-        # @!method initialize(enabled: nil, events: nil, name: nil, url: nil, request_options: {})
+        # @!method initialize(webhook_id:, enabled: nil, events: nil, name: nil, url: nil, request_options: {})
+        #   @param webhook_id [String]
+        #
         #   @param enabled [Boolean] Enable or disable the webhook
         #
         #   @param events [Array<Symbol, ArkEmail::Models::Platform::WebhookUpdateParams::Event>] Events to subscribe to. Empty array means all events.

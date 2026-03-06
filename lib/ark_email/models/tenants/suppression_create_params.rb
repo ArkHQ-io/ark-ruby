@@ -8,6 +8,11 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute tenant_id
+        #
+        #   @return [String]
+        required :tenant_id, String
+
         # @!attribute address
         #   Email address to suppress
         #
@@ -20,7 +25,9 @@ module ArkEmail
         #   @return [String, nil]
         optional :reason, String, nil?: true
 
-        # @!method initialize(address:, reason: nil, request_options: {})
+        # @!method initialize(tenant_id:, address:, reason: nil, request_options: {})
+        #   @param tenant_id [String]
+        #
         #   @param address [String] Email address to suppress
         #
         #   @param reason [String, nil] Reason for suppression (accepts null)

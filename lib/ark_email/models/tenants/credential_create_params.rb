@@ -8,6 +8,11 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute tenant_id
+        #
+        #   @return [String]
+        required :tenant_id, String
+
         # @!attribute name
         #   Name for the credential. Can only contain letters, numbers, hyphens, and
         #   underscores. Max 50 characters.
@@ -24,9 +29,11 @@ module ArkEmail
         #   @return [Symbol, ArkEmail::Models::Tenants::CredentialCreateParams::Type]
         required :type, enum: -> { ArkEmail::Tenants::CredentialCreateParams::Type }
 
-        # @!method initialize(name:, type:, request_options: {})
+        # @!method initialize(tenant_id:, name:, type:, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::Tenants::CredentialCreateParams} for more details.
+        #
+        #   @param tenant_id [String]
         #
         #   @param name [String] Name for the credential. Can only contain letters, numbers,
         #

@@ -3,6 +3,7 @@ module ArkEmail
     module Platform
       type webhook_update_params =
         {
+          webhook_id: String,
           enabled: bool,
           events: ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event],
           name: String,
@@ -13,6 +14,8 @@ module ArkEmail
       class WebhookUpdateParams < ArkEmail::Internal::Type::BaseModel
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
+
+        attr_accessor webhook_id: String
 
         attr_reader enabled: bool?
 
@@ -33,6 +36,7 @@ module ArkEmail
         def url=: (String) -> String
 
         def initialize: (
+          webhook_id: String,
           ?enabled: bool,
           ?events: ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event],
           ?name: String,
@@ -41,6 +45,7 @@ module ArkEmail
         ) -> void
 
         def to_hash: -> {
+          webhook_id: String,
           enabled: bool,
           events: ::Array[ArkEmail::Models::Platform::WebhookUpdateParams::event],
           name: String,

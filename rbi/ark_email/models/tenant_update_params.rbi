@@ -11,6 +11,9 @@ module ArkEmail
           T.any(ArkEmail::TenantUpdateParams, ArkEmail::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :tenant_id
+
       # Custom key-value pairs. Useful for storing references to your internal systems.
       #
       # **Limits:**
@@ -49,6 +52,7 @@ module ArkEmail
 
       sig do
         params(
+          tenant_id: String,
           metadata:
             T.nilable(
               T::Hash[
@@ -62,6 +66,7 @@ module ArkEmail
         ).returns(T.attached_class)
       end
       def self.new(
+        tenant_id:,
         # Custom key-value pairs. Useful for storing references to your internal systems.
         #
         # **Limits:**
@@ -82,6 +87,7 @@ module ArkEmail
       sig do
         override.returns(
           {
+            tenant_id: String,
             metadata:
               T.nilable(
                 T::Hash[

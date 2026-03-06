@@ -18,6 +18,9 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :tenant_id
 
+        sig { returns(Integer) }
+        attr_accessor :credential_id
+
         # Set to `true` to include the credential key in the response
         sig { returns(T.nilable(T::Boolean)) }
         attr_reader :reveal
@@ -28,12 +31,14 @@ module ArkEmail
         sig do
           params(
             tenant_id: String,
+            credential_id: Integer,
             reveal: T::Boolean,
             request_options: ArkEmail::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           tenant_id:,
+          credential_id:,
           # Set to `true` to include the credential key in the response
           reveal: nil,
           request_options: {}
@@ -44,6 +49,7 @@ module ArkEmail
           override.returns(
             {
               tenant_id: String,
+              credential_id: Integer,
               reveal: T::Boolean,
               request_options: ArkEmail::RequestOptions
             }

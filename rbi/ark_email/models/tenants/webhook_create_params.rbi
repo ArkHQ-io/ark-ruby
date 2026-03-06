@@ -15,6 +15,9 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Webhook name for identification
         sig { returns(String) }
         attr_accessor :name
@@ -52,6 +55,7 @@ module ArkEmail
 
         sig do
           params(
+            tenant_id: String,
             name: String,
             url: String,
             all_events: T.nilable(T::Boolean),
@@ -66,6 +70,7 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
+          tenant_id:,
           # Webhook name for identification
           name:,
           # HTTPS endpoint URL
@@ -92,6 +97,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              tenant_id: String,
               name: String,
               url: String,
               all_events: T.nilable(T::Boolean),

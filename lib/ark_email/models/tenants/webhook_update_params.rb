@@ -13,6 +13,11 @@ module ArkEmail
         #   @return [String]
         required :tenant_id, String
 
+        # @!attribute webhook_id
+        #
+        #   @return [String]
+        required :webhook_id, String
+
         # @!attribute all_events
         #
         #   @return [Boolean, nil]
@@ -38,8 +43,9 @@ module ArkEmail
         #   @return [String, nil]
         optional :url, String, nil?: true
 
-        # @!method initialize(tenant_id:, all_events: nil, enabled: nil, events: nil, name: nil, url: nil, request_options: {})
+        # @!method initialize(tenant_id:, webhook_id:, all_events: nil, enabled: nil, events: nil, name: nil, url: nil, request_options: {})
         #   @param tenant_id [String]
+        #   @param webhook_id [String]
         #   @param all_events [Boolean, nil]
         #   @param enabled [Boolean, nil]
         #   @param events [Array<String>, nil]
