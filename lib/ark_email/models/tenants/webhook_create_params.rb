@@ -8,6 +8,11 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute tenant_id
+        #
+        #   @return [String]
+        required :tenant_id, String
+
         # @!attribute name
         #   Webhook name for identification
         #
@@ -51,9 +56,11 @@ module ArkEmail
                  },
                  nil?: true
 
-        # @!method initialize(name:, url:, all_events: nil, enabled: nil, events: nil, request_options: {})
+        # @!method initialize(tenant_id:, name:, url:, all_events: nil, enabled: nil, events: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::Tenants::WebhookCreateParams} for more details.
+        #
+        #   @param tenant_id [String]
         #
         #   @param name [String] Webhook name for identification
         #

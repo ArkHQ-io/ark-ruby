@@ -18,6 +18,9 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :tenant_id
 
+        sig { returns(String) }
+        attr_accessor :tracking_id
+
         # Comma-separated list of domains to exclude from click tracking (accepts null)
         sig { returns(T.nilable(String)) }
         attr_accessor :excluded_click_domains
@@ -37,6 +40,7 @@ module ArkEmail
         sig do
           params(
             tenant_id: String,
+            tracking_id: String,
             excluded_click_domains: T.nilable(String),
             ssl_enabled: T.nilable(T::Boolean),
             track_clicks: T.nilable(T::Boolean),
@@ -46,6 +50,7 @@ module ArkEmail
         end
         def self.new(
           tenant_id:,
+          tracking_id:,
           # Comma-separated list of domains to exclude from click tracking (accepts null)
           excluded_click_domains: nil,
           # Enable or disable SSL for tracking URLs (accepts null)
@@ -62,6 +67,7 @@ module ArkEmail
           override.returns(
             {
               tenant_id: String,
+              tracking_id: String,
               excluded_click_domains: T.nilable(String),
               ssl_enabled: T.nilable(T::Boolean),
               track_clicks: T.nilable(T::Boolean),

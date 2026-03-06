@@ -15,6 +15,9 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Page number (1-indexed)
         sig { returns(T.nilable(Integer)) }
         attr_reader :page
@@ -46,6 +49,7 @@ module ArkEmail
 
         sig do
           params(
+            tenant_id: String,
             page: Integer,
             per_page: Integer,
             type: ArkEmail::Tenants::CredentialListParams::Type::OrSymbol,
@@ -53,6 +57,7 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
+          tenant_id:,
           # Page number (1-indexed)
           page: nil,
           # Number of items per page (max 100)
@@ -66,6 +71,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              tenant_id: String,
               page: Integer,
               per_page: Integer,
               type: ArkEmail::Tenants::CredentialListParams::Type::OrSymbol,

@@ -18,9 +18,15 @@ module ArkEmail
         #   @return [String]
         required :webhook_id, String
 
-        # @!method initialize(tenant_id:, webhook_id:, request_options: {})
+        # @!attribute delivery_id
+        #
+        #   @return [String]
+        required :delivery_id, String
+
+        # @!method initialize(tenant_id:, webhook_id:, delivery_id:, request_options: {})
         #   @param tenant_id [String]
         #   @param webhook_id [String]
+        #   @param delivery_id [String]
         #   @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}]
       end
     end

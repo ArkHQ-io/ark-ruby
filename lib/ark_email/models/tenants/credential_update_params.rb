@@ -13,6 +13,11 @@ module ArkEmail
         #   @return [String]
         required :tenant_id, String
 
+        # @!attribute credential_id
+        #
+        #   @return [Integer]
+        required :credential_id, Integer
+
         # @!attribute hold
         #   Set to `true` to disable the credential (put on hold). Set to `false` to enable
         #   the credential (release from hold).
@@ -26,11 +31,13 @@ module ArkEmail
         #   @return [String, nil]
         optional :name, String
 
-        # @!method initialize(tenant_id:, hold: nil, name: nil, request_options: {})
+        # @!method initialize(tenant_id:, credential_id:, hold: nil, name: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::Tenants::CredentialUpdateParams} for more details.
         #
         #   @param tenant_id [String]
+        #
+        #   @param credential_id [Integer]
         #
         #   @param hold [Boolean] Set to `true` to disable the credential (put on hold).
         #

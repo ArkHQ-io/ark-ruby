@@ -7,6 +7,11 @@ module ArkEmail
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
 
+      # @!attribute tenant_id
+      #
+      #   @return [String]
+      required :tenant_id, String
+
       # @!attribute metadata
       #   Custom key-value pairs. Useful for storing references to your internal systems.
       #
@@ -36,9 +41,11 @@ module ArkEmail
       #   @return [Symbol, ArkEmail::Models::TenantUpdateParams::Status, nil]
       optional :status, enum: -> { ArkEmail::TenantUpdateParams::Status }
 
-      # @!method initialize(metadata: nil, name: nil, status: nil, request_options: {})
+      # @!method initialize(tenant_id:, metadata: nil, name: nil, status: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::TenantUpdateParams} for more details.
+      #
+      #   @param tenant_id [String]
       #
       #   @param metadata [Hash{Symbol=>String, Float, Boolean, nil}, nil] Custom key-value pairs. Useful for storing references to your internal systems.
       #

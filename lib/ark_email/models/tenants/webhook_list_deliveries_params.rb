@@ -13,6 +13,11 @@ module ArkEmail
         #   @return [String]
         required :tenant_id, String
 
+        # @!attribute webhook_id
+        #
+        #   @return [String]
+        required :webhook_id, String
+
         # @!attribute after
         #   Only deliveries after this Unix timestamp
         #
@@ -49,8 +54,10 @@ module ArkEmail
         #   @return [Boolean, nil]
         optional :success, ArkEmail::Internal::Type::Boolean
 
-        # @!method initialize(tenant_id:, after: nil, before: nil, event: nil, page: nil, per_page: nil, success: nil, request_options: {})
+        # @!method initialize(tenant_id:, webhook_id:, after: nil, before: nil, event: nil, page: nil, per_page: nil, success: nil, request_options: {})
         #   @param tenant_id [String]
+        #
+        #   @param webhook_id [String]
         #
         #   @param after [Integer] Only deliveries after this Unix timestamp
         #

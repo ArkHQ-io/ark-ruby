@@ -18,6 +18,9 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :tenant_id
 
+        sig { returns(String) }
+        attr_accessor :webhook_id
+
         sig { returns(T.nilable(T::Boolean)) }
         attr_accessor :all_events
 
@@ -36,6 +39,7 @@ module ArkEmail
         sig do
           params(
             tenant_id: String,
+            webhook_id: String,
             all_events: T.nilable(T::Boolean),
             enabled: T.nilable(T::Boolean),
             events: T.nilable(T::Array[String]),
@@ -46,6 +50,7 @@ module ArkEmail
         end
         def self.new(
           tenant_id:,
+          webhook_id:,
           all_events: nil,
           enabled: nil,
           events: nil,
@@ -59,6 +64,7 @@ module ArkEmail
           override.returns(
             {
               tenant_id: String,
+              webhook_id: String,
               all_events: T.nilable(T::Boolean),
               enabled: T.nilable(T::Boolean),
               events: T.nilable(T::Array[String]),

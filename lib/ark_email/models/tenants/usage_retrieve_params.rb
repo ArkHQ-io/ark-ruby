@@ -8,6 +8,11 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute tenant_id
+        #
+        #   @return [String]
+        required :tenant_id, String
+
         # @!attribute period
         #   Time period for usage data. Defaults to current month.
         #
@@ -28,9 +33,11 @@ module ArkEmail
         #   @return [String, nil]
         optional :timezone, String
 
-        # @!method initialize(period: nil, timezone: nil, request_options: {})
+        # @!method initialize(tenant_id:, period: nil, timezone: nil, request_options: {})
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::Tenants::UsageRetrieveParams} for more details.
+        #
+        #   @param tenant_id [String]
         #
         #   @param period [String] Time period for usage data. Defaults to current month.
         #

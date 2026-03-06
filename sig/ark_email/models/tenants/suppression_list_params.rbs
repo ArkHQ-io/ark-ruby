@@ -2,12 +2,14 @@ module ArkEmail
   module Models
     module Tenants
       type suppression_list_params =
-        { page: Integer, per_page: Integer }
+        { tenant_id: String, page: Integer, per_page: Integer }
         & ArkEmail::Internal::Type::request_parameters
 
       class SuppressionListParams < ArkEmail::Internal::Type::BaseModel
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
+
+        attr_accessor tenant_id: String
 
         attr_reader page: Integer?
 
@@ -18,12 +20,14 @@ module ArkEmail
         def per_page=: (Integer) -> Integer
 
         def initialize: (
+          tenant_id: String,
           ?page: Integer,
           ?per_page: Integer,
           ?request_options: ArkEmail::request_opts
         ) -> void
 
         def to_hash: -> {
+          tenant_id: String,
           page: Integer,
           per_page: Integer,
           request_options: ArkEmail::RequestOptions

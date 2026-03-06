@@ -18,6 +18,9 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :tenant_id
 
+        sig { returns(String) }
+        attr_accessor :webhook_id
+
         # Event type to simulate
         sig { returns(ArkEmail::Tenants::WebhookTestParams::Event::OrSymbol) }
         attr_accessor :event
@@ -25,12 +28,14 @@ module ArkEmail
         sig do
           params(
             tenant_id: String,
+            webhook_id: String,
             event: ArkEmail::Tenants::WebhookTestParams::Event::OrSymbol,
             request_options: ArkEmail::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
           tenant_id:,
+          webhook_id:,
           # Event type to simulate
           event:,
           request_options: {}
@@ -41,6 +46,7 @@ module ArkEmail
           override.returns(
             {
               tenant_id: String,
+              webhook_id: String,
               event: ArkEmail::Tenants::WebhookTestParams::Event::OrSymbol,
               request_options: ArkEmail::RequestOptions
             }

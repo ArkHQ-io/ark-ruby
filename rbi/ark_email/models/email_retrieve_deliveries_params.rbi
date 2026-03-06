@@ -14,15 +14,23 @@ module ArkEmail
           )
         end
 
+      sig { returns(String) }
+      attr_accessor :email_id
+
       sig do
-        params(request_options: ArkEmail::RequestOptions::OrHash).returns(
-          T.attached_class
-        )
+        params(
+          email_id: String,
+          request_options: ArkEmail::RequestOptions::OrHash
+        ).returns(T.attached_class)
       end
-      def self.new(request_options: {})
+      def self.new(email_id:, request_options: {})
       end
 
-      sig { override.returns({ request_options: ArkEmail::RequestOptions }) }
+      sig do
+        override.returns(
+          { email_id: String, request_options: ArkEmail::RequestOptions }
+        )
+      end
       def to_hash
       end
     end

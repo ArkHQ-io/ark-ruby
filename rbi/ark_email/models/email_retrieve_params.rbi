@@ -11,6 +11,9 @@ module ArkEmail
           T.any(ArkEmail::EmailRetrieveParams, ArkEmail::Internal::AnyHash)
         end
 
+      sig { returns(String) }
+      attr_accessor :email_id
+
       # Comma-separated list of fields to include:
       #
       # - `full` - Include all expanded fields in a single request
@@ -28,11 +31,13 @@ module ArkEmail
 
       sig do
         params(
+          email_id: String,
           expand: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
       end
       def self.new(
+        email_id:,
         # Comma-separated list of fields to include:
         #
         # - `full` - Include all expanded fields in a single request
@@ -49,7 +54,11 @@ module ArkEmail
 
       sig do
         override.returns(
-          { expand: String, request_options: ArkEmail::RequestOptions }
+          {
+            email_id: String,
+            expand: String,
+            request_options: ArkEmail::RequestOptions
+          }
         )
       end
       def to_hash

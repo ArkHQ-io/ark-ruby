@@ -2,21 +2,28 @@ module ArkEmail
   module Models
     module Platform
       type webhook_test_params =
-        { event: ArkEmail::Models::Platform::WebhookTestParams::event }
+        {
+          webhook_id: String,
+          event: ArkEmail::Models::Platform::WebhookTestParams::event
+        }
         & ArkEmail::Internal::Type::request_parameters
 
       class WebhookTestParams < ArkEmail::Internal::Type::BaseModel
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        attr_accessor webhook_id: String
+
         attr_accessor event: ArkEmail::Models::Platform::WebhookTestParams::event
 
         def initialize: (
+          webhook_id: String,
           event: ArkEmail::Models::Platform::WebhookTestParams::event,
           ?request_options: ArkEmail::request_opts
         ) -> void
 
         def to_hash: -> {
+          webhook_id: String,
           event: ArkEmail::Models::Platform::WebhookTestParams::event,
           request_options: ArkEmail::RequestOptions
         }

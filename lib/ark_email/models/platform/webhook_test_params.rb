@@ -8,13 +8,20 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute webhook_id
+        #
+        #   @return [String]
+        required :webhook_id, String
+
         # @!attribute event
         #   Event type to simulate
         #
         #   @return [Symbol, ArkEmail::Models::Platform::WebhookTestParams::Event]
         required :event, enum: -> { ArkEmail::Platform::WebhookTestParams::Event }
 
-        # @!method initialize(event:, request_options: {})
+        # @!method initialize(webhook_id:, event:, request_options: {})
+        #   @param webhook_id [String]
+        #
         #   @param event [Symbol, ArkEmail::Models::Platform::WebhookTestParams::Event] Event type to simulate
         #
         #   @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}]
