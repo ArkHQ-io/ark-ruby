@@ -3,6 +3,7 @@ module ArkEmail
     module Tenants
       type tracking_create_params =
         {
+          tenant_id: String,
           domain_id: Integer,
           name: String,
           ssl_enabled: bool?,
@@ -15,6 +16,8 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        attr_accessor tenant_id: String
+
         attr_accessor domain_id: Integer
 
         attr_accessor name: String
@@ -26,6 +29,7 @@ module ArkEmail
         attr_accessor track_opens: bool?
 
         def initialize: (
+          tenant_id: String,
           domain_id: Integer,
           name: String,
           ?ssl_enabled: bool?,
@@ -35,6 +39,7 @@ module ArkEmail
         ) -> void
 
         def to_hash: -> {
+          tenant_id: String,
           domain_id: Integer,
           name: String,
           ssl_enabled: bool?,

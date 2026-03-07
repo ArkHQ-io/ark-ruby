@@ -31,6 +31,7 @@ module ArkEmail
           accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
+          tenant_id: String,
           total: Integer,
           sandbox: bool
         }
@@ -42,6 +43,8 @@ module ArkEmail
 
         attr_accessor messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message]
 
+        attr_accessor tenant_id: String
+
         attr_accessor total: Integer
 
         attr_reader sandbox: bool?
@@ -52,6 +55,7 @@ module ArkEmail
           accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
+          tenant_id: String,
           total: Integer,
           ?sandbox: bool
         ) -> void
@@ -60,6 +64,7 @@ module ArkEmail
           accepted: Integer,
           failed: Integer,
           messages: ::Hash[Symbol, ArkEmail::Models::EmailSendBatchResponse::Data::Message],
+          tenant_id: String,
           total: Integer,
           sandbox: bool
         }

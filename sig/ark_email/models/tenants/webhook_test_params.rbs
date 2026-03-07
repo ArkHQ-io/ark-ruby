@@ -4,6 +4,7 @@ module ArkEmail
       type webhook_test_params =
         {
           tenant_id: String,
+          webhook_id: String,
           event: ArkEmail::Models::Tenants::WebhookTestParams::event
         }
         & ArkEmail::Internal::Type::request_parameters
@@ -14,16 +15,20 @@ module ArkEmail
 
         attr_accessor tenant_id: String
 
+        attr_accessor webhook_id: String
+
         attr_accessor event: ArkEmail::Models::Tenants::WebhookTestParams::event
 
         def initialize: (
           tenant_id: String,
+          webhook_id: String,
           event: ArkEmail::Models::Tenants::WebhookTestParams::event,
           ?request_options: ArkEmail::request_opts
         ) -> void
 
         def to_hash: -> {
           tenant_id: String,
+          webhook_id: String,
           event: ArkEmail::Models::Tenants::WebhookTestParams::event,
           request_options: ArkEmail::RequestOptions
         }

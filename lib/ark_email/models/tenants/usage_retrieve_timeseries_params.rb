@@ -8,6 +8,11 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute tenant_id
+        #
+        #   @return [String]
+        required :tenant_id, String
+
         # @!attribute granularity
         #   Time bucket size for data points
         #
@@ -26,7 +31,9 @@ module ArkEmail
         #   @return [String, nil]
         optional :timezone, String
 
-        # @!method initialize(granularity: nil, period: nil, timezone: nil, request_options: {})
+        # @!method initialize(tenant_id:, granularity: nil, period: nil, timezone: nil, request_options: {})
+        #   @param tenant_id [String]
+        #
         #   @param granularity [Symbol, ArkEmail::Models::Tenants::UsageRetrieveTimeseriesParams::Granularity] Time bucket size for data points
         #
         #   @param period [String] Time period for timeseries data. Defaults to current month.

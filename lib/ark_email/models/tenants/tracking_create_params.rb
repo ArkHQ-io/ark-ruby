@@ -8,6 +8,11 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute tenant_id
+        #
+        #   @return [String]
+        required :tenant_id, String
+
         # @!attribute domain_id
         #   ID of the sending domain to attach this track domain to
         #
@@ -38,7 +43,9 @@ module ArkEmail
         #   @return [Boolean, nil]
         optional :track_opens, ArkEmail::Internal::Type::Boolean, api_name: :trackOpens, nil?: true
 
-        # @!method initialize(domain_id:, name:, ssl_enabled: nil, track_clicks: nil, track_opens: nil, request_options: {})
+        # @!method initialize(tenant_id:, domain_id:, name:, ssl_enabled: nil, track_clicks: nil, track_opens: nil, request_options: {})
+        #   @param tenant_id [String]
+        #
         #   @param domain_id [Integer] ID of the sending domain to attach this track domain to
         #
         #   @param name [String] Subdomain name (e.g., 'track' for track.yourdomain.com)

@@ -37,10 +37,18 @@ module ArkEmail
         #   @return [String]
         required :message, String
 
-        # @!method initialize(id:, message:)
+        # @!attribute tenant_id
+        #   The tenant ID this email belongs to
+        #
+        #   @return [String]
+        required :tenant_id, String, api_name: :tenantId
+
+        # @!method initialize(id:, message:, tenant_id:)
         #   @param id [String] Email identifier (token)
         #
         #   @param message [String]
+        #
+        #   @param tenant_id [String] The tenant ID this email belongs to
       end
     end
   end

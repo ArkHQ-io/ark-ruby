@@ -4,6 +4,7 @@ module ArkEmail
       type tracking_update_params =
         {
           tenant_id: String,
+          tracking_id: String,
           excluded_click_domains: String?,
           ssl_enabled: bool?,
           track_clicks: bool?,
@@ -17,6 +18,8 @@ module ArkEmail
 
         attr_accessor tenant_id: String
 
+        attr_accessor tracking_id: String
+
         attr_accessor excluded_click_domains: String?
 
         attr_accessor ssl_enabled: bool?
@@ -27,6 +30,7 @@ module ArkEmail
 
         def initialize: (
           tenant_id: String,
+          tracking_id: String,
           ?excluded_click_domains: String?,
           ?ssl_enabled: bool?,
           ?track_clicks: bool?,
@@ -36,6 +40,7 @@ module ArkEmail
 
         def to_hash: -> {
           tenant_id: String,
+          tracking_id: String,
           excluded_click_domains: String?,
           ssl_enabled: bool?,
           track_clicks: bool?,

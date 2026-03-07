@@ -105,6 +105,18 @@ module ArkEmail
       #   @return [String, nil]
       optional :tag, String, nil?: true
 
+      # @!attribute tenant_id
+      #   The tenant ID to send this email from. Determines which tenant's configuration
+      #   (domains, webhooks, tracking) is used.
+      #
+      #   - If your API key is scoped to a specific tenant, this must match that tenant or
+      #     be omitted.
+      #   - If your API key is org-level, specify the tenant to send from.
+      #   - If omitted, the organization's default tenant is used.
+      #
+      #   @return [String, nil]
+      optional :tenant_id, String, api_name: :tenantId, nil?: true
+
       # @!attribute text
       #   Plain text body (accepts null, auto-generated from HTML if not provided).
       #   Maximum 5MB (5,242,880 characters).
@@ -117,7 +129,7 @@ module ArkEmail
       #   @return [String, nil]
       optional :idempotency_key, String
 
-      # @!method initialize(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, metadata: nil, reply_to: nil, tag: nil, text: nil, idempotency_key: nil, request_options: {})
+      # @!method initialize(from:, subject:, to:, attachments: nil, bcc: nil, cc: nil, headers: nil, html: nil, metadata: nil, reply_to: nil, tag: nil, tenant_id: nil, text: nil, idempotency_key: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::EmailSendParams} for more details.
       #
@@ -142,6 +154,8 @@ module ArkEmail
       #   @param reply_to [String, nil] Reply-to address (accepts null)
       #
       #   @param tag [String, nil] Tag for categorization and filtering (accepts null)
+      #
+      #   @param tenant_id [String, nil] The tenant ID to send this email from. Determines which tenant's
       #
       #   @param text [String, nil] Plain text body (accepts null, auto-generated from HTML if not provided).
       #

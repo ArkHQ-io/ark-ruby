@@ -3,6 +3,7 @@ module ArkEmail
     module Tenants
       type webhook_create_params =
         {
+          tenant_id: String,
           name: String,
           url: String,
           all_events: bool?,
@@ -15,6 +16,8 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        attr_accessor tenant_id: String
+
         attr_accessor name: String
 
         attr_accessor url: String
@@ -26,6 +29,7 @@ module ArkEmail
         attr_accessor events: ::Array[ArkEmail::Models::Tenants::WebhookCreateParams::event]?
 
         def initialize: (
+          tenant_id: String,
           name: String,
           url: String,
           ?all_events: bool?,
@@ -35,6 +39,7 @@ module ArkEmail
         ) -> void
 
         def to_hash: -> {
+          tenant_id: String,
           name: String,
           url: String,
           all_events: bool?,

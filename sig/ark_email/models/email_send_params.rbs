@@ -13,6 +13,7 @@ module ArkEmail
         metadata: ::Hash[Symbol, String]?,
         reply_to: String?,
         tag: String?,
+        tenant_id: String?,
         text: String?,
         idempotency_key: String
       }
@@ -44,6 +45,8 @@ module ArkEmail
 
       attr_accessor tag: String?
 
+      attr_accessor tenant_id: String?
+
       attr_accessor text: String?
 
       attr_reader idempotency_key: String?
@@ -62,6 +65,7 @@ module ArkEmail
         ?metadata: ::Hash[Symbol, String]?,
         ?reply_to: String?,
         ?tag: String?,
+        ?tenant_id: String?,
         ?text: String?,
         ?idempotency_key: String,
         ?request_options: ArkEmail::request_opts
@@ -79,6 +83,7 @@ module ArkEmail
         metadata: ::Hash[Symbol, String]?,
         reply_to: String?,
         tag: String?,
+        tenant_id: String?,
         text: String?,
         idempotency_key: String,
         request_options: ArkEmail::RequestOptions

@@ -87,6 +87,16 @@ module ArkEmail
       sig { returns(T.nilable(String)) }
       attr_accessor :tag
 
+      # The tenant ID to send this email from. Determines which tenant's configuration
+      # (domains, webhooks, tracking) is used.
+      #
+      # - If your API key is scoped to a specific tenant, this must match that tenant or
+      #   be omitted.
+      # - If your API key is org-level, specify the tenant to send from.
+      # - If omitted, the organization's default tenant is used.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tenant_id
+
       # Plain text body (accepts null, auto-generated from HTML if not provided).
       # Maximum 5MB (5,242,880 characters).
       sig { returns(T.nilable(String)) }
@@ -112,6 +122,7 @@ module ArkEmail
           metadata: T.nilable(T::Hash[Symbol, String]),
           reply_to: T.nilable(String),
           tag: T.nilable(String),
+          tenant_id: T.nilable(String),
           text: T.nilable(String),
           idempotency_key: String,
           request_options: ArkEmail::RequestOptions::OrHash
@@ -170,6 +181,14 @@ module ArkEmail
         reply_to: nil,
         # Tag for categorization and filtering (accepts null)
         tag: nil,
+        # The tenant ID to send this email from. Determines which tenant's configuration
+        # (domains, webhooks, tracking) is used.
+        #
+        # - If your API key is scoped to a specific tenant, this must match that tenant or
+        #   be omitted.
+        # - If your API key is org-level, specify the tenant to send from.
+        # - If omitted, the organization's default tenant is used.
+        tenant_id: nil,
         # Plain text body (accepts null, auto-generated from HTML if not provided).
         # Maximum 5MB (5,242,880 characters).
         text: nil,
@@ -193,6 +212,7 @@ module ArkEmail
             metadata: T.nilable(T::Hash[Symbol, String]),
             reply_to: T.nilable(String),
             tag: T.nilable(String),
+            tenant_id: T.nilable(String),
             text: T.nilable(String),
             idempotency_key: String,
             request_options: ArkEmail::RequestOptions

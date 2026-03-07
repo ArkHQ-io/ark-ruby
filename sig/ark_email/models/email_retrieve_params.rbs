@@ -1,22 +1,27 @@
 module ArkEmail
   module Models
     type email_retrieve_params =
-      { expand: String } & ArkEmail::Internal::Type::request_parameters
+      { email_id: String, expand: String }
+      & ArkEmail::Internal::Type::request_parameters
 
     class EmailRetrieveParams < ArkEmail::Internal::Type::BaseModel
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
+
+      attr_accessor email_id: String
 
       attr_reader expand: String?
 
       def expand=: (String) -> String
 
       def initialize: (
+        email_id: String,
         ?expand: String,
         ?request_options: ArkEmail::request_opts
       ) -> void
 
       def to_hash: -> {
+        email_id: String,
         expand: String,
         request_options: ArkEmail::RequestOptions
       }

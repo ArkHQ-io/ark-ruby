@@ -2,6 +2,7 @@ module ArkEmail
   module Models
     type tenant_update_params =
       {
+        tenant_id: String,
         metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?,
         name: String,
         status: ArkEmail::Models::TenantUpdateParams::status
@@ -11,6 +12,8 @@ module ArkEmail
     class TenantUpdateParams < ArkEmail::Internal::Type::BaseModel
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
+
+      attr_accessor tenant_id: String
 
       attr_accessor metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?
 
@@ -25,6 +28,7 @@ module ArkEmail
       ) -> ArkEmail::Models::TenantUpdateParams::status
 
       def initialize: (
+        tenant_id: String,
         ?metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?,
         ?name: String,
         ?status: ArkEmail::Models::TenantUpdateParams::status,
@@ -32,6 +36,7 @@ module ArkEmail
       ) -> void
 
       def to_hash: -> {
+        tenant_id: String,
         metadata: ::Hash[Symbol, ArkEmail::Models::TenantUpdateParams::metadata?]?,
         name: String,
         status: ArkEmail::Models::TenantUpdateParams::status,

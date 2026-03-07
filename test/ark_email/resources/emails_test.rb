@@ -39,6 +39,7 @@ class ArkEmail::Test::Resources::EmailsTest < ArkEmail::Test::ResourceTest
         from: String,
         status: ArkEmail::Models::EmailListResponse::Status,
         subject: String,
+        tenant_id: String,
         timestamp: Float,
         timestamp_iso: Time,
         to: String,

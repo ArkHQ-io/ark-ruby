@@ -2,6 +2,27 @@
 
 module ArkEmail
   module Resources
+    # Per-tenant usage analytics and bulk reporting.
+    #
+    # Track email sending statistics for each tenant to power billing, dashboards, and
+    # monitoring.
+    #
+    # **Single Tenant Usage:**
+    #
+    # - `GET /tenants/{id}/usage` - Get usage stats for a specific tenant
+    # - `GET /tenants/{id}/usage/timeseries` - Get time-bucketed data for charts
+    #
+    # **Bulk Usage:**
+    #
+    # - `GET /usage/tenants` - Get usage for all tenants (paginated, sortable)
+    # - `GET /usage/export` - Export usage data as CSV, JSONL, or JSON
+    #
+    # **Period Formats:**
+    #
+    # - Shortcuts: `today`, `yesterday`, `this_month`, `last_month`, `last_7_days`,
+    #   `last_30_days`
+    # - Month: `2024-01`
+    # - Date range: `2024-01-01..2024-01-15`
     class Usage
       # Some parameter documentations has been truncated, see
       # {ArkEmail::Models::UsageRetrieveParams} for more details.
@@ -41,10 +62,11 @@ module ArkEmail
       # @see ArkEmail::Models::UsageRetrieveParams
       def retrieve(params = {})
         parsed, options = ArkEmail::UsageRetrieveParams.dump_request(params)
+        query = ArkEmail::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "usage",
-          query: parsed,
+          query: query,
           model: ArkEmail::OrgUsageSummary,
           options: options
         )
@@ -96,10 +118,11 @@ module ArkEmail
       # @see ArkEmail::Models::UsageExportParams
       def export(params = {})
         parsed, options = ArkEmail::UsageExportParams.dump_request(params)
+        query = ArkEmail::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "usage/export",
-          query: parsed.transform_keys(format_: "format", min_sent: "minSent"),
+          query: query.transform_keys(format_: "format", min_sent: "minSent"),
           model: ArkEmail::Internal::Type::ArrayOf[ArkEmail::Models::UsageExportResponseItem],
           options: options
         )
@@ -155,10 +178,11 @@ module ArkEmail
       # @see ArkEmail::Models::UsageListTenantsParams
       def list_tenants(params = {})
         parsed, options = ArkEmail::UsageListTenantsParams.dump_request(params)
+        query = ArkEmail::Internal::Util.encode_query_params(parsed)
         @client.request(
           method: :get,
           path: "usage/tenants",
-          query: parsed.transform_keys(min_sent: "minSent", per_page: "perPage"),
+          query: query.transform_keys(min_sent: "minSent", per_page: "perPage"),
           page: ArkEmail::Internal::PageNumberPagination,
           model: ArkEmail::TenantUsageItem,
           options: options

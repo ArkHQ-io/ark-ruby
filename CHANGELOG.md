@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.20.0 (2026-03-07)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** add tenantId to send ([d443493](https://github.com/ArkHQ-io/ark-ruby/commit/d4434933efda6c1cc2cab76c52319113f67aab91))
+
+
+### Bug Fixes
+
+* properly mock time in ruby ci tests ([1af3ac3](https://github.com/ArkHQ-io/ark-ruby/commit/1af3ac341b43b64d6e491c72a0a8bda9408625e1))
+
+
+### Chores
+
+* **ci:** add build step ([07f4b8f](https://github.com/ArkHQ-io/ark-ruby/commit/07f4b8f01d304d412aef6898dc8d003f701e2733))
+* **ci:** skip uploading artifacts on stainless-internal branches ([84760ce](https://github.com/ArkHQ-io/ark-ruby/commit/84760cec19c56830abbe97179c421be8ec8d0573))
+* **internal:** codegen related update ([59ed473](https://github.com/ArkHQ-io/ark-ruby/commit/59ed473b3a2c74b6baecde451956fb1a24829489))
+* **internal:** codegen related update ([52ec8d2](https://github.com/ArkHQ-io/ark-ruby/commit/52ec8d221046d735dd605aab684f17e074478cf9))
+* **test:** do not count install time for mock server timeout ([8be7c3f](https://github.com/ArkHQ-io/ark-ruby/commit/8be7c3f8333306f7e3687ade2d770a928abbf270))
+* update mock server docs ([e0cbedc](https://github.com/ArkHQ-io/ark-ruby/commit/e0cbedce73ed0f6dbd683cb3dc04b8aa9937a434))
+
 ## 0.19.0 (2026-02-07)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.18.0...v0.19.0)

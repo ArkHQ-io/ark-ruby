@@ -7,6 +7,11 @@ module ArkEmail
       extend ArkEmail::Internal::Type::RequestParameters::Converter
       include ArkEmail::Internal::Type::RequestParameters
 
+      # @!attribute email_id
+      #
+      #   @return [String]
+      required :email_id, String
+
       # @!attribute expand
       #   Comma-separated list of fields to include:
       #
@@ -21,9 +26,11 @@ module ArkEmail
       #   @return [String, nil]
       optional :expand, String
 
-      # @!method initialize(expand: nil, request_options: {})
+      # @!method initialize(email_id:, expand: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::EmailRetrieveParams} for more details.
+      #
+      #   @param email_id [String]
       #
       #   @param expand [String] Comma-separated list of fields to include:
       #

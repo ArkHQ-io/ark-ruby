@@ -13,6 +13,11 @@ module ArkEmail
         #   @return [String]
         required :tenant_id, String
 
+        # @!attribute tracking_id
+        #
+        #   @return [String]
+        required :tracking_id, String
+
         # @!attribute excluded_click_domains
         #   Comma-separated list of domains to exclude from click tracking (accepts null)
         #
@@ -37,8 +42,10 @@ module ArkEmail
         #   @return [Boolean, nil]
         optional :track_opens, ArkEmail::Internal::Type::Boolean, api_name: :trackOpens, nil?: true
 
-        # @!method initialize(tenant_id:, excluded_click_domains: nil, ssl_enabled: nil, track_clicks: nil, track_opens: nil, request_options: {})
+        # @!method initialize(tenant_id:, tracking_id:, excluded_click_domains: nil, ssl_enabled: nil, track_clicks: nil, track_opens: nil, request_options: {})
         #   @param tenant_id [String]
+        #
+        #   @param tracking_id [String]
         #
         #   @param excluded_click_domains [String, nil] Comma-separated list of domains to exclude from click tracking (accepts null)
         #

@@ -2,6 +2,15 @@
 
 module ArkEmail
   module Resources
+    # Send and manage email messages.
+    #
+    # **Quick Reference:**
+    #
+    # - `POST /emails` - Send a single email
+    # - `POST /emails/batch` - Send up to 100 emails
+    # - `GET /emails/{emailId}` - Get email status and details
+    # - `GET /emails` - List sent emails
+    # - `POST /emails/{emailId}/retry` - Retry failed delivery
     class Emails
       # Retrieve detailed information about a specific email including delivery status,
       # timestamps, and optionally the email content.
@@ -180,6 +189,7 @@ module ArkEmail
           metadata: T.nilable(T::Hash[Symbol, String]),
           reply_to: T.nilable(String),
           tag: T.nilable(String),
+          tenant_id: T.nilable(String),
           text: T.nilable(String),
           idempotency_key: String,
           request_options: ArkEmail::RequestOptions::OrHash
@@ -239,6 +249,14 @@ module ArkEmail
         reply_to: nil,
         # Body param: Tag for categorization and filtering (accepts null)
         tag: nil,
+        # Body param: The tenant ID to send this email from. Determines which tenant's
+        # configuration (domains, webhooks, tracking) is used.
+        #
+        # - If your API key is scoped to a specific tenant, this must match that tenant or
+        #   be omitted.
+        # - If your API key is org-level, specify the tenant to send from.
+        # - If omitted, the organization's default tenant is used.
+        tenant_id: nil,
         # Body param: Plain text body (accepts null, auto-generated from HTML if not
         # provided). Maximum 5MB (5,242,880 characters).
         text: nil,
@@ -260,6 +278,7 @@ module ArkEmail
         params(
           emails: T::Array[ArkEmail::EmailSendBatchParams::Email::OrHash],
           from: String,
+          tenant_id: T.nilable(String),
           idempotency_key: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailSendBatchResponse)
@@ -269,6 +288,14 @@ module ArkEmail
         emails:,
         # Body param: Sender email for all messages
         from:,
+        # Body param: The tenant ID to send this batch from. Determines which tenant's
+        # configuration (domains, webhooks, tracking) is used.
+        #
+        # - If your API key is scoped to a specific tenant, this must match that tenant or
+        #   be omitted.
+        # - If your API key is org-level, specify the tenant to send from.
+        # - If omitted, the organization's default tenant is used.
+        tenant_id: nil,
         # Header param: Unique key for idempotent requests. If a request with this key was
         # already processed, the cached response is returned. Keys expire after 24 hours.
         idempotency_key: nil,
@@ -288,6 +315,7 @@ module ArkEmail
           raw_message: String,
           to: T::Array[String],
           bounce: T.nilable(T::Boolean),
+          tenant_id: T.nilable(String),
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(ArkEmail::Models::EmailSendRawResponse)
       end
@@ -312,6 +340,14 @@ module ArkEmail
         to:,
         # Whether this is a bounce message (accepts null)
         bounce: nil,
+        # The tenant ID to send this email from. Determines which tenant's configuration
+        # (domains, webhooks, tracking) is used.
+        #
+        # - If your API key is scoped to a specific tenant, this must match that tenant or
+        #   be omitted.
+        # - If your API key is org-level, specify the tenant to send from.
+        # - If omitted, the organization's default tenant is used.
+        tenant_id: nil,
         request_options: {}
       )
       end

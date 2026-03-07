@@ -6,6 +6,7 @@ module ArkEmail
         from: String,
         status: ArkEmail::Models::EmailListResponse::status,
         subject: String,
+        tenant_id: String,
         timestamp: Float,
         timestamp_iso: Time,
         to: String,
@@ -20,6 +21,8 @@ module ArkEmail
       attr_accessor status: ArkEmail::Models::EmailListResponse::status
 
       attr_accessor subject: String
+
+      attr_accessor tenant_id: String
 
       attr_accessor timestamp: Float
 
@@ -36,6 +39,7 @@ module ArkEmail
         from: String,
         status: ArkEmail::Models::EmailListResponse::status,
         subject: String,
+        tenant_id: String,
         timestamp: Float,
         timestamp_iso: Time,
         to: String,
@@ -47,6 +51,7 @@ module ArkEmail
         from: String,
         status: ArkEmail::Models::EmailListResponse::status,
         subject: String,
+        tenant_id: String,
         timestamp: Float,
         timestamp_iso: Time,
         to: String,
