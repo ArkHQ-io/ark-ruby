@@ -8,7 +8,13 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
-        # @!method initialize(request_options: {})
+        # @!attribute tenant_id
+        #
+        #   @return [String]
+        required :tenant_id, String
+
+        # @!method initialize(tenant_id:, request_options: {})
+        #   @param tenant_id [String]
         #   @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}]
       end
     end

@@ -15,17 +15,22 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Domain name (e.g., "mail.example.com")
         sig { returns(String) }
         attr_accessor :name
 
         sig do
           params(
+            tenant_id: String,
             name: String,
             request_options: ArkEmail::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          tenant_id:,
           # Domain name (e.g., "mail.example.com")
           name:,
           request_options: {}
@@ -34,7 +39,11 @@ module ArkEmail
 
         sig do
           override.returns(
-            { name: String, request_options: ArkEmail::RequestOptions }
+            {
+              tenant_id: String,
+              name: String,
+              request_options: ArkEmail::RequestOptions
+            }
           )
         end
         def to_hash

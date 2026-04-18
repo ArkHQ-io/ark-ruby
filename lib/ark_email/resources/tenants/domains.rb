@@ -3,6 +3,20 @@
 module ArkEmail
   module Resources
     class Tenants
+      # Manage sending domains.
+      #
+      # Before you can send emails, you need to:
+      #
+      # 1. Add a domain
+      # 2. Configure DNS records (SPF, DKIM, Return Path)
+      # 3. Verify the domain
+      #
+      # **Quick Reference:**
+      #
+      # - `POST /domains` - Add a new domain
+      # - `GET /domains` - List all domains
+      # - `POST /domains/{id}/verify` - Check DNS and verify domain
+      # - `DELETE /domains/{id}` - Remove a domain
       class Domains
         # Add a new sending domain to a tenant. Returns DNS records that must be
         # configured before the domain can be verified.

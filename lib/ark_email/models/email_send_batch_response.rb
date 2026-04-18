@@ -45,6 +45,12 @@ module ArkEmail
         required :messages,
                  -> { ArkEmail::Internal::Type::HashOf[ArkEmail::Models::EmailSendBatchResponse::Data::Message] }
 
+        # @!attribute tenant_id
+        #   The tenant ID this batch was sent from
+        #
+        #   @return [String]
+        required :tenant_id, String, api_name: :tenantId
+
         # @!attribute total
         #   Total emails in the batch
         #
@@ -58,7 +64,7 @@ module ArkEmail
         #   @return [Boolean, nil]
         optional :sandbox, ArkEmail::Internal::Type::Boolean
 
-        # @!method initialize(accepted:, failed:, messages:, total:, sandbox: nil)
+        # @!method initialize(accepted:, failed:, messages:, tenant_id:, total:, sandbox: nil)
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::EmailSendBatchResponse::Data} for more details.
         #
@@ -67,6 +73,8 @@ module ArkEmail
         #   @param failed [Integer] Failed emails
         #
         #   @param messages [Hash{Symbol=>ArkEmail::Models::EmailSendBatchResponse::Data::Message}] Map of recipient email to message info
+        #
+        #   @param tenant_id [String] The tenant ID this batch was sent from
         #
         #   @param total [Integer] Total emails in the batch
         #

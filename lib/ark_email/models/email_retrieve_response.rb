@@ -63,6 +63,12 @@ module ArkEmail
         #   @return [String]
         required :subject, String
 
+        # @!attribute tenant_id
+        #   The tenant ID this email belongs to
+        #
+        #   @return [String]
+        required :tenant_id, String, api_name: :tenantId
+
         # @!attribute timestamp
         #   Unix timestamp when the email was sent
         #
@@ -150,7 +156,7 @@ module ArkEmail
         #   @return [String, nil]
         optional :tag, String
 
-        # @!method initialize(id:, from:, scope:, status:, subject:, timestamp:, timestamp_iso:, to:, activity: nil, attachments: nil, deliveries: nil, headers: nil, html_body: nil, message_id: nil, plain_body: nil, raw_message: nil, spam: nil, spam_score: nil, tag: nil)
+        # @!method initialize(id:, from:, scope:, status:, subject:, tenant_id:, timestamp:, timestamp_iso:, to:, activity: nil, attachments: nil, deliveries: nil, headers: nil, html_body: nil, message_id: nil, plain_body: nil, raw_message: nil, spam: nil, spam_score: nil, tag: nil)
         #   Some parameter documentations has been truncated, see
         #   {ArkEmail::Models::EmailRetrieveResponse::Data} for more details.
         #
@@ -163,6 +169,8 @@ module ArkEmail
         #   @param status [Symbol, ArkEmail::Models::EmailRetrieveResponse::Data::Status] Current delivery status:
         #
         #   @param subject [String] Email subject line
+        #
+        #   @param tenant_id [String] The tenant ID this email belongs to
         #
         #   @param timestamp [Float] Unix timestamp when the email was sent
         #

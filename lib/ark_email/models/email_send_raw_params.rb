@@ -43,7 +43,19 @@ module ArkEmail
       #   @return [Boolean, nil]
       optional :bounce, ArkEmail::Internal::Type::Boolean, nil?: true
 
-      # @!method initialize(from:, raw_message:, to:, bounce: nil, request_options: {})
+      # @!attribute tenant_id
+      #   The tenant ID to send this email from. Determines which tenant's configuration
+      #   (domains, webhooks, tracking) is used.
+      #
+      #   - If your API key is scoped to a specific tenant, this must match that tenant or
+      #     be omitted.
+      #   - If your API key is org-level, specify the tenant to send from.
+      #   - If omitted, the organization's default tenant is used.
+      #
+      #   @return [String, nil]
+      optional :tenant_id, String, api_name: :tenantId, nil?: true
+
+      # @!method initialize(from:, raw_message:, to:, bounce: nil, tenant_id: nil, request_options: {})
       #   Some parameter documentations has been truncated, see
       #   {ArkEmail::Models::EmailSendRawParams} for more details.
       #
@@ -54,6 +66,8 @@ module ArkEmail
       #   @param to [Array<String>] Recipient email addresses
       #
       #   @param bounce [Boolean, nil] Whether this is a bounce message (accepts null)
+      #
+      #   @param tenant_id [String, nil] The tenant ID to send this email from. Determines which tenant's
       #
       #   @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}]
     end

@@ -2,15 +2,23 @@ module ArkEmail
   module Models
     module Platform
       type webhook_retrieve_delivery_params =
-        {  } & ArkEmail::Internal::Type::request_parameters
+        { delivery_id: String } & ArkEmail::Internal::Type::request_parameters
 
       class WebhookRetrieveDeliveryParams < ArkEmail::Internal::Type::BaseModel
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
-        def initialize: (?request_options: ArkEmail::request_opts) -> void
+        attr_accessor delivery_id: String
 
-        def to_hash: -> { request_options: ArkEmail::RequestOptions }
+        def initialize: (
+          delivery_id: String,
+          ?request_options: ArkEmail::request_opts
+        ) -> void
+
+        def to_hash: -> {
+          delivery_id: String,
+          request_options: ArkEmail::RequestOptions
+        }
       end
     end
   end

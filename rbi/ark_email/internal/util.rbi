@@ -148,10 +148,18 @@ module ArkEmail
         end
       end
 
+      # https://www.rfc-editor.org/rfc/rfc3986.html#section-3.3
+      RFC_3986_NOT_PCHARS = T.let(/[^A-Za-z0-9\-._~!$&'()*+,;=:@]+/, Regexp)
+
       class << self
         # @api private
         sig { params(uri: URI::Generic).returns(String) }
         def uri_origin(uri)
+        end
+
+        # @api private
+        sig { params(path: T.any(String, Integer)).returns(String) }
+        def encode_path(path)
         end
 
         # @api private
@@ -301,6 +309,26 @@ module ArkEmail
         T.let(%r{^application/(:?x-(?:n|l)djson)|(:?(?:x-)?jsonl)}, Regexp)
 
       class << self
+        # @api private
+        sig do
+          params(query: ArkEmail::Internal::AnyHash).returns(
+            ArkEmail::Internal::AnyHash
+          )
+        end
+        def encode_query_params(query)
+        end
+
+        # @api private
+        sig do
+          params(
+            collection: ArkEmail::Internal::AnyHash,
+            key: String,
+            element: T.anything
+          ).void
+        end
+        private def write_query_param_element!(collection, key, element)
+        end
+
         # @api private
         sig do
           params(

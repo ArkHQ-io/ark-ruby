@@ -15,6 +15,9 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # Name for the credential. Can only contain letters, numbers, hyphens, and
         # underscores. Max 50 characters.
         sig { returns(String) }
@@ -31,12 +34,14 @@ module ArkEmail
 
         sig do
           params(
+            tenant_id: String,
             name: String,
             type: ArkEmail::Tenants::CredentialCreateParams::Type::OrSymbol,
             request_options: ArkEmail::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
         def self.new(
+          tenant_id:,
           # Name for the credential. Can only contain letters, numbers, hyphens, and
           # underscores. Max 50 characters.
           name:,
@@ -52,6 +57,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              tenant_id: String,
               name: String,
               type: ArkEmail::Tenants::CredentialCreateParams::Type::OrSymbol,
               request_options: ArkEmail::RequestOptions

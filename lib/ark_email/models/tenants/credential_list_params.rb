@@ -8,6 +8,11 @@ module ArkEmail
         extend ArkEmail::Internal::Type::RequestParameters::Converter
         include ArkEmail::Internal::Type::RequestParameters
 
+        # @!attribute tenant_id
+        #
+        #   @return [String]
+        required :tenant_id, String
+
         # @!attribute page
         #   Page number (1-indexed)
         #
@@ -26,7 +31,9 @@ module ArkEmail
         #   @return [Symbol, ArkEmail::Models::Tenants::CredentialListParams::Type, nil]
         optional :type, enum: -> { ArkEmail::Tenants::CredentialListParams::Type }
 
-        # @!method initialize(page: nil, per_page: nil, type: nil, request_options: {})
+        # @!method initialize(tenant_id:, page: nil, per_page: nil, type: nil, request_options: {})
+        #   @param tenant_id [String]
+        #
         #   @param page [Integer] Page number (1-indexed)
         #
         #   @param per_page [Integer] Number of items per page (max 100)

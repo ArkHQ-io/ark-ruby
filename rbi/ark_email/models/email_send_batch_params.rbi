@@ -18,6 +18,16 @@ module ArkEmail
       sig { returns(String) }
       attr_accessor :from
 
+      # The tenant ID to send this batch from. Determines which tenant's configuration
+      # (domains, webhooks, tracking) is used.
+      #
+      # - If your API key is scoped to a specific tenant, this must match that tenant or
+      #   be omitted.
+      # - If your API key is org-level, specify the tenant to send from.
+      # - If omitted, the organization's default tenant is used.
+      sig { returns(T.nilable(String)) }
+      attr_accessor :tenant_id
+
       sig { returns(T.nilable(String)) }
       attr_reader :idempotency_key
 
@@ -28,6 +38,7 @@ module ArkEmail
         params(
           emails: T::Array[ArkEmail::EmailSendBatchParams::Email::OrHash],
           from: String,
+          tenant_id: T.nilable(String),
           idempotency_key: String,
           request_options: ArkEmail::RequestOptions::OrHash
         ).returns(T.attached_class)
@@ -36,6 +47,14 @@ module ArkEmail
         emails:,
         # Sender email for all messages
         from:,
+        # The tenant ID to send this batch from. Determines which tenant's configuration
+        # (domains, webhooks, tracking) is used.
+        #
+        # - If your API key is scoped to a specific tenant, this must match that tenant or
+        #   be omitted.
+        # - If your API key is org-level, specify the tenant to send from.
+        # - If omitted, the organization's default tenant is used.
+        tenant_id: nil,
         idempotency_key: nil,
         request_options: {}
       )
@@ -46,6 +65,7 @@ module ArkEmail
           {
             emails: T::Array[ArkEmail::EmailSendBatchParams::Email],
             from: String,
+            tenant_id: T.nilable(String),
             idempotency_key: String,
             request_options: ArkEmail::RequestOptions
           }

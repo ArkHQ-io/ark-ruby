@@ -15,6 +15,9 @@ module ArkEmail
             )
           end
 
+        sig { returns(String) }
+        attr_accessor :tenant_id
+
         # ID of the sending domain to attach this track domain to
         sig { returns(Integer) }
         attr_accessor :domain_id
@@ -37,6 +40,7 @@ module ArkEmail
 
         sig do
           params(
+            tenant_id: String,
             domain_id: Integer,
             name: String,
             ssl_enabled: T.nilable(T::Boolean),
@@ -46,6 +50,7 @@ module ArkEmail
           ).returns(T.attached_class)
         end
         def self.new(
+          tenant_id:,
           # ID of the sending domain to attach this track domain to
           domain_id:,
           # Subdomain name (e.g., 'track' for track.yourdomain.com)
@@ -63,6 +68,7 @@ module ArkEmail
         sig do
           override.returns(
             {
+              tenant_id: String,
               domain_id: Integer,
               name: String,
               ssl_enabled: T.nilable(T::Boolean),

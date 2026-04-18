@@ -21,14 +21,18 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :webhook_id
 
+        sig { returns(String) }
+        attr_accessor :delivery_id
+
         sig do
           params(
             tenant_id: String,
             webhook_id: String,
+            delivery_id: String,
             request_options: ArkEmail::RequestOptions::OrHash
           ).returns(T.attached_class)
         end
-        def self.new(tenant_id:, webhook_id:, request_options: {})
+        def self.new(tenant_id:, webhook_id:, delivery_id:, request_options: {})
         end
 
         sig do
@@ -36,6 +40,7 @@ module ArkEmail
             {
               tenant_id: String,
               webhook_id: String,
+              delivery_id: String,
               request_options: ArkEmail::RequestOptions
             }
           )

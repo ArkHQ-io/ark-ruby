@@ -4,6 +4,7 @@ module ArkEmail
       type webhook_update_params =
         {
           tenant_id: String,
+          webhook_id: String,
           all_events: bool?,
           enabled: bool?,
           events: ::Array[String]?,
@@ -18,6 +19,8 @@ module ArkEmail
 
         attr_accessor tenant_id: String
 
+        attr_accessor webhook_id: String
+
         attr_accessor all_events: bool?
 
         attr_accessor enabled: bool?
@@ -30,6 +33,7 @@ module ArkEmail
 
         def initialize: (
           tenant_id: String,
+          webhook_id: String,
           ?all_events: bool?,
           ?enabled: bool?,
           ?events: ::Array[String]?,
@@ -40,6 +44,7 @@ module ArkEmail
 
         def to_hash: -> {
           tenant_id: String,
+          webhook_id: String,
           all_events: bool?,
           enabled: bool?,
           events: ::Array[String]?,

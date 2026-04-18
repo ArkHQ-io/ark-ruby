@@ -13,8 +13,14 @@ module ArkEmail
         #   @return [String]
         required :tenant_id, String
 
-        # @!method initialize(tenant_id:, request_options: {})
+        # @!attribute domain_id
+        #
+        #   @return [String]
+        required :domain_id, String
+
+        # @!method initialize(tenant_id:, domain_id:, request_options: {})
         #   @param tenant_id [String]
+        #   @param domain_id [String]
         #   @param request_options [ArkEmail::RequestOptions, Hash{Symbol=>Object}]
       end
     end

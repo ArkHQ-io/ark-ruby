@@ -13,14 +13,21 @@ module ArkEmail
         #   @return [String]
         required :tenant_id, String
 
+        # @!attribute webhook_id
+        #
+        #   @return [String]
+        required :webhook_id, String
+
         # @!attribute event
         #   Event type to simulate
         #
         #   @return [Symbol, ArkEmail::Models::Tenants::WebhookTestParams::Event]
         required :event, enum: -> { ArkEmail::Tenants::WebhookTestParams::Event }
 
-        # @!method initialize(tenant_id:, event:, request_options: {})
+        # @!method initialize(tenant_id:, webhook_id:, event:, request_options: {})
         #   @param tenant_id [String]
+        #
+        #   @param webhook_id [String]
         #
         #   @param event [Symbol, ArkEmail::Models::Tenants::WebhookTestParams::Event] Event type to simulate
         #

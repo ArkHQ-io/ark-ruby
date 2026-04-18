@@ -13,14 +13,21 @@ module ArkEmail
         #   @return [String]
         required :tenant_id, String
 
+        # @!attribute credential_id
+        #
+        #   @return [Integer]
+        required :credential_id, Integer
+
         # @!attribute reveal
         #   Set to `true` to include the credential key in the response
         #
         #   @return [Boolean, nil]
         optional :reveal, ArkEmail::Internal::Type::Boolean
 
-        # @!method initialize(tenant_id:, reveal: nil, request_options: {})
+        # @!method initialize(tenant_id:, credential_id:, reveal: nil, request_options: {})
         #   @param tenant_id [String]
+        #
+        #   @param credential_id [Integer]
         #
         #   @param reveal [Boolean] Set to `true` to include the credential key in the response
         #

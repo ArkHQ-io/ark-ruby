@@ -18,6 +18,9 @@ module ArkEmail
         sig { returns(String) }
         attr_accessor :tenant_id
 
+        sig { returns(Integer) }
+        attr_accessor :credential_id
+
         # Set to `true` to disable the credential (put on hold). Set to `false` to enable
         # the credential (release from hold).
         sig { returns(T.nilable(T::Boolean)) }
@@ -36,6 +39,7 @@ module ArkEmail
         sig do
           params(
             tenant_id: String,
+            credential_id: Integer,
             hold: T::Boolean,
             name: String,
             request_options: ArkEmail::RequestOptions::OrHash
@@ -43,6 +47,7 @@ module ArkEmail
         end
         def self.new(
           tenant_id:,
+          credential_id:,
           # Set to `true` to disable the credential (put on hold). Set to `false` to enable
           # the credential (release from hold).
           hold: nil,
@@ -56,6 +61,7 @@ module ArkEmail
           override.returns(
             {
               tenant_id: String,
+              credential_id: Integer,
               hold: T::Boolean,
               name: String,
               request_options: ArkEmail::RequestOptions
