@@ -1,5 +1,48 @@
 # Changelog
 
+## 0.20.0 (2026-04-18)
+
+Full Changelog: [v0.19.0...v0.20.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.19.0...v0.20.0)
+
+### Features
+
+* **api:** add tenantId to send ([d443493](https://github.com/ArkHQ-io/ark-ruby/commit/d4434933efda6c1cc2cab76c52319113f67aab91))
+
+
+### Bug Fixes
+
+* align path encoding with RFC 3986 section 3.3 ([1ee22e2](https://github.com/ArkHQ-io/ark-ruby/commit/1ee22e28cf4cc13a4dfe837e1e02a03fb392f747))
+* **internal:** correct multipart form field name encoding ([5d61b9b](https://github.com/ArkHQ-io/ark-ruby/commit/5d61b9b1cdd09c39eebca5102e349607afa202af))
+* multipart encoding for file arrays ([e076c29](https://github.com/ArkHQ-io/ark-ruby/commit/e076c2982e020ac00146c0f873465003dc780804))
+* properly mock time in ruby ci tests ([1af3ac3](https://github.com/ArkHQ-io/ark-ruby/commit/1af3ac341b43b64d6e491c72a0a8bda9408625e1))
+* variable name typo ([dfdf1f9](https://github.com/ArkHQ-io/ark-ruby/commit/dfdf1f919610cfe77257d03aaf8800e8927afd9c))
+
+
+### Chores
+
+* **ci:** add build step ([07f4b8f](https://github.com/ArkHQ-io/ark-ruby/commit/07f4b8f01d304d412aef6898dc8d003f701e2733))
+* **ci:** skip lint on metadata-only changes ([ca59137](https://github.com/ArkHQ-io/ark-ruby/commit/ca5913766b6889a2ea3c0966859652a01a2956b1))
+* **ci:** skip uploading artifacts on stainless-internal branches ([84760ce](https://github.com/ArkHQ-io/ark-ruby/commit/84760cec19c56830abbe97179c421be8ec8d0573))
+* **ci:** support opting out of skipping builds on metadata-only commits ([999db01](https://github.com/ArkHQ-io/ark-ruby/commit/999db01d79aa3e790cd164119e32a33c1161dd76))
+* **internal:** codegen related update ([9d8c06b](https://github.com/ArkHQ-io/ark-ruby/commit/9d8c06be7fe3191860ac13bccb3c8e6dfce4dcaf))
+* **internal:** codegen related update ([59ed473](https://github.com/ArkHQ-io/ark-ruby/commit/59ed473b3a2c74b6baecde451956fb1a24829489))
+* **internal:** codegen related update ([52ec8d2](https://github.com/ArkHQ-io/ark-ruby/commit/52ec8d221046d735dd605aab684f17e074478cf9))
+* **internal:** tweak CI branches ([890ab73](https://github.com/ArkHQ-io/ark-ruby/commit/890ab7325739769a805f7d783b06f6aed714d5cd))
+* **internal:** update gitignore ([c32fe9f](https://github.com/ArkHQ-io/ark-ruby/commit/c32fe9f42f4108c3a02dd282375c2355d72c14b9))
+* **test:** do not count install time for mock server timeout ([8be7c3f](https://github.com/ArkHQ-io/ark-ruby/commit/8be7c3f8333306f7e3687ade2d770a928abbf270))
+* **tests:** bump steady to v0.19.4 ([20434aa](https://github.com/ArkHQ-io/ark-ruby/commit/20434aa984868e0c14f7a0aa7532ef1d13720ff0))
+* **tests:** bump steady to v0.19.5 ([b648dfd](https://github.com/ArkHQ-io/ark-ruby/commit/b648dfdd94ef618155eb49efcb6356877f045e7b))
+* **tests:** bump steady to v0.19.6 ([b617b4c](https://github.com/ArkHQ-io/ark-ruby/commit/b617b4c3f5bd7ecdcef434578bac5bc9e6bcedfa))
+* **tests:** bump steady to v0.19.7 ([8b6c392](https://github.com/ArkHQ-io/ark-ruby/commit/8b6c3929e2e186d2549fa35f8313fe07c4b800b1))
+* **tests:** bump steady to v0.20.1 ([0a0a6a2](https://github.com/ArkHQ-io/ark-ruby/commit/0a0a6a23689e7908b5d9329be7de142cca56d736))
+* **tests:** bump steady to v0.20.2 ([5cac749](https://github.com/ArkHQ-io/ark-ruby/commit/5cac749910a6b44d5e822fbea298c554399065b5))
+* update mock server docs ([e0cbedc](https://github.com/ArkHQ-io/ark-ruby/commit/e0cbedce73ed0f6dbd683cb3dc04b8aa9937a434))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([dda5d01](https://github.com/ArkHQ-io/ark-ruby/commit/dda5d0168b42d6ca35dd0acb5a209d4be56e6e71))
+
 ## 0.19.0 (2026-02-07)
 
 Full Changelog: [v0.18.0...v0.19.0](https://github.com/ArkHQ-io/ark-ruby/compare/v0.18.0...v0.19.0)
